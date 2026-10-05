@@ -1,0 +1,8 @@
+include("sgetrf.jl")
+include("strsx.jl")
+include("strse.jl")
+include("strtri.jl")
+include("sgetrs.jl")
+include("sgetre.jl")
+include("sgetri.jl")
+include("sgetrp.jl")

@@ -1,3 +1,3 @@
-using Aqua, AlgebraicTemplate 
+using Aqua, PATHPACK 
 
-Aqua.test_all(AlgebraicTemplate, ambiguities=false,)
+Aqua.test_all(PATHPACK, ambiguities=false,)

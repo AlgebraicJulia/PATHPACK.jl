@@ -1,7 +1,7 @@
-# AlgebraicTemplate.jl
+# PATHPACK.jl
 
 ```@meta
-CurrentModule = AlgebraicTemplate
+CurrentModule = PATHPACK
 ```
 
-`AlgebraicTemplate.jl` is a Julia library for...
+`PATHPACK.jl` is a Julia library for...

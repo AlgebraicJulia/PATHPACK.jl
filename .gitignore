@@ -27,3 +27,8 @@ Manifest.toml
 .DS_Store
 .vscode
 .ipynb_checkpoints
+
+# vim swap files
+*.swp
+*.swo
+*.swn
