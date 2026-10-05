@@ -612,40 +612,6 @@ function strsx_fwd_upd_1!(s::AbstractSemiring, C::AbstractVecOrMat{T}, fsep::Abs
     return
 end
 
-function strsx_fwd_upd_vec_1!(s::AbstractSemiring, C::AbstractVecOrMat{T}, fsep::AbstractVector{I}, l₂₁::AbstractVector{T}, Rp::I, na::I, nrhs::I, trans::Val, ::Val{SIDE}) where {T, I, SIDE}
-    if C isa AbstractVector
-        v = C[Rp]
-
-        if SIDE === :L
-            strsx_vec_scatter!(s, trans, C, 0, fsep, l₂₁, v, na)
-        else
-            @inbounds for i in oneto(na)
-                C[fsep[i]] = smuladd(s, v, l₂₁[i], C[fsep[i]], Val(:N), trans)
-            end
-        end
-    else
-        if SIDE === :L
-            @inbounds for k in oneto(nrhs)
-                strsx_vec_scatter!(s, trans, C, (k - 1) * size(C, 1), fsep, l₂₁, C[Rp, k], na)
-            end
-        else
-            Z = sizeof(T)
-            sC = stride(C, 2)
-
-            @preserve C begin
-                pC = pointer(C)
-                pr = pC + (Rp - one(I)) * sC * Z
-
-                @inbounds for i in oneto(na)
-                    saxpy_kern!(s, Val(:N), trans, Val(:R), pC + (fsep[i] - one(I)) * sC * Z, pr, l₂₁[i], nrhs)
-                end
-            end
-        end
-    end
-
-    return
-end
-
 # ===== strsx_bwd! =====
 
 function strsx_bwd!(
@@ -1132,43 +1098,6 @@ function strsx_bwd_upd_1!(s::AbstractSemiring, C::AbstractVecOrMat{T}, fsep::Abs
 end
 
 # ===== strsx_vec =====
-
-@inline function strsx_vec_scatter_step!(s::AbstractSemiring, trans::Val, C::AbstractVecOrMat{T}, o::Integer, idx::AbstractVector, a::AbstractVector{T}, v::T, i::Integer, ::Val{W}) where {T, W}
-    function cf(l)
-        return @inbounds(C[o + idx[i + l - 1]])
-    end
-
-    function af(l)
-        return @inbounds(a[i + l - 1])
-    end
-
-    cv = Vec{W, T}(ntuple(cf, Val(W)))
-    av = Vec{W, T}(ntuple(af, Val(W)))
-    cv = smuladd(s, av, v, cv, trans, Val(:N))
-
-    @inbounds for l in 1:W
-        C[o + idx[i + l - 1]] = cv[l]
-    end
-
-    return
-end
-
-@inline function strsx_vec_scatter!(s::AbstractSemiring, trans::Val, C::AbstractVecOrMat{T}, o::Integer, idx::AbstractVector, a::AbstractVector{T}, v::T, n::Integer) where {T}
-    i = 1
-    W = min(vecwidth(T), 8)
-
-    @inbounds while i + W - 1 <= n
-        strsx_vec_scatter_step!(s, trans, C, o, idx, a, v, i, Val(W))
-        i += W
-    end
-
-    @inbounds while i <= n
-        C[o + idx[i]] = smuladd(s, a[i], v, C[o + idx[i]], trans, Val(:N))
-        i += 1
-    end
-
-    return
-end
 
 @inline function strsx_vec_gather_step(s::AbstractSemiring, trans::Val, C::AbstractVecOrMat{T}, o::Integer, idx::AbstractVector, a::AbstractVector{T}, d::Vec{W, T}, i::Integer) where {T, W}
     function cf(l)
