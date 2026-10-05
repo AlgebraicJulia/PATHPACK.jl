@@ -1116,16 +1116,17 @@ end
 @inline function strsx_vec_gather(s::AbstractSemiring, trans::Val, C::AbstractVecOrMat{T}, o::Integer, idx::AbstractVector, a::AbstractVector{T}, v::T, n::Integer) where {T}
     i = 1
     W = min(vecwidth(T), 8)
+    op = compose(trans, Val(:N))
 
     if n >= W
-        d = szero(s, Vec{W, T}, Val(:N))
+        d = szero(s, Vec{W, T}, op)
 
         @inbounds while i + W - 1 <= n
             d = strsx_vec_gather_step(s, trans, C, o, idx, a, d, i)
             i += W
         end
 
-        v = splus(s, v, sreduce(s, d, Val(:N)), Val(:N))
+        v = splus(s, v, sreduce(s, d, op), op)
     end
 
     @inbounds while i <= n
