@@ -356,8 +356,6 @@ end
 
 function sgetri!(F::ChordalSLU{<:Any, T}, C::AbstractMatrix; nt::Integer = nthreads()) where {T}
     @assert size(F, 1) == size(C, 1) == size(C, 2)
-
-    n = size(C, 1)
     #
     #   C ← U* L*
     #
@@ -365,9 +363,7 @@ function sgetri!(F::ChordalSLU{<:Any, T}, C::AbstractMatrix; nt::Integer = nthre
     #
     #   C ← P⁻¹ C Q⁻¹
     #
-    work = FVector{T}(undef, min(8, n) * n)
-    permuterows!(C, work, F.rperm)
-    permutecols!(C, work, F.cperm)
+    permuterowscols!(C, F.rperm, F.cperm; nt)
 
     return C
 end

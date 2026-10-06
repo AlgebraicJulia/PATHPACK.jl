@@ -222,6 +222,254 @@ function permutecols!(A::AbstractVecOrMat, work::AbstractVector, perm::AbstractV
     return A
 end
 
+# ===== permuterowscols! =====
+
+function permuterowscols!(
+        A::AbstractMatrix{T},
+        rperm::AbstractVector{I},
+        cperm::AbstractVector{I};
+        nt::Integer = nthreads(),
+    ) where {T, I}
+    if isone(nt)
+        permuterowscols_st!(A, rperm, cperm)
+    else
+        permuterowscols_mt!(A, rperm, cperm, nt)
+    end
+
+    return A
+end
+
+function permuterowscols_st!(
+        A::AbstractMatrix{T},
+        rperm::AbstractVector{I},
+        cperm::AbstractVector{I},
+    ) where {T, I}
+    m = size(A, 1)
+    n = size(A, 2)
+
+    cur = FVector{T}(undef, m)
+    nxt = FVector{T}(undef, m)
+    mark = FVector{Bool}(undef, n)
+    fill!(mark, false)
+
+    @inbounds for jstrt in oneto(n)
+        if !mark[jstrt]
+            for i in oneto(m)
+                cur[i] = A[i, jstrt]
+            end
+
+            j = jstrt
+
+            while true
+                mark[j] = true
+                k = cperm[j]
+
+                if k != jstrt
+                    for i in oneto(m)
+                        nxt[i] = A[i, k]
+                    end
+                end
+
+                for i in oneto(m)
+                    A[rperm[i], k] = cur[i]
+                end
+
+                k == jstrt && break
+                cur, nxt = nxt, cur
+                j = k
+            end
+        end
+    end
+
+    return A
+end
+
+function permuterowscols_mt!(
+        A::AbstractMatrix{T},
+        rperm::AbstractVector{I},
+        cperm::AbstractVector{I},
+        nt::Integer,
+    ) where {T, I}
+    m = size(A, 1)
+    n = size(A, 2)
+
+    ctgt = FVector{I}(undef, n)
+    cptr = FVector{I}(undef, n + 1)
+    mark = FVector{Bool}(undef, n)
+    fill!(mark, false)
+
+    q = zero(I)
+    ncyc = zero(I)
+
+    @inbounds for j in oneto(n)
+        if !mark[j]
+            ncyc += one(I)
+            cptr[ncyc] = q + one(I)
+            k = convert(I, j)
+
+            while !mark[k]
+                mark[k] = true
+                q += one(I)
+                ctgt[q] = k
+                k = cperm[k]
+            end
+        end
+    end
+
+    cptr[ncyc + one(I)] = n + one(I)
+    w = max(1, cld(n, 4nt))
+
+    tstrt = I[]
+    tstop = I[]
+    tpred = I[]
+
+    a = one(I)
+
+    @inbounds for c in oneto(ncyc)
+        cs = cptr[c]
+        ce = cptr[c + one(I)] - one(I)
+
+        if ce - cs + 1 > w
+            if a < cs
+                push!(tstrt, a)
+                push!(tstop, cs - one(I))
+                push!(tpred, zero(I))
+            end
+
+            for s in cs:w:ce
+                if s == cs
+                    pred = ce
+                else
+                    pred = s - one(I)
+                end
+
+                push!(tstrt, s)
+                push!(tstop, min(s + w - 1, ce))
+                push!(tpred, pred)
+            end
+
+            a = ce + one(I)
+        elseif ce - a + 1 >= w
+            push!(tstrt, a)
+            push!(tstop, ce)
+            push!(tpred, zero(I))
+            a = ce + one(I)
+        end
+    end
+
+    if a <= n
+        push!(tstrt, a)
+        push!(tstop, n)
+        push!(tpred, zero(I))
+    end
+
+    ntask = length(tstrt)
+    save = FVector{FVector{T}}(undef, ntask)
+
+    @threads for t in 1:ntask
+        if ispositive(tpred[t])
+            k = ctgt[tpred[t]]
+            col = FVector{T}(undef, m)
+
+            for i in oneto(m)
+                col[i] = A[i, k]
+            end
+
+            save[t] = col
+        end
+    end
+
+    @threads for t in 1:ntask
+        if ispositive(tpred[t])
+            permuterowscols_seg!(A, rperm, ctgt, tstrt[t], tstop[t], save[t])
+        else
+            permuterowscols_grp!(A, rperm, cperm, ctgt, tstrt[t], tstop[t])
+        end
+    end
+
+    return A
+end
+
+function permuterowscols_seg!(
+        A::AbstractMatrix{T},
+        rperm::AbstractVector{I},
+        ctgt::AbstractVector{I},
+        strt::I,
+        stop::I,
+        cur::FVector{T},
+    ) where {T, I}
+    m = size(A, 1)
+    nxt = FVector{T}(undef, m)
+
+    @inbounds for p in strt:stop
+        k = ctgt[p]
+
+        if p < stop
+            for i in oneto(m)
+                nxt[i] = A[i, k]
+            end
+        end
+
+        for i in oneto(m)
+            A[rperm[i], k] = cur[i]
+        end
+
+        cur, nxt = nxt, cur
+    end
+
+    return A
+end
+
+function permuterowscols_grp!(
+        A::AbstractMatrix{T},
+        rperm::AbstractVector{I},
+        cperm::AbstractVector{I},
+        ctgt::AbstractVector{I},
+        strt::I,
+        stop::I,
+    ) where {T, I}
+    m = size(A, 1)
+    cur = FVector{T}(undef, m)
+    nxt = FVector{T}(undef, m)
+    cs = strt
+
+    @inbounds while cs <= stop
+        ce = cs
+
+        while cperm[ctgt[ce]] != ctgt[cs]
+            ce += one(I)
+        end
+
+        for i in oneto(m)
+            cur[i] = A[i, ctgt[cs]]
+        end
+
+        for p in cs:ce
+            if p < ce
+                k = ctgt[p + one(I)]
+            else
+                k = ctgt[cs]
+            end
+
+            if p < ce
+                for i in oneto(m)
+                    nxt[i] = A[i, k]
+                end
+            end
+
+            for i in oneto(m)
+                A[rperm[i], k] = cur[i]
+            end
+
+            cur, nxt = nxt, cur
+        end
+
+        cs = ce + one(I)
+    end
+
+    return A
+end
+
 function intriangle(::Val{:L}, i, j)
     return i >= j
 end
@@ -232,10 +480,6 @@ end
 
 # ===== siszero =====
 
-#
-# Is C[jstrt:jstop] identically zero? A false negative only costs time
-# (the component is solved anyway), so this uses isequal rather than ==.
-#
 function siszero(s::AbstractSemiring, trans::Val, C::AbstractVector{T}, jstrt::I, jstop::I) where {T, I}
     z = szero(s, T, trans)
 
