@@ -125,11 +125,11 @@ function sgetri_reach!(
 
     @inbounds anc[head] = d
     @inbounds mark[d] = tag
-    @inbounds stack[d] = Nptr[Bptr[d]]
+    @inbounds stack[head] = Nptr[Bptr[d]]
 
     @inbounds while ispositive(head)
         c = anc[head]
-        p = stack[c]
+        p = stack[head]
         pstop = Nptr[Bptr[c + one(I)]] - one(I)
 
         b = zero(I)
@@ -144,13 +144,13 @@ function sgetri_reach!(
             end
         end
 
-        stack[c] = p
+        stack[head] = p
 
         if ispositive(b)
             mark[b] = tag
             head += one(I)
             anc[head] = b
-            stack[b] = Nptr[Bptr[b]]
+            stack[head] = Nptr[Bptr[b]]
         else
             head -= one(I)
             top -= one(I)
