@@ -361,7 +361,7 @@ function sgetri!(F::ChordalSLU{<:Any, T}, C::AbstractMatrix; nt::Integer = nthre
     #
     #   C ← U* L*
     #
-    sgetri!(F.s, F.L, F.U, F.S.Bptr, F.S.Fptr, F.S.nBptr, pointers(F.S.N), targets(F.S.N), F.Nval, C; nt)
+    sgetri!(F.s, F.L, F.U, F.S.Bptr, F.S.Fptr, F.S.fcc, F.S.nBptr, pointers(F.S.N), targets(F.S.N), F.Nval, C; nt)
     #
     #   C ← P⁻¹ C Q⁻¹
     #
