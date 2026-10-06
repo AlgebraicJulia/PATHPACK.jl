@@ -25,26 +25,39 @@ end
 
 function ssymbolic(A::SparseMatrixCSC{<:Any, I}; alg::PermutationOrAlgorithm = DEFAULT_ELIMINATION_ALGORITHM) where {I}
     n = convert(I, size(A, 2))
-
-    scc = sccs(A)
-
-    nBptr = nv(scc)
-    Bptr  = pointers(scc)
-    invp  = targets(scc)
+    whole = BipartiteGraph{I, I}(n, n, getcolptr(A)[n + one(I)] - one(I), getcolptr(A), rowvals(A))
     #
-    # the pattern of A[invp, invp] (only the pattern is used from here on: no values are permuted)
+    # a symmetric pattern (no loops, sorted lists: an undirected graph, as for APSP on most inputs): its
+    # strongly connected components are its connected components (one search, not Tarjan's), each
+    # component's subgraph is already symmetric, and there is no coupling between components
     #
-    graph = permute_pattern(A, invp, invp)
+    sym = psymmetric_pattern(whole)
 
-    perm, tree = scliquetree(graph, Bptr, nBptr; alg)
+    if sym
+        Bptr, invp, nBptr = psymmetric_sccs(whole)
+    else
+        scc = sccs(A)
+        nBptr = nv(scc)
+        Bptr  = pointers(scc)
+        invp  = targets(scc)
+        stable_components!(invp, Bptr, nBptr)
+    end
+
+    # (only the pattern of A is used from here on; one component: the labels are kept, no copy)
+    if isone(nBptr)
+        graph = whole
+    elseif sym
+        graph = nothing                             # (each component's subgraph is taken from A directly)
+    else
+        graph = permute_pattern(A, invp, invp)
+    end
+
+    perm, tree = sym && !isone(nBptr) ? scliquetree_sym(A, invp, Bptr, nBptr; alg) : scliquetree(graph, Bptr, nBptr; alg, sym)
     S = pchordalsymbolic(tree)
     Fptr = sccfronts(S, Bptr, nBptr)
     fcc = sccmap(S, Fptr, nBptr)
-    #
-    # the coupling between components: the pattern of A[invp[perm], invp[perm]] below the diagonal blocks
-    # (none with one component)
-    #
-    N = isone(nBptr) ? nooffd(n) : soffd(graph, perm, Bptr, nBptr)
+    # the coupling between components; with one component (or a symmetric pattern) there is none
+    N = isone(nBptr) || sym ? nooffd(n) : soffd(graph, perm, Bptr, nBptr)
 
     @inbounds for a in oneto(n)
         perm[a] = invp[perm[a]]
@@ -57,6 +70,31 @@ function ssymbolic(A::SparseMatrixCSC{<:Any, I}; alg::PermutationOrAlgorithm = D
     return Permutation(perm, invp), ChordalSSymbolic(S, N, Bptr, Fptr, fcc, nBptr)
 end
 
+#
+# the vertices of each component in increasing order (a counting sort by component): the components
+# keep their (topological) order, but within one the labels keep the input's order, so that a column of
+# an undirected graph, whose rows all lie in its component, stays sorted when relabelled
+#
+function stable_components!(tgt::AbstractVector{I}, Bptr::AbstractVector{I}, nBptr::I) where {I}
+    n = length(tgt)
+    comp = FVector{I}(undef, n)
+    nxt = FVector{I}(undef, nBptr)
+
+    @inbounds for c in oneto(nBptr)
+        nxt[c] = Bptr[c]
+
+        for p in Bptr[c]:(Bptr[c + one(I)] - one(I))
+            comp[tgt[p]] = c
+        end
+    end
+
+    @inbounds for v in oneto(I(n))
+        c = comp[v]; tgt[nxt[c]] = v; nxt[c] += one(I)
+    end
+
+    return tgt
+end
+
 function scliquetree(A::SparseMatrixCSC{<:Any, I}, Bptr::AbstractVector{I}, nBptr::I; alg::PermutationOrAlgorithm = DEFAULT_ELIMINATION_ALGORITHM) where {I}
     return scliquetree(BipartiteGraph(A), Bptr, nBptr; alg)
 end
@@ -67,7 +105,7 @@ end
 # subgraph that is already symmetric, without loops, is not symmetrized again), then the clique trees of
 # all of them as one.
 #
-function scliquetree(graph::BipartiteGraph{I}, Bptr::AbstractVector{I}, nBptr::I; alg::PermutationOrAlgorithm = DEFAULT_ELIMINATION_ALGORITHM) where {I}
+function scliquetree(graph::BipartiteGraph{I}, Bptr::AbstractVector{I}, nBptr::I; alg::PermutationOrAlgorithm = DEFAULT_ELIMINATION_ALGORITHM, sym::Bool = false) where {I}
     trees = Vector{Any}(undef, nBptr)
     small1 = small2 = nothing; vstrt = one(I)
 
@@ -82,13 +120,84 @@ function scliquetree(graph::BipartiteGraph{I}, Bptr::AbstractVector{I}, nBptr::I
             trees[c] = small2
         else
             sub = isone(nBptr) ? graph : subgraph(graph, vstrt, vstop - one(I))
-            trees[c] = pcliquetree(psymmetric_pattern(sub) ? sub : symmetric(sub, 'N'), alg)
+            trees[c] = pcliquetree(sym || psymmetric_pattern(sub) ? sub : symmetric(sub, 'N'), alg)
         end
 
         vstrt = vstop
     end
 
     return mergetrees(trees, Bptr, nBptr, nv(graph))
+end
+
+#
+# scliquetree(permute_pattern(A, invp, invp), Bptr, nBptr) for a symmetric pattern: each component's
+# subgraph comes from A directly (its vertices keep their input order, so its lists stay sorted).
+#
+function scliquetree_sym(A::SparseMatrixCSC{<:Any, I}, invp::AbstractVector{I}, Bptr::AbstractVector{I}, nBptr::I; alg::PermutationOrAlgorithm = DEFAULT_ELIMINATION_ALGORITHM) where {I}
+    n = convert(I, size(A, 2))
+    loc = FVector{I}(undef, n)
+
+    @inbounds for c in oneto(nBptr), a in Bptr[c]:(Bptr[c + one(I)] - one(I))
+        loc[invp[a]] = a - Bptr[c] + one(I)
+    end
+
+    trees = Vector{Any}(undef, nBptr)
+    small1 = small2 = nothing
+
+    @inbounds for c in oneto(nBptr)
+        nc = Bptr[c + one(I)] - Bptr[c]
+
+        if isone(nc)
+            isnothing(small1) && (small1 = cliquetree(symmetric(componentgraph(A, invp, loc, Bptr, c), 'N'); alg))
+            trees[c] = small1
+        elseif nc == two(I)
+            isnothing(small2) && (small2 = cliquetree(symmetric(componentgraph(A, invp, loc, Bptr, c), 'N'); alg))
+            trees[c] = small2
+        else
+            trees[c] = pcliquetree(componentgraph(A, invp, loc, Bptr, c), alg)
+        end
+    end
+
+    return mergetrees(trees, Bptr, nBptr, n)
+end
+
+#
+# the subgraph of component c of a symmetric pattern A, its vertices relabelled 1:nc (loc: the label of
+# each vertex in its component): subgraph(permute_pattern(A, invp, invp), Bptr[c], Bptr[c + 1] - 1)
+#
+function componentgraph(A::SparseMatrixCSC{<:Any, I}, invp::AbstractVector{I}, loc::AbstractVector{I}, Bptr::AbstractVector{I}, c::I) where {I}
+    Aptr = getcolptr(A); Arow = rowvals(A)
+    off = Bptr[c] - one(I); nc = Bptr[c + one(I)] - Bptr[c]
+    ptr = FVector{I}(undef, nc + one(I))
+    @inbounds ptr[1] = p = one(I)
+
+    @inbounds for k in oneto(nc)
+        v = invp[off + k]
+        ptr[k + one(I)] = p += Aptr[v + one(I)] - Aptr[v]
+    end
+
+    m = p - one(I); tgt = FVector{I}(undef, m)
+
+    fillcols! = function (lo, hi)
+        @inbounds for k in lo:hi
+            v = invp[off + k]; q = ptr[k] - Aptr[v]
+
+            for r in Aptr[v]:(Aptr[v + one(I)] - one(I))
+                tgt[q + r] = loc[Arow[r]]
+            end
+        end
+    end
+
+    if usethreads(m)
+        T = nthreads(); bnd = chunkbounds(ptr, nc, T)
+        @threads for t in 1:T
+            fillcols!(bnd[t], bnd[t + 1] - 1)
+        end
+    else
+        fillcols!(1, nc)
+    end
+
+    return BipartiteGraph{I, I}(nc, nc, m, ptr, tgt)
 end
 
 # the clique trees of the components (in order) as one clique tree of the whole graph

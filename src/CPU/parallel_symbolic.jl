@@ -3,6 +3,9 @@
 # counterpart in CliqueTrees returns (the same arrays, entry for entry); only the work is split:
 #
 #   psymmetric_pattern    symmetric_pattern (chordal_ssymbolic.jl)
+#   symmetric_sccs        sccs + stable_components! for a symmetric pattern (components = connected
+#   psymmetric_sccs       components): a breadth-first search, or union-find on several threads,
+#                         instead of Tarjan's algorithm
 #   relabelsorted!        the graph relabelled by the order, each list sorted: sympermute!_impl!
 #                         (Forward) and reverse!_impl! read from it
 #   relabelreverse!       sympermute!_impl!(…, Reverse) of the transpose
@@ -45,6 +48,169 @@ function chunkbounds(ptr::AbstractVector{E}, n::Integer, nchunk::Integer) where 
 
     bnd[nchunk + 1] = n + 1
     return bnd
+end
+
+# ===== components of a symmetric pattern =====
+
+#
+# sccs(graph) followed by stable_components! for a graph whose pattern is symmetric: the strongly
+# connected components are then the connected components. Tarjan's algorithm (sccs) starts a search
+# from each vertex not yet reached, in increasing order, and each search emits exactly one component
+# (the root's), so the components come in order of their least vertex; stable_components! sorts the
+# vertices of each. A breadth-first search from the same roots gives the same components, and a
+# counting sort by component the same lists. Returns (ptr, tgt, ncomponents) as sccs' graph holds them.
+#
+function symmetric_sccs(graph::BipartiteGraph{I}) where {I}
+    n = nv(graph); gptr = pointers(graph); gtgt = targets(graph)
+    comp = FVector{I}(undef, n)
+    queue = FVector{I}(undef, n)
+    ptr = FVector{I}(undef, n + one(I))
+    c = zero(I)
+
+    @inbounds for v in oneto(n)
+        comp[v] = zero(I)
+    end
+
+    @inbounds for u in oneto(n)
+        iszero(comp[u]) || continue
+        c += one(I); comp[u] = c; queue[1] = u; head = 1; tail = 1
+
+        while head <= tail
+            v = queue[head]; head += 1
+
+            for p in gptr[v]:(gptr[v + one(I)] - one(I))
+                w = gtgt[p]
+
+                if iszero(comp[w])
+                    comp[w] = c; tail += 1; queue[tail] = w
+                end
+            end
+        end
+
+        ptr[c] = tail                               # (the size of component c, for now)
+    end
+
+    # sizes → pointers; then the vertices of each component in increasing order
+    p = one(I)
+
+    @inbounds for k in oneto(c)
+        s = ptr[k]; ptr[k] = p; p += s
+    end
+
+    @inbounds ptr[c + one(I)] = p
+    tgt = queue                                     # (the search is done with it)
+    cur = FVector{I}(undef, c)
+
+    @inbounds for k in oneto(c)
+        cur[k] = ptr[k]
+    end
+
+    @inbounds for v in oneto(n)
+        k = comp[v]; tgt[cur[k]] = v; cur[k] += one(I)
+    end
+
+    return ptr, tgt, c
+end
+
+#
+# symmetric_sccs(graph) on several threads: the connected components by union-find, each set's root its
+# least vertex. Threads join the edges inside their own range of vertices; the edges between ranges
+# are joined after, in order; then (a root is less than the vertices below it) one pass in increasing
+# order gives every vertex its root, and components numbered by root are the components in order of
+# their least vertex, as Tarjan's search finds them.
+#
+function psymmetric_sccs(graph::BipartiteGraph{I}) where {I}
+    n = nv(graph); gptr = pointers(graph); gtgt = targets(graph); m = Int(gptr[n + one(I)]) - 1
+    usethreads(m) || return symmetric_sccs(graph)
+    T = nthreads(); bnd = chunkbounds(gptr, n, T)
+    root = FVector{I}(undef, n)
+    cross = FVector{Bool}(undef, n)
+
+    local! = function (lo, hi)
+        @inbounds for v in lo:hi
+            root[v] = I(v)
+        end
+
+        @inbounds for v in lo:hi
+            crossing = false                        # (a name of its own: c is the function's)
+
+            for p in gptr[v]:(gptr[v + one(I)] - one(I))
+                w = gtgt[p]
+
+                if lo <= w <= hi
+                    w < v && unite!(root, I(v), w)
+                else
+                    crossing = true
+                end
+            end
+
+            cross[v] = crossing
+        end
+    end
+
+    @threads for t in 1:T
+        local!(bnd[t], bnd[t + 1] - 1)
+    end
+
+    @inbounds for v in oneto(n)
+        cross[v] || continue
+
+        for p in gptr[v]:(gptr[v + one(I)] - one(I))
+            w = gtgt[p]; w < v && unite!(root, v, w)
+        end
+    end
+
+    # roots, the components numbered by root, their sizes, then their vertices in increasing order
+    comp = FVector{I}(undef, n); ptr = FVector{I}(undef, n + one(I)); c = zero(I)
+
+    @inbounds for v in oneto(n)
+        r = root[root[v]]; root[v] = r
+
+        if r == v
+            c += one(I); comp[v] = c; ptr[c] = zero(I)
+        else
+            comp[v] = comp[r]
+        end
+
+        ptr[comp[v]] += one(I)
+    end
+
+    acc = one(I)
+
+    @inbounds for k in oneto(c)
+        s = ptr[k]; ptr[k] = acc; acc += s
+    end
+
+    @inbounds ptr[c + one(I)] = acc
+    tgt = root; cur = FVector{I}(undef, c)          # (root is not needed any more)
+
+    @inbounds for k in oneto(c)
+        cur[k] = ptr[k]
+    end
+
+    @inbounds for v in oneto(n)
+        k = comp[v]; tgt[cur[k]] = v; cur[k] += one(I)
+    end
+
+    return ptr, tgt, c
+end
+
+# union by least root, path halving: afterwards root[x] < x for every x not a root
+@inline function unite!(root::AbstractVector{I}, a::I, b::I) where {I}
+    @inbounds begin
+        while root[a] != a
+            root[a] = root[root[a]]; a = root[a]
+        end
+
+        while root[b] != b
+            root[b] = root[root[b]]; b = root[b]
+        end
+
+        a == b && return
+        a < b ? (root[b] = a) : (root[a] = b)
+    end
+
+    return
 end
 
 #
