@@ -6,16 +6,27 @@ version = "0.0.1"
 
 [deps]
 CliqueTrees = "60701a23-6482-424a-84db-faee86b9b1f8"
+FileWatching = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 Graphs = "86223c79-3864-5bf0-83f7-82e725a168b6"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+PrecompileTools = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SIMD = "fdea26ae-647d-5447-a871-4b548cad5224"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
+[weakdeps]
+CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
+
+[extensions]
+PATHPACKCUDAExt = "CUDA"
+
 [compat]
+CUDA = "6"
 CliqueTrees = "1"
+FileWatching = "1"
 Graphs = "1"
 LinearAlgebra = "1"
+PrecompileTools = "1"
 Random = "1"
 SIMD = "3"
 SparseArrays = "1"

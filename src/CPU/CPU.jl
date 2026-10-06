@@ -6,6 +6,7 @@ using Base.BinaryPlatforms.CPUID: test_cpu_feature, JL_X86_avx512f, JL_X86_avx2,
 using Base.Checked: mul_with_overflow
 using Base.GC: @preserve
 using Base.Threads: @spawn, @threads, nthreads, Atomic, atomic_add!, atomic_xchg!
+import CliqueTrees
 using Graphs: AbstractGraph, neighbors, vertices
 using LinearAlgebra: Factorization, Transpose, AdjointFactorization, TransposeFactorization, lu!, mul!, ldiv!, rdiv!, lmul!, rmul!, tril!
 import LinearAlgebra
@@ -38,6 +39,7 @@ include("dense/dense.jl")
 include("sparse/sparse.jl")
 include("utils.jl")
 include("abstract_slu.jl")
+include("parallel_symbolic.jl")
 include("chordal_ssymbolic.jl")
 include("chordal/chordal.jl")
 include("blocked/blocked.jl")
