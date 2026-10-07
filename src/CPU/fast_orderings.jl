@@ -9,7 +9,7 @@
 #   Natural    the identity order
 #
 # fastpermutation(weights, graph, alg) is permutation(weights, graph, alg) for the symmetric graphs without
-# loops of pcliquetree; when AutoOrder chooses AMF it copies the graph once (amf32) instead of twice.
+# loops of pcliquetree; AMF, and AutoOrder when it chooses AMF, copy the graph once instead of twice.
 #
 module FastOrderings
 
@@ -18,7 +18,7 @@ using Base.Threads: @threads, nthreads
 using Graphs: AbstractGraph
 using CliqueTrees: CliqueTrees, EliminationAlgorithm, AMF, AMFLib
 using CliqueTrees.Multifrontal: BipartiteGraph, FVector, nv, pointers, targets, two, ispositive
-using ..CPU: usethreads, chunkrange
+using ..CPU: usethreads, chunkrange, hugevector
 import CliqueTrees: permutation
 
 twice(x::I) where {I <: Integer} = x + x
@@ -54,7 +54,7 @@ function halo_amf(n0::Integer, n1::Integer, xadj::AbstractVector{E}, adjncy::Abs
     n = V(n0 + n1); m = E(xadj[n + 1] - 1)
     norig = n; nbbuck = twice(norig)
     iwlen = m + E(4n + min(10000, m + n))
-    len = FVector{V}(undef, n); pe = FVector{E}(undef, n + 1); iw = FVector{V}(undef, iwlen)
+    len = FVector{V}(undef, n); pe = FVector{E}(undef, n + 1); iw = hugevector(V, iwlen)
     nvv = FVector{V}(undef, n); elen = FVector{V}(undef, n); last = FVector{V}(undef, n)
     degree = FVector{V}(undef, n); wf = FVector{E}(undef, n); next = FVector{V}(undef, n)
     w = FVector{Int}(undef, n); head = FVector{V}(undef, nbbuck + two(V))
@@ -798,12 +798,86 @@ function fastpermutation(weights::AbstractVector, graph::BipartiteGraph{V}, alg)
         return amf32(graph)
     end
 
+    # permutation(weights, graph, AMF()) is AMFLib.amf(weights, graph), which first copies the graph into a
+    # simple graph (no loops); this graph is one already, so it goes to amf as it is (amf copies it into
+    # its workspace once more): the same order without one copy of the graph
+    alg isa AMF && return amf_simple(n, weights, ptr, targets(graph))
+
     return permutation(weights, graph, alg)
 end
 
 fastpermutation(weights::AbstractVector, graph::AbstractGraph, alg) = permutation(weights, graph, alg)
 
 #
+#
+# AMFLib.amf(n, vwght, xadj, adjncy) (CliqueTrees' AMF, as permutation(weights, graph, AMF()) runs it on a
+# simple graph): amf_impl!'s steps, with its workspace iw (the graph's copy that AMF works in, a little more
+# than the graph) on huge pages (hugevector) and the graph copied into it on several threads; the same
+# arrays for hamf_impl!, so the same order
+#
+function amf_simple(n::V, vwght::AbstractVector, xadj::AbstractVector{E}, adjncy::AbstractVector{V}) where {V, E}
+    @assert n <= length(vwght)
+    @inbounds nn = n + one(V); mm = xadj[nn]; m = mm - one(E)
+    norig = zero(V)
+    iwlen = m + convert(E, 4n + 10000)
+
+    @inbounds for i in oneto(n)
+        norig += trunc(V, vwght[i])
+    end
+
+    nbbuck = twice(norig)
+    len = FVector{V}(undef, n); pe = FVector{E}(undef, nn); iw = hugevector(V, iwlen)
+    nvv = FVector{V}(undef, n); elen = FVector{V}(undef, n); last = FVector{V}(undef, n)
+    degree = FVector{V}(undef, n); wf = FVector{E}(undef, n); next = FVector{V}(undef, n)
+    w = FVector{Int}(undef, n); head = FVector{V}(undef, nbbuck + two(V))
+
+    if usethreads(m)
+        T = nthreads()
+
+        @threads for t in 1:T
+            @inbounds for p in chunkrange(m, T, t)
+                iw[p] = adjncy[p]
+            end
+        end
+    else
+        @inbounds for p in oneto(m)
+            iw[p] = adjncy[p]
+        end
+    end
+
+    @inbounds p = pe[begin] = xadj[begin]
+
+    @inbounds for i in oneto(n)
+        pp = pe[i + one(E)] = xadj[i + one(E)]
+        nvv[i] = trunc(V, vwght[i])
+        len[i] = convert(V, pp - p)
+        p = pp
+    end
+
+    AMFLib.hamf_impl!(norig, n, zero(V), nbbuck, iwlen, pe, mm, len, iw, nvv, elen, last, degree, wf, next, w, head)
+
+    @inbounds for j in oneto(norig)
+        head[j] = zero(V)
+    end
+
+    @inbounds for i in oneto(n)
+        head[abs(elen[i])] = i
+    end
+
+    k = zero(V)
+
+    @inbounds for j in oneto(norig)
+        i = head[j]
+
+        if ispositive(i)
+            last[i] = k += one(V)
+            elen[k] = i
+        end
+    end
+
+    return convert(Vector{V}, elen), convert(Vector{V}, last)
+end
+
 # halo_amf(Int32(n), 0, int_adjacency(graph)...) followed by (order, invperm(order)) in the graph's
 # integer type
 #
@@ -813,7 +887,7 @@ function amf32(graph::BipartiteGraph{W}) where {W}
     n = V(n0); m = E(gptr[n0 + one(W)] - one(W))
     norig = n; nbbuck = twice(norig)
     iwlen = m + E(4n + min(10000, m + n))
-    len = FVector{V}(undef, n); pe = FVector{E}(undef, n + 1); iw = FVector{V}(undef, iwlen)
+    len = FVector{V}(undef, n); pe = FVector{E}(undef, n + 1); iw = hugevector(V, iwlen)
     nvv = FVector{V}(undef, n); elen = FVector{V}(undef, n); last = FVector{V}(undef, n)
     degree = FVector{V}(undef, n); wf = FVector{E}(undef, n); next = FVector{V}(undef, n)
     w = FVector{Int}(undef, n); head = FVector{V}(undef, nbbuck + two(V))

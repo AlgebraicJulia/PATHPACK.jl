@@ -557,3 +557,22 @@ function siszero(s::AbstractSemiring, trans::Val, C::AbstractVector{T}, jstrt::I
 
     return true
 end
+
+#
+# FVector{T}(undef, n), on transparent huge pages where the OS offers them in madvise mode (Linux, e.g.
+# HiPerGator): for the large work arrays of the symbolic phase, which are fresh memory on every call
+# (the allocator maps arrays this large anew each time), so every 4 KB page of them faults when first
+# written; 2 MB pages fault 512× less often (a 256 MB array written by one thread: 80 ms in 4 KB faults,
+# 37 ms on huge pages, on a B200 node's host). A hint: the contents are the same.
+#
+function hugevector(::Type{T}, n::Integer) where {T}
+    x = FVector{T}(undef, n)
+    bytes = n * sizeof(T)
+
+    if Sys.islinux() && bytes >= 2^22
+        p = UInt(pointer(x)); a0 = (p + UInt(2^21 - 1)) & ~UInt(2^21 - 1); a1 = (p + UInt(bytes)) & ~UInt(2^21 - 1)
+        a1 > a0 && ccall(:madvise, Cint, (Ptr{Cvoid}, Csize_t, Cint), Ptr{Cvoid}(a0), a1 - a0, 14)    # MADV_HUGEPAGE
+    end
+
+    return x
+end

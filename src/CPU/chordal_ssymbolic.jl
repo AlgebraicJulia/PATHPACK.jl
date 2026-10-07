@@ -31,10 +31,10 @@ function ssymbolic(A::SparseMatrixCSC{<:Any, I}; alg::PermutationOrAlgorithm = D
     # strongly connected components are its connected components (one search, not Tarjan's), each
     # component's subgraph is already symmetric, and there is no coupling between components
     #
-    sym = psymmetric_pattern(whole)
+    sym, comps = psymmetric_components(whole)       # (psymmetric_pattern, then psymmetric_sccs: in one pass)
 
     if sym
-        Bptr, invp, nBptr = psymmetric_sccs(whole)
+        Bptr, invp, nBptr = comps
     else
         scc = sccs(A)
         nBptr = nv(scc)
@@ -107,10 +107,10 @@ end
 #
 function scliquetree(graph::BipartiteGraph{I}, Bptr::AbstractVector{I}, nBptr::I; alg::PermutationOrAlgorithm = DEFAULT_ELIMINATION_ALGORITHM, sym::Bool = false) where {I}
     trees = Vector{Any}(undef, nBptr)
-    small1 = small2 = nothing; vstrt = one(I)
+    small1 = small2 = nothing; big = I[]
 
     @inbounds for c in oneto(nBptr)
-        vstop = Bptr[c + one(I)]; nc = vstop - vstrt
+        vstrt = Bptr[c]; vstop = Bptr[c + one(I)]; nc = vstop - vstrt
 
         if isone(nc) && !isone(nBptr)
             isnothing(small1) && (small1 = cliquetree(symmetric(subgraph(graph, vstrt, vstop - one(I)), 'N'); alg))
@@ -119,14 +119,37 @@ function scliquetree(graph::BipartiteGraph{I}, Bptr::AbstractVector{I}, nBptr::I
             isnothing(small2) && (small2 = cliquetree(symmetric(subgraph(graph, vstrt, vstop - one(I)), 'N'); alg))
             trees[c] = small2
         else
-            sub = isone(nBptr) ? graph : subgraph(graph, vstrt, vstop - one(I))
-            trees[c] = pcliquetree(sym || psymmetric_pattern(sub) ? sub : symmetric(sub, 'N'), alg)
+            push!(big, c)
         end
+    end
 
-        vstrt = vstop
+    eachcomponent(big, Bptr) do c
+        sub = isone(nBptr) ? graph : subgraph(graph, Bptr[c], Bptr[c + one(I)] - one(I))
+        trees[c] = pcliquetree(sym || psymmetric_pattern(sub) ? sub : symmetric(sub, 'N'), alg)
     end
 
     return mergetrees(trees, Bptr, nBptr, nv(graph))
+end
+
+#
+# f(c) for the components c in `comps`: the clique tree of each component depends on that component
+# only, so with several components and threads they are done concurrently, the largest started first
+# (one large component next to many small ones, as in net4-1, takes the time of the large one); the
+# trees are the same, each where the serial loop puts it.
+#
+function eachcomponent(f, comps::AbstractVector{I}, Bptr::AbstractVector{I}) where {I}
+    if length(comps) > 1 && nthreads() > 1
+        sizes = [Bptr[c + one(I)] - Bptr[c] for c in comps]
+
+        @sync for k in sortperm(sizes; rev = true)
+            c = comps[k]
+            @spawn f(c)
+        end
+    else
+        foreach(f, comps)
+    end
+
+    return
 end
 
 #
@@ -142,7 +165,7 @@ function scliquetree_sym(A::SparseMatrixCSC{<:Any, I}, invp::AbstractVector{I}, 
     end
 
     trees = Vector{Any}(undef, nBptr)
-    small1 = small2 = nothing
+    small1 = small2 = nothing; big = I[]
 
     @inbounds for c in oneto(nBptr)
         nc = Bptr[c + one(I)] - Bptr[c]
@@ -154,10 +177,11 @@ function scliquetree_sym(A::SparseMatrixCSC{<:Any, I}, invp::AbstractVector{I}, 
             isnothing(small2) && (small2 = cliquetree(symmetric(componentgraph(A, invp, loc, Bptr, c), 'N'); alg))
             trees[c] = small2
         else
-            trees[c] = pcliquetree(componentgraph(A, invp, loc, Bptr, c), alg)
+            push!(big, c)
         end
     end
 
+    eachcomponent(c -> (trees[c] = pcliquetree(componentgraph(A, invp, loc, Bptr, c), alg)), big, Bptr)
     return mergetrees(trees, Bptr, nBptr, n)
 end
 

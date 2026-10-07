@@ -152,6 +152,16 @@ function psymmetric_sccs(graph::BipartiteGraph{I}) where {I}
         local!(bnd[t], bnd[t + 1] - 1)
     end
 
+    return union_components!(root, cross, graph)
+end
+
+#
+# psymmetric_sccs after the threads' unions inside their ranges (root, and cross[v]: v has an edge leaving its
+# range): the edges between ranges joined in order, then the components numbered by root
+#
+function union_components!(root::AbstractVector{I}, cross::AbstractVector{Bool}, graph::BipartiteGraph{I}) where {I}
+    n = nv(graph); gptr = pointers(graph); gtgt = targets(graph)
+
     @inbounds for v in oneto(n)
         cross[v] || continue
 
@@ -214,38 +224,105 @@ end
 end
 
 #
-# symmetric_pattern(graph) on several threads (chordal_ssymbolic.jl): every list strictly increasing,
-# without its own vertex, and each entry i of list j has j in list i (binary search: the lists are
-# sorted). The same answer as the serial check, whose one pointer per list checks the same two things.
+# symmetric_pattern(graph) on several threads (chordal_ssymbolic.jl): every list strictly increasing and
+# without its own vertex, and each entry i > j of list j has j in list i (binary search: the lists are
+# sorted), and there are as many entries below the diagonal as above it. Then the entries above map one to
+# one onto entries below (their mirrors), and with equal numbers every entry below is a mirror too: the
+# same answer as the serial check, with half of the searches.
 #
 function psymmetric_pattern(graph::AbstractGraph{I}) where {I}
     n = nv(graph); ptr = pointers(graph); tgt = targets(graph); m = Int(ptr[n + one(I)]) - 1
     usethreads(m) || return symmetric_pattern(graph)
     T = nthreads(); bnd = chunkbounds(ptr, n, T); ok = Threads.Atomic{Bool}(true)
+    above = zeros(Int, T)
 
-    check! = function (lo, hi)
+    check! = function (t, lo, hi)
+        a = 0
+
         @inbounds for j in lo:hi
             p0 = ptr[j]; p1 = ptr[j + one(I)] - one(I); prev = zero(I)
 
             for p in p0:p1
                 i = tgt[p]
 
-                if i == j || i <= prev || !inlist(tgt, ptr[i], ptr[i + one(I)] - one(I), I(j))
+                if i == j || i <= prev || (i > j && !inlist(tgt, ptr[i], ptr[i + one(I)] - one(I), I(j)))
                     ok[] = false; return
                 end
 
+                a += i > j
                 prev = i
             end
 
             (j & 1023 == 0 && !ok[]) && return
         end
+
+        above[t] = a
     end
 
     @threads for t in 1:T
-        check!(bnd[t], bnd[t + 1] - 1)
+        check!(t, bnd[t], bnd[t + 1] - 1)
     end
 
-    return ok[]
+    return ok[] && 2 * sum(above) == m
+end
+
+#
+# (psymmetric_pattern(graph), psymmetric_sccs(graph) when the pattern is symmetric, else nothing) with one read
+# of the lists: the threads check their ranges of lists (as psymmetric_pattern) and join the edges inside
+# their ranges (as psymmetric_sccs, whose ranges are the same) in the same pass. The same answers.
+#
+function psymmetric_components(graph::BipartiteGraph{I}) where {I}
+    n = nv(graph); ptr = pointers(graph); tgt = targets(graph); m = Int(ptr[n + one(I)]) - 1
+
+    if !usethreads(m)
+        sym = symmetric_pattern(graph)
+        return sym, sym ? symmetric_sccs(graph) : nothing
+    end
+
+    T = nthreads(); bnd = chunkbounds(ptr, n, T); ok = Threads.Atomic{Bool}(true)
+    above = zeros(Int, T)
+    root = FVector{I}(undef, n); cross = FVector{Bool}(undef, n)
+
+    check! = function (t, lo, hi)
+        a = 0
+
+        @inbounds for v in lo:hi
+            root[v] = I(v)
+        end
+
+        @inbounds for j in lo:hi
+            p0 = ptr[j]; p1 = ptr[j + one(I)] - one(I); prev = zero(I); crossing = false
+
+            for p in p0:p1
+                i = tgt[p]
+
+                if i == j || i <= prev || (i > j && !inlist(tgt, ptr[i], ptr[i + one(I)] - one(I), I(j)))
+                    ok[] = false; return
+                end
+
+                a += i > j
+                prev = i
+
+                if lo <= i <= hi
+                    i < j && unite!(root, I(j), i)
+                else
+                    crossing = true
+                end
+            end
+
+            cross[j] = crossing
+            (j & 1023 == 0 && !ok[]) && return
+        end
+
+        above[t] = a
+    end
+
+    @threads for t in 1:T
+        check!(t, bnd[t], bnd[t + 1] - 1)
+    end
+
+    (ok[] && 2 * sum(above) == m) || return false, nothing
+    return true, union_components!(root, cross, graph)
 end
 
 # whether v is in the sorted tgt[lo:hi]
@@ -278,6 +355,10 @@ function relabelsorted!(Hptr::AbstractVector{E}, Htgt::AbstractVector{V}, split:
         v = order[x]
         Hptr[x + one(V)] = acc += gptr[v + one(V)] - gptr[v]
     end
+
+    # dense enough: by a scatter instead of sorting each list
+    T = nthreads()
+    par && T > 1 && T * n <= (Int(acc) - 1) ÷ 2 && return relabelscatter!(Hptr, Htgt, split, graph, order, index)
 
     fillH! = function (lo, hi)
         dmax = 0
@@ -324,6 +405,72 @@ function relabelsorted!(Hptr::AbstractVector{E}, Htgt::AbstractVector{V}, split:
     end
 
     return BipartiteGraph(n, n, m, Hptr, Htgt)
+end
+
+#
+# relabelsorted! by a scatter (the graph is symmetric): visiting the new labels y in increasing order, y is
+# appended to list index[w] of every neighbor w of order[y], so every list comes out sorted, without
+# sorting. Threads take ranges of y (in order) and write to their own slots of each list, found by counting
+# first (T counters per list: for graphs with at least 2T entries per list on average, where sorting the
+# lists costs the most). The same lists as relabelsorted!'s.
+#
+function relabelscatter!(Hptr::AbstractVector{E}, Htgt::AbstractVector{V}, split::AbstractVector{V}, graph::AbstractGraph{V}, order::AbstractVector, index::AbstractVector) where {V, E}
+    n = nv(graph); gptr = pointers(graph); gtgt = targets(graph)
+    T = nthreads(); bnd = chunkbounds(Hptr, n, T)
+    cnt = Matrix{E}(undef, n, T)                    # cnt[x, t]: thread t's entries of list x, then where they go
+
+    @threads for t in 1:T
+        @inbounds begin
+            for x in oneto(n)
+                cnt[x, t] = zero(E)
+            end
+
+            for y in bnd[t]:(bnd[t + 1] - 1)
+                v = order[y]
+
+                for p in gptr[v]:(gptr[v + one(V)] - one(E))
+                    cnt[index[gtgt[p]], t] += one(E)
+                end
+            end
+        end
+    end
+
+    xb = chunkbounds(Hptr, n, T)
+
+    @threads for t in 1:T
+        @inbounds for x in xb[t]:(xb[t + 1] - 1)
+            o = Hptr[x]
+
+            for s in 1:T
+                c = cnt[x, s]; cnt[x, s] = o; o += c
+            end
+        end
+    end
+
+    @threads for t in 1:T
+        @inbounds for y in bnd[t]:(bnd[t + 1] - 1)
+            v = order[y]
+
+            for p in gptr[v]:(gptr[v + one(V)] - one(E))
+                x = index[gtgt[p]]; q = cnt[x, t]
+                Htgt[q] = y; cnt[x, t] = q + one(E)
+            end
+        end
+    end
+
+    @threads for t in 1:T
+        @inbounds for x in xb[t]:(xb[t + 1] - 1)
+            o = Hptr[x]; b = zero(V)
+
+            for q in o:(Hptr[x + one(V)] - one(E))
+                Htgt[q] < x ? (b += one(V)) : break
+            end
+
+            split[x] = b
+        end
+    end
+
+    return BipartiteGraph(n, n, Int(Hptr[n + one(V)]) - 1, Hptr, Htgt)
 end
 
 # sort tgt[lo:hi] in place (distinct values; no allocation): Shell sort with Ciura's gaps (extended
@@ -585,7 +732,7 @@ function pcliquetree(graph::AbstractGraph{V}, alg::PermutationOrAlgorithm) where
     nn = n + one(V); nnn = nn + one(V)
     weights = CTR.Ones{V}(n)
 
-    target1 = FVector{V}(undef, max(m, nn))
+    target1 = hugevector(V, max(m, nn))
     target3 = FVector{V}(undef, n)
 
     pointer1 = FVector{E}(undef, nn)
@@ -618,10 +765,10 @@ function pcliquetree(graph::AbstractGraph{V}, alg::PermutationOrAlgorithm) where
     # supernodetree_impl!: the elimination tree and the column counts read the graph relabelled (H,
     # each list sorted): the etree skips the entries above the diagonal, and the counts read the ones
     # below it (the transpose of upper; split[x] = the number of entries of H[x] below x)
-    Hptr = FVector{E}(undef, nn); Htgt = FVector{V}(undef, CTR.twice(m)); split = FVector{V}(undef, n)
+    Hptr = FVector{E}(undef, nn); Htgt = hugevector(V, CTR.twice(m)); split = FVector{V}(undef, n)
     H = relabelsorted!(Hptr, Htgt, split, graph, order, index)
     etree_prefix!(elmtree, elmorder, H, split)
-    lower = suffixes!(FVector{E}(undef, nn), FVector{V}(undef, m), H, split)
+    lower = suffixes!(FVector{E}(undef, nn), hugevector(V, m), H, split)
 
     CTR.supcnt_impl!(colcount, new, parent, index, elmorder,
         elmindex, sndptr, CTR.UnionFind(n, target1, pointer3, target3),
@@ -670,7 +817,7 @@ function pcliquetree(graph::AbstractGraph{V}, alg::PermutationOrAlgorithm) where
 
     # cliquetree_impl!
     k = sepptr[h + one(V)] - one(E)
-    septgt = FVector{V}(undef, k)
+    septgt = hugevector(V, k)
     separator = BipartiteGraph(n, h, k, sepptr, septgt)
     lower2 = relabelreverse!(pointer1, target1, H, elmindex)
     pseparators!(separator, lower2, sndtree)
@@ -828,7 +975,7 @@ function pchordalsymbolic(ctree::CliqueTree{I, I}) where {I}
     pnt = tree.tree.prnt
     h = nv(res)
 
-    reltgt = FVector{I}(undef, ne(sep))
+    reltgt = hugevector(I, ne(sep))
     rel = BipartiteGraph(nov(sep), nv(sep), ne(sep), pointers(sep), reltgt)
 
     nMptr = jMptr = one(I)
