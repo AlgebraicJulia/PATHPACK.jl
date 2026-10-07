@@ -706,17 +706,19 @@ function distance_bound(A::SparseMatrixCSC{T}, limit::Real = Inf) where {T <: Ab
 
     b = (n - 1) * Float64(reinterpret(T, h))
     (isfinite(b) && b < limit) && return b
-    c = 0.0
+    c = 0.0; inf = reinterpret(U, T(Inf)); ptr = SparseArrays.getcolptr(A)
 
-    for j in 1:n
-        m = 0.0
+    # (max |w| of each column over its finite weights, by the bits as above: Inf and NaN, whose bits
+    # without the sign are ≥ those of Inf, count as 0; the same sum as max(abs(Float64(w))) per column)
+    @inbounds for j in 1:n
+        m = zero(U)
 
-        for p in SparseArrays.nzrange(A, j)
-            v = abs(Float64(w[p]))
-            isfinite(v) && (m = max(m, v))
+        @simd for p in ptr[j]:(ptr[j + 1] - 1)
+            x = reinterpret(U, w[p]) & mask
+            m = max(m, ifelse(x < inf, x, zero(U)))
         end
 
-        c += m
+        c += Float64(reinterpret(T, m))
     end
 
     return isfinite(b) ? min(b, c) : c
