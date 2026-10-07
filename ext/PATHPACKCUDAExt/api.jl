@@ -946,20 +946,20 @@ const SYNC_TOP = Ref(false)
 
 function factor_overlapped(F::ChordalSLU, A::SparseMatrixCSC)
     dev = CUDA.device()
-    entries = Threads.@spawn @step "copy entries" copyto!(F, A)
-    up = bottom = nothing; bspans = Tuple{Int, Int}[]
+    entries = up = bottom = nothing; bspans = Tuple{Int, Int}[]
 
     P = try
         B = bottom_plan(F; large = 256)
         bspans = bottom_spans(F, B.workers)
-        # (all of the factor first, the bottom spans again when factored: uploading only the top's
-        # complement, in pieces, measured 1.003× geomean on the B200, so the simpler copy is kept)
-        tspans = [(1, Int(MF.nv(F.S.S.res)))]
+        # the entries of A: those of the bottom spans into the host factor, the top's straight into the
+        # device factor (host_entries!, device_entries!: the host's top part is never touched, and the
+        # upload is of A, not of the factor)
+        onhost = front_onhost(F, bspans)
+        entries = Threads.@spawn @step "copy entries" host_entries!(F, A, onhost, bspans)
         dbuf = @step "device factor" device_factor(F, B.nbndval)
         up = Threads.@spawn begin
             CUDA.device!(dev)
-            wait(entries)
-            @step "upload factor" upload_factor!(dbuf, F, tspans)
+            @step "upload factor" device_entries!(dbuf, F, A, onhost)
         end
 
         bottom = Threads.@spawn begin

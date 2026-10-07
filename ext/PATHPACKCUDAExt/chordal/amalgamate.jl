@@ -80,20 +80,6 @@ function amalgamation_key(x)
     return nothing
 end
 
-# |a ∩ b| for sorted vectors (separators are sorted), without allocating
-function sorted_common(a::AbstractVector, b::AbstractVector)
-    i = firstindex(a); j = firstindex(b); c = 0
-
-    @inbounds while i <= lastindex(a) && j <= lastindex(b)
-        x = a[i]; y = b[j]
-        c += x == y
-        i += x <= y
-        j += y <= x
-    end
-
-    return c
-end
-
 # allowed: only fronts with allowed[f] are merged (all if nothing). compact: the merged arrays (and the
 # maps) cover only the groups of allowed fronts; the others get empty blocks (for a merge that only the
 # GPU top of the factorization uses)
@@ -108,6 +94,15 @@ function amalgamate_fronts(::Type{I}, nmax::Integer, alpha::Real, Rptr, Sptr, St
     #
     width = [nn(f) for f in 1:nf]                       # residual width of the chain ending at f
     joins = falses(nf)                                   # joins[c]: c is merged into c + 1
+    #
+    # |sep(c) ∩ sep(f)| for a child c of f: by the clique-tree property sep(c) ⊆ res(f) ∪ sep(f), and res(f)
+    # (a range of vertices) is disjoint from sep(f), so it is |sep(c)| less the vertices of sep(c) in res(f),
+    # which (sep(c) is sorted) two binary searches count: the same number as merging the two lists
+    #
+    function common(c, f)
+        sc = sep(c)
+        return length(sc) - (searchsortedfirst(sc, Rptr[f + 1]) - searchsortedfirst(sc, Rptr[f]))
+    end
 
     for f in 2:nf
         c = f - 1
@@ -115,8 +110,7 @@ function amalgamate_fronts(::Type{I}, nmax::Integer, alpha::Real, Rptr, Sptr, St
         (isnothing(allowed) || (allowed[c] && allowed[f])) || continue
         w = width[c] + nn(f)
         w <= nmax || continue
-        common = sorted_common(sep(c), sep(f))
-        zeros = width[c] * (na(f) - common)              # padded entries in the chain's separator columns
+        zeros = width[c] * (na(f) - common(c, f))              # padded entries in the chain's separator columns
         zeros <= max(8, alpha * width[c] * max(na(c), 1)) || continue
         joins[c] = true
         width[f] = w
@@ -164,10 +158,10 @@ function amalgamate_fronts(::Type{I}, nmax::Integer, alpha::Real, Rptr, Sptr, St
     # the maps are built on the GPU (the merged factor is as large as the factor: tens of MB of maps per
     # call, which on the host would be garbage after one upload)
     #
-    mLD = CUDA.zeros(Int32, Dn[end] - 1); mUD = CUDA.zeros(Int32, Dn[end] - 1)
-    mLL = CUDA.zeros(Int32, Ln[end] - 1); mUL = CUDA.zeros(Int32, Ln[end] - 1)
+    mLD, mUD, mLL, mUL = @step "maps alloc" (CUDA.zeros(Int32, Dn[end] - 1), CUDA.zeros(Int32, Dn[end] - 1),
+        CUDA.zeros(Int32, Ln[end] - 1), CUDA.zeros(Int32, Ln[end] - 1))
     members = Int32[m for (h, g) in groups if stored(h) for m in h:g]
-    amalgamate_maps_gpu!(mLD, mUD, mLL, mUL, members, group, groups, Rptr, Sptr, Stgt, Dptr, Lptr, Dn, Ln)
+    @step "maps" amalgamate_maps_gpu!(mLD, mUD, mLL, mUL, members, group, groups, Rptr, Sptr, Stgt, Dptr, Lptr, Dn, Ln)
 
     pn = Vector{I}(undef, ng)
 
@@ -207,8 +201,8 @@ function amalgamate_maps_gpu!(mLD, mUD, mLL, mUL, members, group, groups, Rptr, 
     offs = cumsum([0; [length(p) for p in parts]])
     buf = Vector{Int32}(undef, offs[end])
 
-    for (k, p) in enumerate(parts), (i, x) in enumerate(p)
-        buf[offs[k] + i] = x % Int32
+    for (k, p) in enumerate(parts)
+        view(buf, (offs[k] + 1):offs[k + 1]) .= p .% Int32
     end
 
     d = CuVector(buf)

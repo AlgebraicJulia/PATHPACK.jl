@@ -277,9 +277,11 @@ function FactorPlan(F::ChordalSLU{Sem, T, I}, B::BottomPlan{T, I}; graph::Bool =
 
         if merge > 1 && any(istop) && nlarge >= cf.factor_merge_min
             Stgt = MF.targets(S.sep)
-            amal = amalgamation(amalgamation_key(S.Dptr), I, merge, alpha, Vector{I}(view(Rptr, 1:(nf + 1))), Vector{I}(view(Sptr, 1:(nf + 1))),
-                Vector{I}(view(Stgt, 1:(Sptr[nf + 1] - 1))), Vector{I}(view(S.Dptr, 1:(nf + 1))), Vector{I}(view(S.Lptr, 1:(nf + 1))),
-                Vector{I}(view(pnt, 1:nf)), Vector{I}(view(S.idx, 1:size(F, 1))); allowed = istop, compact = true)     # cached per symbolic factorization
+            # (views of the symbolic arrays: amalgamate_fronts only reads them, and copies of the separators
+            # were tens of MB of garbage per call)
+            amal = @step "amalgamation" amalgamation(amalgamation_key(S.Dptr), I, merge, alpha, view(Rptr, 1:(nf + 1)), view(Sptr, 1:(nf + 1)),
+                view(Stgt, 1:(Sptr[nf + 1] - 1)), view(S.Dptr, 1:(nf + 1)), view(S.Lptr, 1:(nf + 1)),
+                view(pnt, 1:nf), view(S.idx, 1:size(F, 1)); allowed = istop, compact = true)     # cached per symbolic factorization
             isnothing(amal) || amal.nf == nf && (amal = nothing)        # nothing merged
         end
     end
@@ -348,7 +350,7 @@ function FactorPlan(F::ChordalSLU{Sem, T, I}, B::BottomPlan{T, I}; graph::Bool =
             dbuf..., CuVector{T}(undef, max(gpeak, 1)), CuVector{T}(undef, 1),
             upload(relptr), upload(MF.targets(S.rel)),
             tasks, levels, [CuStream() for _ in 1:nstreams],
-            [CuVector{T}(undef, nFgpu) for _ in 1:nstreams], graph, nothing,
+            front_buffers(T, tasks, levels, nstreams), graph, nothing,
             nothing, ntuple(_ -> CuVector{T}(undef, 0), 4),
         )
         #
@@ -377,7 +379,6 @@ function merged_plan(F::ChordalSLU{Sem, T, I}, A::Amalgamation, istop, topwork, 
     chdptr = MF.pointers(S.chd); chdtgt = MF.targets(S.chd)
     na(f) = Int(Sptr[f + 1] - Sptr[f])
     children(f) = (Int(chdtgt[p]) for p in chdptr[f]:(chdptr[f + 1] - 1))
-    sep(f) = view(Stgt, Sptr[f]:(Sptr[f + 1] - 1))
     ng = A.nf; grp = A.group
     ufirst = zeros(Int, ng); ulast = zeros(Int, ng)
 
@@ -390,24 +391,12 @@ function merged_plan(F::ChordalSLU{Sem, T, I}, A::Amalgamation, istop, topwork, 
     uw(q) = Int(A.Rptr[q + 1] - A.Rptr[q])
     una(q) = Int(A.Sptr[q + 1] - A.Sptr[q])
     utop(q) = istop[ufirst[q]]
-    newrel = I[]
     #
-    # positions of the vertices `verts` in unit q's front: residual vertices first, then its separator
+    # the relative indices of the children's updates in their merged parents (newrel), child after child in
+    # the order of the tasks: the loops below give each child its range (jobs: (q, c, first)), and
+    # merged_positions! fills them afterwards, on several threads
     #
-    function positions!(q, verts)
-        r0 = Int(A.Rptr[q]); w = uw(q)
-        sg = view(A.Stgt, A.Sptr[q]:(A.Sptr[q + 1] - 1))
-
-        for u in verts
-            if r0 <= u < r0 + w
-                push!(newrel, I(u - r0 + 1))
-            else
-                k = searchsortedfirst(sg, u)
-                @assert k <= length(sg) && sg[k] == u "merged factorization: separator vertex outside the parent's front"
-                push!(newrel, I(w + k))
-            end
-        end
-    end
+    jobs = Tuple{Int, Int, Int}[]; nrel = 0
 
     externals(q) = sort!([c for m in ufirst[q]:ulast[q] for c in children(m) if grp[c] != q])
     tasks = Tuple{Int, Int, Int, Int, Int, Vector{Tuple{Bool, Int, Int, Int}}}[]
@@ -427,8 +416,7 @@ function merged_plan(F::ChordalSLU{Sem, T, I}, A::Amalgamation, istop, topwork, 
             kids = Tuple{Bool, Int, Int, Int}[]
 
             for c in Iterators.reverse(ks)
-                rp = length(newrel) + 1
-                positions!(q, sep(c))
+                rp = nrel + 1; nrel += na(c); push!(jobs, (q, c, rp))
                 push!(kids, istop[c] ? (true, slot[grp[c]], na(c), rp) : (false, bndoff[c], na(c), rp))
             end
 
@@ -454,8 +442,7 @@ function merged_plan(F::ChordalSLU{Sem, T, I}, A::Amalgamation, istop, topwork, 
             kids = Tuple{Bool, Int, Int, Int}[]
 
             for c in Iterators.reverse(ks)
-                rp = length(newrel) + 1
-                positions!(q, sep(c))
+                rp = nrel + 1; nrel += na(c); push!(jobs, (q, c, rp))
                 push!(kids, istop[c] ? (true, offs[c], na(c), rp) : (false, bndoff[c], na(c), rp))
             end
 
@@ -471,21 +458,95 @@ function merged_plan(F::ChordalSLU{Sem, T, I}, A::Amalgamation, istop, topwork, 
         end
     end
 
+    newrel = @step "positions" merged_positions(A, Sptr, Stgt, jobs, nrel)
+    @step "device buffers" begin
     merged = (CuVector{T}(undef, length(A.mLD)), CuVector{T}(undef, length(A.mLL)), CuVector{T}(undef, length(A.mUD)), CuVector{T}(undef, length(A.mUL)))
     P = FactorPlan{Sem, T, I}(
         F, istop, topwork, nt, workers, nbndval,
         dbuf..., CuVector{T}(undef, max(gpeak, 1)), CuVector{T}(undef, 1),
         upload(MF.pointers(S.rel)), upload(newrel),
         tasks, levels, [CuStream() for _ in 1:nstreams],
-        [CuVector{T}(undef, nFgpu) for _ in 1:nstreams], graph, nothing,
+        front_buffers(T, tasks, levels, nstreams), graph, nothing,
         A, merged,
     )
 
     for x in (P.LD, P.LL, P.UD, P.UL, P.Mb, P.Mg, P.relptr, P.reltgt, P.Fbufs..., merged...)
         CUDA.enable_synchronization!(x, false)
     end
+    end
 
     return P
+end
+
+#
+# newrel[first:first + na(c) - 1] for each job (q, c, first): the position of each vertex u of sep(c) in
+# merged front q, its residual (a range of vertices) first, then its separator sep(q) (A.Stgt); both
+# sorted, so each search starts where the last one ended. Jobs write disjoint ranges: threads take runs
+# of jobs with near-equal numbers of entries.
+#
+function merged_positions(A::Amalgamation{I}, Sptr, Stgt, jobs::Vector{Tuple{Int, Int, Int}}, nrel::Integer) where {I}
+    newrel = Vector{I}(undef, nrel)
+
+    fillrange! = function (j0, j1)
+        @inbounds for j in j0:j1
+            q, c, o = jobs[j]
+            r0 = Int(A.Rptr[q]); w = Int(A.Rptr[q + 1]) - r0
+            s0 = Int(A.Sptr[q]); s1 = Int(A.Sptr[q + 1]) - 1; k = s0
+
+            for p in Int(Sptr[c]):(Int(Sptr[c + 1]) - 1)
+                u = Stgt[p]
+
+                if r0 <= u < r0 + w
+                    newrel[o] = I(u - r0 + 1)
+                else
+                    k = searchsortedfirst(A.Stgt, u, k, s1, Base.Order.Forward)
+                    k <= s1 && A.Stgt[k] == u || error("merged factorization: separator vertex outside the parent's front")
+                    newrel[o] = I(w + k - s0 + 1)
+                end
+
+                o += 1
+            end
+        end
+    end
+
+    nj = length(jobs); T = Threads.nthreads()
+
+    if T > 1 && nrel >= 2^16
+        starts = [jobs[j][3] for j in 1:nj]
+        bnd = [searchsortedfirst(starts, cld(t * nrel, T) + 1) for t in 0:T]
+        bnd[1] = 1; bnd[end] = nj + 1
+
+        Threads.@threads for t in 1:T
+            fillrange!(bnd[t], bnd[t + 1] - 1)
+        end
+    else
+        fillrange!(1, nj)
+    end
+
+    return newrel
+end
+
+#
+# The front buffer of each stream (factor_top_streams!: the i-th task of a level runs on stream mod1(i, ns)),
+# as large as the largest front run on that stream: with one dense front at the top of the tree, one stream
+# needs its size and the others much less (they were all that size: 8 × 590 MB on EB_16384_64, each a new
+# allocation on a cold call). One stream (no levels): one buffer for every task.
+#
+function front_buffers(::Type{T}, tasks, levels, nstreams::Integer) where {T}
+    front(t) = (tasks[t][1] + tasks[t][2])^2
+
+    if nstreams == 1 || isempty(levels)
+        return [CuVector{T}(undef, max(1, maximum(front, eachindex(tasks); init = 1)))]
+    end
+
+    sizes = ones(Int, nstreams)
+
+    for level in levels, (i, t) in enumerate(level)
+        k = mod1(i, nstreams)
+        sizes[k] = max(sizes[k], front(t))
+    end
+
+    return [CuVector{T}(undef, sz) for sz in sizes]
 end
 
 # the factor arrays the top fronts are factored in: (LD, UD, LL, UL)
@@ -567,6 +628,205 @@ function upload_factor!(dbuf, F::ChordalSLU, spans)
     LD, LL, UD, UL, _ = dbuf
     upload_spans!(LD, F.LDval, S.Dptr, spans); upload_spans!(UD, F.UDval, S.Dptr, spans)
     upload_spans!(LL, F.LLval, S.Lptr, spans); upload_spans!(UL, F.ULval, S.Lptr, spans)
+    return
+end
+
+#
+# The entries of A into the factor in two parts, copyto!(F, A) split by front:
+#
+#   host_entries!     the fronts of the bottom spans (the bottom subtrees, which the CPU factors, and the
+#                     top fronts between them that upload_bottom! copies along) into the host factor F,
+#                     as copyto! writes them;
+#   device_entries!   the other fronts (the GPU's top) straight into the device factor: filled with the
+#                     semiring zero, then each entry of A to its slot, found on the GPU (the same search
+#                     as copyto!'s, one warp per column of A).
+#
+# The same factor as copyto! followed by the upload of all of it, but the device receives A and the
+# symbolic arrays it needs instead of the factor (1.2 GB on EB_16384_64, the transfer that held up the
+# plan on a cold call), the host's top part is never written (malloc'd memory that is never touched costs
+# nothing, where copyto! faulted in all of it), and the host searches only the bottom's slots. The two
+# parts are independent: they run at the same time.
+#
+function front_onhost(F::ChordalSLU, spans)
+    onhost = zeros(Bool, Int(MF.nv(F.S.S.res)))
+
+    for (lo, hi) in spans
+        onhost[lo:hi] .= true
+    end
+
+    return onhost
+end
+
+function host_entries!(F::ChordalSLU{<:Any, T}, A::SparseMatrixCSC, onhost::Vector{Bool}, spans) where {T}
+    S = F.S.S; z = szero(F.s, T, Val(:N))
+    Dptr = S.Dptr; Lptr = S.Lptr
+
+    for (lo, hi) in spans
+        CPU.pfill!(view(F.LDval, Int(Dptr[lo]):(Int(Dptr[hi + 1]) - 1)), z); CPU.pfill!(view(F.UDval, Int(Dptr[lo]):(Int(Dptr[hi + 1]) - 1)), z)
+        CPU.pfill!(view(F.LLval, Int(Lptr[lo]):(Int(Lptr[hi + 1]) - 1)), z); CPU.pfill!(view(F.ULval, Int(Lptr[lo]):(Int(Lptr[hi + 1]) - 1)), z)
+    end
+
+    fill!(F.Nval, z)
+    n = size(A, 2)
+    nchunk = SparseArrays.getcolptr(A)[n + 1] - 1 < 2^15 ? 1 : 8 * Threads.nthreads()
+
+    if isone(nchunk)
+        host_columns!(F, A, onhost, 1, n)
+    else
+        Threads.@threads for k in 1:nchunk
+            host_columns!(F, A, onhost, cld((k - 1) * n, nchunk) + 1, cld(k * n, nchunk))
+        end
+    end
+
+    return F
+end
+
+# CPU.scatter_columns! for columns c0:c1, only the entries whose slot is in a front on the host
+function host_columns!(F::ChordalSLU{<:Any, T, I}, A::SparseMatrixCSC, onhost::Vector{Bool}, c0::Integer, c1::Integer) where {T, I}
+    S = F.S.S
+    rptr = MF.pointers(S.res); sptr = MF.pointers(S.sep); stgt = MF.targets(S.sep)
+    idx = S.idx; Dptr = S.Dptr; Lptr = S.Lptr
+    Bptr = F.S.Bptr; fcc = F.S.fcc
+    Nptr = MF.pointers(F.S.N); Ntgt = MF.targets(F.S.N)
+    LD = F.LDval; LL = F.LLval; UD = F.UDval; UL = F.ULval; Nval = F.Nval
+    rinvp = F.rinvp; cinvp = F.cinvp
+    Aptr = SparseArrays.getcolptr(A); Arow = SparseArrays.rowvals(A); Aval = SparseArrays.nonzeros(A)
+
+    @inbounds for c in c0:c1
+        j = convert(I, cinvp[c]); f = idx[j]
+        jlo = rptr[f]; nn = rptr[f + one(I)] - jlo
+        na = sptr[f + one(I)] - sptr[f]
+        jstrt = Bptr[fcc[f]]
+        hf = onhost[f]
+
+        for p in Aptr[c]:(Aptr[c + 1] - 1)
+            i = convert(I, rinvp[Arow[p]])
+
+            if i < jstrt
+                r = CPU.sortedindex(Ntgt, Nptr[j], Nptr[j + one(I)] - one(I), i)
+                iszero(r) || (Nval[r] = Aval[p])
+            elseif jlo <= i < jlo + nn
+                hf || continue
+                o = Dptr[f] + (i - jlo) + (j - jlo) * nn
+                LD[o] = Aval[p]; UD[o] = Aval[p]
+            elseif i > j
+                hf || continue
+                k = CPU.sortedindex(stgt, sptr[f], sptr[f + one(I)] - one(I), i)
+                iszero(k) || (LL[Lptr[f] + (k - sptr[f]) + (j - jlo) * na] = Aval[p])
+            else
+                g = idx[i]
+                onhost[g] || continue
+                ilo = rptr[g]; mm = rptr[g + one(I)] - ilo
+                k = CPU.sortedindex(stgt, sptr[g], sptr[g + one(I)] - one(I), j)
+                iszero(k) || (UL[Lptr[g] + (i - ilo) + (k - sptr[g]) * mm] = Aval[p])
+            end
+        end
+    end
+
+    return
+end
+
+# the index of v in the sorted tgt[lo:hi], or 0 (CPU.sortedindex)
+@inline function sortedindex_gpu(tgt, lo::Int, hi::Int, v::Int32)
+    @inbounds while lo <= hi
+        mid = (lo + hi) >>> 1; t = tgt[mid]
+        t == v && return mid
+        t < v ? (lo = mid + 1) : (hi = mid - 1)
+    end
+
+    return 0
+end
+
+# host_columns! for the fronts not on the host, one warp per column of A
+function device_entries_kernel!(LD, UD, LL, UL, Aptr, Arow, Aval, rinvp, cinvp, idx, rptr, sptr, stgt, Dptr, Lptr, jstart, onhost)
+    lane = (threadIdx().x - 1) % 32
+    warp = ((blockIdx().x - 1) * blockDim().x + threadIdx().x - 1) ÷ 32
+    nwarps = (gridDim().x * blockDim().x) ÷ 32
+    n = length(cinvp)
+    c = warp + 1
+
+    @inbounds while c <= n
+        j = Int(cinvp[c]); f = Int(idx[j])
+        jlo = Int(rptr[f]); nn = Int(rptr[f + 1]) - jlo
+        na = Int(sptr[f + 1]) - Int(sptr[f])
+        jstrt = Int(jstart[f]); hf = onhost[f]
+        p = Int(Aptr[c]) + lane
+
+        while p < Int(Aptr[c + 1])
+            i = Int(rinvp[Int(Arow[p])])
+
+            if i < jstrt
+                # (coupling between components: no such entries on the GPU, check_coupling)
+            elseif jlo <= i < jlo + nn
+                if !hf
+                    o = Int(Dptr[f]) + (i - jlo) + (j - jlo) * nn
+                    LD[o] = Aval[p]; UD[o] = Aval[p]
+                end
+            elseif i > j
+                if !hf
+                    k = sortedindex_gpu(stgt, Int(sptr[f]), Int(sptr[f + 1]) - 1, i % Int32)
+                    iszero(k) || (LL[Int(Lptr[f]) + (k - Int(sptr[f])) + (j - jlo) * na] = Aval[p])
+                end
+            else
+                g = Int(idx[i])
+
+                if !onhost[g]
+                    ilo = Int(rptr[g]); mm = Int(rptr[g + 1]) - ilo
+                    k = sortedindex_gpu(stgt, Int(sptr[g]), Int(sptr[g + 1]) - 1, j % Int32)
+                    iszero(k) || (UL[Int(Lptr[g]) + (i - ilo) + (k - Int(sptr[g])) * mm] = Aval[p])
+                end
+            end
+
+            p += 32
+        end
+
+        c += nwarps
+    end
+
+    return
+end
+
+# x as Int32 (vertex labels and column pointers below 2³¹), converted on threads when long
+function int32_copy(x::AbstractVector)
+    y = Vector{Int32}(undef, length(x)); m = length(x)
+
+    if m >= 2^18 && Threads.nthreads() > 1
+        T = Threads.nthreads()
+
+        Threads.@threads for t in 1:T
+            @inbounds for q in (cld((t - 1) * m, T) + 1):cld(t * m, T)
+                y[q] = x[q] % Int32
+            end
+        end
+    else
+        @inbounds for q in 1:m
+            y[q] = x[q] % Int32
+        end
+    end
+
+    return y
+end
+
+# the device factor (dbuf) before the bottom is uploaded: the semiring zero, with the entries of A of the fronts not on the host
+function device_entries!(dbuf, F::ChordalSLU{<:Any, T, I}, A::SparseMatrixCSC, onhost::Vector{Bool}) where {T, I}
+    LD, LL, UD, UL, _ = dbuf
+    z = szero(F.s, T, Val(:N))
+    foreach(x -> isempty(x) || fill!(x, z), (LD, LL, UD, UL))
+    n = size(A, 2); m = SparseArrays.nnz(A)
+    (iszero(n) || iszero(m) || all(onhost)) && (CUDA.synchronize(); return)
+    @assert n < typemax(Int32) && m < typemax(Int32)
+    S = F.S.S; nf = Int(MF.nv(S.res)); nsep = Int(MF.pointers(S.sep)[nf + 1]) - 1
+    jstart = [Int(F.S.Bptr[F.S.fcc[f]]) for f in 1:nf]
+    vals = SparseArrays.nonzeros(A)
+    dev = map(upload, (int32_copy(view(SparseArrays.getcolptr(A), 1:(n + 1))), int32_copy(view(SparseArrays.rowvals(A), 1:m)),
+        eltype(A) === T ? view(vals, 1:m) : T.(view(vals, 1:m)), int32_copy(view(F.rinvp, 1:n)), int32_copy(view(F.cinvp, 1:n)),
+        int32_copy(view(S.idx, 1:n)), Vector{Int}(view(MF.pointers(S.res), 1:(nf + 1))), Vector{Int}(view(MF.pointers(S.sep), 1:(nf + 1))),
+        int32_copy(view(MF.targets(S.sep), 1:nsep)), Vector{Int}(view(S.Dptr, 1:(nf + 1))), Vector{Int}(view(S.Lptr, 1:(nf + 1))),
+        jstart, onhost))
+    nb = min(cld(n, 8), 2^16)
+    @cuda threads = 256 blocks = nb device_entries_kernel!(LD, UD, LL, UL, dev...)
+    CUDA.synchronize()
+    foreach(CUDA.unsafe_free!, dev)
     return
 end
 
