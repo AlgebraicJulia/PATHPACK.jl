@@ -582,8 +582,8 @@ end
     return
 end
 
-# ⊕ is idempotent (min or max: the atomic kinds), for diag_block! (host side)
-idem_plus(s, ::Type{T}) where {T} = atomic_kind(s, Val(:N), T) isa Union{Val{:min}, Val{:max}}
+# ⊕ is idempotent (min or max, or a bitwise and / or, on a machine type: native atomics), for diag_block! (host side)
+idem_plus(s, ::Type{T}) where {T} = atomic_kind(s, Val(:N), T) isa Union{Val{:min}, Val{:max}, Val{:and}, Val{:or}}
 
 #
 # In the tile kernel each step of a product reads 4 contiguous values of A (As[i, kk], i contiguous) and of

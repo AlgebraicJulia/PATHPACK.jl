@@ -257,23 +257,54 @@ end
 #
 #   C[i, j] ← C[i, j] ⊕ m, atomically
 #
-# C[i, j] ← C[i, j] ⊕ m atomically. When ⊕ is min, max or + on a machine type, this is one native
-# reduction (RED: fire and forget, no returned value); otherwise a compare-and-swap loop.
+# C[i, j] ← C[i, j] ⊕ m atomically. When ⊕ is min, max, + or a bitwise and / or on a machine type, this is
+# one native reduction (RED: fire and forget, no returned value); otherwise a compare-and-swap loop.
 @inline atomic_splus!(s::AbstractSemiring, trans::Val, C::CuDeviceMatrix{T}, i, j, m::T) where {T} =
     atomic_splus!(atomic_kind(s, trans, T), s, trans, C, i, j, m)
 @inline atomic_splus!(s::AbstractSemiring, trans::Val, C::ColMapped{T}, i, j, m::T) where {T} =
     atomic_splus!(atomic_kind(s, trans, T), s, trans, C.p, i, (@inbounds C.cm[j]), m)
 
+#
+# The ⊕ of s as one of the GPU's native operations, from the structure of the semiring (PATHPACK.CPU):
+# Val(:min), Val(:max), Val(:add), Val(:and) or Val(:or) (bitwise), or nothing. MinPlus and MinProd add by
+# min, PlusProd by +, AndOr by bitwise and; a Lattice or a NegativeQuantale adds as the semiring it is made
+# from, a DualQuantale by the dual operation (min ↔ max, and ↔ or). So MaxPlus, MinMax, MaxMin, MaxProd,
+# the Lawvere quantales and OrAnd need no entry of their own (test_names.jl checks plus_op against splus).
+#
+plus_op(s) = nothing
+plus_op(::Union{CPU.MinPlus, CPU.MinProd}) = Val(:min)
+plus_op(::CPU.PlusProd) = Val(:add)
+plus_op(::CPU.AndOr) = Val(:and)
+plus_op(s::Union{CPU.Lattice, CPU.NegativeQuantale}) = plus_op(s.s)
+plus_op(d::CPU.DualQuantale) = dual_op(plus_op(d.s))
+dual_op(op) = nothing
+dual_op(::Val{:min}) = Val(:max)
+dual_op(::Val{:max}) = Val(:min)
+dual_op(::Val{:and}) = Val(:or)
+dual_op(::Val{:or}) = Val(:and)
+
+# the atomic ⊕ for elements of type T: native where the hardware has it for T, else a compare-and-swap loop
 atomic_kind(s, trans, T) = Val(:cas)
-atomic_kind(::CPU.MinPlus, ::Val{:N}, ::Type{<:Union{Float32, Float64, Int32, Int64}}) = Val(:min)
-atomic_kind(::CPU.DualQuantale{CPU.MinPlus}, ::Val{:N}, ::Type{<:Union{Float32, Float64, Int32, Int64}}) = Val(:max)   # MaxPlus
-atomic_kind(::CPU.DualQuantale{CPU.MinMax}, ::Val{:N}, ::Type{<:Union{Float32, Float64, Int32, Int64}}) = Val(:max)   # MaxMin
-atomic_kind(::CPU.PlusProd, ::Val{:N}, ::Type{<:Union{Float32, Float64}}) = Val(:add)
+atomic_kind(s, ::Val{:N}, ::Type{T}) where {T} = native_atomic(plus_op(s), T)
+native_atomic(op, ::Type) = Val(:cas)
+native_atomic(op::Union{Val{:min}, Val{:max}}, ::Type{<:Union{Float32, Float64, Int32, Int64}}) = op
+native_atomic(op::Val{:add}, ::Type{<:Union{Float32, Float64}}) = op
+native_atomic(op::Union{Val{:and}, Val{:or}}, ::Type{<:Union{Int32, Int64, UInt32, UInt64}}) = op
 
 @inline atomic_ptr(::Type{U}, C, i, j) where {U} = reinterpret(Core.LLVMPtr{U, CUDA.AS.Global}, pointer(C, i + (j - 1) * size(C, 1)))
 
 @inline function atomic_splus!(::Val{:add}, s, trans, C::CuDeviceMatrix{T}, i, j, m::T) where {T}
     CUDA.atomic_add!(atomic_ptr(T, C, i, j), m)
+    return
+end
+
+@inline function atomic_splus!(::Val{:and}, s, trans, C::CuDeviceMatrix{T}, i, j, m::T) where {T}
+    CUDA.atomic_and!(atomic_ptr(T, C, i, j), m)
+    return
+end
+
+@inline function atomic_splus!(::Val{:or}, s, trans, C::CuDeviceMatrix{T}, i, j, m::T) where {T}
+    CUDA.atomic_or!(atomic_ptr(T, C, i, j), m)
     return
 end
 
