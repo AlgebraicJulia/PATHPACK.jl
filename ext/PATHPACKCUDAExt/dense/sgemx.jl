@@ -242,6 +242,10 @@ function gemm_refinements(cs, m::Integer, n::Integer, k::Integer, splitk::Bool, 
     return unique!(out)
 end
 
+# Without tuning, kernel v8 (paired k-steps) in place of v7 where its instructions are native (pair_ok:
+# Float32, ⊕ = min or max, compute capability 10.x), as the tuner picks it there. (A Ref for A/B runs.)
+const HEURISTIC_PAIR = Ref(true)
+
 # without tuning: from the shape and the GPU size only. With strided Float32 operands, kernel v7 in
 # 128 × 64 tiles (64 × 64 for n ≤ 64) is the fastest or within a few percent of it on the closure's
 # shapes on an RTX 5060 Laptop, L4 and RTX PRO 6000 (bench/gemm_shapes.jl), except for small k
@@ -250,8 +254,9 @@ end
 # 6000 (1.0-1.4× the 64 × 128 tiles). (Wider in-place outputs go through a scratch output: launch!.)
 function heuristic_gemm(s, ::Type{V}, m::Integer, n::Integer, k::Integer, inplace::Bool, strided::Bool = false) where {V}
     if config().gemm_kernel == 0 && strided && V === Float32 && 32 < n && 64 < k
-        inplace && 64 < n <= 256 && return GemmConfig(7, 64, -1, 8, 8, 8, 8, 1, 0)
-        return n <= 64 ? GemmConfig(7, 64, 64, 8, 8, 8) : GemmConfig(7, 128, 64, 8, 8, 8)
+        v = HEURISTIC_PAIR[] && pair_ok(s, V) ? 8 : 7
+        inplace && 64 < n <= 256 && return GemmConfig(v, 64, -1, 8, 8, 8, 8, 1, 0)
+        return n <= 64 ? GemmConfig(v, 64, 64, 8, 8, 8) : GemmConfig(v, 128, 64, 8, 8, 8)
     end
 
     v = forced_version(s, V)
