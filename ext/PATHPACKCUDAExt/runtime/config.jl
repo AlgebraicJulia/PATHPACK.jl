@@ -62,10 +62,14 @@ Numeric factorization
 
 Symbolic factorization
 - `ordering = "auto"`: the fill-reducing ordering (any order gives the same distances; only fill and speed
-  change). "auto": CliqueTrees.AutoOrder — per graph, HubAMF on graphs with hubs (maximum degree > 2√n),
-  BFSND (parallel nested dissection, halo AMF leaves) on lattice-like graphs, AMF otherwise; "amf": AMF;
-  "hub": HubAMF; "bfsnd": BFSND everywhere; "amd", "metis": SuiteSparse AMD and METIS NodeND (need AMD.jl /
-  Metis.jl loaded); "nd-dense": partial nested dissection with dense leaves of ≤ 150 vertices (ROME-style).
+  change). "auto": `PATHPACK.CPU.AutoOrder()`, a per-graph rule from the degree statistics (O(n)):
+  HubAMF when the degrees are skewed (maximum degree > 2√n and > 3 × the mean degree: hubs, ordered last),
+  BFSND (parallel nested dissection, halo AMF leaves) on lattice-like graphs (≥ 75% of the vertices of one
+  degree, coefficient of variation ≤ 0.15, maximum degree ≤ 8, and for degree ≤ 4 a breadth-first depth
+  ≥ 1.5√n), AMF otherwise and below 1000 vertices (the thresholds were chosen on our 30-graph suite);
+  "amf": AMF; "hub": HubAMF; "bfsnd": BFSND everywhere; "amd", "metis": SuiteSparse AMD and METIS
+  NodeND (need AMD.jl / Metis.jl loaded); "nd-dense": partial nested dissection with dense leaves of ≤ 150
+  vertices (ROME-style).
 
 The `alg` keyword of `apsp_gpu`, `apsp_gpu!` and `apsp_plan` (an elimination algorithm or permutation for
 CliqueTrees, e.g. `BestFill(AMF(), METIS())`) replaces `ordering` for that call.
@@ -131,14 +135,13 @@ function elimination_algorithm(c::GPUConfig = config())
     alg = ELIMINATION_ALG[]
     isnothing(alg) || return alg
     o = c.ordering
-    # (AutoOrder, HubAMF and BFSND are in CliqueTrees' itay/gpu branch; without them, "auto" is AMF)
-    o == "auto" && return isdefined(CliqueTrees, :AutoOrder) ? CliqueTrees.AutoOrder() : CliqueTrees.AMF()
+    o == "auto" && return CPU.AutoOrder()
     o == "amf" && return CliqueTrees.AMF()
-    o == "hub" && return CliqueTrees.HubAMF()
-    o == "bfsnd" && return CliqueTrees.BFSND()
+    o == "hub" && return CPU.HubAMF()
+    o == "bfsnd" && return CPU.BFSND()
     o == "amd" && return CliqueTrees.AMD()
     o == "metis" && return CliqueTrees.METIS()
-    return CliqueTrees.BFSND(; levels = 40, minsize = 150, leaf = CliqueTrees.Natural())
+    return CPU.BFSND(; levels = 40, minsize = 150, leaf = CPU.Natural())
 end
 
 # process-wide defaults may be set by environment variables SEMIRINGGPU_<SETTING> (e.g.
