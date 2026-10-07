@@ -9,7 +9,8 @@
 #   Natural    the identity order
 #
 # fastpermutation(weights, graph, alg) is permutation(weights, graph, alg) for the symmetric graphs without
-# loops of pcliquetree; AMF, and AutoOrder when it chooses AMF, copy the graph once instead of twice.
+# loops of pcliquetree; AMF, and AutoOrder when it orders with AMF (its choice, or BFSND without a split
+# at the root), copy the graph once instead of twice.
 #
 module FastOrderings
 
@@ -258,22 +259,22 @@ function permutation(weights::AbstractVector, graph::AbstractGraph{V}, alg::BFSN
     return out, invperm(out)
 end
 
-function bfsnd(n::Int, xadj::Vector{Int}, adj::Vector{I}, alg::BFSND, weights) where {I}
+# (level, root: the levels and the order of the root's last breadth-first search, when pseudoperipheral! made them)
+function bfsnd(n::Int, xadj::Vector{Int}, adj::Vector{I}, alg::BFSND, weights, level::Vector{Int32} = zeros(Int32, n),
+        root::Union{Nothing, Vector{I}} = nothing) where {I}
     n < alg.minsize && return leaforder(n, xadj, adj, alg.leaf, weights)
     fm = alg.fm > 0
-    st = NDState{I}(xadj, adj, ones(Int32, n), zeros(Int32, n), Vector{I}(undef, n), Vector{Int8}(undef, n),
+    st = NDState{I}(xadj, adj, ones(Int32, n), level, Vector{I}(undef, n), Vector{Int8}(undef, n),
         fm ? zeros(Int32, n) : Int32[], fm ? zeros(Int32, n) : Int32[], fm ? zeros(Bool, n) : Bool[],
         Vector{I}(undef, n), Threads.Atomic{Int32}(1))
-    ndsplit!(st, alg, collect(oneto(I(n))), Int32(1), 1, 0, weights)
+    ndsplit!(st, alg, collect(oneto(I(n))), Int32(1), 1, 0, weights, root)
     return st.order
 end
 
 newid!(st::NDState) = Threads.atomic_add!(st.nextid, Int32(1)) + Int32(1)
 
-# breadth-first search from s over subproblem id; levels from 1, queue[1:count]
-function bfs!(st::NDState{I}, id::Int32, s::I, queue::Vector{I}) where {I}
-    xadj = st.xadj; adj = st.adj; owner = st.owner; level = st.level
-
+# breadth-first search from s over subproblem id (owner nothing: every vertex); levels from 1, queue[1:count]
+function bfs!(xadj::AbstractVector, adj::AbstractVector, owner, level::Vector{Int32}, id::Int32, s, queue::Vector{I}) where {I}
     @inbounds begin
         head = 1; tail = 1; queue[1] = s; level[s] = Int32(1)
 
@@ -283,7 +284,7 @@ function bfs!(st::NDState{I}, id::Int32, s::I, queue::Vector{I}) where {I}
             for p in xadj[v]:xadj[v + 1] - 1
                 w = adj[p]
 
-                if owner[w] == id && iszero(level[w])
+                if (isnothing(owner) || owner[w] == id) && iszero(level[w])
                     level[w] = lv; tail += 1; queue[tail] = w
                 end
             end
@@ -293,40 +294,40 @@ function bfs!(st::NDState{I}, id::Int32, s::I, queue::Vector{I}) where {I}
     return tail
 end
 
-function clearlevels!(st::NDState, vs)
-    level = st.level
+bfs!(st::NDState{I}, id::Int32, s::I, queue::Vector{I}) where {I} = bfs!(st.xadj, st.adj, st.owner, st.level, id, s, queue)
 
+function clearlevels!(level::Vector{Int32}, vs)
     @inbounds for v in vs
         level[v] = Int32(0)
     end
 end
 
-function ndsplit!(st::NDState{I}, alg::BFSND, vs::Vector{I}, id::Int32, lo::Int, depth::Int, weights) where {I}
+clearlevels!(st::NDState, vs) = clearlevels!(st.level, vs)
+
+#
+# ndsplit!'s search for a pseudo-peripheral vertex (George & Liu) over the vertices vs of subproblem id: from a
+# vertex of minimum degree, then the vertex of minimum degree in the last level, while the depth grows (at
+# most two more searches). Leaves the levels and the order (queue) of the last search; returns
+# (:disconnected, the vertices reached by the first), (:leaf, k) when the subproblem is not split (depth
+# < 3, or at the root a depth below depthcheck·√k), or (:split, k). owner nothing: vs is the whole graph.
+#
+function pseudoperipheral!(xadj::AbstractVector, adj::AbstractVector, owner, level::Vector{Int32}, id::Int32, vs,
+        queue::Vector{I}, depthcheck::Float64, depth::Int) where {I}
     k = length(vs)
-
-    if depth >= alg.levels || k < alg.minsize
-        return ndleaf!(st, alg, vs, id, lo, weights)
-    end
-
-    xadj = st.xadj; adj = st.adj; owner = st.owner; level = st.level; part = st.part
-    queue = Vector{I}(undef, k)
-
-    # a pseudo-peripheral vertex (George & Liu): from a vertex of minimum degree, then the vertex of minimum
-    # degree in the last level, while the depth grows (at most two more searches)
-    s = vs[1]; ds = xadj[s + 1] - xadj[s]
+    s = first(vs); ds = xadj[s + 1] - xadj[s]
 
     @inbounds for v in vs
         d = xadj[v + 1] - xadj[v]
         d < ds && (s = v; ds = d)
     end
 
-    clearlevels!(st, vs)
-    cnt = bfs!(st, id, s, queue)
-    cnt < k && return ndcomponents!(st, alg, vs, id, lo, depth, queue, cnt, weights)
+    clearlevels!(level, vs)
+    cnt = bfs!(xadj, adj, owner, level, id, s, queue)
+    cnt < k && return :disconnected, cnt
 
     # (the diameter is at most twice this eccentricity: fail the depth check without more searches)
-    if iszero(depth) && 2level[queue[k]] < alg.depthcheck * sqrt(k)
-        return ndleaf!(st, alg, vs, id, lo, weights)
+    if iszero(depth) && 2level[queue[k]] < depthcheck * sqrt(k)
+        return :leaf, k
     end
 
     for sweep in 1:2
@@ -338,17 +339,38 @@ function ndsplit!(st::NDState{I}, alg::BFSND, vs::Vector{I}, id::Int32, lo::Int,
             d < du && (u = v; du = d)
         end
 
-        clearlevels!(st, vs)
-        bfs!(st, id, u, queue)
+        clearlevels!(level, vs)
+        bfs!(xadj, adj, owner, level, id, u, queue)
         level[queue[k]] <= last && break
     end
 
     depthL = Int(level[queue[k]])
+    (depthL < 3 || (iszero(depth) && depthL < depthcheck * sqrt(k))) && return :leaf, k
+    return :split, k
+end
 
-    if depthL < 3 || (iszero(depth) && depthL < alg.depthcheck * sqrt(k))
+function ndsplit!(st::NDState{I}, alg::BFSND, vs::Vector{I}, id::Int32, lo::Int, depth::Int, weights,
+        root::Union{Nothing, Vector{I}} = nothing) where {I}
+    k = length(vs)
+
+    if depth >= alg.levels || k < alg.minsize
         return ndleaf!(st, alg, vs, id, lo, weights)
     end
 
+    xadj = st.xadj; adj = st.adj; owner = st.owner; level = st.level; part = st.part
+
+    # a pseudo-peripheral vertex and its level structure (pseudoperipheral!), or the root's, made beforehand (root:
+    # its search's order, its levels in st.level, and the subproblem split)
+    if isnothing(root)
+        queue = Vector{I}(undef, k)
+        status, cnt = pseudoperipheral!(xadj, adj, owner, level, id, vs, queue, alg.depthcheck, depth)
+        status === :disconnected && return ndcomponents!(st, alg, vs, id, lo, depth, queue, cnt, weights)
+        status === :leaf && return ndleaf!(st, alg, vs, id, lo, weights)
+    else
+        queue = root
+    end
+
+    depthL = Int(level[queue[k]])
     sizes = zeros(Int, depthL)
 
     @inbounds for v in vs
@@ -789,13 +811,17 @@ end
 #
 # permutation(weights, graph, alg) for a symmetric graph without loops. When AutoOrder chooses AMF, the
 # order is halo_amf's with the graph copied once (into AMF's workspace) instead of twice (int_adjacency,
-# then the workspace), and the inverse permutation built with the order: the same (order, index).
+# then the workspace), and the inverse permutation built with the order: the same (order, index). So
+# also when it chooses BFSND and the root is not split (the depth check fails: e.g. a torus, or a mesh
+# that is not planar), which the root's search, run on the graph itself, tells before any copy.
 #
 function fastpermutation(weights::AbstractVector, graph::BipartiteGraph{V}, alg) where {V}
     n = nv(graph); ptr = pointers(graph); m = Int(ptr[n + one(V)]) - 1
 
-    if alg isa AutoOrder && max(n, m) < typemax(Int32) && first(autochoice(Int(n), ptr, alg)) === :amf
-        return amf32(graph)
+    if alg isa AutoOrder && max(n, m) < typemax(Int32)
+        choice, x = autochoice(Int(n), ptr, alg)
+        choice === :amf && return amf32(graph)
+        choice === :nd && alg.nd.leaf isa AMF && return autond(weights, graph, alg, x)
     end
 
     # permutation(weights, graph, AMF()) is AMFLib.amf(weights, graph), which first copies the graph into a
@@ -804,6 +830,26 @@ function fastpermutation(weights::AbstractVector, graph::BipartiteGraph{V}, alg)
     alg isa AMF && return amf_simple(n, weights, ptr, targets(graph))
 
     return permutation(weights, graph, alg)
+end
+
+#
+# permutation(weights, graph, alg) when AutoOrder chooses BFSND with depth check x (alg.nd.leaf AMF, the
+# graph with fewer than 2^31 vertices and edges). An unsplit root is ordered by ndleaf! (or leaforder) as
+# halo AMF of the whole graph, in its own labels: amf32(graph). Otherwise bfsnd on the graph's copy, its
+# root's search (the same levels and order on the copy as on the graph) not run again.
+#
+function autond(weights::AbstractVector, graph::BipartiteGraph{V}, alg::AutoOrder, x::Float64) where {V}
+    nd = alg.nd; n = Int(nv(graph))
+    nd = BFSND(nd.leaf, nd.levels, nd.minsize, nd.maxsep, nd.fm, nd.fmlimit, nd.balance, nd.threads, x)
+    (n < nd.minsize || nd.levels <= 0) && return amf32(graph)
+    level = zeros(Int32, n); queue = Vector{Int32}(undef, n)
+    status, _ = pseudoperipheral!(pointers(graph), targets(graph), nothing, level, Int32(1), oneto(Int32(n)), queue, x, 0)
+    status === :leaf && return amf32(graph)
+    _, xadj, adj = int_adjacency(graph)
+    adj::Vector{Int32}
+    order = status === :split ? bfsnd(n, xadj, adj, nd, weights, level, queue) : bfsnd(n, xadj, adj, nd, weights)
+    out = convert(Vector{V}, order)
+    return out, invperm(out)
 end
 
 fastpermutation(weights::AbstractVector, graph::AbstractGraph, alg) = permutation(weights, graph, alg)
