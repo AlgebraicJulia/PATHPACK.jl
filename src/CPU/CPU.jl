@@ -40,6 +40,8 @@ include("sparse/sparse.jl")
 include("utils.jl")
 include("abstract_slu.jl")
 include("parallel_symbolic.jl")
+include("fast_orderings.jl")
+using .FastOrderings: Natural, HubAMF, BFSND, AutoOrder, fastpermutation
 include("chordal_ssymbolic.jl")
 include("chordal/chordal.jl")
 include("blocked/blocked.jl")

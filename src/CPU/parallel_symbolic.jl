@@ -600,7 +600,7 @@ function pcliquetree(graph::AbstractGraph{V}, alg::PermutationOrAlgorithm) where
     parent = FVector{V}(undef, n)
     elmtree = Parent{V}(n)
 
-    order, index = CTR.permutation(weights, graph, alg)
+    order, index = fastpermutation(weights, graph, alg)
 
     if !usethreads(CTR.de(graph))
         # (small: the serial algorithm, as cliquetree)
