@@ -123,6 +123,41 @@ graphs = [("grid3 9³", grid3(9, Float32)), ("grid 30×30", grid(30, 30, Float32
     end
 end
 
+#
+# The step timer with tasks: the per-device tasks of the multi-GPU path time their steps on the call's
+# timer, each task with its own stack of open steps (they used to share one: KeyErrors on nested step
+# names such as "U_path/U_top_batched/U_top_dense", or UndefRefErrors).
+#
+@testset "with_phases with tasks" begin
+    nt = max(8, 2 * Threads.nthreads())
+    r, tm = Ext.with_steps() do
+        Ext.@step "outer" begin
+            @sync for _ in 1:nt
+                Threads.@spawn for _ in 1:50
+                    Ext.@step "a" (Ext.@step "b" (Ext.@step "c" yield()))
+                end
+            end
+            :done
+        end
+    end
+    @test r === :done
+    @test tm.counts["outer"] == 1
+    @test tm.counts["outer/a"] == tm.counts["outer/a/b"] == tm.counts["outer/a/b/c"] == 50 * nt
+    @test isempty(tm.stack) && isempty(tm.others)       # every open step was closed, no task's stack kept
+
+    # the whole call on the device repeated: per-device tasks inside the closure's steps
+    for A in (grid3(9, Float32), pieces(500, Float32))
+        ref = Array(Ext.apsp_gpu(A))
+
+        for devs in ([d, d], [d, d, d])
+            H, t = Ext.with_phases(() -> Ext.apsp_gpu(A; devices = devs, output = :host))
+            @test isequal(H, ref)
+            @test all(x -> isfinite(x) && x >= 0, (t.symbolic, t.numeric_gpu, t.inverse, t.solve, t.total)) && t.total > 0
+            @test any(k -> count(==('/'), k) >= 2, keys(t.steps))      # nested steps of the per-device tasks
+        end
+    end
+end
+
 @testset "all GPUs" begin
     devs = collect(CUDA.devices())
     if length(devs) < 2

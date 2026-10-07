@@ -193,6 +193,14 @@ const FTIMER = ScopedValue{Any}(nothing)
 # with @step, by name, nested steps under their parent ("plan/top merge"). Each step synchronizes the
 # device before and after, so GPU work is charged to the step that issued it (and work that would have
 # overlapped across steps no longer does). Off (one null test per step) outside with_steps.
+#
+# Tasks started inside f (the per-GPU tasks of the multi-GPU path, the uploads and plans made on other
+# threads) see the same timer: each task keeps its own stack of open steps, and the shared tables are
+# updated under a lock. A task's steps nest under the steps that the task which made the timer had open
+# when that task timed its first step (e.g. "closure/U_path/U_top_dense" for a step of a per-GPU task
+# started inside "closure"); the times of concurrent tasks under one name add up (device-seconds).
+
+const StepEntry = Tuple{String, UInt64, UInt64, Int}    # (name, start, GC time, bytes allocated) at its start
 
 mutable struct StepTimer
     times::Dict{String, Float64}
@@ -200,31 +208,56 @@ mutable struct StepTimer
     bytes::Dict{String, Int}            # host memory allocated
     counts::Dict{String, Int}
     order::Vector{String}               # in order of first start (parents before their steps)
-    stack::Vector{Tuple{String, UInt64, UInt64, Int}}
+    stack::Vector{StepEntry}            # the open steps of the task that made the timer
+    owner::Task
+    others::Dict{Task, Tuple{Int, Vector{StepEntry}}}   # other tasks: (steps inherited from the owner's, their stack)
+    lock::ReentrantLock
 end
 
 StepTimer() = StepTimer(Dict{String, Float64}(), Dict{String, Float64}(), Dict{String, Int}(), Dict{String, Int}(), String[],
-    Tuple{String, UInt64, UInt64, Int}[])
+    StepEntry[], current_task(), Dict{Task, Tuple{Int, Vector{StepEntry}}}(), ReentrantLock())
 
 const STEPS = ScopedValue{Union{Nothing, StepTimer}}(nothing)
 
+# the stack of open steps of the current task (call with tm.lock held)
+function task_stack(tm::StepTimer)
+    t = current_task()
+    t === tm.owner && return tm.stack
+    return get!(() -> (length(tm.stack), copy(tm.stack)), tm.others, t)[2]
+end
+
+steppath(stack, name) = join((first.(stack)..., name), "/")
+
 function step_begin!(tm::StepTimer, name::AbstractString)
     CUDA.device_synchronize()
-    path = join((first.(tm.stack)..., name), "/")
-    haskey(tm.times, path) || (push!(tm.order, path); tm.times[path] = 0.0)
-    push!(tm.stack, (String(name), time_ns(), Base.gc_time_ns(), Base.gc_bytes()))
+
+    @lock tm.lock begin
+        stack = task_stack(tm)
+        path = steppath(stack, name)
+        haskey(tm.times, path) || (push!(tm.order, path); tm.times[path] = 0.0)
+        push!(stack, (String(name), time_ns(), Base.gc_time_ns(), Base.gc_bytes()))
+    end
+
     return
 end
 
 function step_end!(tm::StepTimer)
     CUDA.device_synchronize()
     t1 = time_ns(); g1 = Base.gc_time_ns(); b1 = Base.gc_bytes()
-    name, t0, g0, b0 = pop!(tm.stack)
-    path = join((first.(tm.stack)..., name), "/")
-    tm.times[path] += (t1 - t0) / 1e9
-    tm.gc[path] = get(tm.gc, path, 0.0) + (g1 - g0) / 1e9
-    tm.bytes[path] = get(tm.bytes, path, 0) + (b1 - b0)
-    tm.counts[path] = get(tm.counts, path, 0) + 1
+
+    @lock tm.lock begin
+        stack = task_stack(tm)
+        name, t0, g0, b0 = pop!(stack)
+        path = steppath(stack, name)
+        tm.times[path] += (t1 - t0) / 1e9
+        tm.gc[path] = get(tm.gc, path, 0.0) + (g1 - g0) / 1e9
+        tm.bytes[path] = get(tm.bytes, path, 0) + (b1 - b0)
+        tm.counts[path] = get(tm.counts, path, 0) + 1
+        # (another task's last open step: forget its stack, so that a finished task holds nothing)
+        task = current_task()
+        task === tm.owner || length(stack) > tm.others[task][1] || delete!(tm.others, task)
+    end
+
     return
 end
 
@@ -232,10 +265,17 @@ end
 function step_add!(name::AbstractString, t::Real)
     tm = STEPS[]
     isnothing(tm) && return
-    path = join((first.(tm.stack)..., name), "/")
-    haskey(tm.times, path) || (push!(tm.order, path); tm.times[path] = 0.0)
-    tm.times[path] += t
-    tm.counts[path] = get(tm.counts, path, 0) + 1
+
+    @lock tm.lock begin
+        stack = task_stack(tm)
+        path = steppath(stack, name)
+        haskey(tm.times, path) || (push!(tm.order, path); tm.times[path] = 0.0)
+        tm.times[path] += t
+        tm.counts[path] = get(tm.counts, path, 0) + 1
+        task = current_task()
+        task === tm.owner || length(stack) > tm.others[task][1] || delete!(tm.others, task)
+    end
+
     return
 end
 
@@ -289,7 +329,8 @@ Run `f()` with the step timer and return its result and the time (seconds) of ea
 - `other`, `total`; `steps`: every step's time, by name (as `with_steps`)
 
 Each step synchronizes the device and the steps run one after the other (the overlaps of an untimed
-call are off), so the total exceeds the time of an untimed call.
+call are off), so the total exceeds the time of an untimed call. With several devices, the steps of the
+per-device tasks run concurrently and their times are summed over the devices.
 """
 function with_phases(f)
     r, tm = with_steps(f)
