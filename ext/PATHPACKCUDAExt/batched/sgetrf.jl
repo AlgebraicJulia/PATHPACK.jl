@@ -317,11 +317,11 @@ const TB_NT = 256
     return ntuple(k -> smuladd(s, l[((k - 1) & 3) + 1], u[((k - 1) >> 2) + 1], X[k], Val(:N), Val(:N)), Val(16))
 end
 
-# two rank-1 updates, X ⊕ l0 u0 ⊕ l1 u1; with op = Val(:min) / Val(:max) (min-plus / max-plus Float32 on
-# compute capability 10.x, pair_ok) as 2 adds and one 3-input min / max per entry (FMNMX3; rank2_min3, as
-# GEMM kernel v6): the same values. (sm_120 has no FMNMX3: there the 3-input form is 30-50% slower.)
+# two rank-1 updates, X ⊕ l0 u0 ⊕ l1 u1; with op a Pair3 (Float32 with ⊕ = min or max, e.g. min-plus, max-min,
+# on compute capability 10.x, pair_ok) as 2 products and one 3-input min / max per entry (FMNMX3;
+# rank2_min3, as GEMM kernel v6): the same values. (sm_120 has no FMNMX3: there the 3-input form is 30-50% slower.)
 @inline rank2(s::AbstractSemiring, ::Nothing, X::NTuple{16}, l0, u0, l1, u1) = rank1(s, rank1(s, X, l0, u0), l1, u1)
-@inline rank2(s::AbstractSemiring, op::Val, X::NTuple{16}, l0, u0, l1, u1) = rank2_min3(op, X, l0, u0, l1, u1)
+@inline rank2(s::AbstractSemiring, op::Pair3, X::NTuple{16}, l0, u0, l1, u1) = rank2_min3(op, X, l0, u0, l1, u1)
 
 # the op argument of rank2 for semiring s and element type T (host side)
 pair_op(s, ::Type{T}) where {T} = pair_ok(s, T) ? min3_op(s) : nothing

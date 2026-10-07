@@ -182,7 +182,7 @@ end
     end
 end
 
-# ===== kernel v8: v7 with packed adds and 3-input mins (sm_100, min-plus / max-plus Float32) =====
+# ===== kernel v8: v7 with paired k-steps, 3-input mins / maxes (sm_100, Float32 with ⊕ = min or max) =====
 #
 # On sm_100, add.f32x2 (FADD2) adds a pair of registers to a broadcast scalar, and the 3-input min.f32
 # (FMNMX3) takes two products at once, so two k-steps of a 2 × 1 piece of the tile,
@@ -191,7 +191,9 @@ end
 #
 # cost 2 FADD2 + 2 FMNMX3: one instruction per multiply-add instead of two (FADD + FMNMX). The same
 # operations as v2 per entry (min is exact and commutative): bit-identical results. Julia's LLVM
-# scalarizes <2 x float> adds and emits 2-input mins, so both are inline PTX.
+# scalarizes <2 x float> adds and emits 2-input mins, so both are inline PTX. Other semirings whose ⊕ is
+# min or max (Pair3): min-times / max-times with packed multiplies (FMUL2), the bottleneck lattices
+# with their ⊗ by sprod (2 FMNMX + 1 FMNMX3 per pair of steps instead of 4 FMNMX).
 
 const F2 = NTuple{2, VecElement{Float32}}
 
@@ -210,14 +212,31 @@ pair_ok(s, ::Type{V}) where {V} = min3_ok(s, V) && device_profile().capability.m
     }
     attributes #0 = { alwaysinline }""", "entry"), F2, Tuple{F2, Float32}, a, b)
 
+@inline mulbc(a::F2, b::Float32) = Base.llvmcall(("""
+    define <2 x float> @entry(<2 x float> %a, float %b) #0 {
+        %ai = bitcast <2 x float> %a to i64
+        %b0 = insertelement <2 x float> undef, float %b, i32 0
+        %b1 = insertelement <2 x float> %b0, float %b, i32 1
+        %bi = bitcast <2 x float> %b1 to i64
+        %r = call i64 asm "mul.f32x2 \$0, \$1, \$2;", "=l,l,l"(i64 %ai, i64 %bi)
+        %rf = bitcast i64 %r to <2 x float>
+        ret <2 x float> %rf
+    }
+    attributes #0 = { alwaysinline }""", "entry"), F2, Tuple{F2, Float32}, a, b)
+
+# the products of rows r, r + 1 with b (Pair3's M): packed adds / multiplies, or two sprod
+@inline pairbc(::Pair3{P, :add}, a::F2, b::Float32) where {P} = addbc(a, b)
+@inline pairbc(::Pair3{P, :mul}, a::F2, b::Float32) where {P} = mulbc(a, b)
+@inline pairbc(op::Pair3{P, :sprod}, a::F2, b::Float32) where {P} = (VecElement(ptimes(op, a[1].value, b)), VecElement(ptimes(op, a[2].value, b)))
+
 # acc ← acc ⊕ a ⊗ bᵀ ⊕ a′ ⊗ b′ᵀ, two k-steps, for the 8 × TN tile acc[r + 8(c - 1)]
 @generated function v8_rank2(op, acc::NTuple{N, Float32}, a::NTuple{8, Float32}, b::NTuple{TN, Float32},
         a1::NTuple{8, Float32}, b1::NTuple{TN, Float32}) where {N, TN}
     stmts = Expr[]; terms = Vector{Any}(undef, N)
     for c in 1:TN, r in 1:2:7
         x = Symbol(:x, r, :_, c); y = Symbol(:y, r, :_, c)
-        push!(stmts, :($x = addbc((VecElement(a[$r]), VecElement(a[$(r + 1)])), b[$c])))
-        push!(stmts, :($y = addbc((VecElement(a1[$r]), VecElement(a1[$(r + 1)])), b1[$c])))
+        push!(stmts, :($x = pairbc(op, (VecElement(a[$r]), VecElement(a[$(r + 1)])), b[$c])))
+        push!(stmts, :($y = pairbc(op, (VecElement(a1[$r]), VecElement(a1[$(r + 1)])), b1[$c])))
         terms[r + 8 * (c - 1)] = :(pair3(op, acc[$(r + 8 * (c - 1))], $x[1].value, $y[1].value))
         terms[r + 1 + 8 * (c - 1)] = :(pair3(op, acc[$(r + 1 + 8 * (c - 1))], $x[2].value, $y[2].value))
     end

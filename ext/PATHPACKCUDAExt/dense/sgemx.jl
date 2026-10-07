@@ -284,7 +284,7 @@ function forced_version(s, ::Type{V}) where {V}
     v = config().gemm_kernel
 
     if v == 6 && !min3_ok(s, V)
-        @warn "PATHPACK.GPU: gemm_kernel = 6 needs Float32 min-plus or max-plus on compute capability 10.0+; using kernel 2" maxlog = 1
+        @warn "PATHPACK.GPU: gemm_kernel = 6 needs Float32 with ⊕ = min or max on compute capability 10.0+; using kernel 2" maxlog = 1
         return 2
     end
 
@@ -294,7 +294,7 @@ function forced_version(s, ::Type{V}) where {V}
     end
 
     if v == 8 && !pair_ok(s, V)
-        @warn "PATHPACK.GPU: gemm_kernel = 8 needs Float32 min-plus or max-plus on compute capability 10.x; using kernel 7" maxlog = 1
+        @warn "PATHPACK.GPU: gemm_kernel = 8 needs Float32 with ⊕ = min or max on compute capability 10.x; using kernel 7" maxlog = 1
         return V === Float32 ? 7 : 2
     end
 
@@ -627,10 +627,32 @@ end
 # PTX's three-input min.f32 / max.f32 (PTX ISA 8.8, sm_100+): one FMNMX3 on B200. Julia's LLVM backend
 # only emits the two-input form, which ptxas does not fuse, so kernel v6 issues them explicitly.
 #
-min3_op(::CPU.MinPlus) = Val(:min)
-min3_op(::CPU.DualQuantale{CPU.MinPlus}) = Val(:max)       # MaxPlus
-min3_op(s) = nothing
+# Any semiring whose ⊕ is min or max (plus_op: min-plus, max-plus, max-min, min-max, min-times, max-times,
+# the Lawvere quantales) takes its k-steps in pairs, acc ⊕ x ⊕ y with x, y the two products: a Pair3, with
+# P = :min or :max (the ⊕) and M how the pair's products are formed: :add or :mul (the ⊗ of the tropical
+# semirings and their Lawvere quantales: packed f32x2 adds / multiplies in kernel v8, as smuladd computes
+# them on the device), or :sprod (any other ⊗, e.g. the min or max of the bottleneck lattices, by sprod).
+#
+struct Pair3{P, M, S}
+    s::S
+end
+
+Pair3{P, M}(s::S) where {P, M, S} = Pair3{P, M, S}(s)
+
+pair_times(::Union{CPU.MinPlus, CPU.DualQuantale{CPU.MinPlus}}) = Val(:add)        # min-plus, max-plus
+pair_times(::Union{CPU.MinProd, CPU.DualQuantale{CPU.MinProd}}) = Val(:mul)        # min-times, max-times
+pair_times(n::CPU.NegativeQuantale) = pair_times(n.s)                              # (sprod of the Lawvere quantales: + or ×)
+pair_times(s) = Val(:sprod)
+
+min3_op(s) = pair3_of(plus_op(s), pair_times(s), s)
+pair3_of(op, times, s) = nothing
+pair3_of(::Val{P}, ::Val{M}, s) where {P, M} = P in (:min, :max) ? Pair3{P, M}(s) : nothing
 min3_ok(s, ::Type{V}) where {V} = V === Float32 && !isnothing(min3_op(s)) && device_profile().capability >= v"10.0"
+
+# a product of a pair (see Pair3)
+@inline ptimes(::Pair3{P, :add}, a::Float32, b::Float32) where {P} = a + b
+@inline ptimes(::Pair3{P, :mul}, a::Float32, b::Float32) where {P} = a * b
+@inline ptimes(op::Pair3{P, :sprod}, a::Float32, b::Float32) where {P} = CPU.sprod(op.s, a, b, Val(:N), Val(:N))
 
 @inline min3(a::Float32, b::Float32, c::Float32) = Base.llvmcall(("""
     define float @entry(float %a, float %b, float %c) #0 {
@@ -645,7 +667,7 @@ min3_ok(s, ::Type{V}) where {V} = V === Float32 && !isnothing(min3_op(s)) && dev
     }
     attributes #0 = { alwaysinline }""", "entry"), Float32, Tuple{Float32, Float32, Float32}, a, b, c)
 
-# ===== kernel v6: v2's layout with an explicit 3-input min (sm_100+, min-plus / max-plus Float32) =====
+# ===== kernel v6: v2's layout with an explicit 3-input min (sm_100+, Float32 with ⊕ = min or max) =====
 #
 # On sm_100 NVIDIA's compiler turns min(min(acc, a₀ + b₀), a₁ + b₁) into one 3-input min (FMNMX3), so a
 # pair of k-steps costs 2 adds and 1 min instead of 2 and 2. Julia's LLVM backend emits 2-input mins,
@@ -653,11 +675,11 @@ min3_ok(s, ::Type{V}) where {V} = V === Float32 && !isnothing(min3_op(s)) && dev
 # here explicitly. The shared-memory layout and thread mapping are v2's (conflict-free 16-byte loads);
 # interior panels load without bounds checks, with 32-bit index arithmetic (as v4).
 #
-@inline pair3(::Val{:min}, acc::Float32, x::Float32, y::Float32) = min3(acc, x, y)
-@inline pair3(::Val{:max}, acc::Float32, x::Float32, y::Float32) = max3(acc, x, y)
+@inline pair3(::Pair3{:min}, acc::Float32, x::Float32, y::Float32) = min3(acc, x, y)
+@inline pair3(::Pair3{:max}, acc::Float32, x::Float32, y::Float32) = max3(acc, x, y)
 
 @generated function rank2_min3(op, acc::NTuple{N, Float32}, a0::NTuple{TM, Float32}, b0::NTuple{TN, Float32}, a1::NTuple{TM, Float32}, b1::NTuple{TN, Float32}) where {N, TM, TN}
-    terms = [:(pair3(op, acc[$(r + (c - 1) * TM)], a0[$r] + b0[$c], a1[$r] + b1[$c])) for c in 1:TN for r in 1:TM]
+    terms = [:(pair3(op, acc[$(r + (c - 1) * TM)], ptimes(op, a0[$r], b0[$c]), ptimes(op, a1[$r], b1[$c]))) for c in 1:TN for r in 1:TM]
     return :($(Expr(:meta, :inline)); @inbounds ($(terms...),))
 end
 

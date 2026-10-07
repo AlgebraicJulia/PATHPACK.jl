@@ -87,3 +87,26 @@ skipped = String[]
 end
 
 println("not computed on the GPU (check_semiring): ", isempty(skipped) ? "none" : join(skipped, ", "))
+
+# the GPU's native ⊕ (plus_op: atomics, paired k-steps) is the semiring's splus, for every exported semiring
+@testset "plus_op is splus" begin
+    natives = Dict(:min => min, :max => max, :add => +, :and => &, :or => |)
+    exported = [getfield(CPU, n) for n in names(CPU)]
+    scalar = filter(x -> x isa Type && x <: CPU.AbstractSemiring && isconcretetype(x) && applicable(x) && !occursin("Matrix", string(x)), exported)
+    for S in scalar
+        s = S(); op = Ext.plus_op(s)
+        op === nothing && continue
+        f = natives[typeof(op).parameters[1]]
+        xs = f in (&, |) ? Int32[0, 1, 5, 12, typemax(Int32)] : Float32[-Inf32, -3, 0, 0.5, 2, 7, Inf32]
+        f in (&, |) || (s isa CPU.PlusProd && (xs = filter(isfinite, xs)))
+        for x in xs, y in xs
+            @test isequal(CPU.splus(s, x, y, Val(:N)), f(x, y))
+        end
+        p = Ext.min3_op(s)
+        @test isnothing(p) == !(op in (Val(:min), Val(:max)))
+    end
+    @test Ext.atomic_kind(CPU.MinMax(), Val(:N), Float32) === Val(:min)
+    @test Ext.atomic_kind(CPU.OrAnd(), Val(:N), Int32) === Val(:or)
+    @test Ext.atomic_kind(CPU.OrAnd(), Val(:N), Float32) === Val(:cas)
+    @test Ext.atomic_kind(CPU.PlusProd(), Val(:N), Int32) === Val(:cas)
+end
