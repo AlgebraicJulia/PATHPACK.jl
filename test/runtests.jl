@@ -7,3 +7,7 @@ end
 @testset "Core" begin
   include("core.jl")
 end
+
+@testset "GPU" begin
+  include("gpu/gpu.jl")
+end
