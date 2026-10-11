@@ -10,7 +10,7 @@ using CliqueTrees: graphpermute
 using Graphs: AbstractGraph, neighbors, vertices
 using LinearAlgebra: Factorization, Transpose, AdjointFactorization, TransposeFactorization, lu!, mul!, ldiv!, rdiv!, lmul!, rmul!, tril!
 import LinearAlgebra
-using SIMD: Vec, vload, vstore, vifelse, shufflevector
+using SIMD: BScalarTypes, Vec, vload, vstore, vifelse, shufflevector
 using SparseArrays: SparseMatrixCSC, findnz, getcolptr, nnz, nonzeros, nzrange, permute, rowvals, sparse
 
 using CliqueTrees.Multifrontal: BipartiteGraph, ChordalSymbolic, ChordalTriangular, CliqueTree, DivisionWorkspace,

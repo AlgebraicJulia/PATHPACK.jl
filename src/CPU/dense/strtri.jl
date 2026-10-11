@@ -97,7 +97,7 @@ end
 
 # ===== strtri2! =====
 
-function strtri2!(s::AbstractSemiring, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}) where {T, DIAG}
+function strtri2!(s::AbstractSemiring, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}) where {T <: BScalarTypes, DIAG}
     @assert size(A, 1) == size(A, 2)
 
     n = size(A, 1)
@@ -161,7 +161,7 @@ function strtri2!(s::AbstractSemiring, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix
     return A
 end
 
-function strtri2!(s::AbstractSemiring, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}) where {T, DIAG}
+function strtri2!(s::AbstractSemiring, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}) where {T <: BScalarTypes, DIAG}
     @assert size(A, 1) == size(A, 2)
 
     n = size(A, 1)
@@ -193,6 +193,74 @@ function strtri2!(s::AbstractSemiring, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix
                 end
 
                 saxpy_kern!(s, Val(:N), Val(:N), Val(:R), pA + (j - 1) * sA * Z, pA + (k - 1) * sA * Z, Akj, k - 1)
+            end
+        end
+    end
+
+    return A
+end
+
+function strtri2!(s::AbstractSemiring, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}) where {T, DIAG}
+    @assert size(A, 1) == size(A, 2)
+
+    n = size(A, 1)
+
+    if DIAG === :N
+        @inbounds for k in 1:n
+            A[k, k] = sstar(s, A[k, k])
+        end
+    end
+
+    @inbounds for j in 1:n
+        if DIAG === :N && !isintegral(s)
+            for i in j + 1:n
+                A[i, j] = sprod(s, A[i, j], A[j, j], Val(:N), Val(:N))
+            end
+        end
+
+        for k in j + 1:n
+            if DIAG === :N && !isintegral(s)
+                A[k, j] = sprod(s, A[k, k], A[k, j], Val(:N), Val(:N))
+            end
+
+            Akj = A[k, j]
+
+            for q in k + 1:n
+                A[q, j] = smuladd(s, A[q, k], Akj, A[q, j], Val(:N), Val(:N))
+            end
+        end
+    end
+
+    return A
+end
+
+function strtri2!(s::AbstractSemiring, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}) where {T, DIAG}
+    @assert size(A, 1) == size(A, 2)
+
+    n = size(A, 1)
+
+    if DIAG === :N
+        @inbounds for k in 1:n
+            A[k, k] = sstar(s, A[k, k])
+        end
+    end
+
+    @inbounds for j in n:-1:1
+        if DIAG === :N && !isintegral(s)
+            for i in 1:j - 1
+                A[i, j] = sprod(s, A[i, j], A[j, j], Val(:N), Val(:N))
+            end
+        end
+
+        for k in j - 1:-1:1
+            if DIAG === :N && !isintegral(s)
+                A[k, j] = sprod(s, A[k, k], A[k, j], Val(:N), Val(:N))
+            end
+
+            Akj = A[k, j]
+
+            for q in 1:k - 1
+                A[q, j] = smuladd(s, A[q, k], Akj, A[q, j], Val(:N), Val(:N))
             end
         end
     end

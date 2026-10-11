@@ -1,12 +1,16 @@
 # ===== vecwidth =====
 
-function vecwidth(::Type{T}) where {T}
+function vecwidth(::Type{T}) where {T <: BScalarTypes}
     return 64 ÷ sizeof(T)
+end
+
+function vecwidth(::Type{T}) where {T}
+    return 1
 end
 
 # ===== workspace pool =====
 
-function spool_st(s::AbstractSemiring, ::Type{T}, ni::Integer, nj::Integer, nk::Integer) where {T}
+function spool_st(s::AbstractSemiring, ::Type{T}, ni::Integer, nj::Integer, nk::Integer) where {T <: BScalarTypes}
     mr = SGEMX_MV * vecwidth(T)
 
     nic = min(ni, SGEMX_LEAF)
@@ -20,6 +24,14 @@ function spool_st(s::AbstractSemiring, ::Type{T}, ni::Integer, nj::Integer, nk::
     AP = FVector{T}(undef, apn)
     BP = FVector{T}(undef, bpn)
     CP = FVector{T}(undef, cpn)
+
+    return AP, BP, CP
+end
+
+function spool_st(s::AbstractSemiring, ::Type{T}, ni::Integer, nj::Integer, nk::Integer) where {T}
+    AP = FVector{T}(undef, 0)
+    BP = FVector{T}(undef, 0)
+    CP = FVector{T}(undef, 0)
 
     return AP, BP, CP
 end

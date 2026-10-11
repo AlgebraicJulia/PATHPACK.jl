@@ -159,7 +159,7 @@ end
     return
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::N_OR_R, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractVecOrMat) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::N_OR_R, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractVecOrMat) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
     m = size(B, 2)
 
@@ -179,7 +179,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::N_OR_R, ::Val{:L}, ::Val
     return B
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::N_OR_R, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractVecOrMat) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::N_OR_R, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractVecOrMat) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
     m = size(B, 2)
 
@@ -237,7 +237,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::N_OR_R, ::Val{:U}, ::Val
     return B
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::T_OR_C, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractVecOrMat) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::T_OR_C, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractVecOrMat) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
     m = size(B, 2)
 
@@ -297,7 +297,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::T_OR_C, ::Val{:L}, ::Val
     return B
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::T_OR_C, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractVecOrMat) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::T_OR_C, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractVecOrMat) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
     m = size(B, 2)
 
@@ -357,7 +357,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:L}, trans::T_OR_C, ::Val{:U}, ::Val
     return B
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractMatrix) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractMatrix) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
     m = size(B, 1)
 
@@ -395,7 +395,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:U}, ::Val
     return B
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractMatrix) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractMatrix) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
     m = size(B, 1)
 
@@ -433,7 +433,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:L}, ::Val
     return B
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractMatrix) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractMatrix) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
     m = size(B, 1)
 
@@ -463,7 +463,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:L}, ::Val
     return B
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractMatrix) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractMatrix) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
     m = size(B, 1)
 
@@ -493,7 +493,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:U}, ::Val
     return B
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, b::AbstractVector) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, b::AbstractVector) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
 
     Z = sizeof(T)
@@ -519,7 +519,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:U}, ::Val
     return b
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, b::AbstractVector) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, b::AbstractVector) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
 
     Z = sizeof(T)
@@ -545,7 +545,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::N_OR_R, ::Val{:L}, ::Val
     return b
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, b::AbstractVector) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:L}, ::Val{DIAG}, A::AbstractMatrix{T}, b::AbstractVector) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
 
     Z = sizeof(T)
@@ -569,7 +569,7 @@ function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:L}, ::Val
     return b
 end
 
-function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, b::AbstractVector) where {T, DIAG}
+function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:U}, ::Val{DIAG}, A::AbstractMatrix{T}, b::AbstractVector) where {T <: BScalarTypes, DIAG}
     n = size(A, 1)
 
     Z = sizeof(T)
@@ -587,6 +587,120 @@ function strsx2!(s::AbstractSemiring, ::Val{:R}, trans::T_OR_C, ::Val{:U}, ::Val
             end
 
             saxpy_kern!(s, Val(:N), trans, Val(:L), pb, pA + (k - 1) * sA * Z, bk, k - 1)
+        end
+    end
+
+    return b
+end
+
+function strsx2!(s::AbstractSemiring, side::Val{:L}, trans::Val{TRANS}, uplo::Val{UPLO}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractVecOrMat) where {T, TRANS, UPLO, DIAG}
+    n = size(A, 1)
+    m = size(B, 2)
+
+    if isforward(UPLO, TRANS, :L)
+        order = 1:n
+    else
+        order = n:-1:1
+    end
+
+    @inbounds for j in 1:m, p in order
+        if DIAG === :N && !isintegral(s)
+            B[p, j] = sprod(s, sstar(s, A[p, p]), B[p, j], trans, Val(:N))
+        end
+
+        Bpj = B[p, j]
+
+        if isforward(UPLO, TRANS, :L)
+            rest = p + 1:n
+        else
+            rest = 1:p - 1
+        end
+
+        for q in rest
+            if TRANS === :N || TRANS === :R
+                Aqp = A[q, p]
+            else
+                Aqp = A[p, q]
+            end
+
+            B[q, j] = smuladd(s, Aqp, Bpj, B[q, j], trans, Val(:N))
+        end
+    end
+
+    return B
+end
+
+function strsx2!(s::AbstractSemiring, side::Val{:R}, trans::Val{TRANS}, uplo::Val{UPLO}, ::Val{DIAG}, A::AbstractMatrix{T}, B::AbstractMatrix) where {T, TRANS, UPLO, DIAG}
+    n = size(A, 1)
+    m = size(B, 1)
+
+    if isforward(UPLO, TRANS, :R)
+        order = 1:n
+    else
+        order = n:-1:1
+    end
+
+    @inbounds for p in order
+        if DIAG === :N && !isintegral(s)
+            sApp = sstar(s, A[p, p])
+
+            for i in 1:m
+                B[i, p] = sprod(s, B[i, p], sApp, Val(:N), trans)
+            end
+        end
+
+        if isforward(UPLO, TRANS, :R)
+            rest = p + 1:n
+        else
+            rest = 1:p - 1
+        end
+
+        for q in rest
+            if TRANS === :N || TRANS === :R
+                Apq = A[p, q]
+            else
+                Apq = A[q, p]
+            end
+
+            for i in 1:m
+                B[i, q] = smuladd(s, B[i, p], Apq, B[i, q], Val(:N), trans)
+            end
+        end
+    end
+
+    return B
+end
+
+function strsx2!(s::AbstractSemiring, side::Val{:R}, trans::Val{TRANS}, uplo::Val{UPLO}, ::Val{DIAG}, A::AbstractMatrix{T}, b::AbstractVector) where {T, TRANS, UPLO, DIAG}
+    n = size(A, 1)
+
+    if isforward(UPLO, TRANS, :R)
+        order = 1:n
+    else
+        order = n:-1:1
+    end
+
+    @inbounds for p in order
+        if DIAG === :N && !isintegral(s)
+            b[p] = sprod(s, b[p], sstar(s, A[p, p]), Val(:N), trans)
+        end
+
+        bp = b[p]
+
+        if isforward(UPLO, TRANS, :R)
+            rest = p + 1:n
+        else
+            rest = 1:p - 1
+        end
+
+        for q in rest
+            if TRANS === :N || TRANS === :R
+                Apq = A[p, q]
+            else
+                Apq = A[q, p]
+            end
+
+            b[q] = smuladd(s, bp, Apq, b[q], Val(:N), trans)
         end
     end
 

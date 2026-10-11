@@ -84,10 +84,20 @@ end
 
 # ===== saxpy! =====
 
-function saxpy!(s::AbstractSemiring, tA::Val, tB::Val, side::Val, a, x::AbstractVector{T}, y::AbstractVector{T}) where {T}
+function saxpy!(s::AbstractSemiring, tA::Val, tB::Val, side::Val, a, x::AbstractVector{T}, y::AbstractVector{T}) where {T <: BScalarTypes}
     @assert length(x) == length(y)
 
     @preserve x y saxpy_kern!(s, tA, tB, side, pointer(y), pointer(x), a, length(y))
+
+    return y
+end
+
+function saxpy!(s::AbstractSemiring, tA::Val, tB::Val, side::Val, a, x::AbstractVector{T}, y::AbstractVector{T}) where {T}
+    @assert length(x) == length(y)
+
+    @inbounds for i in eachindex(x, y)
+        y[i] = smul(s, tA, tB, side, x[i], a, y[i])
+    end
 
     return y
 end

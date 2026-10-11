@@ -69,7 +69,7 @@ end
 
 # ===== sgetrf2! =====
 
-function sgetrf2!(s::AbstractSemiring, A::AbstractMatrix{T}) where {T}
+function sgetrf2!(s::AbstractSemiring, A::AbstractMatrix{T}) where {T <: BScalarTypes}
     @assert size(A, 2) == size(A, 1)
 
     n = size(A, 1)
@@ -142,6 +142,32 @@ function sgetrf2!(s::AbstractSemiring, A::AbstractMatrix{T}) where {T}
             end
 
             i += 1
+        end
+    end
+
+    return A
+end
+
+function sgetrf2!(s::AbstractSemiring, A::AbstractMatrix{T}) where {T}
+    @assert size(A, 2) == size(A, 1)
+
+    n = size(A, 1)
+
+    @inbounds for i in 1:n
+        if !isintegral(s)
+            sAii = sstar(s, A[i, i])
+
+            for k in i + 1:n
+                A[k, i] = sprod(s, A[k, i], sAii, Val(:N), Val(:N))
+            end
+        end
+
+        for j in i + 1:n
+            Aij = A[i, j]
+
+            for q in i + 1:n
+                A[q, j] = smuladd(s, A[q, i], Aij, A[q, j], Val(:N), Val(:N))
+            end
         end
     end
 

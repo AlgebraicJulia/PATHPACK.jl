@@ -336,7 +336,7 @@ function strsx_fwd_upd_small!(
         trans::N_OR_R,
         ::Val{:U},
         ::Val{:R},
-    ) where {T, I}
+    ) where {T <: BScalarTypes, I}
     Rp = pointers(res)[f]
     #
     # fsep is the separator at node f
@@ -379,6 +379,55 @@ function strsx_fwd_upd_small!(
                     saxpy_kern!(s, Val(:N), trans, Val(:R), pc, pC + (d - one(I)) * sC * Z, L₂₁[i, j], nrhs)
                 end
             end
+        end
+    end
+
+    return
+end
+
+function strsx_fwd_upd_small!(
+        s::AbstractSemiring,
+        C::AbstractMatrix{T},
+        D₁₁::AbstractMatrix{T},
+        L₂₁::AbstractMatrix{T},
+        res::AbstractGraph{I},
+        sep::AbstractGraph{I},
+        nn::I,
+        na::I,
+        nrhs::I,
+        f::I,
+        ::Val{DIAG},
+        trans::N_OR_R,
+        ::Val{:U},
+        ::Val{:R},
+    ) where {T, I, DIAG}
+    Rp = pointers(res)[f]
+    #
+    # fsep is the separator at node f
+    #
+    #     fsep = sep(f)
+    #
+    fsep = neighbors(sep, f)
+
+    @inbounds for j in oneto(nn)
+        c = Rp + j - one(I)
+
+        for i in oneto(j - one(I))
+            scoladd!(s, trans, C, c, Rp + i - one(I), D₁₁[i, j], nrhs)
+        end
+
+        if !isintegral(s) && DIAG === :N
+            v = sstar(s, D₁₁[j, j])
+
+            for k in oneto(nrhs)
+                C[k, c] = sprod(s, C[k, c], v, Val(:N), trans)
+            end
+        end
+    end
+
+    if ispositive(na)
+        @inbounds for j in oneto(na), i in oneto(nn)
+            scoladd!(s, trans, C, fsep[j], Rp + i - one(I), L₂₁[i, j], nrhs)
         end
     end
 
@@ -451,7 +500,7 @@ function strsx_fwd_upd_small!(
         trans::T_OR_C,
         ::Val{:L},
         ::Val{:R},
-    ) where {T, I}
+    ) where {T <: BScalarTypes, I}
     Rp = pointers(res)[f]
     #
     # fsep is the separator at node f
@@ -494,6 +543,55 @@ function strsx_fwd_upd_small!(
                     saxpy_kern!(s, Val(:N), trans, Val(:R), pc, pC + (d - one(I)) * sC * Z, L₂₁[i, j], nrhs)
                 end
             end
+        end
+    end
+
+    return
+end
+
+function strsx_fwd_upd_small!(
+        s::AbstractSemiring,
+        C::AbstractMatrix{T},
+        D₁₁::AbstractMatrix{T},
+        L₂₁::AbstractMatrix{T},
+        res::AbstractGraph{I},
+        sep::AbstractGraph{I},
+        nn::I,
+        na::I,
+        nrhs::I,
+        f::I,
+        ::Val{DIAG},
+        trans::T_OR_C,
+        ::Val{:L},
+        ::Val{:R},
+    ) where {T, I, DIAG}
+    Rp = pointers(res)[f]
+    #
+    # fsep is the separator at node f
+    #
+    #     fsep = sep(f)
+    #
+    fsep = neighbors(sep, f)
+
+    @inbounds for i in oneto(nn)
+        ci = Rp + i - one(I)
+
+        if !isintegral(s) && DIAG === :N
+            v = sstar(s, D₁₁[i, i])
+
+            for k in oneto(nrhs)
+                C[k, ci] = sprod(s, C[k, ci], v, Val(:N), trans)
+            end
+        end
+
+        for j in i + one(I):nn
+            scoladd!(s, trans, C, Rp + j - one(I), ci, D₁₁[j, i], nrhs)
+        end
+    end
+
+    if ispositive(na)
+        @inbounds for i in oneto(na), j in oneto(nn)
+            scoladd!(s, trans, C, fsep[i], Rp + j - one(I), L₂₁[i, j], nrhs)
         end
     end
 
@@ -595,18 +693,32 @@ function strsx_fwd_upd_1!(s::AbstractSemiring, C::AbstractVecOrMat{T}, fsep::Abs
                 end
             end
         else
-            Z = sizeof(T)
-            sC = stride(C, 2)
-
-            @preserve C begin
-                pC = pointer(C)
-                pr = pC + (Rp - one(I)) * sC * Z
-
-                @inbounds for i in oneto(na)
-                    saxpy_kern!(s, Val(:N), trans, Val(:R), pC + (fsep[i] - one(I)) * sC * Z, pr, l₂₁[i], nrhs)
-                end
-            end
+            strsx_fwd_upd_1_cols!(s, C, fsep, l₂₁, Rp, na, nrhs, trans)
         end
+    end
+
+    return
+end
+
+function strsx_fwd_upd_1_cols!(s::AbstractSemiring, C::AbstractMatrix{T}, fsep::AbstractVector{I}, l₂₁::AbstractVector{T}, Rp::I, na::I, nrhs::I, trans::Val) where {T <: BScalarTypes, I}
+    Z = sizeof(T)
+    sC = stride(C, 2)
+
+    @preserve C begin
+        pC = pointer(C)
+        pr = pC + (Rp - one(I)) * sC * Z
+
+        @inbounds for i in oneto(na)
+            saxpy_kern!(s, Val(:N), trans, Val(:R), pC + (fsep[i] - one(I)) * sC * Z, pr, l₂₁[i], nrhs)
+        end
+    end
+
+    return
+end
+
+function strsx_fwd_upd_1_cols!(s::AbstractSemiring, C::AbstractMatrix{T}, fsep::AbstractVector{I}, l₂₁::AbstractVector{T}, Rp::I, na::I, nrhs::I, trans::Val) where {T, I}
+    @inbounds for i in oneto(na)
+        scoladd!(s, trans, C, fsep[i], Rp, l₂₁[i], nrhs)
     end
 
     return
@@ -817,7 +929,7 @@ function strsx_bwd_upd_small!(
         trans::N_OR_R,
         ::Val{:L},
         ::Val{:R},
-    ) where {T, I}
+    ) where {T <: BScalarTypes, I}
     Rp = pointers(res)[f]
     #
     # fsep is the separator at node f
@@ -857,6 +969,53 @@ function strsx_bwd_upd_small!(
                 for k in oneto(nrhs)
                     C[k, c] = sprod(s, C[k, c], v, Val(:N), trans)
                 end
+            end
+        end
+    end
+
+    return
+end
+
+function strsx_bwd_upd_small!(
+        s::AbstractSemiring,
+        C::AbstractMatrix{T},
+        D₁₁::AbstractMatrix{T},
+        U₁₂::AbstractMatrix{T},
+        res::AbstractGraph{I},
+        sep::AbstractGraph{I},
+        nn::I,
+        na::I,
+        nrhs::I,
+        f::I,
+        ::Val{DIAG},
+        trans::N_OR_R,
+        ::Val{:L},
+        ::Val{:R},
+    ) where {T, I, DIAG}
+    Rp = pointers(res)[f]
+    #
+    # fsep is the separator at node f
+    #
+    #     fsep = sep(f)
+    #
+    fsep = neighbors(sep, f)
+
+    @inbounds for j in oneto(nn), i in oneto(na)
+        scoladd!(s, trans, C, Rp + j - one(I), fsep[i], U₁₂[i, j], nrhs)
+    end
+
+    @inbounds for j in reverse(oneto(nn))
+        c = Rp + j - one(I)
+
+        for i in j + one(I):nn
+            scoladd!(s, trans, C, c, Rp + i - one(I), D₁₁[i, j], nrhs)
+        end
+
+        if !isintegral(s) && DIAG === :N
+            v = sstar(s, D₁₁[j, j])
+
+            for k in oneto(nrhs)
+                C[k, c] = sprod(s, C[k, c], v, Val(:N), trans)
             end
         end
     end
@@ -930,7 +1089,7 @@ function strsx_bwd_upd_small!(
         trans::T_OR_C,
         ::Val{:U},
         ::Val{:R},
-    ) where {T, I}
+    ) where {T <: BScalarTypes, I}
     Rp = pointers(res)[f]
     #
     # fsep is the separator at node f
@@ -973,6 +1132,55 @@ function strsx_bwd_upd_small!(
                 cj = Rp + j - one(I)
                 saxpy_kern!(s, Val(:N), trans, Val(:R), pC + (cj - one(I)) * sC * Z, pci, D₁₁[j, i], nrhs)
             end
+        end
+    end
+
+    return
+end
+
+function strsx_bwd_upd_small!(
+        s::AbstractSemiring,
+        C::AbstractMatrix{T},
+        D₁₁::AbstractMatrix{T},
+        U₁₂::AbstractMatrix{T},
+        res::AbstractGraph{I},
+        sep::AbstractGraph{I},
+        nn::I,
+        na::I,
+        nrhs::I,
+        f::I,
+        ::Val{DIAG},
+        trans::T_OR_C,
+        ::Val{:U},
+        ::Val{:R},
+    ) where {T, I, DIAG}
+    Rp = pointers(res)[f]
+    #
+    # fsep is the separator at node f
+    #
+    #     fsep = sep(f)
+    #
+    fsep = neighbors(sep, f)
+
+    if ispositive(na)
+        @inbounds for j in oneto(nn), i in oneto(na)
+            scoladd!(s, trans, C, Rp + j - one(I), fsep[i], U₁₂[j, i], nrhs)
+        end
+    end
+
+    @inbounds for i in reverse(oneto(nn))
+        ci = Rp + i - one(I)
+
+        if !isintegral(s) && DIAG === :N
+            v = sstar(s, D₁₁[i, i])
+
+            for k in oneto(nrhs)
+                C[k, ci] = sprod(s, C[k, ci], v, Val(:N), trans)
+            end
+        end
+
+        for j in oneto(i - one(I))
+            scoladd!(s, trans, C, Rp + j - one(I), ci, D₁₁[j, i], nrhs)
         end
     end
 
@@ -1080,18 +1288,32 @@ function strsx_bwd_upd_1!(s::AbstractSemiring, C::AbstractVecOrMat{T}, fsep::Abs
                 C[k, Rp] = v
             end
         else
-            Z = sizeof(T)
-            sC = stride(C, 2)
-
-            @preserve C begin
-                pC = pointer(C)
-                pr = pC + (Rp - one(I)) * sC * Z
-
-                @inbounds for i in oneto(na)
-                    saxpy_kern!(s, Val(:N), trans, Val(:R), pr, pC + (fsep[i] - one(I)) * sC * Z, u₁₂[i], nrhs)
-                end
-            end
+            strsx_bwd_upd_1_cols!(s, C, fsep, u₁₂, Rp, na, nrhs, trans)
         end
+    end
+
+    return
+end
+
+function strsx_bwd_upd_1_cols!(s::AbstractSemiring, C::AbstractMatrix{T}, fsep::AbstractVector{I}, u₁₂::AbstractVector{T}, Rp::I, na::I, nrhs::I, trans::Val) where {T <: BScalarTypes, I}
+    Z = sizeof(T)
+    sC = stride(C, 2)
+
+    @preserve C begin
+        pC = pointer(C)
+        pr = pC + (Rp - one(I)) * sC * Z
+
+        @inbounds for i in oneto(na)
+            saxpy_kern!(s, Val(:N), trans, Val(:R), pr, pC + (fsep[i] - one(I)) * sC * Z, u₁₂[i], nrhs)
+        end
+    end
+
+    return
+end
+
+function strsx_bwd_upd_1_cols!(s::AbstractSemiring, C::AbstractMatrix{T}, fsep::AbstractVector{I}, u₁₂::AbstractVector{T}, Rp::I, na::I, nrhs::I, trans::Val) where {T, I}
+    @inbounds for i in oneto(na)
+        scoladd!(s, trans, C, Rp, fsep[i], u₁₂[i], nrhs)
     end
 
     return
@@ -1113,7 +1335,7 @@ end
     return smuladd(s, av, bv, d, trans, Val(:N))
 end
 
-@inline function strsx_vec_gather(s::AbstractSemiring, trans::Val, C::AbstractVecOrMat{T}, o::Integer, idx::AbstractVector, a::AbstractVector{T}, v::T, n::Integer) where {T}
+@inline function strsx_vec_gather(s::AbstractSemiring, trans::Val, C::AbstractVecOrMat{T}, o::Integer, idx::AbstractVector, a::AbstractVector{T}, v::T, n::Integer) where {T <: BScalarTypes}
     i = 1
     W = min(vecwidth(T), 8)
     op = compose(trans, Val(:N))
@@ -1135,6 +1357,25 @@ end
     end
 
     return v
+end
+
+@inline function strsx_vec_gather(s::AbstractSemiring, trans::Val, C::AbstractVecOrMat{T}, o::Integer, idx::AbstractVector, a::AbstractVector{T}, v::T, n::Integer) where {T}
+    @inbounds for i in 1:n
+        v = smuladd(s, a[i], C[o + idx[i]], v, trans, Val(:N))
+    end
+
+    return v
+end
+
+#
+#   C[:, c] ← C[:, c] + C[:, d] x
+#
+function scoladd!(s::AbstractSemiring, trans::Val, C::AbstractMatrix, c::Integer, d::Integer, x, nrhs::Integer)
+    @inbounds for k in oneto(nrhs)
+        C[k, c] = smuladd(s, C[k, d], x, C[k, c], Val(:N), trans)
+    end
+
+    return
 end
 
 # ===== subtree-parallel solve =====

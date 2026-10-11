@@ -25,11 +25,25 @@ function sger!(s::AbstractSemiring, tA::Val, tB::Val, side::Val, x::AbstractVect
     return M
 end
 
-function sger_st!(s::AbstractSemiring, tA::Val, tB::Val, side::Val, x::AbstractVector{T}, y::AbstractVector, M::AbstractMatrix{T}) where {T}
+function sger_st!(s::AbstractSemiring, tA::Val, tB::Val, side::Val, x::AbstractVector{T}, y::AbstractVector, M::AbstractMatrix{T}) where {T <: BScalarTypes}
     @assert size(M, 1) == length(x)
     @assert size(M, 2) == length(y)
 
     @preserve x M sger_kern!(s, tA, tB, side, pointer(M), stride(M, 2), pointer(x), y, length(x), length(y))
+
+    return M
+end
+
+function sger_st!(s::AbstractSemiring, tA::Val, tB::Val, side::Val, x::AbstractVector{T}, y::AbstractVector, M::AbstractMatrix{T}) where {T}
+    @assert size(M, 1) == length(x)
+    @assert size(M, 2) == length(y)
+
+    nr = length(x)
+    nc = length(y)
+
+    @inbounds for c in oneto(nc), r in oneto(nr)
+        M[r, c] = smul(s, tA, tB, side, x[r], y[c], M[r, c])
+    end
 
     return M
 end

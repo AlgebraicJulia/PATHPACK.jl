@@ -130,10 +130,23 @@ end
 
 # ===== sdot =====
 
-function sdot(s::AbstractSemiring, tA::Val, tB::Val, x::AbstractVector{T}, y::AbstractVector{T}) where {T}
+function sdot(s::AbstractSemiring, tA::Val, tB::Val, x::AbstractVector{T}, y::AbstractVector{T}) where {T <: BScalarTypes}
     @assert length(x) == length(y)
 
     op = compose(tA, tB)
 
     return @preserve x y sdot_kern!(s, tA, tB, op, pointer(x), pointer(y), length(x))
+end
+
+function sdot(s::AbstractSemiring, tA::Val, tB::Val, x::AbstractVector{T}, y::AbstractVector{T}) where {T}
+    @assert length(x) == length(y)
+
+    op = compose(tA, tB)
+    d = szero(s, T, op)
+
+    @inbounds for j in eachindex(x, y)
+        d = smuladd(s, x[j], y[j], d, tA, tB)
+    end
+
+    return d
 end

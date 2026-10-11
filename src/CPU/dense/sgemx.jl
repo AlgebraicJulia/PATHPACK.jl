@@ -63,7 +63,7 @@ function sgemx!(s::AbstractSemiring, tA::N_OR_R, tB::Val, c::AbstractVector{T}, 
     return c
 end
 
-function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::Val, c::AbstractVector{T}, A::AbstractMatrix{T}, b::AbstractVector) where {T}
+function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::Val, c::AbstractVector{T}, A::AbstractMatrix{T}, b::AbstractVector) where {T <: BScalarTypes}
     ni = size(A, 1)
     nj = size(A, 2)
     sj = stride(A, 2)
@@ -84,6 +84,17 @@ function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::Val, c::AbstractVector{T
             saxpy_kern!(s, tA, tB, Val(:R), pc, pA + (j - 1) * sj * Z, b[j], ni)
             j += 1
         end
+    end
+
+    return c
+end
+
+function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::Val, c::AbstractVector{T}, A::AbstractMatrix{T}, b::AbstractVector) where {T}
+    ni = size(A, 1)
+    nj = size(A, 2)
+
+    @inbounds for j in oneto(nj), i in oneto(ni)
+        c[i] = smuladd(s, A[i, j], b[j], c[i], tA, tB)
     end
 
     return c
@@ -132,7 +143,7 @@ function sgemx!(s::AbstractSemiring, tA::T_OR_C, tB::Val, c::AbstractVector, A::
     return c
 end
 
-function sgemx_st!(s::AbstractSemiring, tA::T_OR_C, tB::Val, c::AbstractVector, A::AbstractMatrix{T}, b::AbstractVector) where {T}
+function sgemx_st!(s::AbstractSemiring, tA::T_OR_C, tB::Val, c::AbstractVector, A::AbstractMatrix{T}, b::AbstractVector) where {T <: BScalarTypes}
     ni = size(A, 2)
     nj = size(A, 1)
     sj = stride(A, 2)
@@ -159,6 +170,25 @@ function sgemx_st!(s::AbstractSemiring, tA::T_OR_C, tB::Val, c::AbstractVector, 
             c[i] = splus(s, c[i], sdot_kern!(s, tA, tB, op, pA + (i - 1) * sj * Z, pb, nj), op)
             i += 1
         end
+    end
+
+    return c
+end
+
+function sgemx_st!(s::AbstractSemiring, tA::T_OR_C, tB::Val, c::AbstractVector, A::AbstractMatrix{T}, b::AbstractVector) where {T}
+    ni = size(A, 2)
+    nj = size(A, 1)
+
+    op = compose(tA, tB)
+
+    @inbounds for i in oneto(ni)
+        d = szero(s, T, op)
+
+        for j in oneto(nj)
+            d = smuladd(s, A[j, i], b[j], d, tA, tB)
+        end
+
+        c[i] = splus(s, c[i], d, op)
     end
 
     return c
@@ -207,7 +237,7 @@ function sgemx!(s::AbstractSemiring, tA::N_OR_R, tB::N_OR_R, c::AbstractVector, 
     return c
 end
 
-function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::N_OR_R, c::AbstractVector, a::AbstractVector, B::AbstractMatrix{T}) where {T}
+function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::N_OR_R, c::AbstractVector, a::AbstractVector, B::AbstractMatrix{T}) where {T <: BScalarTypes}
     ni = size(B, 2)
     nj = size(B, 1)
     sj = stride(B, 2)
@@ -234,6 +264,25 @@ function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::N_OR_R, c::AbstractVecto
             c[i] = splus(s, c[i], sdot_kern!(s, tA, tB, op, pa, pB + (i - 1) * sj * Z, nj), op)
             i += 1
         end
+    end
+
+    return c
+end
+
+function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::N_OR_R, c::AbstractVector, a::AbstractVector, B::AbstractMatrix{T}) where {T}
+    ni = size(B, 2)
+    nj = size(B, 1)
+
+    op = compose(tA, tB)
+
+    @inbounds for i in oneto(ni)
+        d = szero(s, T, op)
+
+        for j in oneto(nj)
+            d = smuladd(s, a[j], B[j, i], d, tA, tB)
+        end
+
+        c[i] = splus(s, c[i], d, op)
     end
 
     return c
@@ -282,7 +331,7 @@ function sgemx!(s::AbstractSemiring, tA::N_OR_R, tB::T_OR_C, c::AbstractVector{T
     return c
 end
 
-function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::T_OR_C, c::AbstractVector{T}, a::AbstractVector, B::AbstractMatrix{T}) where {T}
+function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::T_OR_C, c::AbstractVector{T}, a::AbstractVector, B::AbstractMatrix{T}) where {T <: BScalarTypes}
     ni = size(B, 1)
     nj = size(B, 2)
     sj = stride(B, 2)
@@ -303,6 +352,17 @@ function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::T_OR_C, c::AbstractVecto
             saxpy_kern!(s, tA, tB, Val(:L), pc, pB + (j - 1) * sj * Z, a[j], ni)
             j += 1
         end
+    end
+
+    return c
+end
+
+function sgemx_st!(s::AbstractSemiring, tA::N_OR_R, tB::T_OR_C, c::AbstractVector{T}, a::AbstractVector, B::AbstractMatrix{T}) where {T}
+    ni = size(B, 1)
+    nj = size(B, 2)
+
+    @inbounds for j in oneto(nj), i in oneto(ni)
+        c[i] = smuladd(s, a[j], B[i, j], c[i], tA, tB)
     end
 
     return c
@@ -539,8 +599,39 @@ end
 
 # ===== sgemx2! =====
 
-function sgemx2!(s::AbstractSemiring, tA::Val, tB::Val, C::AbstractMatrix{T}, A::AbstractMatrix, B::AbstractMatrix, AP::AbstractVector, BP::AbstractVector, CP::AbstractVector, mr::Val = Val(SGEMX_MV * vecwidth(T))) where {T}
+function sgemx2!(s::AbstractSemiring, tA::Val, tB::Val, C::AbstractMatrix{T}, A::AbstractMatrix, B::AbstractMatrix, AP::AbstractVector, BP::AbstractVector, CP::AbstractVector, mr::Val = Val(SGEMX_MV * vecwidth(T))) where {T <: BScalarTypes}
     return sgemx2_impl!(s, tA, tB, C, A, B, AP, BP, CP, mr)
+end
+
+function sgemx2!(s::AbstractSemiring, tA::Val{TA}, tB::Val{TB}, C::AbstractMatrix{T}, A::AbstractMatrix, B::AbstractMatrix, AP::AbstractVector, BP::AbstractVector, CP::AbstractVector, mr::Val = Val(1)) where {T, TA, TB}
+    ni = size(C, 1)
+    nk = size(C, 2)
+
+    if TA === :N || TA === :R
+        nj = size(A, 2)
+    else
+        nj = size(A, 1)
+    end
+
+    @inbounds for k in oneto(nk), j in oneto(nj)
+        if TB === :N || TB === :R
+            b = B[j, k]
+        else
+            b = B[k, j]
+        end
+
+        for i in oneto(ni)
+            if TA === :N || TA === :R
+                a = A[i, j]
+            else
+                a = A[j, i]
+            end
+
+            C[i, k] = smuladd(s, a, b, C[i, k], tA, tB)
+        end
+    end
+
+    return C
 end
 
 function sgemx2_impl!(s::AbstractSemiring, tA::Val{TA}, tB::Val{TB}, C::AbstractMatrix{T}, A::AbstractMatrix, B::AbstractMatrix, AP::AbstractVector, BP::AbstractVector, CP::AbstractVector, mr::Val{MR} = Val(SGEMX_MV * vecwidth(T))) where {T, MR, TA, TB}
