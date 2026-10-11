@@ -109,168 +109,215 @@ function Base.getproperty(F::ChordalSLU, name::Symbol)
     end
 end
 
-#
-# Each entry A[r, c] goes straight to its slot. With i = rinvp[r], j = cinvp[c] and f the front of j,
-# g the front of i:
-#
-#   i before the component of j       -> the coupling block N (column j)
-#   i, j in one front                 -> the diagonal blocks of L and of U (both hold all of it)
-#   i > j, other fronts               -> the off-diagonal block of L at f (i in sep(f))
-#   i < j, other fronts               -> the off-diagonal block of U at g (j in sep(g))
-#
-# Every entry has its own slot, so the columns of A are independent and threads take disjoint ranges.
-# This is copyto_reference! (permute, then scatter front by front) without the permuted copy of A.
-#
-function Base.copyto!(F::ChordalSLU{<:Any, T}, A::SparseMatrixCSC) where {T}
-    z = szero(F.s, T, Val(:N))
-    pfill!(F.LDval, z); pfill!(F.LLval, z)
-    pfill!(F.UDval, z); pfill!(F.ULval, z)
-    fill!(F.Nval, z)
+# ===== copyto! =====
 
-    n = size(A, 2)
-    nchunk = getcolptr(A)[n + 1] - 1 < 2^15 ? 1 : 8 * nthreads()
+const SCOPYTO_LEAF = 2^15
 
-    if isone(nchunk)
-        scatter_columns!(F, A, 1, n)
+function Base.copyto!(F::ChordalSLU, A::SparseMatrixCSC; nt::Integer = nthreads())
+    return scopyto_mt!(F, A, nt)
+end
+
+function scopyto_st!(F::ChordalSLU{<:Any, T, I}, A::SparseMatrixCSC) where {T, I}
+    n = nov(F.S.S.res)
+    h = nv(F.S.S.res)
+
+    ind = FVector{I}(undef, n)
+    cur = FVector{I}(undef, h)
+
+    fill!(ind, zero(I))
+
+    @inbounds for f in oneto(h)
+        cur[f] = pointers(F.S.S.sep)[f]
+    end
+
+    szerorec_st!(F.s, F.LDval, Val(:N))
+    szerorec_st!(F.s, F.LLval, Val(:N))
+    szerorec_st!(F.s, F.UDval, Val(:N))
+    szerorec_st!(F.s, F.ULval, Val(:N))
+    szerorec_st!(F.s, F.Nval,  Val(:N))
+
+    scopyto_loop!(F, A, ind, cur, one(I), h)
+    return F
+end
+
+function scopyto_mt!(F::ChordalSLU{<:Any, T, I}, A::SparseMatrixCSC, nt::Integer) where {T, I}
+    if nt <= 1 || nnz(A) < SCOPYTO_LEAF
+        scopyto_st!(F, A)
     else
-        @threads for k in 1:nchunk
-            scatter_columns!(F, A, cld((k - 1) * n, nchunk) + 1, cld(k * n, nchunk))
+        res = F.S.S.res
+
+        h = nv(res)
+        m = 4nt
+
+        work = FVector{I}(undef, h + one(I))
+        fbnd = FVector{I}(undef, m + 1)
+
+        szerorec_mt!(F.s, F.LDval, Val(:N), nt)
+        szerorec_mt!(F.s, F.LLval, Val(:N), nt)
+        szerorec_mt!(F.s, F.UDval, Val(:N), nt)
+        szerorec_mt!(F.s, F.ULval, Val(:N), nt)
+        szerorec_mt!(F.s, F.Nval,  Val(:N), nt)
+
+        work[begin] = zero(I)
+
+        @inbounds for f in oneto(h)
+            w = work[f]
+
+            for j in neighbors(res, f)
+                c = F.cperm[j]
+                w += A.colptr[c + one(I)] - A.colptr[c]
+            end
+
+            work[f + one(I)] = w
+        end
+
+        fbnd[begin] = f = one(I)
+
+        @inbounds for k in 1:m - 1
+            w = fld(widemul(work[h + one(I)], k), m)
+
+            while f <= h && work[f + one(I)] < w
+                f += one(I)
+            end
+
+            fbnd[k + 1] = f
+        end
+
+        fbnd[m + 1] = h + one(I)
+
+        @threads for t in 1:nt
+            scopyto_task!(F, A, fbnd, m, t, nt)
         end
     end
 
     return F
 end
 
-function scatter_columns!(F::ChordalSLU{<:Any, T, I}, A::SparseMatrixCSC, c0::Integer, c1::Integer) where {T, I}
-    S = F.S.S
-    rptr = pointers(S.res); sptr = pointers(S.sep); stgt = targets(S.sep)
-    idx = S.idx; Dptr = S.Dptr; Lptr = S.Lptr
-    Bptr = F.S.Bptr; nBptr = F.S.nBptr; fcc = F.S.fcc
-    Nptr = pointers(F.S.N); Ntgt = targets(F.S.N)
-    LD = F.LDval; LL = F.LLval; UD = F.UDval; UL = F.ULval; Nval = F.Nval
-    rinvp = F.rinvp; cinvp = F.cinvp
-    Aptr = getcolptr(A); Arow = rowvals(A); Aval = nonzeros(A)
+function scopyto_task!(F::ChordalSLU{<:Any, T, I}, A::SparseMatrixCSC, fbnd::AbstractVector{I}, m::Integer, t::Integer, nt::Integer) where {T, I}
+    n = nov(F.S.S.res)
+    h = nv(F.S.S.res)
 
-    @inbounds for c in c0:c1
-        j = convert(I, cinvp[c]); f = idx[j]
-        jlo = rptr[f]; nn = rptr[f + one(I)] - jlo
-        na = sptr[f + one(I)] - sptr[f]
-        jstrt = Bptr[fcc[f]]
+    ind = FVector{I}(undef, n)
+    cur = FVector{I}(undef, h)
 
-        for p in Aptr[c]:(Aptr[c + 1] - 1)
-            i = convert(I, rinvp[Arow[p]]); x = Aval[p]
+    fill!(ind, zero(I))
 
-            if i < jstrt
-                r = sortedindex(Ntgt, Nptr[j], Nptr[j + one(I)] - one(I), i)
-                iszero(r) || (Nval[r] = x)
-            elseif jlo <= i < jlo + nn
-                o = Dptr[f] + (i - jlo) + (j - jlo) * nn
-                LD[o] = x; UD[o] = x
-            elseif i > j
-                k = sortedindex(stgt, sptr[f], sptr[f + one(I)] - one(I), i)
-                iszero(k) || (LL[Lptr[f] + (k - sptr[f]) + (j - jlo) * na] = x)
-            else
-                g = idx[i]; ilo = rptr[g]; mm = rptr[g + one(I)] - ilo
-                k = sortedindex(stgt, sptr[g], sptr[g + one(I)] - one(I), j)
-                iszero(k) || (UL[Lptr[g] + (i - ilo) + (k - sptr[g]) * mm] = x)
-            end
+    @inbounds for f in oneto(h)
+        cur[f] = pointers(F.S.S.sep)[f]
+    end
+
+    for k in t:nt:m
+        fstrt = fbnd[k]
+        fstop = fbnd[k + 1] - one(I)
+
+        if fstrt <= fstop
+            scopyto_loop!(F, A, ind, cur, fstrt, fstop)
         end
     end
 
     return
 end
 
-# the index of v in the sorted range tgt[lo:hi], or 0
-function sortedindex(tgt::AbstractVector{I}, lo::I, hi::I, v::I) where {I}
-    @inbounds while lo <= hi
-        mid = (lo + hi) >>> 1; t = tgt[mid]
-        t == v && return mid
-        t < v ? (lo = mid + one(I)) : (hi = mid - one(I))
-    end
+function scopyto_loop!(
+        F::ChordalSLU{<:Any, T, I},
+        A::SparseMatrixCSC,
+        ind::AbstractVector{I},
+        cur::AbstractVector{I},
+        fstrt::I,
+        fstop::I,
+    ) where {T, I}
+    S = F.S.S
 
-    return zero(I)
-end
+    res = S.res
+    sep = S.sep
+    idx = S.idx
 
-# fill! on threads, for the large factor arrays
-function pfill!(x::AbstractVector, v)
-    n = length(x)
-    nchunk = n < 2^18 ? 1 : 4 * nthreads()
-
-    if isone(nchunk)
-        fill!(x, v)
-    else
-        @threads for k in 1:nchunk
-            fill!(view(x, (cld((k - 1) * n, nchunk) + 1):cld(k * n, nchunk)), v)
-        end
-    end
-
-    return x
-end
-
-# copyto! through a permuted copy of A (the reference for the direct scatter above)
-function copyto_reference!(F::ChordalSLU, A::SparseMatrixCSC)
-    A = permute(A, F.rperm, F.cperm)
-    scopyto_offd!(F, A)
-    scopyto!(F.s, F.L, A)
-    scopyto!(F.s, F.U, A)
-    return F
-end
-
-function scopyto_offd!(F::ChordalSLU{<:Any, T, I}, A::SparseMatrixCSC) where {T, I}
-    n = convert(I, size(A, 2))
+    Dptr = S.Dptr
+    Lptr = S.Lptr
 
     Bptr = F.S.Bptr
-    nBptr = F.S.nBptr
-    Nptr = pointers(F.S.N)
-    Ntgt = targets(F.S.N)
-    Nval = F.Nval
+    fcc = F.S.fcc
 
-    Aptr = getcolptr(A)
-    Atgt = rowvals(A)
-    Aval = nonzeros(A)
+    rinvp = F.rinvp
+    cperm = F.cperm
 
-    fill!(Nval, szero(F.s, T, Val(:N)))
+    @inbounds for f in fstrt:fstop
+        nn = eltypedegree(res, f)
+        na = eltypedegree(sep, f)
 
-    q = one(I)
+        rlo = pointers(res)[f]
+        rhi = pointers(res)[f + one(I)] - one(I)
 
-    @inbounds for c in oneto(nBptr)
-        jstrt = Bptr[c]
-        jstop = Bptr[c + one(I)] - one(I)
+        sstrt = pointers(sep)[f]
+        sstop = pointers(sep)[f + one(I)] - one(I)
 
-        for j in jstrt:jstop
-            pstrt = Aptr[j]
-            pstop = Aptr[j + one(I)] - one(I)
-            Aptr[j] = q
+        Dp = Dptr[f]
+        Lp = Lptr[f]
 
-            r = Nptr[j]
+        jstrt = Bptr[fcc[f]]
 
-            for p in pstrt:pstop
-                i = Atgt[p]
+        for q in sstrt:sstop
+            ind[targets(sep)[q]] = q - sstrt + one(I)
+        end
+
+        for j in rlo:rhi
+            c = cperm[j]
+
+            for r in pointers(F.S.N)[j]:pointers(F.S.N)[j + one(I)] - one(I)
+                ind[targets(F.S.N)[r]] = r
+            end
+
+            for p in A.colptr[c]:A.colptr[c + one(I)] - one(I)
+                i = convert(I, rinvp[A.rowval[p]])
 
                 if i < jstrt
-                    while Ntgt[r] < i
-                        r += one(I)
+                    r = ind[i]
+
+                    if ispositive(r)
+                        F.Nval[r] = A.nzval[p]
+                    end
+                elseif rlo <= i <= rhi
+                    o = Dp + (i - rlo) + (j - rlo) * nn
+                    F.LDval[o] = A.nzval[p]
+                    F.UDval[o] = A.nzval[p]
+                elseif i > j
+                    k = ind[i]
+
+                    if ispositive(k)
+                        F.LLval[Lp + (k - one(I)) + (j - rlo) * na] = A.nzval[p]
+                    end
+                else
+                    g = idx[i]
+                    qstrt = pointers(sep)[g]
+                    qstop = pointers(sep)[g + one(I)]
+
+                    q = cur[g]
+
+                    while q < qstop && targets(sep)[q] < j
+                        q += one(I)
                     end
 
-                    Nval[r] = Aval[p]
-                else
-                    Atgt[q] = i
-                    Aval[q] = Aval[p]
-                    q += one(I)
+                    cur[g] = q
+
+                    if q < qstop && targets(sep)[q] == j
+                        mlo = pointers(res)[g]
+                        mm = eltypedegree(res, g)
+                        F.ULval[Lptr[g] + (i - mlo) + (q - qstrt) * mm] = A.nzval[p]
+                    end
                 end
             end
+
+            for r in pointers(F.S.N)[j]:pointers(F.S.N)[j + one(I)] - one(I)
+                ind[targets(F.S.N)[r]] = zero(I)
+            end
+        end
+
+        for q in sstrt:sstop
+            ind[targets(sep)[q]] = zero(I)
         end
     end
 
-    Aptr[n + one(I)] = q
-    resize!(Atgt, q - one(I))
-    resize!(Aval, q - one(I))
-    return A
-end
-
-function scopyto!(s::AbstractSemiring, A::ChordalTriangular{<:Any, <:Any, T}, B::SparseMatrixCSC) where {T}
-    fill!(A, szero(s, T, Val(:N)))
-    return copy_scatter!(A, B)
+    return
 end
 
 # ===== sgetrf! =====
@@ -288,7 +335,7 @@ end
 # ===== sgetrs! =====
 
 function sgetrs!(F::ChordalSLU{<:Any, T, I}, side::Val{SIDE}, trans::Val{TRANS}, B::AbstractVecOrMat; nt::Integer = nthreads()) where {T, I, SIDE, TRANS}
-    if SIDE === :L
+    if SIDE === :L || B isa AbstractVector
         m = size(B, 1)
         n = size(B, 2)
     else
@@ -306,7 +353,7 @@ function sgetrs!(F::ChordalSLU{<:Any, T, I}, side::Val{SIDE}, trans::Val{TRANS},
 
     work = FVector{T}(undef, m * min(8, n))
 
-    if SIDE === :L
+    if SIDE === :L || B isa AbstractVector
         permuterows!(B, work, invp)
     else
         permutecols!(B, work, invp)
@@ -320,7 +367,7 @@ function sgetrs!(F::ChordalSLU{<:Any, T, I}, side::Val{SIDE}, trans::Val{TRANS},
 
     sgetrs_mt!(F.s, side, trans, F.L, F.U, F.S.Bptr, F.S.Fptr, F.S.nBptr, pointers(F.S.N), targets(F.S.N), F.Nval, B, pool, nt)
 
-    if SIDE === :L
+    if SIDE === :L || B isa AbstractVector
         permuterows!(B, work, perm)
     else
         permutecols!(B, work, perm)
@@ -354,7 +401,7 @@ function sgetrs!(F::ChordalSLU{<:Any, T, I}, side::Val{SIDE}, trans::Val{TRANS},
 end
 
 function sgetrs!(F::ChordalSLU{<:Any, T, I}, side::Val{SIDE}, trans::Val{TRANS}, B::AbstractVecOrMat, W::TDWorkspace{T, I}; nt::Integer = nthreads()) where {T, I, SIDE, TRANS}
-    if SIDE === :L
+    if SIDE === :L || B isa AbstractVector
         m = size(B, 1)
         n = size(B, 2)
     else
@@ -372,7 +419,7 @@ function sgetrs!(F::ChordalSLU{<:Any, T, I}, side::Val{SIDE}, trans::Val{TRANS},
 
     work = FVector{T}(undef, m * min(8, n))
 
-    if SIDE === :L
+    if SIDE === :L || B isa AbstractVector
         permuterows!(B, work, invp)
     else
         permutecols!(B, work, invp)
@@ -386,7 +433,7 @@ function sgetrs!(F::ChordalSLU{<:Any, T, I}, side::Val{SIDE}, trans::Val{TRANS},
 
     sgetrs_mt!(F.s, side, trans, F.L, F.U, F.S.Bptr, F.S.Fptr, F.S.nBptr, pointers(F.S.N), targets(F.S.N), F.Nval, B, W, pool, nt)
 
-    if SIDE === :L
+    if SIDE === :L || B isa AbstractVector
         permuterows!(B, work, perm)
     else
         permutecols!(B, work, perm)
@@ -400,10 +447,8 @@ end
 #
 # Solve against an elementary vector eₖ, overwriting b:
 #
-#   sgetre!(F, Val(:L), Val(:N), b, k)   b ← A* eₖ    (column k of A*)
-#   sgetre!(F, Val(:L), Val(:T), b, k)   b ← A*ᵀ eₖ   (row k of A*)
-#
-# Side :R treats b as a row vector.
+#   sgetre!(F, Val(:L), Val(:N), b, k)   b ← A*  eₖ
+#   sgetre!(F, Val(:L), Val(:T), b, k)   b ← A*ᵀ eₖ
 #
 function sgetre!(F::ChordalSLU{<:Any, T, I}, side::Val{SIDE}, trans::Val{TRANS}, b::AbstractVector, k::Integer; nt::Integer = nthreads()) where {T, I, SIDE, TRANS}
     D = TDSymbolic(F; nt)

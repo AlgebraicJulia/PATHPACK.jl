@@ -8,7 +8,22 @@ function strse!(
         A::ChordalTriangular{<:Any, UPLO, T, I},
         C::AbstractVector{T},
         M::AbstractVector{T},
+        k::I;
+        nt::Integer = nthreads(),
+    ) where {UPLO, T, I}
+    return strse_mt!(s, side, trans, diag, A, C, M, k, nt)
+end
+
+function strse_mt!(
+        s::AbstractSemiring,
+        side::Val,
+        trans::Val,
+        diag::Val,
+        A::ChordalTriangular{<:Any, UPLO, T, I},
+        C::AbstractVector{T},
+        M::AbstractVector{T},
         k::I,
+        nt::Integer,
     ) where {UPLO, T, I}
     res  = A.S.res
     sep  = A.S.sep
@@ -28,7 +43,7 @@ function strse!(
         if isone(nn)
             strse_fwd_1!(s, C, A.Dval, A.Lval, Dptr, Lptr, res, sep, f, trans, A.uplo, diag, side)
         else
-            strse_fwd!(s, C, M, A.Dval, A.Lval, Dptr, Lptr, res, sep, f, trans, A.uplo, diag, side)
+            strse_fwd!(s, C, M, A.Dval, A.Lval, Dptr, Lptr, res, sep, nt, f, trans, A.uplo, diag, side)
         end
 
         r = f
@@ -50,6 +65,7 @@ function strse_fwd!(
         Lptr::AbstractVector{I},
         res::AbstractGraph{I},
         sep::AbstractGraph{I},
+        nt::Integer,
         f::I,
         trans::Val,
         uplo::Val{UPLO},
@@ -99,18 +115,18 @@ function strse_fwd!(
     #
     #   C₁ ← D₁₁* C₁
     #
-    strsx!(s, side, trans, uplo, diag, D₁₁, C₁)
+    strsx!(s, side, trans, uplo, diag, D₁₁, C₁; nt)
 
     if ispositive(na)
         M₂ = view(M, oneto(na))
-        szerorec!(s, M₂, trans)
+        szerorec!(s, M₂, trans; nt)
         #
         #   M₂ ← L₂₁ C₁
         #
         if SIDE === :L
-            sgemx!(s, trans, Val(:N), M₂, L₂₁, C₁)
+            sgemx_mt!(s, trans, Val(:N), M₂, L₂₁, C₁, nt)
         else
-            sgemx!(s, Val(:N), trans, M₂, C₁, L₂₁)
+            sgemx_mt!(s, Val(:N), trans, M₂, C₁, L₂₁, nt)
         end
         #
         #   C₂ ← C₂ + M₂

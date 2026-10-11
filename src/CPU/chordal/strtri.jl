@@ -141,9 +141,9 @@ function strtri_band!(
     #   X ← 0
     #
     if UPLO === :L
-        szerorec!(s, view(X, oneto(nrhs), bstrt:bstop), Val(:N))
+        szerorec!(s, view(X, oneto(nrhs), bstrt:bstop), Val(:N); nt)
     else
-        szerorec!(s, view(X, bstrt:bstop, oneto(nrhs)), Val(:N))
+        szerorec!(s, view(X, bstrt:bstop, oneto(nrhs)), Val(:N); nt)
     end
 
     for f in fstrt:nv(res)
@@ -296,7 +296,7 @@ function strtri_fwd!(
         #
         #   M₂ ← 0
         #
-        szerorec!(s, M₂, Val(:N))
+        szerorec!(s, M₂, Val(:N); nt)
         #
         #   M₂ ← X₁ U₁₂
         #

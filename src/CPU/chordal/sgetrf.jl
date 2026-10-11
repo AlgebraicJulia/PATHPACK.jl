@@ -91,7 +91,7 @@ function sgetrf_loop!(
     #
     #     F ← 0
     #
-    szerorec!(s, F, Val(:N))
+    szerorec!(s, F, Val(:N); nt)
 
     for i in Iterators.reverse(neighbors(chd, j))
         sgetrf_send!(s, F, Mptr, Mval, rel, ns, i)
@@ -205,7 +205,7 @@ function sgetrf_loop_1!(
     #
     #     F ← 0
     #
-    szerorec!(s, F, Val(:N))
+    szerorec!(s, F, Val(:N); nt)
 
     for i in Iterators.reverse(neighbors(chd, j))
         sgetrf_send!(s, F, Mptr, Mval, rel, ns, i)

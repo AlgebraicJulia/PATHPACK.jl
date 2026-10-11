@@ -129,13 +129,13 @@ function sgetrp_loop!(
         #
         #     F₂₁ ← (F₂₂ L₂₁) L₁₁*
         #
-        szerorec!(s, F₂₁, Val(:N))
+        szerorec!(s, F₂₁, Val(:N); nt)
         sgemx_mt!(s, Val(:N), Val(:N), F₂₁, M₂₂, L₂₁, pool, nt)
         strsx_mt!(s, Val(:R), Val(:N), Val(:L), Val(:U), L₁₁, F₂₁, pool, nt)
         #
         #     F₁₂ ← U₁₁* (U₁₂ F₂₂)
         #
-        szerorec!(s, F₁₂, Val(:N))
+        szerorec!(s, F₁₂, Val(:N); nt)
         sgemx_mt!(s, Val(:N), Val(:N), F₁₂, U₁₂, M₂₂, pool, nt)
         strsx_mt!(s, Val(:L), Val(:N), Val(:U), Val(:N), U₁₁, F₁₂, pool, nt)
     end
@@ -143,7 +143,7 @@ function sgetrp_loop!(
     #     F₁₁ ← L₁₁*
     #
     strtri_mt!(s, Val(:L), Val(:U), L₁₁, pool, nt)
-    szerorec!(s, F₁₁, Val(:N))
+    szerorec!(s, F₁₁, Val(:N); nt)
 
     @inbounds for k in oneto(nn)
         F₁₁[k, k] = sone(s, T, Val(:N))
@@ -263,12 +263,12 @@ function sgetrp_loop_1!(
         #
         #     z₂₁ ← F₂₂ l₂₁
         #
-        szerorec!(s, f₂₁, Val(:N))
+        szerorec!(s, f₂₁, Val(:N); nt)
         sgemx_mt!(s, Val(:N), Val(:N), f₂₁, M₂₂, l₂₁, nt)
         #
         #     z₁₂ ← u₁₁* (u₁₂ F₂₂)
         #
-        szerorec!(s, f₁₂, Val(:N))
+        szerorec!(s, f₁₂, Val(:N); nt)
         sgemx_mt!(s, Val(:N), Val(:N), f₁₂, u₁₂, M₂₂, nt)
 
         @inbounds for k in oneto(na)

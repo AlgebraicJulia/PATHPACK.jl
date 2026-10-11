@@ -8,7 +8,7 @@ function sgetri!(s::AbstractSemiring, C::AbstractMatrix{T}, A::AbstractMatrix{T}
     #
     #   C ← U
     #
-    szerorec!(s, C, Val(:N))
+    szerorec!(s, C, Val(:N); nt)
     copytri!(C, A, Val(:U))
 
     if nt <= 1

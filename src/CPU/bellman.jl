@@ -23,7 +23,7 @@ function bellman!(f, s::AbstractSemiring, side::Val{SIDE}, trans::Val, A::Abstra
     #
     #   u ← 0
     #
-    szerorec!(s, u, trans)
+    szerorec!(s, u, trans; nt)
 
     while !f(u, b) && i <= itmax
         i += 1
@@ -51,7 +51,7 @@ function bellman_i!(f, s::AbstractSemiring, side::Val{SIDE}, trans::Val, A::Abst
     #
     #   u ← 0
     #
-    szerorec!(s, u, trans)
+    szerorec!(s, u, trans; nt)
 
     while !f(u, b) && i <= itmax
         i += 1

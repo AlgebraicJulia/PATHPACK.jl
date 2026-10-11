@@ -246,7 +246,7 @@ function strsx_fwd_upd!(
         #
         #   M₂ ← L₂₁ C₁
         #
-        szerorec!(s, M₂, trans)
+        szerorec!(s, M₂, trans; nt)
 
         if C isa AbstractVector
             if SIDE === :L
@@ -1700,7 +1700,7 @@ function td_strsx_fwd_task!(
         f = targets(D.rts)[p]
         g = targets(D.rts)[q]
 
-        szerorec!(s, Pc, trans)
+        szerorec_mt!(s, Pc, trans, 1)
         bd = TDBound(Pc, D.cut, D.col)
         strsx_mt!(s, side, trans, diag, A, B, M, pool, 1, D.fdsc[f], g, bd)
 

@@ -69,72 +69,6 @@ function sccs!(low::AbstractVector{I}, arc::AbstractVector{I}, ptr::AbstractVect
     return BipartiteGraph{I, I}(n, c, n, ptr, tgt)
 end
 
-#
-# the graph of the pattern of A[p, q], without the values: the same lists as BipartiteGraph(permute(A, p, q))
-# (each sorted), built in parallel. Column j is column q[j] of A with its rows renamed by p⁻¹ and sorted;
-# the columns are independent, so threads fill disjoint ranges.
-#
-function permute_pattern(A::SparseMatrixCSC{<:Any, I}, p::AbstractVector, q::AbstractVector) where {I}
-    m, n = size(A)
-    Aptr = getcolptr(A); Arow = rowvals(A)
-    ip = Vector{I}(undef, m)
-
-    @inbounds for i in oneto(m)
-        ip[p[i]] = i
-    end
-
-    ptr = FVector{I}(undef, n + 1)
-    @inbounds ptr[1] = one(I)
-
-    @inbounds for j in oneto(n)
-        c = q[j]
-        ptr[j + 1] = ptr[j] + (Aptr[c + 1] - Aptr[c])
-    end
-
-    nz = ptr[n + 1] - one(I)
-    row = FVector{I}(undef, nz)
-    nchunk = nz < 2^16 ? 1 : 8 * nthreads()
-
-    if isone(nchunk)                               # (no threads to wake for a small matrix)
-        permute_pattern_columns!(row, ptr, Aptr, Arow, ip, q, 1, n)
-    else
-        @threads for k in 1:nchunk
-            permute_pattern_columns!(row, ptr, Aptr, Arow, ip, q, cld((k - 1) * n, nchunk) + 1, cld(k * n, nchunk))
-        end
-    end
-
-    return BipartiteGraph{I, I}(m, n, nz, ptr, row)
-end
-
-function permute_pattern_columns!(row::AbstractVector{I}, ptr, Aptr, Arow, ip, q, j0::Integer, j1::Integer) where {I}
-    @inbounds for j in j0:j1
-        c = q[j]; a = Aptr[c]; o = ptr[j]; d = ptr[j + 1] - o
-
-        for t in 0:(d - 1)
-            row[o + t] = ip[Arow[a + t]]
-        end
-
-        if d > 24                                  # rows are distinct: an unstable in-place sort will do
-            r = view(row, o:(o + d - 1))
-            issorted(r) || sort!(r; alg = QuickSort)  # (sorted already when the relabelling keeps the order)
-            continue
-        end
-
-        for t in 1:(d - 1)
-            r = row[o + t]; u = t - 1
-
-            while u >= 0 && row[o + u] > r
-                row[o + u + 1] = row[o + u]
-                u -= 1
-            end
-
-            row[o + u + 1] = r
-        end
-    end
-
-    return
-end
-
 function subgraph(graph::BipartiteGraph{I}, strt::I, stop::I) where {I}
     @assert one(I) <= strt <= stop <= nv(graph)
 
@@ -171,8 +105,32 @@ function subgraph(graph::BipartiteGraph{I}, strt::I, stop::I) where {I}
     return BipartiteGraph{I, I}(n, n, m, ptr, tgt)
 end
 
-function szerorec!(s::AbstractSemiring, A::AbstractVecOrMat{T}, trans::Val) where {T}
+# ===== szerorec! =====
+
+const SZEROREC_LEAF = 2^18
+
+function szerorec!(s::AbstractSemiring, A::AbstractVecOrMat, trans::Val; nt::Integer = nthreads())
+    return szerorec_mt!(s, A, trans, nt)
+end
+
+function szerorec_st!(s::AbstractSemiring, A::AbstractVecOrMat{T}, trans::Val) where {T}
     fill!(A, szero(s, T, trans))
+    return A
+end
+
+function szerorec_mt!(s::AbstractSemiring, A::AbstractVecOrMat, trans::Val, nt::Integer)
+    if nt <= 1 || length(A) < SZEROREC_LEAF
+        szerorec_st!(s, A, trans)
+    else
+        n = size(A, ndims(A))
+
+        @threads for t in 1:nt
+            strt = fld(n * (t - 1), nt) + 1
+            stop = fld(n *  t,      nt)
+            szerorec_st!(s, selectdim(A, ndims(A), strt:stop), trans)
+        end
+    end
+
     return A
 end
 

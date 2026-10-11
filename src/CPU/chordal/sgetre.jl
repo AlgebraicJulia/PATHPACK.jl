@@ -18,10 +18,10 @@ function sgetre!(
     M = view(W.Mval, oneto(L.S.nFval))
 
     if isforward(:L, TRANS, SIDE)
-        strse!(s, side, trans, Val(:U), L, C, M, k)
+        strse_mt!(s, side, trans, Val(:U), L, C, M, k, nt)
         strsx_mt!(s, side, trans, Val(:N), U, C, W, pool, nt, b, fstrt, fstop)
     else
-        strse!(s, side, trans, Val(:N), U, C, M, k)
+        strse_mt!(s, side, trans, Val(:N), U, C, M, k, nt)
         strsx_mt!(s, side, trans, Val(:U), L, C, W, pool, nt, b, fstrt, fstop)
     end
 
