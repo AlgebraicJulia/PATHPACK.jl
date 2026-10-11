@@ -69,6 +69,16 @@ function sccs!(low::AbstractVector{I}, arc::AbstractVector{I}, ptr::AbstractVect
     return BipartiteGraph{I, I}(n, c, n, ptr, tgt)
 end
 
+# TODO: USE CLIQUETREES VERSION
+function graphpermute(graph::AbstractGraph, order::AbstractVector, index::AbstractVector)
+    return permute(BipartiteGraph(graph), order, index)
+end
+
+# TODO: USE CLIQUETREES VERSION
+function graphpermute(graph::BipartiteGraph, order::AbstractVector, index::AbstractVector)
+    return permute(graph, order, index)
+end
+
 function subgraph(graph::BipartiteGraph{I}, strt::I, stop::I) where {I}
     @assert one(I) <= strt <= stop <= nv(graph)
 
