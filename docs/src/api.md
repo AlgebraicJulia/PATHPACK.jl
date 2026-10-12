@@ -1,5 +1,5 @@
 # Library Reference
 
 ```@autodocs
-Modules = [PATHPACK]
+Modules = [PATHPACK, PATHPACK.CPU, PATHPACK.GPU]
 ```

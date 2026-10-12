@@ -42,7 +42,7 @@ makedocs(
   pages=Any[
     "PATHPACK.jl"=>"index.md",
     "Examples"=>Any[
-      "generated/literate_example.md",
+      "generated/shortest_paths.md",
     ],
     "Library Reference"=>"api.md",
   ]
