@@ -1,0 +1,901 @@
+tool,graph,threads,placement,variant,metric,value,source,commit,machine,date,job
+boost_widest,CurlCurl_0,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,CurlCurl_0,1,core,,latency_s,0.0019052000000000001,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,CurlCurl_0,1,core,full matrix,total_s,21.116807,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,EB_16384_64,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,EB_16384_64,1,core,,latency_s,0.0065206000000000005,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,EB_16384_64,1,core,full matrix,total_s,106.840056,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,EB_8192_256,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,EB_8192_256,1,core,,latency_s,0.0066251,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,EB_8192_256,1,core,full matrix,total_s,54.279704,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,G67,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,G67,1,core,,latency_s,0.001128,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,G67,1,core,full matrix,total_s,11.281138,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,OPF_6000,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,OPF_6000,1,core,,latency_s,0.004076,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,OPF_6000,1,core,full matrix,total_s,121.884338,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,USpowerGrid,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,USpowerGrid,1,core,,latency_s,0.00038030000000000003,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,USpowerGrid,1,core,full matrix,total_s,1.879679,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,c-42,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,c-42,1,core,,latency_s,0.0013432000000000001,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,c-42,1,core,full matrix,total_s,14.066357,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,c-69,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,c-69,1,core,,latency_s,0.011224399999999999,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,c-69,1,core,full matrix,total_s,757.187814,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,delaunay_n13,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,delaunay_n13,1,core,,latency_s,0.0011145999999999999,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,delaunay_n13,1,core,full matrix,total_s,9.131897,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,delaunay_n14,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,delaunay_n14,1,core,,latency_s,0.002298,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,delaunay_n14,1,core,full matrix,total_s,37.652759,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,delaunay_n16,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,delaunay_n16,1,core,,latency_s,0.0101647,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,delaunay_n16,1,core,full matrix,total_s,666.166880,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,email-Enron,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,email-Enron,1,core,,latency_s,0.0053437,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,email-Enron,1,core,full matrix,total_s,180.066647,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,fe_sphere,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,fe_sphere,1,core,,latency_s,0.0022663,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,fe_sphere,1,core,full matrix,total_s,37.137630,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,fe_tooth,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,fe_tooth,1,core,,latency_s,0.019835099999999998,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,fe_tooth,1,core,full matrix,total_s,1549.855822,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,finan512,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,finan512,1,core,,latency_s,0.013388,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,finan512,1,core,full matrix,total_s,1000.791675,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,hypercube_14,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,hypercube_14,1,core,,latency_s,0.003811,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,hypercube_14,1,core,full matrix,total_s,62.443683,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,lpl1,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,lpl1,1,core,,latency_s,0.0058265,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,lpl1,1,core,full matrix,total_s,189.134342,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,nd6k,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,nd6k,1,core,,latency_s,0.0190411,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,nd6k,1,core,full matrix,total_s,342.759453,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,net4-1,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,net4-1,1,core,,latency_s,0.0195098,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,net4-1,1,core,full matrix,total_s,1723.571835,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,oilpan,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,oilpan,1,core,,latency_s,0.029645,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,oilpan,1,core,full matrix,total_s,2186.408826,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,onera_dual,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,onera_dual,1,core,,latency_s,0.0131131,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,onera_dual,1,core,full matrix,total_s,1122.058854,raw/bottleneck/20261006-083410_lib-a/task_1/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_1
+boost_widest,rgg2d_14,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,rgg2d_14,1,core,,latency_s,0.0099276,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,rgg2d_14,1,core,full matrix,total_s,162.664001,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,rgg3d_14,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,rgg3d_14,1,core,,latency_s,0.0333621,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,rgg3d_14,1,core,full matrix,total_s,546.637835,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,t60k,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,t60k,1,core,,latency_s,0.0053409,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,t60k,1,core,full matrix,total_s,320.485503,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,wing,1,core,,check_pass,1,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,wing,1,core,,latency_s,0.0102449,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+boost_widest,wing,1,core,full matrix,total_s,635.519124,raw/bottleneck/20261006-083410_lib-a/task_0/out/baselines_boost_widest.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:24:07Z,44925477_0
+cch,USA-t-BAY,1,core,,build_s,0.1408,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-BAY,1,core,,customize_s,0.044700000000000004,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-BAY,1,core,,order_s,8.245899999999999,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-BAY,1,core,,query_s,1.1890000000000001e-05,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-CAL,1,core,,build_s,1.0526,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-CAL,1,core,,customize_s,0.2509,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-CAL,1,core,,order_s,68.2982,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-CAL,1,core,,query_s,2.519e-05,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-COL,1,core,,build_s,0.1911,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-COL,1,core,,customize_s,0.054200000000000005,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-COL,1,core,,order_s,11.593200000000001,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-COL,1,core,,query_s,1.826e-05,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-CTR,1,core,,build_s,8.841899999999999,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-CTR,1,core,,customize_s,2.3443,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-CTR,1,core,,order_s,861.2717,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-CTR,1,core,,query_s,0.000117,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-E,1,core,,build_s,2.1499,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-E,1,core,,customize_s,0.49060000000000004,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-E,1,core,,order_s,154.8869,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-E,1,core,,query_s,5.0409999999999993e-05,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-FLA,1,core,,build_s,0.5102,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-FLA,1,core,,customize_s,0.1306,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-FLA,1,core,,order_s,34.0141,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-FLA,1,core,,query_s,1.627e-05,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NE,1,core,,build_s,0.7967000000000001,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NE,1,core,,customize_s,0.24530000000000002,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NE,1,core,,order_s,57.4161,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NE,1,core,,query_s,3.8759999999999995e-05,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NW,1,core,,build_s,0.5252,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NW,1,core,,customize_s,0.1277,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NW,1,core,,order_s,34.6388,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NW,1,core,,query_s,1.787e-05,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NY,1,core,,build_s,0.144,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NY,1,core,,customize_s,0.0615,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NY,1,core,,order_s,8.1092,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-NY,1,core,,query_s,1.987e-05,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-USA,1,core,,build_s,14.978,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-USA,1,core,,customize_s,3.7081,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-USA,1,core,,order_s,1573.563,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-USA,1,core,,query_s,0.00013409,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-W,1,core,,build_s,3.8914,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-W,1,core,,customize_s,0.8395,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-W,1,core,,order_s,275.4413,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+cch,USA-t-W,1,core,,query_s,4.929e-05,raw/external/20261005-224530_lib-b/task_2/out/baselines_cch.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:58Z,44888631_2
+gap_apsp,CurlCurl_0,1,core,delta=1.43781e+08,latency_s,0.0008,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,CurlCurl_0,1,core,delta=1.43781e+08,samples,1,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,CurlCurl_0,1,core,delta=2.87561e+08,latency_s,0.00084,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,CurlCurl_0,1,core,delta=2.87561e+08,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,CurlCurl_0,1,core,delta=2.87561e+08;full matrix,total_s,9.658453,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,CurlCurl_0,1,core,delta=7.18903e+07;runs 11083,latency_s,0.00083,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,CurlCurl_0,1,core,delta=7.18903e+07;runs 11083,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,CurlCurl_0,16,processes,delta=1.43781e+08,latency_s,0.000921875,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,CurlCurl_0,16,processes,delta=1.43781e+08,samples,16,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,CurlCurl_0,16,processes,delta=2.87561e+08,latency_s,0.0009800000000000002,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,CurlCurl_0,16,processes,delta=2.87561e+08,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,CurlCurl_0,16,processes,delta=7.18903e+07;runs 693 each,latency_s,0.0008199999999999997,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,CurlCurl_0,16,processes,delta=7.18903e+07;runs 693 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,CurlCurl_0,16,threads,delta=2.87561e+08;full matrix,total_s,0.697022,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,EB_16384_64,1,core,delta=0.788411,latency_s,0.00402,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,EB_16384_64,1,core,delta=0.788411,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,EB_16384_64,1,core,delta=0.788411;runs 16384,latency_s,0.00395,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,EB_16384_64,1,core,delta=0.788411;runs 16384,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,EB_16384_64,1,core,delta=1.57682;full matrix,total_s,69.735415,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,EB_16384_64,16,processes,delta=0.788411,latency_s,0.009683749999999998,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,EB_16384_64,16,processes,delta=0.788411,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,EB_16384_64,16,processes,delta=0.788411;runs 1024 each,latency_s,0.009536875,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,EB_16384_64,16,processes,delta=0.788411;runs 1024 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,EB_16384_64,16,threads,delta=1.57682;full matrix,total_s,4.780210,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,EB_8192_256,1,core,delta=0.789193,latency_s,0.00563,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,EB_8192_256,1,core,delta=0.789193,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,EB_8192_256,1,core,delta=0.789193;full matrix,total_s,48.467954,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,EB_8192_256,1,core,delta=0.789193;runs 8192,latency_s,0.00568,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,EB_8192_256,1,core,delta=0.789193;runs 8192,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,EB_8192_256,16,processes,delta=0.789193,latency_s,0.017073125,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,EB_8192_256,16,processes,delta=0.789193,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,EB_8192_256,16,processes,delta=0.789193;runs 512 each,latency_s,0.017304375000000004,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,EB_8192_256,16,processes,delta=0.789193;runs 512 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,EB_8192_256,16,threads,delta=0.789193;full matrix,total_s,4.924071,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,G67,1,core,delta=128;runs 10000,latency_s,0.00019,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,G67,1,core,delta=128;runs 10000,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,G67,1,core,delta=256,latency_s,0.00019,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,G67,1,core,delta=256,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,G67,1,core,delta=32,latency_s,0.00019,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,G67,1,core,delta=32,samples,1,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,G67,1,core,delta=64,latency_s,0.00019,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,G67,1,core,delta=64,samples,1,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,G67,1,core,delta=8;full matrix,total_s,2.141325,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,G67,16,processes,delta=128;runs 625 each,latency_s,0.00019000000000000004,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,G67,16,processes,delta=128;runs 625 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,G67,16,processes,delta=256,latency_s,0.00021750000000000006,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,G67,16,processes,delta=256,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,G67,16,processes,delta=32,latency_s,0.00019750000000000006,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,G67,16,processes,delta=32,samples,16,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,G67,16,processes,delta=64,latency_s,0.00023062500000000006,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,G67,16,processes,delta=64,samples,16,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,G67,16,threads,delta=8;full matrix,total_s,0.155663,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,OPF_6000,1,core,delta=337.268,latency_s,0.00735,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,OPF_6000,1,core,delta=337.268,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,OPF_6000,1,core,delta=337.268;runs 29902,latency_s,0.00708,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,OPF_6000,1,core,delta=337.268;runs 29902,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,OPF_6000,1,core,delta=43170.4;full matrix,total_s,279.537123,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,OPF_6000,16,processes,delta=337.268,latency_s,0.0108925,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,OPF_6000,16,processes,delta=337.268,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,OPF_6000,16,processes,delta=337.268;runs 1869 each,latency_s,0.009569375,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,OPF_6000,16,processes,delta=337.268;runs 1869 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,OPF_6000,16,threads,delta=43170.4;full matrix,total_s,19.511979,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,USpowerGrid,1,core,delta=256,latency_s,0.00014,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,USpowerGrid,1,core,delta=256,samples,1,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,USpowerGrid,1,core,delta=64,latency_s,0.00014,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,USpowerGrid,1,core,delta=64,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,USpowerGrid,1,core,delta=64;full matrix,total_s,0.677614,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,USpowerGrid,1,core,delta=8;runs 4941,latency_s,0.00014,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,USpowerGrid,1,core,delta=8;runs 4941,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,USpowerGrid,16,processes,delta=256,latency_s,0.00013999999999999996,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,USpowerGrid,16,processes,delta=256,samples,16,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,USpowerGrid,16,processes,delta=64,latency_s,0.00016,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,USpowerGrid,16,processes,delta=64,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,USpowerGrid,16,processes,delta=8;runs 309 each,latency_s,0.00014249999999999997,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,USpowerGrid,16,processes,delta=8;runs 309 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,USpowerGrid,16,threads,delta=64;full matrix,total_s,0.054240,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,c-42,1,core,delta=0.0434378,latency_s,0.00062,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,c-42,1,core,delta=0.0434378,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,c-42,1,core,delta=0.0434378;full matrix,total_s,6.514384,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,c-42,1,core,delta=0.0434378;runs 10471,latency_s,0.00058,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,c-42,1,core,delta=0.0434378;runs 10471,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,c-42,1,core,delta=0.0868757,latency_s,0.00058,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,c-42,1,core,delta=0.0868757,samples,1,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,c-42,16,processes,delta=0.0434378,latency_s,0.000739375,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,c-42,16,processes,delta=0.0434378,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,c-42,16,processes,delta=0.0434378;runs 655 each,latency_s,0.000595,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,c-42,16,processes,delta=0.0434378;runs 655 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,c-42,16,processes,delta=0.0868757,latency_s,0.0006425000000000001,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,c-42,16,processes,delta=0.0868757,samples,16,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,c-42,16,threads,delta=0.0434378;full matrix,total_s,0.486228,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,c-69,1,core,delta=0.0447244;runs 67458,latency_s,0.0041,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,c-69,1,core,delta=0.0447244;runs 67458,samples,1,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,c-69,1,core,delta=0.0894489,latency_s,0.00389,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,c-69,1,core,delta=0.0894489,samples,1,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,c-69,1,core,delta=0.0894489;full matrix,total_s,262.806148,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,c-69,16,processes,delta=0.0447244;runs 4217 each,latency_s,0.0074874999999999985,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,c-69,16,processes,delta=0.0447244;runs 4217 each,samples,16,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,c-69,16,processes,delta=0.0894489,latency_s,0.007421875000000001,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,c-69,16,processes,delta=0.0894489,samples,16,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,c-69,16,threads,delta=0.0894489;full matrix,total_s,18.394930,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,delaunay_n13,1,core,delta=256,latency_s,0.0003,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,delaunay_n13,1,core,delta=256,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,delaunay_n13,1,core,delta=256;full matrix,total_s,2.593933,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,delaunay_n13,1,core,delta=32;runs 8192,latency_s,0.0003,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,delaunay_n13,1,core,delta=32;runs 8192,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,delaunay_n13,1,core,delta=512,latency_s,0.00029,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,delaunay_n13,1,core,delta=512,samples,1,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,delaunay_n13,1,core,delta=64,latency_s,0.0003,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,delaunay_n13,1,core,delta=64,samples,1,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,delaunay_n13,16,processes,delta=256,latency_s,0.0003275,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,delaunay_n13,16,processes,delta=256,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,delaunay_n13,16,processes,delta=32;runs 512 each,latency_s,0.00029874999999999997,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,delaunay_n13,16,processes,delta=32;runs 512 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,delaunay_n13,16,processes,delta=512,latency_s,0.000328125,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,delaunay_n13,16,processes,delta=512,samples,16,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,delaunay_n13,16,processes,delta=64,latency_s,0.00029874999999999997,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,delaunay_n13,16,processes,delta=64,samples,16,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,delaunay_n13,16,threads,delta=256;full matrix,total_s,0.183103,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,delaunay_n14,1,core,delta=128;full matrix,total_s,10.681632,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,delaunay_n14,1,core,delta=32,latency_s,0.00062,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,delaunay_n14,1,core,delta=32,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,delaunay_n14,1,core,delta=64,latency_s,0.0006,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,delaunay_n14,1,core,delta=64,samples,1,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,delaunay_n14,1,core,delta=64;runs 16384,latency_s,0.00061,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,delaunay_n14,1,core,delta=64;runs 16384,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,delaunay_n14,16,processes,delta=32,latency_s,0.0007493749999999999,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,delaunay_n14,16,processes,delta=32,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,delaunay_n14,16,processes,delta=64,latency_s,0.0006981250000000001,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,delaunay_n14,16,processes,delta=64,samples,16,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,delaunay_n14,16,processes,delta=64;runs 1024 each,latency_s,0.000601875,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,delaunay_n14,16,processes,delta=64;runs 1024 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,delaunay_n14,16,threads,delta=128;full matrix,total_s,0.753560,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,delaunay_n16,1,core,delta=128,latency_s,0.00254,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,delaunay_n16,1,core,delta=128,samples,1,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,delaunay_n16,1,core,delta=128;full matrix,total_s,166.799926,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,delaunay_n16,1,core,delta=256;runs 65536,latency_s,0.00267,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,delaunay_n16,1,core,delta=256;runs 65536,samples,1,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,delaunay_n16,1,core,delta=512,latency_s,0.00268,raw/apsp/20261005-165630_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_2
+gap_apsp,delaunay_n16,1,core,delta=512,samples,1,raw/apsp/20261005-165630_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_2
+gap_apsp,delaunay_n16,16,processes,delta=128,latency_s,0.004186250000000001,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,delaunay_n16,16,processes,delta=128,samples,16,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,delaunay_n16,16,processes,delta=256;runs 4096 each,latency_s,0.00395375,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,delaunay_n16,16,processes,delta=256;runs 4096 each,samples,16,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,delaunay_n16,16,processes,delta=512,latency_s,0.004451875,raw/apsp/20261005-165630_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_2
+gap_apsp,delaunay_n16,16,processes,delta=512,samples,16,raw/apsp/20261005-165630_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_2
+gap_apsp,delaunay_n16,16,threads,delta=128;full matrix,total_s,11.443488,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,email-Enron,1,core,delta=3.15191,latency_s,0.00248,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,email-Enron,1,core,delta=3.15191,samples,1,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,email-Enron,1,core,delta=3.15191;full matrix,total_s,84.598414,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,email-Enron,1,core,delta=3.15191;runs 33696,latency_s,0.00265,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,email-Enron,1,core,delta=3.15191;runs 33696,samples,1,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,email-Enron,1,core,delta=6.30381,latency_s,0.0025,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,email-Enron,1,core,delta=6.30381,samples,1,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,email-Enron,1,core,delta=6.30381;full matrix,total_s,86.715149,raw/scaling64/20261006-083411_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T17:42:15Z,44925485_0
+gap_apsp,email-Enron,1,core,delta=6.30381;runs 33696,latency_s,0.0025,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,email-Enron,1,core,delta=6.30381;runs 33696,samples,1,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,email-Enron,1,processes,delta=3.15191,latency_s,0.00249,raw/scaling/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:18:52Z,44888637_0
+gap_apsp,email-Enron,1,processes,delta=3.15191,samples,1,raw/scaling/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:18:52Z,44888637_0
+gap_apsp,email-Enron,1,processes,delta=3.15191;runs 33696 each,latency_s,0.00271,raw/scaling/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:48:32Z,44903250_0
+gap_apsp,email-Enron,1,processes,delta=3.15191;runs 33696 each,samples,1,raw/scaling/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:48:32Z,44903250_0
+gap_apsp,email-Enron,16,processes,delta=3.15191,latency_s,0.003758125,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,email-Enron,16,processes,delta=3.15191,samples,16,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,email-Enron,16,processes,delta=3.15191;runs 2106 each,latency_s,0.0041512499999999996,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,email-Enron,16,processes,delta=3.15191;runs 2106 each,samples,16,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,email-Enron,16,processes,delta=6.30381,latency_s,0.003814375,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,email-Enron,16,processes,delta=6.30381,samples,16,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,email-Enron,16,threads,delta=3.15191;full matrix,total_s,5.969466,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,email-Enron,16,threads,delta=6.30381;full matrix,total_s,6.060824,raw/scaling/20261006-083410_lib-a/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_4
+gap_apsp,email-Enron,2,processes,delta=3.15191,latency_s,0.0026049999999999997,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,email-Enron,2,processes,delta=3.15191,samples,2,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,email-Enron,2,processes,delta=3.15191;runs 16848 each,latency_s,0.00309,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,email-Enron,2,processes,delta=3.15191;runs 16848 each,samples,2,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,email-Enron,2,threads,delta=3.15191;full matrix,total_s,42.345346,raw/scaling/20261006-083410_lib-a/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_1
+gap_apsp,email-Enron,32,processes,delta=3.15191,latency_s,0.004064375,raw/scaling32/20261005-224531_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:23:23Z,44888640_0
+gap_apsp,email-Enron,32,processes,delta=3.15191,samples,32,raw/scaling32/20261005-224531_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:23:23Z,44888640_0
+gap_apsp,email-Enron,32,processes,delta=3.15191;runs 1053 each,latency_s,0.004139375000000001,raw/scaling32/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903253_0
+gap_apsp,email-Enron,32,processes,delta=3.15191;runs 1053 each,samples,32,raw/scaling32/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903253_0
+gap_apsp,email-Enron,32,threads,delta=3.15191;full matrix,total_s,3.579002,raw/scaling32/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:55:43Z,44925482_0
+gap_apsp,email-Enron,4,processes,delta=3.15191,latency_s,0.0032475,raw/scaling/20261005-182131_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_2
+gap_apsp,email-Enron,4,processes,delta=3.15191,samples,4,raw/scaling/20261005-182131_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_2
+gap_apsp,email-Enron,4,processes,delta=3.15191;runs 8424 each,latency_s,0.00323,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,email-Enron,4,processes,delta=3.15191;runs 8424 each,samples,4,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,email-Enron,4,processes,delta=6.30381,latency_s,0.0032775,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,email-Enron,4,processes,delta=6.30381,samples,4,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,email-Enron,4,threads,delta=3.15191;full matrix,total_s,21.425527,raw/scaling/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_2
+gap_apsp,email-Enron,64,processes,delta=6.30381;runs 527 each,latency_s,0.004529843750000003,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,email-Enron,64,processes,delta=6.30381;runs 527 each,samples,64,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,email-Enron,64,threads,delta=6.30381;full matrix,total_s,1.604758,raw/scaling64/20261006-083411_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T17:42:15Z,44925485_0
+gap_apsp,email-Enron,8,processes,delta=3.15191,latency_s,0.0034312500000000007,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,email-Enron,8,processes,delta=3.15191,samples,8,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,email-Enron,8,processes,delta=3.15191;runs 4212 each,latency_s,0.0031349999999999998,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,email-Enron,8,processes,delta=3.15191;runs 4212 each,samples,8,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,email-Enron,8,threads,delta=3.15191;full matrix,total_s,10.990196,raw/scaling/20261006-083410_lib-a/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_3
+gap_apsp,fe_sphere,1,core,delta=128,latency_s,0.00041,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,fe_sphere,1,core,delta=128,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,fe_sphere,1,core,delta=16,latency_s,0.00042,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,fe_sphere,1,core,delta=16,samples,1,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,fe_sphere,1,core,delta=32;full matrix,total_s,7.139786,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,fe_sphere,1,core,delta=64;runs 16386,latency_s,0.00041,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,fe_sphere,1,core,delta=64;runs 16386,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,fe_sphere,16,processes,delta=128,latency_s,0.0005674999999999999,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,fe_sphere,16,processes,delta=128,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,fe_sphere,16,processes,delta=16,latency_s,0.0005787500000000001,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,fe_sphere,16,processes,delta=16,samples,16,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,fe_sphere,16,processes,delta=64;runs 1025 each,latency_s,0.0004400000000000001,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,fe_sphere,16,processes,delta=64;runs 1025 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,fe_sphere,16,threads,delta=32;full matrix,total_s,0.524855,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,fe_tooth,1,core,delta=128,latency_s,0.00429,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,fe_tooth,1,core,delta=128,samples,1,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,fe_tooth,1,core,delta=128;full matrix,total_s,370.918750,raw/apsp/20261006-083410_lib-a/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:57:06Z,44925475_4
+gap_apsp,fe_tooth,1,core,delta=512;runs 78136,latency_s,0.0043,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,fe_tooth,1,core,delta=512;runs 78136,samples,1,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,fe_tooth,1,core,delta=64,latency_s,0.00472,raw/apsp/20261005-184858_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T23:11:55Z,44869543_4
+gap_apsp,fe_tooth,1,core,delta=64,samples,1,raw/apsp/20261005-184858_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T23:11:55Z,44869543_4
+gap_apsp,fe_tooth,1,core,delta=8,latency_s,0.00454,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,fe_tooth,1,core,delta=8,samples,1,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,fe_tooth,16,processes,delta=128,latency_s,0.008324375000000002,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,fe_tooth,16,processes,delta=128,samples,16,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,fe_tooth,16,processes,delta=512;runs 4884 each,latency_s,0.008063124999999997,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,fe_tooth,16,processes,delta=512;runs 4884 each,samples,16,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,fe_tooth,16,processes,delta=64,latency_s,0.008584375000000002,raw/apsp/20261005-184858_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T23:11:55Z,44869543_4
+gap_apsp,fe_tooth,16,processes,delta=64,samples,16,raw/apsp/20261005-184858_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T23:11:55Z,44869543_4
+gap_apsp,fe_tooth,16,processes,delta=8,latency_s,0.00855875,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,fe_tooth,16,processes,delta=8,samples,16,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,fe_tooth,16,threads,delta=128;full matrix,total_s,24.934562,raw/apsp/20261006-083410_lib-a/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:57:06Z,44925475_4
+gap_apsp,finan512,1,core,delta=0.0624609;full matrix,total_s,416.049628,raw/scaling/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_2
+gap_apsp,finan512,1,core,delta=0.0624609;runs 74752,latency_s,0.00518,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,finan512,1,core,delta=0.0624609;runs 74752,samples,1,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,finan512,1,core,delta=0.124922,latency_s,0.00507,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,finan512,1,core,delta=0.124922,samples,1,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,finan512,1,core,delta=0.124922;full matrix,total_s,401.550721,raw/scaling64/20261006-083411_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T17:42:15Z,44925485_0
+gap_apsp,finan512,1,core,delta=0.124922;runs 74752,latency_s,0.00505,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,finan512,1,core,delta=0.124922;runs 74752,samples,1,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,finan512,1,core,delta=0.249844,latency_s,0.00516,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,finan512,1,core,delta=0.249844,samples,1,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,finan512,1,processes,delta=0.124922,latency_s,0.00515,raw/scaling/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:18:52Z,44888637_0
+gap_apsp,finan512,1,processes,delta=0.124922,samples,1,raw/scaling/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:18:52Z,44888637_0
+gap_apsp,finan512,1,processes,delta=0.124922;runs 74752 each,latency_s,0.00528,raw/scaling/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:48:32Z,44903250_0
+gap_apsp,finan512,1,processes,delta=0.124922;runs 74752 each,samples,1,raw/scaling/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:48:32Z,44903250_0
+gap_apsp,finan512,1,processes,delta=0.249844,latency_s,0.00524,raw/scaling/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:04:57Z,44854750_0
+gap_apsp,finan512,1,processes,delta=0.249844,samples,1,raw/scaling/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:04:57Z,44854750_0
+gap_apsp,finan512,16,processes,delta=0.124922,latency_s,0.00678375,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,finan512,16,processes,delta=0.124922,samples,16,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,finan512,16,processes,delta=0.124922;runs 4672 each,latency_s,0.006885625000000001,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,finan512,16,processes,delta=0.124922;runs 4672 each,samples,16,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,finan512,16,processes,delta=0.249844,latency_s,0.006955625000000002,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,finan512,16,processes,delta=0.249844,samples,16,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,finan512,16,threads,delta=0.124922;full matrix,total_s,28.242002,raw/apsp/20261006-083410_lib-a/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:57:06Z,44925475_4
+gap_apsp,finan512,2,processes,delta=0.0624609;runs 37376 each,latency_s,0.005785,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,finan512,2,processes,delta=0.0624609;runs 37376 each,samples,2,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,finan512,2,processes,delta=0.124922,latency_s,0.005615,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,finan512,2,processes,delta=0.124922,samples,2,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,finan512,2,processes,delta=0.249844,latency_s,0.005665,raw/scaling/20261005-182131_lib-c/task_1/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_1
+gap_apsp,finan512,2,processes,delta=0.249844,samples,2,raw/scaling/20261005-182131_lib-c/task_1/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_1
+gap_apsp,finan512,2,threads,delta=0.124922;full matrix,total_s,213.367068,raw/scaling/20261006-083410_lib-a/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_1
+gap_apsp,finan512,32,processes,delta=0.124922,latency_s,0.007127499999999999,raw/scaling32/20261005-224531_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:23:23Z,44888640_0
+gap_apsp,finan512,32,processes,delta=0.124922,samples,32,raw/scaling32/20261005-224531_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:23:23Z,44888640_0
+gap_apsp,finan512,32,processes,delta=0.124922;runs 2336 each,latency_s,0.007071875,raw/scaling32/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903253_0
+gap_apsp,finan512,32,processes,delta=0.124922;runs 2336 each,samples,32,raw/scaling32/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903253_0
+gap_apsp,finan512,32,threads,delta=0.124922;full matrix,total_s,13.264234,raw/scaling32/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:55:43Z,44925482_0
+gap_apsp,finan512,4,processes,delta=0.124922,latency_s,0.006167499999999999,raw/scaling/20261005-182131_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_2
+gap_apsp,finan512,4,processes,delta=0.124922,samples,4,raw/scaling/20261005-182131_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_2
+gap_apsp,finan512,4,processes,delta=0.124922;runs 18688 each,latency_s,0.0064375000000000005,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,finan512,4,processes,delta=0.124922;runs 18688 each,samples,4,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,finan512,4,processes,delta=0.249844,latency_s,0.00617,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,finan512,4,processes,delta=0.249844,samples,4,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,finan512,4,threads,delta=0.0624609;full matrix,total_s,103.462176,raw/scaling/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_2
+gap_apsp,finan512,64,processes,delta=0.124922;runs 1168 each,latency_s,0.007961250000000003,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,finan512,64,processes,delta=0.124922;runs 1168 each,samples,64,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,finan512,64,threads,delta=0.124922;full matrix,total_s,7.466456,raw/scaling64/20261006-083411_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T17:42:15Z,44925485_0
+gap_apsp,finan512,8,processes,delta=0.124922,latency_s,0.00631625,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,finan512,8,processes,delta=0.124922,samples,8,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,finan512,8,processes,delta=0.124922;runs 9344 each,latency_s,0.006212499999999999,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,finan512,8,processes,delta=0.124922;runs 9344 each,samples,8,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,finan512,8,threads,delta=0.124922;full matrix,total_s,53.829499,raw/scaling/20261006-083410_lib-a/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_3
+gap_apsp,hypercube_14,1,core,delta=3.15547;full matrix,total_s,28.068015,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,hypercube_14,1,core,delta=6.31094,latency_s,0.00159,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,hypercube_14,1,core,delta=6.31094,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,hypercube_14,1,core,delta=6.31094;runs 16384,latency_s,0.00155,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,hypercube_14,1,core,delta=6.31094;runs 16384,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,hypercube_14,16,processes,delta=6.31094,latency_s,0.00216375,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,hypercube_14,16,processes,delta=6.31094,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,hypercube_14,16,processes,delta=6.31094;runs 1024 each,latency_s,0.0018475000000000002,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,hypercube_14,16,processes,delta=6.31094;runs 1024 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,hypercube_14,16,threads,delta=3.15547;full matrix,total_s,2.041007,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,lpl1,1,core,delta=0.0625,latency_s,0.00095,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,lpl1,1,core,delta=0.0625,samples,1,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,lpl1,1,core,delta=1,latency_s,0.00103,raw/apsp/20261005-184858_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:06Z,44869543_2
+gap_apsp,lpl1,1,core,delta=1,samples,1,raw/apsp/20261005-184858_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:06Z,44869543_2
+gap_apsp,lpl1,1,core,delta=128;full matrix,total_s,30.743985,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,lpl1,1,core,delta=128;runs 32460,latency_s,0.00098,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,lpl1,1,core,delta=128;runs 32460,samples,1,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,lpl1,1,core,delta=16,latency_s,0.00096,raw/apsp/20261005-165630_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_2
+gap_apsp,lpl1,1,core,delta=16,samples,1,raw/apsp/20261005-165630_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_2
+gap_apsp,lpl1,16,processes,delta=0.0625,latency_s,0.0019925,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,lpl1,16,processes,delta=0.0625,samples,16,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,lpl1,16,processes,delta=1,latency_s,0.00205125,raw/apsp/20261005-184858_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:06Z,44869543_2
+gap_apsp,lpl1,16,processes,delta=1,samples,16,raw/apsp/20261005-184858_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:06Z,44869543_2
+gap_apsp,lpl1,16,processes,delta=128;runs 2029 each,latency_s,0.0016887500000000004,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,lpl1,16,processes,delta=128;runs 2029 each,samples,16,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,lpl1,16,processes,delta=16,latency_s,0.00189625,raw/apsp/20261005-165630_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_2
+gap_apsp,lpl1,16,processes,delta=16,samples,16,raw/apsp/20261005-165630_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_2
+gap_apsp,lpl1,16,threads,delta=128;full matrix,total_s,2.140547,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,nd6k,1,core,delta=0.0148953;full matrix,total_s,694.067854,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,nd6k,1,core,delta=0.0595813,latency_s,0.03638,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,nd6k,1,core,delta=0.0595813,samples,1,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,nd6k,1,core,delta=0.47665;runs 18000,latency_s,0.03591,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,nd6k,1,core,delta=0.47665;runs 18000,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,nd6k,1,core,delta=3.8132,latency_s,0.03616,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,nd6k,1,core,delta=3.8132,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,nd6k,1,core,delta=30.5056,latency_s,0.03574,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,nd6k,1,core,delta=30.5056,samples,1,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,nd6k,16,processes,delta=0.0595813,latency_s,0.08906125000000001,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,nd6k,16,processes,delta=0.0595813,samples,16,raw/apsp/20261005-184858_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:05Z,44869543_0
+gap_apsp,nd6k,16,processes,delta=0.47665;runs 1125 each,latency_s,0.091281875,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,nd6k,16,processes,delta=0.47665;runs 1125 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,nd6k,16,processes,delta=3.8132,latency_s,0.08851875000000001,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,nd6k,16,processes,delta=3.8132,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,nd6k,16,processes,delta=30.5056,latency_s,0.088713125,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,nd6k,16,processes,delta=30.5056,samples,16,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,nd6k,16,threads,delta=0.0148953;full matrix,total_s,95.062374,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,net4-1,1,core,delta=0.0625;full matrix,total_s,558.106159,raw/apsp/20261006-083410_lib-a/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:57:06Z,44925475_4
+gap_apsp,net4-1,1,core,delta=0.0625;runs 88343,latency_s,0.00627,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,net4-1,1,core,delta=0.0625;runs 88343,samples,1,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,net4-1,1,core,delta=0.25,latency_s,0.00597,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,net4-1,1,core,delta=0.25,samples,1,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,net4-1,1,core,delta=128,latency_s,0.00569,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,net4-1,1,core,delta=128,samples,1,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,net4-1,1,core,delta=128;full matrix,total_s,763.455786,raw/scaling64/20261006-083411_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T17:42:15Z,44925485_0
+gap_apsp,net4-1,1,core,delta=16,latency_s,0.00564,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,net4-1,1,core,delta=16,samples,1,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,net4-1,1,core,delta=16;runs 88343,latency_s,0.0062,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,net4-1,1,core,delta=16;runs 88343,samples,1,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,net4-1,1,core,delta=2,latency_s,0.00569,raw/scaling/20261005-182131_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866568_0
+gap_apsp,net4-1,1,core,delta=2,samples,1,raw/scaling/20261005-182131_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866568_0
+gap_apsp,net4-1,1,core,delta=256,latency_s,0.0059,raw/apsp/20261005-184858_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T23:11:55Z,44869543_4
+gap_apsp,net4-1,1,core,delta=256,samples,1,raw/apsp/20261005-184858_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T23:11:55Z,44869543_4
+gap_apsp,net4-1,1,core,delta=32,latency_s,0.00557,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,net4-1,1,core,delta=32,samples,1,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,net4-1,1,core,delta=32;full matrix,total_s,606.369611,raw/scaling32/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:55:43Z,44925482_0
+gap_apsp,net4-1,1,core,delta=512,latency_s,0.00556,raw/scaling/20261005-182131_lib-c/task_3/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:34:57Z,44866568_3
+gap_apsp,net4-1,1,core,delta=512,samples,1,raw/scaling/20261005-182131_lib-c/task_3/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:34:57Z,44866568_3
+gap_apsp,net4-1,1,core,delta=512;runs 88343,latency_s,0.00602,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,net4-1,1,core,delta=512;runs 88343,samples,1,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,net4-1,1,core,delta=64;full matrix,total_s,544.192840,raw/scaling/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T15:34:31Z,44925479_0
+gap_apsp,net4-1,1,core,delta=64;runs 88343,latency_s,0.00645,raw/scaling/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_4
+gap_apsp,net4-1,1,core,delta=64;runs 88343,samples,1,raw/scaling/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_4
+gap_apsp,net4-1,1,core,delta=8,latency_s,0.00561,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,net4-1,1,core,delta=8,samples,1,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,net4-1,1,processes,delta=16;runs 88343 each,latency_s,0.00626,raw/scaling/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:48:32Z,44903250_0
+gap_apsp,net4-1,1,processes,delta=16;runs 88343 each,samples,1,raw/scaling/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:48:32Z,44903250_0
+gap_apsp,net4-1,1,processes,delta=2,latency_s,0.00515,raw/scaling/20261005-182131_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866568_0
+gap_apsp,net4-1,1,processes,delta=2,samples,1,raw/scaling/20261005-182131_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866568_0
+gap_apsp,net4-1,1,processes,delta=256,latency_s,0.00518,raw/scaling/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:04:57Z,44854750_0
+gap_apsp,net4-1,1,processes,delta=256,samples,1,raw/scaling/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:04:57Z,44854750_0
+gap_apsp,net4-1,1,processes,delta=32,latency_s,0.00511,raw/scaling/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:18:52Z,44888637_0
+gap_apsp,net4-1,1,processes,delta=32,samples,1,raw/scaling/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:18:52Z,44888637_0
+gap_apsp,net4-1,16,processes,delta=0.25,latency_s,0.014771874999999997,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,net4-1,16,processes,delta=0.25,samples,16,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,net4-1,16,processes,delta=16,latency_s,0.014454375000000004,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,net4-1,16,processes,delta=16,samples,16,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,net4-1,16,processes,delta=16;runs 5522 each,latency_s,0.01668875,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,net4-1,16,processes,delta=16;runs 5522 each,samples,16,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,net4-1,16,processes,delta=256,latency_s,0.014688125000000002,raw/apsp/20261005-184858_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T23:11:55Z,44869543_4
+gap_apsp,net4-1,16,processes,delta=256,samples,16,raw/apsp/20261005-184858_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T23:11:55Z,44869543_4
+gap_apsp,net4-1,16,processes,delta=64;runs 5522 each,latency_s,0.01663,raw/scaling/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_4
+gap_apsp,net4-1,16,processes,delta=64;runs 5522 each,samples,16,raw/scaling/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_4
+gap_apsp,net4-1,16,processes,delta=8,latency_s,0.014516250000000001,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,net4-1,16,processes,delta=8,samples,16,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,net4-1,16,threads,delta=0.0625;full matrix,total_s,58.261730,raw/apsp/20261006-083410_lib-a/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:57:06Z,44925475_4
+gap_apsp,net4-1,2,processes,delta=16,latency_s,0.005745,raw/scaling/20261005-182131_lib-c/task_1/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_1
+gap_apsp,net4-1,2,processes,delta=16,samples,2,raw/scaling/20261005-182131_lib-c/task_1/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_1
+gap_apsp,net4-1,2,processes,delta=512;runs 44172 each,latency_s,0.007719999999999999,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,net4-1,2,processes,delta=512;runs 44172 each,samples,2,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,net4-1,2,processes,delta=8,latency_s,0.00593,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,net4-1,2,processes,delta=8,samples,2,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,net4-1,2,threads,delta=0.0625;full matrix,total_s,263.078877,raw/scaling/20261006-083410_lib-a/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_1
+gap_apsp,net4-1,32,processes,delta=128,latency_s,0.0097575,raw/scaling32/20261005-182404_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866634_0
+gap_apsp,net4-1,32,processes,delta=128,samples,32,raw/scaling32/20261005-182404_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866634_0
+gap_apsp,net4-1,32,processes,delta=16;runs 2761 each,latency_s,0.017479062499999996,raw/scaling32/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903253_0
+gap_apsp,net4-1,32,processes,delta=16;runs 2761 each,samples,32,raw/scaling32/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903253_0
+gap_apsp,net4-1,32,processes,delta=32,latency_s,0.009447187500000002,raw/scaling32/20261005-224531_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:23:23Z,44888640_0
+gap_apsp,net4-1,32,processes,delta=32,samples,32,raw/scaling32/20261005-224531_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:23:23Z,44888640_0
+gap_apsp,net4-1,32,threads,delta=32;full matrix,total_s,30.101723,raw/scaling32/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:55:43Z,44925482_0
+gap_apsp,net4-1,4,processes,delta=0.0625;runs 22086 each,latency_s,0.00971,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,net4-1,4,processes,delta=0.0625;runs 22086 each,samples,4,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,net4-1,4,processes,delta=32,latency_s,0.00761,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,net4-1,4,processes,delta=32,samples,4,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,net4-1,4,processes,delta=512,latency_s,0.0077599999999999995,raw/scaling/20261005-182131_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_2
+gap_apsp,net4-1,4,processes,delta=512,samples,4,raw/scaling/20261005-182131_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_2
+gap_apsp,net4-1,4,threads,delta=32;full matrix,total_s,150.825109,raw/scaling/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_2
+gap_apsp,net4-1,64,processes,delta=16;runs 1381 each,latency_s,0.018293906250000005,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,net4-1,64,processes,delta=16;runs 1381 each,samples,64,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,net4-1,64,threads,delta=128;full matrix,total_s,25.081598,raw/scaling64/20261006-083411_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T17:42:15Z,44925485_0
+gap_apsp,net4-1,8,processes,delta=128,latency_s,0.010356250000000001,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,net4-1,8,processes,delta=128,samples,8,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,net4-1,8,processes,delta=512,latency_s,0.01024625,raw/scaling/20261005-182131_lib-c/task_3/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:34:57Z,44866568_3
+gap_apsp,net4-1,8,processes,delta=512,samples,8,raw/scaling/20261005-182131_lib-c/task_3/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:34:57Z,44866568_3
+gap_apsp,net4-1,8,processes,delta=512;runs 11043 each,latency_s,0.0118075,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,net4-1,8,processes,delta=512;runs 11043 each,samples,8,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,net4-1,8,threads,delta=128;full matrix,total_s,88.136999,raw/scaling/20261006-083410_lib-a/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_3
+gap_apsp,oilpan,1,core,delta=27718.1,latency_s,0.08361,raw/apsp/20261005-184858_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:06Z,44869543_2
+gap_apsp,oilpan,1,core,delta=27718.1,samples,1,raw/apsp/20261005-184858_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:06Z,44869543_2
+gap_apsp,oilpan,1,core,delta=27718.1;full matrix,total_s,6310.573043,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,oilpan,1,core,delta=27718.1;runs 73752,latency_s,0.08937,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,oilpan,1,core,delta=27718.1;runs 73752,samples,1,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,oilpan,1,core,delta=55436.2,latency_s,0.07875,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,oilpan,1,core,delta=55436.2,samples,1,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,oilpan,16,processes,delta=27718.1,latency_s,0.24205937499999997,raw/apsp/20261005-184858_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:06Z,44869543_2
+gap_apsp,oilpan,16,processes,delta=27718.1,samples,16,raw/apsp/20261005-184858_lib-c/task_2/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:55:06Z,44869543_2
+gap_apsp,oilpan,16,processes,delta=27718.1;runs 4610 each,latency_s,0.251653125,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,oilpan,16,processes,delta=27718.1;runs 4610 each,samples,16,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,oilpan,16,processes,delta=55436.2,latency_s,0.23831625,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,oilpan,16,processes,delta=55436.2,samples,16,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,oilpan,16,threads,delta=27718.1;full matrix,total_s,872.748589,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,onera_dual,1,core,delta=128,latency_s,0.00311,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,onera_dual,1,core,delta=128,samples,1,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,onera_dual,1,core,delta=128;runs 85567,latency_s,0.003,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,onera_dual,1,core,delta=128;runs 85567,samples,1,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,onera_dual,1,core,delta=256,latency_s,0.00292,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,onera_dual,1,core,delta=256,samples,1,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,onera_dual,1,core,delta=32;full matrix,total_s,269.433124,raw/apsp/20261006-083410_lib-a/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:57:06Z,44925475_4
+gap_apsp,onera_dual,16,processes,delta=128,latency_s,0.004876875000000001,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,onera_dual,16,processes,delta=128,samples,16,raw/apsp/20261005-165630_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:16:07Z,44854738_4
+gap_apsp,onera_dual,16,processes,delta=128;runs 5348 each,latency_s,0.004428125000000001,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,onera_dual,16,processes,delta=128;runs 5348 each,samples,16,raw/apsp/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:41:38Z,44903246_4
+gap_apsp,onera_dual,16,processes,delta=256,latency_s,0.00464375,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,onera_dual,16,processes,delta=256,samples,16,raw/apsp/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:39:58Z,44888625_4
+gap_apsp,onera_dual,16,threads,delta=32;full matrix,total_s,19.471272,raw/apsp/20261006-083410_lib-a/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:57:06Z,44925475_4
+gap_apsp,rgg2d_14,1,core,delta=0.789205,latency_s,0.00758,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,rgg2d_14,1,core,delta=0.789205,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,rgg2d_14,1,core,delta=0.789205;full matrix,total_s,131.629583,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,rgg2d_14,1,core,delta=0.789205;runs 16384,latency_s,0.00767,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,rgg2d_14,1,core,delta=0.789205;runs 16384,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,rgg2d_14,1,core,delta=1.57841,latency_s,0.00767,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,rgg2d_14,1,core,delta=1.57841,samples,1,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,rgg2d_14,16,processes,delta=0.789205,latency_s,0.022253749999999996,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,rgg2d_14,16,processes,delta=0.789205,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,rgg2d_14,16,processes,delta=0.789205;runs 1024 each,latency_s,0.022519375,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,rgg2d_14,16,processes,delta=0.789205;runs 1024 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,rgg2d_14,16,processes,delta=1.57841,latency_s,0.022485625,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,rgg2d_14,16,processes,delta=1.57841,samples,16,raw/apsp/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:00:05Z,44854738_0
+gap_apsp,rgg2d_14,16,threads,delta=0.789205;full matrix,total_s,14.731112,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,rgg3d_14,1,core,delta=0.789083,latency_s,0.03467,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,rgg3d_14,1,core,delta=0.789083,samples,1,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,rgg3d_14,1,core,delta=0.789083;full matrix,total_s,596.214234,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,rgg3d_14,1,core,delta=0.789083;runs 16384,latency_s,0.03464,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,rgg3d_14,1,core,delta=0.789083;runs 16384,samples,1,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,rgg3d_14,16,processes,delta=0.789083,latency_s,0.118545,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,rgg3d_14,16,processes,delta=0.789083,samples,16,raw/apsp/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:24:55Z,44888625_0
+gap_apsp,rgg3d_14,16,processes,delta=0.789083;runs 1024 each,latency_s,0.11955125,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,rgg3d_14,16,processes,delta=0.789083;runs 1024 each,samples,16,raw/apsp/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903246_0
+gap_apsp,rgg3d_14,16,threads,delta=0.789083;full matrix,total_s,117.515660,raw/apsp/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T12:54:01Z,44925475_0
+gap_apsp,t60k,1,core,delta=128;runs 60005,latency_s,0.00126,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,t60k,1,core,delta=128;runs 60005,samples,1,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,t60k,1,core,delta=256,latency_s,0.00116,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,t60k,1,core,delta=256,samples,1,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,t60k,1,core,delta=512;full matrix,total_s,68.426114,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,t60k,16,processes,delta=128;runs 3751 each,latency_s,0.0014531249999999998,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,t60k,16,processes,delta=128;runs 3751 each,samples,16,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,t60k,16,processes,delta=256,latency_s,0.0015512499999999997,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,t60k,16,processes,delta=256,samples,16,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,t60k,16,threads,delta=512;full matrix,total_s,4.680504,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,wing,1,core,delta=128,latency_s,0.00262,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,wing,1,core,delta=128,samples,1,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,wing,1,core,delta=128;full matrix,total_s,174.538319,raw/scaling64/20261006-083411_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T17:42:15Z,44925485_0
+gap_apsp,wing,1,core,delta=128;runs 62032,latency_s,0.00256,raw/scaling/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_4
+gap_apsp,wing,1,core,delta=128;runs 62032,samples,1,raw/scaling/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_4
+gap_apsp,wing,1,core,delta=256,latency_s,0.00262,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,wing,1,core,delta=256,samples,1,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,wing,1,core,delta=256;runs 62032,latency_s,0.00263,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,wing,1,core,delta=256;runs 62032,samples,1,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,wing,1,core,delta=32,latency_s,0.00262,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,wing,1,core,delta=32,samples,1,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,wing,1,core,delta=512,latency_s,0.00261,raw/scaling/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:04:57Z,44854750_0
+gap_apsp,wing,1,core,delta=512,samples,1,raw/scaling/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:04:57Z,44854750_0
+gap_apsp,wing,1,core,delta=512;full matrix,total_s,177.242559,raw/scaling32/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:55:43Z,44925482_0
+gap_apsp,wing,1,core,delta=512;runs 62032,latency_s,0.00255,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,wing,1,core,delta=512;runs 62032,samples,1,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,wing,1,core,delta=64;runs 62032,latency_s,0.00272,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,wing,1,core,delta=64;runs 62032,samples,1,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,wing,1,processes,delta=128,latency_s,0.00265,raw/scaling/20261005-182131_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866568_0
+gap_apsp,wing,1,processes,delta=128,samples,1,raw/scaling/20261005-182131_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866568_0
+gap_apsp,wing,1,processes,delta=128;runs 62032 each,latency_s,0.0028,raw/scaling/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:48:32Z,44903250_0
+gap_apsp,wing,1,processes,delta=128;runs 62032 each,samples,1,raw/scaling/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:48:32Z,44903250_0
+gap_apsp,wing,1,processes,delta=256,latency_s,0.00264,raw/scaling/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:18:52Z,44888637_0
+gap_apsp,wing,1,processes,delta=256,samples,1,raw/scaling/20261005-224530_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:18:52Z,44888637_0
+gap_apsp,wing,1,processes,delta=512,latency_s,0.00267,raw/scaling/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:04:57Z,44854750_0
+gap_apsp,wing,1,processes,delta=512,samples,1,raw/scaling/20261005-165630_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:04:57Z,44854750_0
+gap_apsp,wing,16,processes,delta=128,latency_s,0.004225,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,wing,16,processes,delta=128,samples,16,raw/scaling/20261005-224530_lib-b/task_4/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:31:03Z,44888637_4
+gap_apsp,wing,16,processes,delta=128;runs 3877 each,latency_s,0.0038831250000000003,raw/scaling/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_4
+gap_apsp,wing,16,processes,delta=128;runs 3877 each,samples,16,raw/scaling/20261006-005407_lib-b/task_4/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_4
+gap_apsp,wing,16,processes,delta=256,latency_s,0.0044975,raw/scaling/20261005-182131_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:34:57Z,44866568_4
+gap_apsp,wing,16,processes,delta=256,samples,16,raw/scaling/20261005-182131_lib-c/task_4/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:34:57Z,44866568_4
+gap_apsp,wing,16,processes,delta=32,latency_s,0.004252500000000001,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,wing,16,processes,delta=32,samples,16,raw/apsp/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:29:25Z,44888625_2
+gap_apsp,wing,16,processes,delta=64;runs 3877 each,latency_s,0.004246875000000001,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,wing,16,processes,delta=64;runs 3877 each,samples,16,raw/apsp/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:35:31Z,44903246_2
+gap_apsp,wing,16,threads,delta=128;full matrix,total_s,12.018366,raw/apsp/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T14:34:34Z,44925475_2
+gap_apsp,wing,2,processes,delta=128,latency_s,0.0027349999999999996,raw/scaling/20261005-182131_lib-c/task_1/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_1
+gap_apsp,wing,2,processes,delta=128,samples,2,raw/scaling/20261005-182131_lib-c/task_1/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:31:33Z,44866568_1
+gap_apsp,wing,2,processes,delta=256,latency_s,0.00272,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,wing,2,processes,delta=256,samples,2,raw/scaling/20261005-224530_lib-b/task_1/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:21:59Z,44888637_1
+gap_apsp,wing,2,processes,delta=512;runs 31016 each,latency_s,0.003225,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,wing,2,processes,delta=512;runs 31016 each,samples,2,raw/scaling/20261006-005407_lib-b/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:50:36Z,44903250_1
+gap_apsp,wing,2,threads,delta=128;full matrix,total_s,86.479126,raw/scaling/20261006-083410_lib-a/task_1/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_1
+gap_apsp,wing,32,processes,delta=128,latency_s,0.004707500000000001,raw/scaling32/20261005-182404_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866634_0
+gap_apsp,wing,32,processes,delta=128,samples,32,raw/scaling32/20261005-182404_lib-c/task_0/out/baselines_gap_apsp.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:28:07Z,44866634_0
+gap_apsp,wing,32,processes,delta=128;runs 1939 each,latency_s,0.004167499999999999,raw/scaling32/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903253_0
+gap_apsp,wing,32,processes,delta=128;runs 1939 each,samples,32,raw/scaling32/20261006-005407_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T05:06:21Z,44903253_0
+gap_apsp,wing,32,processes,delta=256,latency_s,0.00430125,raw/scaling32/20261005-224531_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:23:23Z,44888640_0
+gap_apsp,wing,32,processes,delta=256,samples,32,raw/scaling32/20261005-224531_lib-b/task_0/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:23:23Z,44888640_0
+gap_apsp,wing,32,threads,delta=512;full matrix,total_s,6.223344,raw/scaling32/20261006-083410_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:55:43Z,44925482_0
+gap_apsp,wing,4,processes,delta=128,latency_s,0.0038375,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,wing,4,processes,delta=128,samples,4,raw/scaling/20261005-224530_lib-b/task_2/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:27:58Z,44888637_2
+gap_apsp,wing,4,processes,delta=256;runs 15508 each,latency_s,0.004050000000000001,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,wing,4,processes,delta=256;runs 15508 each,samples,4,raw/scaling/20261006-005407_lib-b/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:55:12Z,44903250_2
+gap_apsp,wing,4,threads,delta=128;full matrix,total_s,43.942767,raw/scaling/20261006-083410_lib-a/task_2/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_2
+gap_apsp,wing,64,processes,delta=128;runs 970 each,latency_s,0.004611875,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,wing,64,processes,delta=128;runs 970 each,samples,64,raw/scaling64/20261005-224602_lib-b/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T05:34:06Z,44888726_0
+gap_apsp,wing,64,threads,delta=128;full matrix,total_s,3.031147,raw/scaling64/20261006-083411_lib-a/task_0/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T17:42:15Z,44925485_0
+gap_apsp,wing,8,processes,delta=128,latency_s,0.003977499999999999,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,wing,8,processes,delta=128,samples,8,raw/scaling/20261005-224530_lib-b/task_3/out/baselines_gap_apsp.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:29:27Z,44888637_3
+gap_apsp,wing,8,processes,delta=512;runs 7754 each,latency_s,0.0037549999999999997,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,wing,8,processes,delta=512;runs 7754 each,samples,8,raw/scaling/20261006-005407_lib-b/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T06:02:38Z,44903250_3
+gap_apsp,wing,8,threads,delta=128;full matrix,total_s,25.185477,raw/scaling/20261006-083410_lib-a/task_3/out/baselines_gap_apsp.txt,lib-a,AMD EPYC 7702 64-Core Processor,2026-10-06T16:06:12Z,44925479_3
+gap_query,USA-t-BAY,1,core,delta=15832.1,latency_s,0.01392,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-BAY,1,core,delta=15832.1,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-BAY,16,region,delta=31664.2,latency_s,0.00411,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-BAY,16,region,delta=31664.2,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-CAL,1,core,delta=26226.9,latency_s,0.11086,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-CAL,1,core,delta=26226.9,samples,1,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-CAL,16,region,delta=52453.8,latency_s,0.02915,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-CAL,16,region,delta=52453.8,samples,1,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-COL,1,core,delta=33834.6,latency_s,0.02116,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-COL,1,core,delta=33834.6,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-COL,16,region,delta=67669.1,latency_s,0.00714,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-COL,16,region,delta=67669.1,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-CTR,1,core,delta=13411.8,latency_s,1.36648,raw/queries/20261005-224530_lib-b/task_2/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:40Z,44888635_2
+gap_query,USA-t-CTR,1,core,delta=13411.8,samples,1,raw/queries/20261005-224530_lib-b/task_2/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:40Z,44888635_2
+gap_query,USA-t-CTR,1,core,delta=6705.9,latency_s,1.3825,raw/queries/20261005-165630_lib-c/task_2/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:01:39Z,44854748_2
+gap_query,USA-t-CTR,1,core,delta=6705.9,samples,1,raw/queries/20261005-165630_lib-c/task_2/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T22:01:39Z,44854748_2
+gap_query,USA-t-CTR,16,region,delta=53647.2,latency_s,0.19279,raw/queries/20261005-224530_lib-b/task_2/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:40Z,44888635_2
+gap_query,USA-t-CTR,16,region,delta=53647.2,samples,1,raw/queries/20261005-224530_lib-b/task_2/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:40Z,44888635_2
+gap_query,USA-t-E,1,core,delta=19964.8,latency_s,0.22256,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-E,1,core,delta=19964.8,samples,1,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-E,16,region,delta=39929.7,latency_s,0.04719,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-E,16,region,delta=39929.7,samples,1,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-FLA,1,core,delta=19352.9,latency_s,0.05649,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-FLA,1,core,delta=19352.9,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-FLA,16,region,delta=38705.8,latency_s,0.01642,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-FLA,16,region,delta=38705.8,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NE,1,core,delta=16247.6,latency_s,0.08935,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NE,1,core,delta=16247.6,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NE,1,core,delta=8123.79,latency_s,0.0911,raw/queries/20261005-165630_lib-c/task_0/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_0
+gap_query,USA-t-NE,1,core,delta=8123.79,samples,1,raw/queries/20261005-165630_lib-c/task_0/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_0
+gap_query,USA-t-NE,16,region,delta=32495.2,latency_s,0.01899,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NE,16,region,delta=32495.2,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NW,1,core,delta=32615.6,latency_s,0.06449,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NW,1,core,delta=32615.6,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NW,16,region,delta=65231.2,latency_s,0.01852,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NW,16,region,delta=65231.2,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NY,1,core,delta=12506.8,latency_s,0.0122,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NY,1,core,delta=12506.8,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NY,16,region,delta=25013.6,latency_s,0.00288,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-NY,16,region,delta=25013.6,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,USA-t-USA,1,core,delta=14155.3,latency_s,1.78955,raw/queries/20261005-224530_lib-b/task_3/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:09:08Z,44888635_3
+gap_query,USA-t-USA,1,core,delta=14155.3,samples,1,raw/queries/20261005-224530_lib-b/task_3/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:09:08Z,44888635_3
+gap_query,USA-t-USA,16,region,delta=56621.2,latency_s,0.29352,raw/queries/20261005-224530_lib-b/task_3/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:09:08Z,44888635_3
+gap_query,USA-t-USA,16,region,delta=56621.2,samples,1,raw/queries/20261005-224530_lib-b/task_3/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:09:08Z,44888635_3
+gap_query,USA-t-W,1,core,delta=18225,latency_s,0.42162,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-W,1,core,delta=18225,samples,1,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-W,1,core,delta=36450,latency_s,0.42035,raw/queries/20261005-165630_lib-c/task_1/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_1
+gap_query,USA-t-W,1,core,delta=36450,samples,1,raw/queries/20261005-165630_lib-c/task_1/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_1
+gap_query,USA-t-W,16,region,delta=36450,latency_s,0.09175,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,USA-t-W,16,region,delta=36450,samples,1,raw/queries/20261005-224530_lib-b/task_1/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T04:02:27Z,44888635_1
+gap_query,c-69,1,core,delta=0.0894489,latency_s,0.00385,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,c-69,1,core,delta=0.0894489,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,c-69,16,region,delta=0.178898,latency_s,0.00166,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,c-69,16,region,delta=0.178898,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,delaunay_n16,1,core,delta=128,latency_s,0.00251,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,delaunay_n16,1,core,delta=128,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,delaunay_n16,16,region,delta=128,latency_s,0.00111,raw/queries/20261005-165630_lib-c/task_0/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_0
+gap_query,delaunay_n16,16,region,delta=128,samples,1,raw/queries/20261005-165630_lib-c/task_0/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_0
+gap_query,delaunay_n16,16,region,delta=8,latency_s,0.00067,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,delaunay_n16,16,region,delta=8,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,email-Enron,1,core,delta=3.15191,latency_s,0.00258,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,email-Enron,1,core,delta=3.15191,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,email-Enron,16,region,delta=12.6076,latency_s,0.00103,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,email-Enron,16,region,delta=12.6076,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,soc-Epinions1,1,core,delta=3.15303,latency_s,0.0030059374999999995,raw/queries/20261005-165630_lib-c/task_0/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_0
+gap_query,soc-Epinions1,1,core,delta=3.15303,samples,32,raw/queries/20261005-165630_lib-c/task_0/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_0
+gap_query,soc-Epinions1,1,core,delta=6.30607,latency_s,0.0030090625000000005,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,soc-Epinions1,1,core,delta=6.30607,samples,32,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,soc-Epinions1,16,region,delta=25.2243,latency_s,0.0014703125,raw/queries/20261005-165630_lib-c/task_0/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_0
+gap_query,soc-Epinions1,16,region,delta=25.2243,samples,32,raw/queries/20261005-165630_lib-c/task_0/out/baselines_gap_query.txt,lib-c,AMD EPYC 7702 64-Core Processor,2026-10-05T21:52:00Z,44854748_0
+gap_query,soc-Epinions1,16,region,delta=6.30607,latency_s,0.0012996875,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,soc-Epinions1,16,region,delta=6.30607,samples,32,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,wing,1,core,delta=512,latency_s,0.00262,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,wing,1,core,delta=512,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,wing,16,region,delta=8,latency_s,0.00073,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+gap_query,wing,16,region,delta=8,samples,1,raw/queries/20261005-224530_lib-b/task_0/out/baselines_gap_query.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:54:58Z,44888635_0
+phast,USA-t-BAY,1,core,,ch_build_s,4.67,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-BAY,1,core,,level_k16_s,0.000415,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-BAY,1,core,,level_k1_s,0.0028,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-BAY,1,core,,level_k64_s,0.000429,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-BAY,1,core,,rank_k16_s,0.000326,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-BAY,1,core,,rank_k1_s,0.003463,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-BAY,1,core,,rank_k64_s,0.000232,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-BAY,1,core,,tree_s,0.002794,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-BAY,16,region,,ch_build_s,4.68,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-BAY,16,region,,level_k16_s,0.000193,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-BAY,16,region,,level_k1_s,0.00018099999999999998,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-BAY,16,region,,level_k64_s,0.00019700000000000002,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-BAY,16,region,,rank_k16_s,0.000128,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-BAY,16,region,,rank_k1_s,0.000222,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-BAY,16,region,,rank_k64_s,0.00014199999999999998,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-BAY,16,region,,tree_s,0.000545,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CAL,1,core,,ch_build_s,32.07,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CAL,1,core,,level_k16_s,0.005033999999999999,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CAL,1,core,,level_k1_s,0.016099,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CAL,1,core,,level_k64_s,0.002978,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CAL,1,core,,rank_k16_s,0.0027370000000000003,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CAL,1,core,,rank_k1_s,0.020994,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CAL,1,core,,rank_k64_s,0.001673,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CAL,1,core,,tree_s,0.016089,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CAL,16,region,,ch_build_s,31.81,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CAL,16,region,,level_k16_s,0.0013540000000000002,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CAL,16,region,,level_k1_s,0.00185,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CAL,16,region,,level_k64_s,0.001266,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CAL,16,region,,rank_k16_s,0.0009350000000000001,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CAL,16,region,,rank_k1_s,0.0016120000000000002,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CAL,16,region,,rank_k64_s,0.000921,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CAL,16,region,,tree_s,0.002267,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-COL,1,core,,ch_build_s,5.16,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-COL,1,core,,level_k16_s,0.000657,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-COL,1,core,,level_k1_s,0.003539,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-COL,1,core,,level_k64_s,0.00058,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-COL,1,core,,rank_k16_s,0.000457,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-COL,1,core,,rank_k1_s,0.004264,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-COL,1,core,,rank_k64_s,0.000308,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-COL,1,core,,tree_s,0.0035310000000000003,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-COL,16,region,,ch_build_s,5.14,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-COL,16,region,,level_k16_s,0.00026900000000000003,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-COL,16,region,,level_k1_s,0.000232,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-COL,16,region,,level_k64_s,0.00026700000000000004,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-COL,16,region,,rank_k16_s,0.00018099999999999998,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-COL,16,region,,rank_k1_s,0.000277,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-COL,16,region,,rank_k64_s,0.000192,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-COL,16,region,,tree_s,0.00057,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CTR,1,core,,ch_build_s,340.76,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CTR,1,core,,level_k16_s,0.049112,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CTR,1,core,,level_k1_s,0.142929,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CTR,1,core,,level_k64_s,0.027378,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CTR,1,core,,rank_k16_s,0.041178,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CTR,1,core,,rank_k1_s,0.158816,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CTR,1,core,,rank_k64_s,0.02164,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CTR,1,core,,tree_s,0.14381899999999997,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-CTR,16,region,,ch_build_s,337.82,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CTR,16,region,,level_k16_s,0.011597,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CTR,16,region,,level_k1_s,0.016723,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CTR,16,region,,level_k64_s,0.010795,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CTR,16,region,,rank_k16_s,0.00919,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CTR,16,region,,rank_k1_s,0.024765000000000002,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CTR,16,region,,rank_k64_s,0.008435,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-CTR,16,region,,tree_s,0.024755,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-E,1,core,,ch_build_s,57.44,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-E,1,core,,level_k16_s,0.010048999999999999,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-E,1,core,,level_k1_s,0.030956,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-E,1,core,,level_k64_s,0.005764999999999999,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-E,1,core,,rank_k16_s,0.005615,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-E,1,core,,rank_k1_s,0.040164,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-E,1,core,,rank_k64_s,0.003317,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-E,1,core,,tree_s,0.03098,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-E,16,region,,ch_build_s,56.98,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-E,16,region,,level_k16_s,0.0026309999999999997,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-E,16,region,,level_k1_s,0.003967,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-E,16,region,,level_k64_s,0.00244,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-E,16,region,,rank_k16_s,0.00185,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-E,16,region,,rank_k1_s,0.003342,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-E,16,region,,rank_k64_s,0.001789,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-E,16,region,,tree_s,0.005063,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-FLA,1,core,,ch_build_s,13.09,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-FLA,1,core,,level_k16_s,0.0024249999999999996,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-FLA,1,core,,level_k1_s,0.009145,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-FLA,1,core,,level_k64_s,0.001532,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-FLA,1,core,,rank_k16_s,0.001141,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-FLA,1,core,,rank_k1_s,0.011111000000000001,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-FLA,1,core,,rank_k64_s,0.000768,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-FLA,1,core,,tree_s,0.009148,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-FLA,16,region,,ch_build_s,13.04,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-FLA,16,region,,level_k16_s,0.000713,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-FLA,16,region,,level_k1_s,0.000902,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-FLA,16,region,,level_k64_s,0.0006720000000000001,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-FLA,16,region,,rank_k16_s,0.000467,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-FLA,16,region,,rank_k1_s,0.000762,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-FLA,16,region,,rank_k64_s,0.00047799999999999996,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-FLA,16,region,,tree_s,0.00122,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NE,1,core,,ch_build_s,28.61,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NE,1,core,,level_k16_s,0.003974,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NE,1,core,,level_k1_s,0.013382999999999999,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NE,1,core,,level_k64_s,0.002439,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NE,1,core,,rank_k16_s,0.002202,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NE,1,core,,rank_k1_s,0.017644,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NE,1,core,,rank_k64_s,0.001338,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NE,1,core,,tree_s,0.013342,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NE,16,region,,ch_build_s,28.69,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NE,16,region,,level_k16_s,0.0010869999999999999,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NE,16,region,,level_k1_s,0.0014399999999999999,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NE,16,region,,level_k64_s,0.0010229999999999998,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NE,16,region,,rank_k16_s,0.000741,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NE,16,region,,rank_k1_s,0.001314,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NE,16,region,,rank_k64_s,0.000731,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NE,16,region,,tree_s,0.0019019999999999998,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NW,1,core,,ch_build_s,15.22,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NW,1,core,,level_k16_s,0.0026680000000000002,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NW,1,core,,level_k1_s,0.009805999999999999,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NW,1,core,,level_k64_s,0.001681,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NW,1,core,,rank_k16_s,0.0014550000000000001,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NW,1,core,,rank_k1_s,0.012074,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NW,1,core,,rank_k64_s,0.000937,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NW,1,core,,tree_s,0.009769,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NW,16,region,,ch_build_s,15.08,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NW,16,region,,level_k16_s,0.000798,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NW,16,region,,level_k1_s,0.00086,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NW,16,region,,level_k64_s,0.000751,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NW,16,region,,rank_k16_s,0.000558,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NW,16,region,,rank_k1_s,0.0010049999999999998,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NW,16,region,,rank_k64_s,0.000559,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NW,16,region,,tree_s,0.001445,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NY,1,core,,ch_build_s,7.7,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NY,1,core,,level_k16_s,0.00040300000000000004,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NY,1,core,,level_k1_s,0.0025299999999999997,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NY,1,core,,level_k64_s,0.000406,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NY,1,core,,rank_k16_s,0.000315,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NY,1,core,,rank_k1_s,0.0034049999999999996,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NY,1,core,,rank_k64_s,0.00020999999999999998,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NY,1,core,,tree_s,0.002534,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-NY,16,region,,ch_build_s,7.68,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NY,16,region,,level_k16_s,0.00016700000000000002,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NY,16,region,,level_k1_s,0.00016700000000000002,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NY,16,region,,level_k64_s,0.00017199999999999998,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NY,16,region,,rank_k16_s,0.000104,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NY,16,region,,rank_k1_s,0.000221,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NY,16,region,,rank_k64_s,0.000115,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-NY,16,region,,tree_s,0.000472,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-USA,1,core,,ch_build_s,480.15,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-USA,1,core,,level_k16_s,0.07066700000000001,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-USA,1,core,,level_k1_s,0.232594,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-USA,1,core,,level_k64_s,0.039472,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-USA,1,core,,rank_k16_s,0.039496,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-USA,1,core,,rank_k1_s,0.273115,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-USA,1,core,,rank_k64_s,0.023262,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-USA,1,core,,tree_s,0.232142,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-USA,16,region,,ch_build_s,484.12,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-USA,16,region,,level_k16_s,0.018182,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-USA,16,region,,level_k1_s,0.029722000000000002,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-USA,16,region,,level_k64_s,0.016667,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-USA,16,region,,rank_k16_s,0.012803,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-USA,16,region,,rank_k1_s,0.023018,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-USA,16,region,,rank_k64_s,0.01216,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-USA,16,region,,tree_s,0.042635,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-W,1,core,,ch_build_s,111.28,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-W,1,core,,level_k16_s,0.017949000000000003,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-W,1,core,,level_k1_s,0.058758000000000005,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-W,1,core,,level_k64_s,0.010266,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-W,1,core,,rank_k16_s,0.010031,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-W,1,core,,rank_k1_s,0.070826,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-W,1,core,,rank_k64_s,0.005900000000000001,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-W,1,core,,tree_s,0.058806,raw/external/20261005-224530_lib-b/task_0/out/baselines_phast_single.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:47:28Z,44888631_0
+phast,USA-t-W,16,region,,ch_build_s,111.67,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-W,16,region,,level_k16_s,0.004684,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-W,16,region,,level_k1_s,0.007168,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-W,16,region,,level_k64_s,0.004298,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-W,16,region,,rank_k16_s,0.0032440000000000004,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-W,16,region,,rank_k1_s,0.005785,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-W,16,region,,rank_k64_s,0.003144,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+phast,USA-t-W,16,region,,tree_s,0.009663,raw/external/20261005-224530_lib-b/task_1/out/baselines_phast_region.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:51:57Z,44888631_1
+stream,-,1,core,,triad_GBps,22.8338,raw/bandwidth/20261005-224530_lib-b/task_0/out/baselines_stream.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:43:27Z,44888627_0
+stream,-,16,region,,triad_GBps,27.5838,raw/bandwidth/20261005-224530_lib-b/task_0/out/baselines_stream.txt,lib-b,AMD EPYC 7702 64-Core Processor,2026-10-06T03:43:27Z,44888627_0

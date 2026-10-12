@@ -1,0 +1,197 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4860d18..0856f6b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,7 +6,11 @@ project(ROME LANGUAGES CXX CUDA)
+ 
+ find_package(CUDA REQUIRED)
+ include_directories("${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}")
+-set(CMAKE_CUDA_ARCHITECTURES 80 86 89 90)
++# [artifact] arch list overridable: -DROME_ARCHS="89;100;120" (default 120)
++if(NOT ROME_ARCHS)
++  set(ROME_ARCHS 120)
++endif()
++set(CMAKE_CUDA_ARCHITECTURES ${ROME_ARCHS})
+ 
+ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+ message(STATUS "CUDA version: ${CUDA_VERSION}")
+diff --git a/src/APSP/rome.cu b/src/APSP/rome.cu
+index 8dd05b7..0200bff 100644
+--- a/src/APSP/rome.cu
++++ b/src/APSP/rome.cu
+@@ -17,6 +17,11 @@
+ #include <functional> 
+ #include <algorithm>
+ #include "Kernel/blockFW.cuh"
++// [artifact] for the post-timer verification hash (ROME_ROWHASH)
++#include <thread>
++#include <vector>
++#include <cmath>
++#include <cstdlib>
+ 
+ //#define PRINT_SHAPE 
+ 
+@@ -782,8 +787,48 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+               (global_finish.tv_nsec - global_start.tv_nsec) / 1e9;
+     printf("Time elapsed of data transfer to host: %.6f seconds\n", elapsed);
+ 
++    // [artifact] ROME_ROWHASH=<file>: verification only, run after every ROME timer (tree build, alloc/init,
++    // computing, D2H). Per-row position-sensitive hash of the WHOLE result in the ORIGINAL labels (1-based i, j),
++    // read from the permuted host buffer through iperm (so it also works with ROME_LOWMEM=1), and the sum-and-count
++    // checksum. uint64 wrapping arithmetic, as the benchmarks' row hash:
++    //   v = d if finite else 0xFFFFFFFF;  rowhash(i) = sum_j v(i,j)*(j*K1 + K2);  fullhash = sum_i rowhash(i)*(i*K3 + 1)
++    if (const char* hp = std::getenv("ROME_ROWHASH")) {
++        struct timespec th0, th1; clock_gettime(CLOCK_MONOTONIC, &th0);
++        const dataSize_t* hip = eTree.IPerm();
++        const unsigned long long K1 = 0x9E3779B97F4A7C15ULL, K2 = 0x632BE59BD9B4E019ULL, K3 = 0xD6E8FEB86659FD93ULL;
++        std::vector<unsigned long long> rh(size), fs(size), un(size);
++        const char* ts = std::getenv("ROME_ROWHASH_THREADS");
++        int nt = ts ? std::atoi(ts) : 16; if (nt < 1) nt = 1;
++        auto work = [&](int t) {
++            for (dataSize_t i = t; i < size; i += nt) {
++                const weight_t* row = permDistance + (size_t)hip[i] * (size_t)size;
++                unsigned long long h = 0, s = 0, u = 0;
++                for (dataSize_t j = 0; j < size; ++j) {
++                    const weight_t v = row[hip[j]];
++                    unsigned long long x;
++                    if (std::isfinite(v)) { x = (unsigned long long)std::llround((double)v); s += x; } else { x = 0xFFFFFFFFULL; ++u; }
++                    h += x * ((unsigned long long)(j + 1) * K1 + K2);
++                }
++                rh[i] = h; fs[i] = s; un[i] = u;
++            }
++        };
++        std::vector<std::thread> pool;
++        for (int t = 0; t < nt; ++t) pool.emplace_back(work, t);
++        for (auto& p : pool) p.join();
++        unsigned long long full = 0, S = 0, U = 0;
++        for (dataSize_t i = 0; i < size; ++i) { full += rh[i] * ((unsigned long long)(i + 1) * K3 + 1ULL); S += fs[i]; U += un[i]; }
++        FILE* hf = std::fopen(hp, "w");
++        if (hf) { for (dataSize_t i = 0; i < size; ++i) std::fprintf(hf, "%016llx\n", rh[i]); std::fclose(hf); }
++        clock_gettime(CLOCK_MONOTONIC, &th1);
++        printf("[artifact] rowhash: n %ld fullhash %016llx checksum_sum %llu unreachable %llu threads %d time %.6f s (after all timers) file %s\n",
++               (long)size, full, S, U, nt, (th1.tv_sec - th0.tv_sec) + (th1.tv_nsec - th0.tv_nsec) / 1e9, hf ? hp : "(open failed)");
++    }
++
+ 
+     // Prepare vertification
++    // [artifact] distance == nullptr (ROME_LOWMEM=1 in the driver) skips the host-side un-permutation
++    // so that only one n^2 host buffer is needed; the GPU computation is unchanged.
++    if (distance != nullptr)
+     for(dataSize_t i = 0; i < size; ++i){
+         for(dataSize_t j = 0; j < size; ++j){
+             distance[i * size + j] = permDistance[iperm[i] * size + iperm[j]];
+diff --git a/src/App/APSP.cu b/src/App/APSP.cu
+index 37d1941..30f1c82 100644
+--- a/src/App/APSP.cu
++++ b/src/App/APSP.cu
+@@ -1,6 +1,8 @@
+ #include <fstream>
+ #include <time.h>
+ #include <string>
++#include <cstdlib>
++#include <cstdio>
+ 
+ #include "Graph/Graph.hpp"
+ #include "Graph/Converter.hpp"
+@@ -22,14 +24,24 @@ int main(int argc, char* argv[]){
+ 
+     // warm_up_cuda();
+ 
++    // [artifact] in-process end-to-end timer: mtx read + CSR + pinned host alloc + APSP()
++    struct timespec e2e_start, e2e_finish;
++    clock_gettime(CLOCK_MONOTONIC, &e2e_start);
++
+     Graph g = MtxReader::Instance().Read(argv[1]);
+ 
+     CSRGraph csr = Converter::Instance().ToCSR(g);
+     weight_t* buffer = nullptr;
+     weight_t* result = nullptr;
++    // [artifact] ROME_LOWMEM=1: allocate only the permuted-distance host buffer (no un-permuted result
++    // buffer, no CPU check, no dump). Needed when 2*n^2*4 bytes of pinned host memory do not fit.
++    const bool lowmem = std::getenv("ROME_LOWMEM") != nullptr;
+     #ifdef PINNED_MEMORY
+-    cudaMallocHost((void**)&buffer, csr.Size() * csr.Size() * sizeof(weight_t));
+-    cudaMallocHost((void**)&result, csr.Size() * csr.Size() * sizeof(weight_t));
++    DebugAssert(__FILE__, __LINE__, "cudaMallocHost(buffer) failed",
++                cudaMallocHost((void**)&buffer, csr.Size() * csr.Size() * sizeof(weight_t)) == cudaSuccess);
++    if (!lowmem)
++    DebugAssert(__FILE__, __LINE__, "cudaMallocHost(result) failed",
++                cudaMallocHost((void**)&result, csr.Size() * csr.Size() * sizeof(weight_t)) == cudaSuccess);
+     #else
+     result = new weight_t[csr.Size() * csr.Size()];
+     buffer = new weight_t[csr.Size() * csr.Size()];
+@@ -38,10 +50,39 @@ int main(int argc, char* argv[]){
+ 
+     APSP(csr, result, buffer);
+ 
++    clock_gettime(CLOCK_MONOTONIC, &e2e_finish);
++    printf("[artifact] End-to-end (read+CSR+host alloc+APSP incl. ordering, H2D, compute, D2H, unpermute): %.6f seconds\n",
++           (e2e_finish.tv_sec - e2e_start.tv_sec) + (e2e_finish.tv_nsec - e2e_start.tv_nsec) / 1e9);
++
++    // [artifact] optional dump of the first ROME_DUMP_NROWS (default 3) rows of the result
++    // (original vertex labeling; row r = source r+1 in 1-based ids). Outside all timed regions.
++    const char* dumpPath = lowmem ? nullptr : std::getenv("ROME_DUMP_ROWS");
++    if (dumpPath) {
++        dataSize_t N = csr.Size();
++        int nrows = std::getenv("ROME_DUMP_NROWS") ? std::atoi(std::getenv("ROME_DUMP_NROWS")) : 3;
++        FILE* f = std::fopen(dumpPath, "w");
++        DebugAssert(__FILE__, __LINE__, "Dump file can not be opened", f != nullptr);
++        for (int r = 0; r < nrows && r < N; ++r) {
++            for (dataSize_t c = 0; c < N; ++c) {
++                weight_t v = result[r * N + c];
++                if (v == kWeightInf) std::fprintf(f, c ? " Inf" : "Inf");
++                else std::fprintf(f, c ? " %.0f" : "%.0f", (double)v);
++            }
++            std::fprintf(f, "\n");
++        }
++        std::fclose(f);
++        printf("[artifact] Dumped %d rows to %s\n", nrows, dumpPath);
++    }
++
++    // [artifact] ROME_SKIP_CHECK=1 skips the CPU SuperFW reference check (slow, needs another n^2 host buffer)
++    if (!lowmem && std::getenv("ROME_SKIP_CHECK") == nullptr) {
+     printf("Checking result...\n");
+     CheckResult(csr, result, buffer);
++    } else {
++        printf("[artifact] Skipping CPU reference check (ROME_SKIP_CHECK set)\n");
++    }
+ 
+-    if(!StringFunc::Instance().StrCmp(argv[2], "ignore")){
++    if(!lowmem && !StringFunc::Instance().StrCmp(argv[2], "ignore")){
+         std::ofstream reportFile;
+         reportFile.open(argv[2]);
+         DebugAssert(__FILE__, __LINE__,"File can not be opend", reportFile.is_open());
+@@ -62,7 +103,7 @@ int main(int argc, char* argv[]){
+     }
+     #ifdef PINNED_MEMORY
+     cudaFreeHost(buffer);
+-    cudaFreeHost(result);
++    if (result) cudaFreeHost(result);
+     #else
+     delete[] result;
+     delete[] buffer;
+diff --git a/src/Matrix/MtxReader.cpp b/src/Matrix/MtxReader.cpp
+index 164217a..5e288fd 100644
+--- a/src/Matrix/MtxReader.cpp
++++ b/src/Matrix/MtxReader.cpp
+@@ -6,6 +6,7 @@
+ #include <cstring>
+ #include <climits>
+ #include <cmath>
++#include <cstdlib>
+ #include "Common/DebugAssert.hpp"
+ 
+ 
+@@ -93,7 +94,11 @@ Graph MtxReader::Read(const char* path){
+         else{
+             i = std::stoi(line_parsed[0]) - 1;
+             j = std::stoi(line_parsed[1]) - 1;
+-            value = std::rand() % 10 + 1;  // Random value between 1 and 100. Alternative to floating-point precision verification
++            // [artifact] upstream ignored the file's weights and used random ones:
++            //   value = std::rand() % 10 + 1;
++            // We read the weight from the file instead (set ROME_RANDOM_WEIGHTS=1 for upstream behavior).
++            if (std::getenv("ROME_RANDOM_WEIGHTS") != nullptr) value = std::rand() % 10 + 1;
++            else value = static_cast<weight_t>(std::stod(line_parsed[2]));
+         }
+         if (i != j) {
+             g.Connect(i,j,value);

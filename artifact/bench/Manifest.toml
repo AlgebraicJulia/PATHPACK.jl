@@ -1,0 +1,360 @@
+# This file is machine-generated - editing it directly is not advised
+
+julia_version = "1.12.7"
+manifest_format = "2.0"
+
+[[deps.AbstractTrees]]
+git-tree-sha1 = "2d9c9a55f9c93e8887ad391fbae72f8ef55e1177"
+uuid = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
+version = "0.4.5"
+
+[[deps.ArnoldiMethod]]
+deps = ["LinearAlgebra", "Random", "StaticArrays"]
+git-tree-sha1 = "d57bd3762d308bded22c3b82d033bff85f6195c6"
+uuid = "ec485272-7323-5ecc-a04f-4719b315124d"
+version = "0.4.0"
+
+[[deps.Artifacts]]
+uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
+version = "1.11.0"
+
+[[deps.Base64]]
+uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+version = "1.11.0"
+
+[[deps.CEnum]]
+git-tree-sha1 = "389ad5c84de1ae7cf0e28e381131c98ea87d54fc"
+uuid = "fa961155-64e5-5f13-b03f-caf6b980ea82"
+version = "0.5.0"
+
+[[deps.CliqueTrees]]
+deps = ["AbstractTrees", "FillArrays", "FixedSizeArrays", "Graphs", "LinearAlgebra", "Random", "SparseArrays"]
+git-tree-sha1 = "423b166fa25432c540f00a76408753c3e91bc436"
+uuid = "60701a23-6482-424a-84db-faee86b9b1f8"
+version = "1.19.7"
+
+    [deps.CliqueTrees.extensions]
+    AMDExt = "AMD"
+    CatlabExt = "Catlab"
+    FlowCutterPACE17_jllExt = "FlowCutterPACE17_jll"
+    KaHyParExt = "KaHyPar"
+    KrylovExt = "Krylov"
+    LaplaciansExt = "Laplacians"
+    MetisExt = "Metis"
+    MooncakeExt = "Mooncake"
+    TreeWidthSolverExt = "TreeWidthSolver"
+
+    [deps.CliqueTrees.weakdeps]
+    AMD = "14f7f29c-3bd6-536c-9a0b-7339e30b5a3e"
+    Catlab = "134e5e36-593f-5add-ad60-77f754baafbe"
+    FlowCutterPACE17_jll = "008204e2-cd5c-5c6d-9360-d31f32b5f6c2"
+    KaHyPar = "2a6221f6-aa48-11e9-3542-2d9e0ef01880"
+    Krylov = "ba0b0d4f-ebba-5204-a429-3ac8c609bfb7"
+    Laplacians = "6f8e5838-0efe-5de0-80a3-5fb4f8dbb1de"
+    Metis = "2679e427-3c69-5b7f-982b-ece356f1e94b"
+    Mooncake = "da2b9cff-9c12-43a0-ae48-6db2b0edb7d6"
+    TreeWidthSolver = "7d267fc5-9ace-409f-a54c-cd2374872a55"
+
+[[deps.CodecZlib]]
+deps = ["TranscodingStreams", "Zlib_jll"]
+git-tree-sha1 = "970758a3d591a2a5c2a907c53f2e2f8c1b1d3537"
+uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
+version = "0.7.9"
+
+[[deps.Collects]]
+git-tree-sha1 = "d0b504dbd9ea6a0142845a6f9b4c58b3627c718f"
+uuid = "08986516-18db-4a8b-8eaa-f5ef1828d8f1"
+version = "1.1.0"
+
+[[deps.CompilerSupportLibraries_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
+version = "1.3.1+2"
+
+[[deps.DataStructures]]
+deps = ["OrderedCollections"]
+git-tree-sha1 = "b0bc6d2cad1fed8b7fd59a1551a991cb3d2809e6"
+uuid = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+version = "0.19.6"
+
+[[deps.Dates]]
+deps = ["Printf"]
+uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
+version = "1.11.0"
+
+[[deps.FillArrays]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "086b5fbd032baf544678cc15b52b015e4c4aceb8"
+uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
+version = "1.17.1"
+
+    [deps.FillArrays.extensions]
+    FillArraysPDMatsExt = "PDMats"
+    FillArraysSparseArraysExt = "SparseArrays"
+    FillArraysStaticArraysExt = "StaticArrays"
+    FillArraysStatisticsExt = "Statistics"
+
+    [deps.FillArrays.weakdeps]
+    PDMats = "90014a1f-27ba-587c-ab20-58faa44d9150"
+    SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+    StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+    Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+
+[[deps.FixedSizeArrays]]
+deps = ["Collects"]
+git-tree-sha1 = "76bb6e6427ba47b22c97b7f2cddc1ae002e6a9ad"
+uuid = "3821ddf9-e5b5-40d5-8e25-6813ab96b5e2"
+version = "1.3.0"
+
+    [deps.FixedSizeArrays.extensions]
+    FixedSizeArraysAdaptExt = "Adapt"
+    FixedSizeArraysRandomExt = "Random"
+
+    [deps.FixedSizeArrays.weakdeps]
+    Adapt = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
+    Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[[deps.Graphs]]
+deps = ["ArnoldiMethod", "DataStructures", "Inflate", "LinearAlgebra", "Random", "SimpleTraits", "SparseArrays", "Statistics"]
+git-tree-sha1 = "dbb2b976f605b220dfe139d6db9f3859680da09e"
+uuid = "86223c79-3864-5bf0-83f7-82e725a168b6"
+version = "1.15.0"
+
+    [deps.Graphs.extensions]
+    GraphsSharedArraysExt = "SharedArrays"
+
+    [deps.Graphs.weakdeps]
+    Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+    SharedArrays = "1a1011a3-84de-559e-8e89-a11a2f7dc383"
+
+[[deps.Inflate]]
+git-tree-sha1 = "d1b1b796e47d94588b3757fe84fbf65a5ec4a80d"
+uuid = "d25df0c9-e2be-5dd7-82c8-3ad0b3e990b9"
+version = "0.1.5"
+
+[[deps.InteractiveUtils]]
+deps = ["Markdown"]
+uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
+version = "1.11.0"
+
+[[deps.JLLWrappers]]
+deps = ["Artifacts", "Preferences"]
+git-tree-sha1 = "7204148362dafe5fe6a273f855b8ccbe4df8173e"
+uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
+version = "1.8.0"
+
+[[deps.JSON]]
+deps = ["Dates", "Logging", "Parsers", "PrecompileTools", "StructUtils", "UUIDs", "Unicode"]
+git-tree-sha1 = "4657a834b01ce00f2b94546095c4350617b9af2c"
+uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+version = "1.10.0"
+
+    [deps.JSON.extensions]
+    JSONArrowExt = ["ArrowTypes"]
+
+    [deps.JSON.weakdeps]
+    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
+
+[[deps.JuliaSyntaxHighlighting]]
+deps = ["StyledStrings"]
+uuid = "ac6e5ff7-fb65-4e79-a425-ec3bc9c03011"
+version = "1.12.0"
+
+[[deps.Libdl]]
+uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
+version = "1.11.0"
+
+[[deps.LinearAlgebra]]
+deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
+uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+version = "1.12.0"
+
+[[deps.Logging]]
+uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
+version = "1.11.0"
+
+[[deps.METIS_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl"]
+git-tree-sha1 = "5ecd92439c60a50c49bd6e96192e9d486b24b050"
+uuid = "d00139f3-1899-568f-a2f0-47f597d42d70"
+version = "5.1.4+0"
+
+[[deps.MacroTools]]
+git-tree-sha1 = "1e0228a030642014fe5cfe68c2c0a818f9e3f522"
+uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
+version = "0.5.16"
+
+[[deps.Markdown]]
+deps = ["Base64", "JuliaSyntaxHighlighting", "StyledStrings"]
+uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
+version = "1.11.0"
+
+[[deps.Metis]]
+deps = ["CEnum", "LinearAlgebra", "METIS_jll", "SparseArrays"]
+git-tree-sha1 = "54aca4fd53d39dcd2c3f1bef367b6921e8178628"
+uuid = "2679e427-3c69-5b7f-982b-ece356f1e94b"
+version = "1.5.0"
+
+    [deps.Metis.extensions]
+    MetisGraphs = "Graphs"
+    MetisLightGraphs = "LightGraphs"
+    MetisSimpleWeightedGraphs = ["SimpleWeightedGraphs", "Graphs"]
+
+    [deps.Metis.weakdeps]
+    Graphs = "86223c79-3864-5bf0-83f7-82e725a168b6"
+    LightGraphs = "093fc24a-ae57-5d10-9952-331d41423f4d"
+    SimpleWeightedGraphs = "47aef6b3-ad0c-573a-a1e2-d07658019622"
+
+[[deps.OpenBLAS_jll]]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
+uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
+version = "0.3.29+0"
+
+[[deps.OrderedCollections]]
+git-tree-sha1 = "f9b03759e9ef463718934fbed30820b39997511e"
+uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+version = "2.0.2"
+
+[[deps.PATHPACK]]
+deps = ["CliqueTrees", "Graphs", "LinearAlgebra", "Random", "SIMD", "SparseArrays"]
+path = "../.."
+uuid = "1b389887-3ae0-48ab-8b08-e5a3e3f9bdde"
+version = "0.0.1"
+
+[[deps.Parsers]]
+deps = ["Dates", "PrecompileTools"]
+git-tree-sha1 = "663e8b48b789916221e0765393b289ca6c88f24e"
+uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
+version = "3.0.0"
+
+[[deps.PrecompileTools]]
+deps = ["Preferences"]
+git-tree-sha1 = "edbeefc7a4889f528644251bdb5fc9ab5348bc2c"
+uuid = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
+version = "1.3.4"
+
+[[deps.Preferences]]
+deps = ["TOML"]
+git-tree-sha1 = "5005266de4bfe50e53ff44a5cb5c540b6e47a254"
+uuid = "21216c6a-2e73-6563-6e65-726566657250"
+version = "1.6.0"
+
+[[deps.Printf]]
+deps = ["Unicode"]
+uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+version = "1.11.0"
+
+[[deps.Random]]
+deps = ["SHA"]
+uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+version = "1.11.0"
+
+[[deps.SHA]]
+uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+version = "0.7.0"
+
+[[deps.SIMD]]
+deps = ["PrecompileTools"]
+git-tree-sha1 = "e24dc23107d426a096d3eae6c165b921e74c18e4"
+uuid = "fdea26ae-647d-5447-a871-4b548cad5224"
+version = "3.7.2"
+
+[[deps.Serialization]]
+uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+version = "1.11.0"
+
+[[deps.SimpleTraits]]
+deps = ["InteractiveUtils", "MacroTools"]
+git-tree-sha1 = "7ddb0b49c109481b046972c0e4ab02b2127d6a75"
+uuid = "699a6c99-e7fa-54fc-8d76-47d257e15c1d"
+version = "0.9.6"
+
+[[deps.SparseArrays]]
+deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
+uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+version = "1.12.0"
+
+[[deps.StaticArrays]]
+deps = ["LinearAlgebra", "PrecompileTools", "Random", "StaticArraysCore"]
+git-tree-sha1 = "39e70e0ab5d7f89833a62ab7c79df15d4fc417c1"
+uuid = "90137ffa-7385-5640-81b9-e52037218182"
+version = "1.9.22"
+
+    [deps.StaticArrays.extensions]
+    StaticArraysChainRulesCoreExt = "ChainRulesCore"
+    StaticArraysStatisticsExt = "Statistics"
+
+    [deps.StaticArrays.weakdeps]
+    ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+    Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+
+[[deps.StaticArraysCore]]
+git-tree-sha1 = "6ab403037779dae8c514bad259f32a447262455a"
+uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
+version = "1.4.4"
+
+[[deps.Statistics]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "e2b53ce13a53367e96601081e33d34746b571bad"
+uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+version = "1.11.5"
+weakdeps = ["SparseArrays"]
+
+    [deps.Statistics.extensions]
+    SparseArraysExt = ["SparseArrays"]
+
+[[deps.StructUtils]]
+deps = ["Dates", "UUIDs"]
+git-tree-sha1 = "b814d5005d6a529d740ffe06f8a86396f6501138"
+uuid = "ec057cc2-7a8d-4b58-b3b3-92acb9f63b42"
+version = "2.9.2"
+
+    [deps.StructUtils.extensions]
+    StructUtilsLazilyInitializedFieldsExt = ["LazilyInitializedFields"]
+    StructUtilsMeasurementsExt = ["Measurements"]
+    StructUtilsStaticArraysCoreExt = ["StaticArraysCore"]
+    StructUtilsTablesExt = ["Tables"]
+
+    [deps.StructUtils.weakdeps]
+    LazilyInitializedFields = "0e77f7df-68c5-4e49-93ce-4cd80f5598bf"
+    Measurements = "eff96d63-e80a-5855-80a2-b1b0885c5ab7"
+    StaticArraysCore = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
+    Tables = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
+
+[[deps.StyledStrings]]
+uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"
+version = "1.11.0"
+
+[[deps.SuiteSparse_jll]]
+deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
+uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
+version = "7.8.3+2"
+
+[[deps.TOML]]
+deps = ["Dates"]
+uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+version = "1.0.3"
+
+[[deps.TranscodingStreams]]
+git-tree-sha1 = "0c45878dcfdcfa8480052b6ab162cdd138781742"
+uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
+version = "0.11.3"
+
+[[deps.UUIDs]]
+deps = ["Random", "SHA"]
+uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+version = "1.11.0"
+
+[[deps.Unicode]]
+uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
+version = "1.11.0"
+
+[[deps.Zlib_jll]]
+deps = ["Libdl"]
+uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
+version = "1.3.1+2"
+
+[[deps.libblastrampoline_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
+version = "5.15.0+0"

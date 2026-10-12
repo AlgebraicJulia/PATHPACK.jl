@@ -1,0 +1,1376 @@
+graph,commit,gpu,set,call,call_ms,step,task,lane,start_ms,end_ms,bytes,source
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,host matrix,main,cpu,0.2631,0.2633,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,symbolic,main,cpu,0.2701,112.0490,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,factor storage,main,cpu,112.0498,112.1050,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,top selection,main,cpu,112.1275,113.6972,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,bottom forest,main,cpu,113.6982,114.1477,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,worker stacks,main,cpu,114.1481,114.9973,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,device factor,main,cpu,115.0765,115.2838,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,structure,structure,cpu,112.1228,117.2977,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,upload factor,device entries,cpu,115.2978,118.7104,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,A's top entries and index arrays,device entries,pcie,115.2978,118.7104,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,maps alloc,nested (thread 1),cpu,120.3013,120.5713,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,maps,nested (thread 1),cpu,120.6331,122.8459,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,maps alloc,nested (thread 2),cpu,122.8833,123.2699,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,amalgamation,nested (thread 1),cpu,115.3020,124.1953,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,top merge,nested (thread 1),cpu,115.3018,124.1957,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,maps,nested (thread 2),cpu,123.6526,125.8852,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,merge maps,structure,cpu,117.2990,127.3167,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,levels,structure,cpu,127.3171,128.2157,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,positions,nested (thread 1),cpu,125.1485,129.2113,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,copy entries,entries,cpu,115.0767,129.3485,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,device buffers,nested (thread 1),cpu,129.2120,130.2509,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,merged plan,nested (thread 1),cpu,124.1959,130.2514,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,plan (top),main,cpu,115.3013,130.2518,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,top batch,main,cpu,130.2523,130.3681,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,bottom (CPU),subtrees,cpu,129.3533,143.8359,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,upload bottom,main,cpu,143.8434,148.9863,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,subtrees' factors and updates,main,pcie,143.8434,148.9863,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,merge gather,nested (thread 1),cpu,148.9911,149.0309,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,fronts,nested (thread 1),cpu,149.0311,150.9631,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,merge scatter,nested (thread 1),cpu,150.9633,150.9826,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,top (GPU),main,cpu,148.9868,150.9830,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,factor upload,nested (thread 1),cpu,150.9964,150.9964,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,merged factor,nested (thread 1),cpu,150.9965,151.3420,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,upload structure,nested (thread 1),cpu,151.3425,151.3425,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,solve setup,main,cpu,150.9846,151.5172,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,kernels,nested (thread 1),cpu,151.9417,153.2755,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,columns,nested (thread 1),cpu,153.2758,153.7660,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,operators,main,cpu,151.6460,153.7713,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,memory check,main,cpu,153.7715,153.8131,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,allocate,main,cpu,153.8189,154.7238,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,sweep plan,nested (thread 1),cpu,155.1006,155.5374,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,sweep plan,nested (thread 1),cpu,155.5410,155.5412,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,top columns,nested (thread 1),cpu,155.6034,155.7333,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,sweep plan,nested (thread 1),cpu,157.8239,157.8240,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,layer plan,nested (thread 3),cpu,155.6049,158.2995,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,first descendants,nested (thread 1),cpu,169.1649,169.4581,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,sweep plan,nested (thread 1),cpu,169.4598,169.4600,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,slot plan,nested (thread 3),cpu,158.3008,259.2668,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,plans (ahead),nested (thread 1),cpu,179.5568,259.2965,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,sweep plan,nested (thread 1),cpu,259.2975,259.2977,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,layer plan,nested (thread 1),cpu,259.3092,259.3156,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,slot plan,nested (thread 1),cpu,259.3158,259.3215,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,closure,main,cpu,154.7546,259.3878,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,free,main,cpu,259.3884,259.4583,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,1,311.1694,relabel columns,main,cpu,259.4586,263.9000,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,host matrix,main,cpu,0.2797,0.2798,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,symbolic,main,cpu,0.2827,114.7717,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,factor storage,main,cpu,114.7728,115.3007,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,top selection,main,cpu,115.3240,116.7227,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,bottom forest,main,cpu,116.7236,117.1719,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,structure,structure,cpu,115.3213,117.9356,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,worker stacks,main,cpu,117.1724,118.2562,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,device factor,main,cpu,118.3201,118.7259,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,maps alloc,nested (thread 1),cpu,122.8068,123.0106,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,upload factor,device entries,cpu,118.7409,123.3624,,host trace thread 6
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,A's top entries and index arrays,device entries,pcie,118.7409,123.3624,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,maps alloc,nested (thread 2),cpu,123.5279,123.9187,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,maps,nested (thread 1),cpu,123.0869,125.0066,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,amalgamation,nested (thread 1),cpu,118.7425,126.0128,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,top merge,nested (thread 1),cpu,118.7423,126.0131,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,maps,nested (thread 2),cpu,124.3038,128.3821,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,merge maps,structure,cpu,117.9366,129.8132,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,levels,structure,cpu,129.8135,130.7359,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,positions,nested (thread 1),cpu,126.4912,130.9568,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,device buffers,nested (thread 1),cpu,130.9573,132.0282,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,merged plan,nested (thread 1),cpu,126.0133,132.0286,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,plan (top),main,cpu,118.7418,132.0290,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,top batch,main,cpu,132.0294,132.1230,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,structure upload,structure,cpu,130.7414,132.4446,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,solve structure,structure,pcie,130.7414,132.4446,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,copy entries,entries,cpu,118.3143,132.9902,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,bottom (CPU),subtrees,cpu,132.9948,147.7650,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,upload bottom,main,cpu,147.7698,152.7445,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,subtrees' factors and updates,main,pcie,147.7698,152.7445,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,merge gather,nested (thread 1),cpu,152.7484,152.7882,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,fronts,nested (thread 1),cpu,152.7885,154.7594,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,merge scatter,nested (thread 1),cpu,154.7596,154.7785,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,top (GPU),main,cpu,152.7449,154.7789,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,factor upload,nested (thread 1),cpu,154.8009,154.8009,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,merged factor,nested (thread 1),cpu,154.8012,167.7637,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,upload structure,nested (thread 1),cpu,167.7642,167.7642,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,solve setup,main,cpu,154.7887,167.9495,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,kernels,nested (thread 1),cpu,175.3142,175.9928,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,columns,nested (thread 1),cpu,175.9967,176.1862,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,operators,main,cpu,168.0843,176.1896,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,memory check,main,cpu,176.1977,176.2356,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,allocate,main,cpu,176.2362,177.1151,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,sweep plan,nested (thread 1),cpu,177.2656,177.6483,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,sweep plan,nested (thread 1),cpu,177.6524,177.6526,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,top columns,nested (thread 1),cpu,177.7160,177.8339,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,layer plan,nested (thread 3),cpu,177.7201,180.0990,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,sweep plan,nested (thread 1),cpu,181.7095,181.7097,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,first descendants,nested (thread 1),cpu,187.1747,187.3416,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,sweep plan,nested (thread 1),cpu,187.3435,187.3438,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,slot plan,nested (thread 3),cpu,180.1004,269.6022,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,plans (ahead),nested (thread 1),cpu,197.5489,269.6293,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,sweep plan,nested (thread 1),cpu,269.6306,269.6308,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,layer plan,nested (thread 1),cpu,269.6432,269.6512,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,slot plan,nested (thread 1),cpu,269.6513,269.6587,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,closure,main,cpu,177.1548,269.7227,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,free,main,cpu,269.7280,269.8012,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,relabel columns,main,cpu,269.8014,279.7134,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,top,gpu,gpu,152.7449,158.2373,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,merged factor and operators,gpu,gpu,158.2373,176.4535,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,X <- U*,gpu,gpu,177.1521,208.3558,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,X <- XL*,gpu,gpu,208.3558,324.5144,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,relabel,gpu,gpu,324.5144,333.4842,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,start,event,event,0.0213,0.0213,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,top_done,event,event,154.7885,158.2373,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,merged_done,event,event,167.9571,167.9543,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,operators_done,event,event,176.1969,176.4535,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,closure_start,event,event,177.1547,177.1521,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,U_done,event,event,187.1567,208.3558,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,closure_done,event,event,269.7276,324.5144,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,1,333.5296,relabel_done,event,event,279.7191,333.4842,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,host matrix,main,cpu,0.2599,0.2601,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,symbolic,main,cpu,0.2676,114.0694,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,factor storage,main,cpu,114.0707,114.3354,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,top selection,main,cpu,114.3590,115.7722,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,bottom forest,main,cpu,115.7733,116.2212,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,worker stacks,main,cpu,116.2216,117.5849,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,device factor,main,cpu,117.6812,117.9335,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,structure,structure,cpu,114.3568,119.4747,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,maps alloc,nested (thread 1),cpu,121.3131,121.6796,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,upload factor,device entries,cpu,117.9484,121.9550,,host trace thread 5
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,A's top entries and index arrays,device entries,pcie,117.9484,121.9550,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,maps,nested (thread 1),cpu,121.7683,124.3878,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,amalgamation,nested (thread 1),cpu,117.9497,125.3842,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,top merge,nested (thread 1),cpu,117.9495,125.3845,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,maps alloc,nested (thread 2),cpu,125.1495,125.6020,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,maps,nested (thread 2),cpu,125.9909,128.6116,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,merge maps,structure,cpu,119.4760,130.0857,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,positions,nested (thread 1),cpu,126.0427,130.2467,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,levels,structure,cpu,130.0860,130.9860,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,device buffers,nested (thread 1),cpu,130.2472,131.7056,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,merged plan,nested (thread 1),cpu,125.3847,131.7060,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,plan (top),main,cpu,117.9490,131.7064,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,top batch,main,cpu,131.7069,131.8339,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,copy entries,entries,cpu,117.6762,132.3822,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,bottom (CPU),subtrees,cpu,132.3871,146.5362,,host trace thread 6
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,upload bottom,main,cpu,146.5511,151.4160,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,subtrees' factors and updates,main,pcie,146.5511,151.4160,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,merge gather,nested (thread 1),cpu,151.4209,151.4578,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,fronts,nested (thread 1),cpu,151.4580,153.4018,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,merge scatter,nested (thread 1),cpu,153.4020,153.4236,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,top (GPU),main,cpu,151.4166,153.4238,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,factor upload,nested (thread 1),cpu,153.4368,153.4368,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,merged factor,nested (thread 1),cpu,153.4370,153.8780,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,upload structure,nested (thread 1),cpu,153.8785,153.8785,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,solve setup,main,cpu,153.4256,154.2348,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,kernels,nested (thread 1),cpu,154.6670,156.1566,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,columns,nested (thread 1),cpu,156.1571,156.6488,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,operators,main,cpu,154.3633,156.6550,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,memory check,main,cpu,156.6552,156.6983,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,allocate,main,cpu,156.7038,157.5908,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,sweep plan,nested (thread 1),cpu,157.9487,158.4045,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,sweep plan,nested (thread 1),cpu,158.4083,158.4086,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,top columns,nested (thread 1),cpu,158.4706,158.6545,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,sweep plan,nested (thread 1),cpu,159.8710,159.8711,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,layer plan,nested (thread 2),cpu,158.4740,165.2579,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,first descendants,nested (thread 1),cpu,165.6115,165.7748,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,sweep plan,nested (thread 1),cpu,165.7764,165.7767,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,slot plan,nested (thread 2),cpu,165.2593,267.0719,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,plans (ahead),nested (thread 1),cpu,179.0313,267.1008,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,sweep plan,nested (thread 1),cpu,267.1020,267.1023,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,layer plan,nested (thread 1),cpu,267.1136,267.1203,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,slot plan,nested (thread 1),cpu,267.1206,267.1267,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,closure,main,cpu,157.6206,267.1883,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,free,main,cpu,267.1887,267.2638,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,2,315.6843,relabel columns,main,cpu,267.2641,272.0455,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,host matrix,main,cpu,0.2657,0.2658,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,symbolic,main,cpu,0.2681,113.6053,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,factor storage,main,cpu,113.6061,113.8613,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,top selection,main,cpu,113.8864,115.4328,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,bottom forest,main,cpu,115.4338,115.8857,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,structure,structure,cpu,113.8792,116.9389,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,worker stacks,main,cpu,115.8860,116.9538,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,device factor,main,cpu,117.0452,117.3015,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,upload factor,device entries,cpu,117.3157,122.1992,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,A's top entries and index arrays,device entries,pcie,117.3157,122.1992,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,maps alloc,nested (thread 2),cpu,122.3976,122.7483,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,maps alloc,nested (thread 1),cpu,122.5195,122.9809,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,maps,nested (thread 2),cpu,123.1197,125.3278,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,merge maps,structure,cpu,116.9399,126.7764,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,maps,nested (thread 1),cpu,123.0621,126.8064,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,levels,structure,cpu,126.7769,127.6688,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,amalgamation,nested (thread 1),cpu,117.3188,128.1567,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,top merge,nested (thread 1),cpu,117.3184,128.1569,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,structure upload,structure,cpu,127.6748,128.6552,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,solve structure,structure,pcie,127.6748,128.6552,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,positions,nested (thread 1),cpu,129.1390,129.5281,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,device buffers,nested (thread 1),cpu,129.5286,130.5411,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,merged plan,nested (thread 1),cpu,128.1572,130.5414,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,plan (top),main,cpu,117.3179,130.5417,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,top batch,main,cpu,130.5421,130.6467,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,copy entries,entries,cpu,117.0416,132.0616,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,bottom (CPU),subtrees,cpu,132.0662,146.1810,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,upload bottom,main,cpu,146.1861,151.3958,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,subtrees' factors and updates,main,pcie,146.1861,151.3958,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,merge gather,nested (thread 1),cpu,151.4004,151.4427,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,fronts,nested (thread 1),cpu,151.4429,153.3944,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,merge scatter,nested (thread 1),cpu,153.3948,153.4142,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,top (GPU),main,cpu,151.3964,153.4145,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,factor upload,nested (thread 1),cpu,153.4354,153.4355,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,merged factor,nested (thread 1),cpu,153.4356,153.8427,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,upload structure,nested (thread 1),cpu,153.8431,153.8431,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,solve setup,main,cpu,153.4237,154.2329,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,kernels,nested (thread 1),cpu,154.6637,155.6868,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,columns,nested (thread 1),cpu,155.6903,155.9040,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,operators,main,cpu,154.3699,155.9076,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,memory check,main,cpu,155.9153,155.9502,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,allocate,main,cpu,155.9508,156.8406,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,sweep plan,nested (thread 1),cpu,157.2073,157.6606,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,sweep plan,nested (thread 1),cpu,157.6642,157.6644,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,top columns,nested (thread 1),cpu,157.7356,157.9145,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,layer plan,nested (thread 3),cpu,157.7392,160.1630,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,sweep plan,nested (thread 1),cpu,162.1171,162.1173,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,first descendants,nested (thread 1),cpu,167.6829,168.0057,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,sweep plan,nested (thread 1),cpu,168.0076,168.0078,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,slot plan,nested (thread 3),cpu,160.1647,261.4873,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,plans (ahead),nested (thread 1),cpu,181.4443,261.5197,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,sweep plan,nested (thread 1),cpu,261.5209,261.5212,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,layer plan,nested (thread 1),cpu,261.5316,261.5387,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,slot plan,nested (thread 1),cpu,261.5388,261.5451,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,closure,main,cpu,156.8746,261.6084,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,free,main,cpu,261.6137,261.6880,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,relabel columns,main,cpu,261.6883,266.0927,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,top,gpu,gpu,151.3964,156.8928,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,merged factor and operators,gpu,gpu,156.8928,157.5610,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,X <- U*,gpu,gpu,157.5634,188.8436,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,X <- XL*,gpu,gpu,188.8436,304.4379,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,relabel,gpu,gpu,304.4379,313.0265,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,start,event,event,0.0129,0.0129,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,top_done,event,event,153.4236,156.8928,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,merged_done,event,event,154.2403,157.0464,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,operators_done,event,event,155.9147,157.5610,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,closure_start,event,event,156.8744,157.5634,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,U_done,event,event,167.6640,188.8436,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,closure_done,event,event,261.6134,304.4379,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,2,313.0679,relabel_done,event,event,266.0986,313.0265,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,host matrix,main,cpu,0.2611,0.2613,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,symbolic,main,cpu,0.2678,113.7435,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,factor storage,main,cpu,113.7445,114.0061,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,top selection,main,cpu,114.0306,115.6090,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,bottom forest,main,cpu,115.6098,116.0569,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,worker stacks,main,cpu,116.0573,116.9203,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,device factor,main,cpu,117.0049,117.3050,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,structure,structure,cpu,114.0260,117.5393,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,maps alloc,nested (thread 2),cpu,121.8625,122.1669,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,upload factor,device entries,cpu,117.3190,122.2594,,host trace thread 5
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,A's top entries and index arrays,device entries,pcie,117.3190,122.2594,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,maps alloc,nested (thread 1),cpu,123.6079,124.3430,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,maps,nested (thread 2),cpu,122.5508,124.7849,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,merge maps,structure,cpu,117.5403,126.2646,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,levels,structure,cpu,126.2649,127.1885,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,maps,nested (thread 1),cpu,124.4245,128.2347,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,amalgamation,nested (thread 1),cpu,117.3213,129.6062,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,top merge,nested (thread 1),cpu,117.3211,129.6065,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,positions,nested (thread 1),cpu,130.4628,130.7629,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,device buffers,nested (thread 1),cpu,130.7632,131.8519,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,merged plan,nested (thread 1),cpu,129.6068,131.8523,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,plan (top),main,cpu,117.3205,131.8527,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,top batch,main,cpu,131.8532,131.9608,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,copy entries,entries,cpu,117.0010,132.0707,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,bottom (CPU),subtrees,cpu,132.0745,146.2102,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,upload bottom,main,cpu,146.2245,151.2767,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,subtrees' factors and updates,main,pcie,146.2245,151.2767,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,merge gather,nested (thread 1),cpu,151.2849,151.3220,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,fronts,nested (thread 1),cpu,151.3222,153.2742,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,merge scatter,nested (thread 1),cpu,153.2744,153.2931,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,top (GPU),main,cpu,151.2773,153.2933,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,factor upload,nested (thread 1),cpu,153.3069,153.3069,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,merged factor,nested (thread 1),cpu,153.3072,153.7333,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,upload structure,nested (thread 1),cpu,153.7338,153.7338,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,solve setup,main,cpu,153.2951,154.0808,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,kernels,nested (thread 1),cpu,154.5050,155.7730,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,columns,nested (thread 1),cpu,155.7734,156.2585,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,operators,main,cpu,154.2120,156.2640,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,memory check,main,cpu,156.2643,156.3044,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,allocate,main,cpu,156.3102,157.2044,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,sweep plan,nested (thread 1),cpu,157.5684,158.0353,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,sweep plan,nested (thread 1),cpu,158.0390,158.0392,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,top columns,nested (thread 1),cpu,158.0999,158.2698,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,sweep plan,nested (thread 1),cpu,159.6825,159.6827,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,layer plan,nested (thread 2),cpu,158.1002,160.3911,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,first descendants,nested (thread 1),cpu,165.0491,165.2940,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,sweep plan,nested (thread 1),cpu,165.2958,165.2961,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,slot plan,nested (thread 2),cpu,160.3922,265.9474,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,plans (ahead),nested (thread 1),cpu,187.9595,265.9768,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,sweep plan,nested (thread 1),cpu,265.9776,265.9778,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,layer plan,nested (thread 1),cpu,265.9879,265.9947,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,slot plan,nested (thread 1),cpu,265.9949,266.0012,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,closure,main,cpu,157.2390,266.0611,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,free,main,cpu,266.0614,266.1410,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,3,314.5119,relabel columns,main,cpu,266.1412,268.2211,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,host matrix,main,cpu,0.2654,0.2655,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,symbolic,main,cpu,0.2676,115.4738,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,factor storage,main,cpu,115.4747,115.9724,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,top selection,main,cpu,115.9946,117.5373,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,bottom forest,main,cpu,117.5383,117.9739,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,worker stacks,main,cpu,117.9744,119.0664,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,device factor,main,cpu,119.1484,119.4065,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,structure,structure,cpu,115.9915,120.1229,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,upload factor,device entries,cpu,119.4209,124.1254,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,A's top entries and index arrays,device entries,pcie,119.4209,124.1254,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,maps alloc,nested (thread 1),cpu,124.5326,124.7988,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,maps alloc,nested (thread 2),cpu,125.4431,125.7935,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,maps,nested (thread 1),cpu,124.8607,128.1566,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,amalgamation,nested (thread 1),cpu,119.4236,129.2515,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,top merge,nested (thread 1),cpu,119.4234,129.2518,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,maps,nested (thread 2),cpu,126.1691,130.1317,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,positions,nested (thread 1),cpu,129.8792,130.6298,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,merge maps,structure,cpu,120.1241,131.5597,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,device buffers,nested (thread 1),cpu,130.6302,131.7136,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,merged plan,nested (thread 1),cpu,129.2520,131.7141,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,plan (top),main,cpu,119.4229,131.7144,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,top batch,main,cpu,131.7149,131.8174,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,levels,structure,cpu,131.5601,132.4415,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,structure upload,structure,cpu,132.4474,133.4693,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,solve structure,structure,pcie,132.4474,133.4693,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,copy entries,entries,cpu,119.1460,133.7058,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,bottom (CPU),subtrees,cpu,133.7105,148.7599,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,upload bottom,main,cpu,148.7652,153.8196,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,subtrees' factors and updates,main,pcie,148.7652,153.8196,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,merge gather,nested (thread 1),cpu,153.8246,153.8614,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,fronts,nested (thread 1),cpu,153.8616,155.7726,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,merge scatter,nested (thread 1),cpu,155.7728,155.7903,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,top (GPU),main,cpu,153.8201,155.7905,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,factor upload,nested (thread 1),cpu,155.8100,155.8101,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,merged factor,nested (thread 1),cpu,155.8102,156.2168,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,upload structure,nested (thread 1),cpu,156.2173,156.2173,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,solve setup,main,cpu,155.7986,156.7593,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,kernels,nested (thread 1),cpu,157.2006,158.7673,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,columns,nested (thread 1),cpu,158.7709,159.2583,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,operators,main,cpu,156.8951,159.2615,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,memory check,main,cpu,159.2689,159.3031,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,allocate,main,cpu,159.3039,160.1829,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,sweep plan,nested (thread 1),cpu,160.5466,160.9900,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,sweep plan,nested (thread 1),cpu,160.9934,160.9937,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,top columns,nested (thread 1),cpu,161.0538,161.2216,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,sweep plan,nested (thread 1),cpu,162.3751,162.3752,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,layer plan,nested (thread 3),cpu,161.0535,167.6365,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,first descendants,nested (thread 1),cpu,167.9834,168.3004,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,sweep plan,nested (thread 1),cpu,168.3021,168.3025,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,slot plan,nested (thread 3),cpu,167.6379,265.7453,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,plans (ahead),nested (thread 1),cpu,178.4156,265.7776,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,sweep plan,nested (thread 1),cpu,265.7788,265.7791,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,layer plan,nested (thread 1),cpu,265.7918,265.7998,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,slot plan,nested (thread 1),cpu,265.7999,265.8062,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,closure,main,cpu,160.2221,265.8723,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,free,main,cpu,265.9788,266.0673,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,relabel columns,main,cpu,266.0676,268.5753,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,top,gpu,gpu,153.8201,159.3210,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,merged factor and operators,gpu,gpu,159.3210,159.9915,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,X <- U*,gpu,gpu,160.2203,190.6237,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,X <- XL*,gpu,gpu,190.6237,306.2732,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,relabel,gpu,gpu,306.2732,314.8597,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,start,event,event,0.0132,0.0132,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,top_done,event,event,155.7985,159.3210,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,merged_done,event,event,156.7669,159.4746,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,operators_done,event,event,159.2682,159.9915,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,closure_start,event,event,160.2219,160.2203,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,U_done,event,event,167.9637,190.6237,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,closure_done,event,event,265.9784,306.2732,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,3,314.8945,relabel_done,event,event,268.5805,314.8597,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,host matrix,main,cpu,0.2573,0.2575,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,symbolic,main,cpu,0.2647,116.4093,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,factor storage,main,cpu,116.4102,116.4458,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,top selection,main,cpu,116.4692,117.6976,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,bottom forest,main,cpu,117.6985,118.1420,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,worker stacks,main,cpu,118.1423,119.0228,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,device factor,main,cpu,119.1025,119.3766,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,structure,structure,cpu,116.4665,121.5531,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,maps alloc,nested (thread 1),cpu,123.6849,123.8728,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,upload factor,device entries,cpu,119.3914,123.8862,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,A's top entries and index arrays,device entries,pcie,119.3914,123.8862,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,maps,nested (thread 1),cpu,123.9387,126.6222,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,maps alloc,nested (thread 2),cpu,127.1681,127.5438,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,amalgamation,nested (thread 1),cpu,119.3921,128.0576,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,top merge,nested (thread 1),cpu,119.3918,128.0578,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,maps,nested (thread 2),cpu,127.9263,132.0456,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,merge maps,structure,cpu,121.5541,133.4423,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,copy entries,entries,cpu,119.0993,133.7565,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,positions,nested (thread 1),cpu,129.1608,133.7595,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,levels,structure,cpu,133.4428,134.3508,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,device buffers,nested (thread 1),cpu,133.7601,135.2124,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,merged plan,nested (thread 1),cpu,128.0581,135.2128,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,plan (top),main,cpu,119.3914,135.2133,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,top batch,main,cpu,135.2138,135.3291,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,bottom (CPU),subtrees,cpu,133.7609,150.3148,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,upload bottom,main,cpu,150.3295,155.4234,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,subtrees' factors and updates,main,pcie,150.3295,155.4234,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,merge gather,nested (thread 1),cpu,155.4282,155.4665,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,fronts,nested (thread 1),cpu,155.4667,157.4147,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,merge scatter,nested (thread 1),cpu,157.4148,157.4327,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,top (GPU),main,cpu,155.4240,157.4330,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,factor upload,nested (thread 1),cpu,157.4462,157.4463,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,merged factor,nested (thread 1),cpu,157.4465,157.8029,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,upload structure,nested (thread 1),cpu,157.8033,157.8033,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,solve setup,main,cpu,157.4347,158.3344,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,kernels,nested (thread 1),cpu,158.7634,160.0271,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,columns,nested (thread 1),cpu,160.0274,160.2583,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,operators,main,cpu,158.4644,160.2641,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,memory check,main,cpu,160.2643,160.3176,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,allocate,main,cpu,160.3236,161.2450,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,sweep plan,nested (thread 1),cpu,161.4278,161.8811,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,sweep plan,nested (thread 1),cpu,161.8847,161.8849,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,top columns,nested (thread 1),cpu,161.9448,162.1215,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,layer plan,nested (thread 3),cpu,161.9471,164.3334,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,sweep plan,nested (thread 1),cpu,166.1426,166.1428,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,first descendants,nested (thread 1),cpu,171.5790,171.8196,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,sweep plan,nested (thread 1),cpu,171.8211,171.8214,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,slot plan,nested (thread 3),cpu,164.3346,265.4924,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,plans (ahead),nested (thread 1),cpu,187.2087,265.5214,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,sweep plan,nested (thread 1),cpu,265.5224,265.5227,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,layer plan,nested (thread 1),cpu,265.5326,265.5392,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,slot plan,nested (thread 1),cpu,265.5394,265.5453,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,closure,main,cpu,161.2774,265.6060,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,free,main,cpu,265.6064,265.6838,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,4,317.8391,relabel columns,main,cpu,265.6841,268.0759,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,host matrix,main,cpu,0.2655,0.2656,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,symbolic,main,cpu,0.2679,116.1492,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,factor storage,main,cpu,116.1499,116.6364,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,top selection,main,cpu,116.6596,118.2100,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,bottom forest,main,cpu,118.2108,118.6497,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,worker stacks,main,cpu,118.6501,120.1647,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,device factor,main,cpu,120.2471,120.5084,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,structure,structure,cpu,116.6572,121.8401,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,upload factor,device entries,cpu,120.5248,125.2534,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,A's top entries and index arrays,device entries,pcie,120.5248,125.2534,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,maps alloc,nested (thread 1),cpu,127.3150,127.6189,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,maps alloc,nested (thread 2),cpu,127.4150,127.9455,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,maps,nested (thread 1),cpu,127.6913,131.4914,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,maps,nested (thread 2),cpu,128.3295,132.5412,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,amalgamation,nested (thread 1),cpu,120.5250,132.9113,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,top merge,nested (thread 1),cpu,120.5248,132.9115,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,merge maps,structure,cpu,121.8412,134.0000,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,positions,nested (thread 1),cpu,133.9774,134.4018,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,copy entries,entries,cpu,120.2438,134.6024,,host trace thread 5
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,levels,structure,cpu,134.0005,134.9128,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,device buffers,nested (thread 1),cpu,134.4020,135.9083,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,merged plan,nested (thread 1),cpu,132.9118,135.9087,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,plan (top),main,cpu,120.5244,135.9091,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,top batch,main,cpu,135.9095,136.0315,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,structure upload,structure,cpu,134.9175,148.2737,,host trace thread 7
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,solve structure,structure,pcie,134.9175,148.2737,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,bottom (CPU),subtrees,cpu,134.6061,150.1665,,host trace thread 7
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,upload bottom,main,cpu,150.1812,155.0448,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,subtrees' factors and updates,main,pcie,150.1812,155.0448,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,merge gather,nested (thread 1),cpu,155.0496,155.0862,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,fronts,nested (thread 1),cpu,155.0865,156.9798,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,merge scatter,nested (thread 1),cpu,156.9799,156.9978,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,top (GPU),main,cpu,155.0452,156.9981,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,factor upload,nested (thread 1),cpu,157.0180,157.0181,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,merged factor,nested (thread 1),cpu,157.0182,157.3732,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,upload structure,nested (thread 1),cpu,157.3737,157.3737,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,solve setup,main,cpu,157.0065,157.8955,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,kernels,nested (thread 1),cpu,158.3215,159.9250,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,columns,nested (thread 1),cpu,159.9282,160.4176,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,operators,main,cpu,158.0299,160.4212,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,memory check,main,cpu,160.4289,160.4631,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,allocate,main,cpu,160.4637,161.3909,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,sweep plan,nested (thread 1),cpu,161.7625,162.2176,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,sweep plan,nested (thread 1),cpu,162.2212,162.2214,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,top columns,nested (thread 1),cpu,162.2818,162.4517,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,layer plan,nested (thread 3),cpu,162.2826,164.6511,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,sweep plan,nested (thread 1),cpu,166.5567,166.5569,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,first descendants,nested (thread 1),cpu,175.8694,175.9918,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,sweep plan,nested (thread 1),cpu,175.9933,175.9936,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,slot plan,nested (thread 3),cpu,164.6525,269.2307,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,plans (ahead),nested (thread 1),cpu,186.3059,269.2599,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,sweep plan,nested (thread 1),cpu,269.2608,269.2610,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,layer plan,nested (thread 1),cpu,269.2718,269.2786,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,slot plan,nested (thread 1),cpu,269.2787,269.2843,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,closure,main,cpu,161.4257,269.3446,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,free,main,cpu,269.3500,269.4215,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,relabel columns,main,cpu,269.4218,273.8365,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,top,gpu,gpu,155.0452,160.5373,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,merged factor and operators,gpu,gpu,160.5373,161.2045,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,X <- U*,gpu,gpu,161.4243,197.0222,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,X <- XL*,gpu,gpu,197.0222,312.5040,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,relabel,gpu,gpu,312.5040,321.4872,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,start,event,event,0.0135,0.0135,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,top_done,event,event,157.0064,160.5373,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,merged_done,event,event,157.9036,160.6878,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,operators_done,event,event,160.4282,161.2045,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,closure_start,event,event,161.4255,161.4243,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,U_done,event,event,175.8521,197.0222,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,closure_done,event,event,269.3497,312.5040,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,4,321.5301,relabel_done,event,event,273.8437,321.4872,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,host matrix,main,cpu,0.2585,0.2586,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,symbolic,main,cpu,0.2671,115.6915,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,factor storage,main,cpu,115.6925,115.7256,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,top selection,main,cpu,115.7487,117.3313,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,bottom forest,main,cpu,117.3323,117.7806,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,worker stacks,main,cpu,117.7811,118.6535,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,device factor,main,cpu,118.7412,119.0397,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,structure,structure,cpu,115.7434,120.9212,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,upload factor,device entries,cpu,119.0537,123.4651,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,A's top entries and index arrays,device entries,pcie,119.0537,123.4651,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,maps alloc,nested (thread 1),cpu,124.2086,124.9610,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,maps alloc,nested (thread 2),cpu,126.5594,126.8298,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,maps,nested (thread 1),cpu,125.0358,128.4296,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,maps,nested (thread 2),cpu,127.2045,129.4818,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,amalgamation,nested (thread 1),cpu,119.0579,129.8113,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,top merge,nested (thread 1),cpu,119.0577,129.8117,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,merge maps,structure,cpu,120.9221,130.9299,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,positions,nested (thread 1),cpu,130.8728,131.4832,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,levels,structure,cpu,130.9304,131.8473,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,device buffers,nested (thread 1),cpu,131.4836,133.0435,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,merged plan,nested (thread 1),cpu,129.8120,133.0439,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,plan (top),main,cpu,119.0571,133.0443,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,top batch,main,cpu,133.0448,133.1746,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,copy entries,entries,cpu,118.7391,133.7571,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,bottom (CPU),subtrees,cpu,133.7615,149.2838,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,upload bottom,main,cpu,149.2977,154.4281,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,subtrees' factors and updates,main,pcie,149.2977,154.4281,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,merge gather,nested (thread 1),cpu,154.4329,154.4691,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,fronts,nested (thread 1),cpu,154.4693,156.3741,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,merge scatter,nested (thread 1),cpu,156.3742,156.3923,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,top (GPU),main,cpu,154.4287,156.3926,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,factor upload,nested (thread 1),cpu,156.4062,156.4062,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,merged factor,nested (thread 1),cpu,156.4064,156.7778,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,upload structure,nested (thread 1),cpu,156.7781,156.7782,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,solve setup,main,cpu,156.3943,157.3143,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,kernels,nested (thread 1),cpu,157.7439,159.3470,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,columns,nested (thread 1),cpu,159.3473,159.5798,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,operators,main,cpu,157.4438,159.5850,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,memory check,main,cpu,159.5852,159.6257,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,allocate,main,cpu,159.6314,160.7587,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,sweep plan,nested (thread 1),cpu,160.9455,161.4087,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,sweep plan,nested (thread 1),cpu,161.4127,161.4129,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,top columns,nested (thread 1),cpu,161.4718,161.6535,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,layer plan,nested (thread 3),cpu,161.4715,163.8592,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,sweep plan,nested (thread 1),cpu,165.6813,165.6815,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,first descendants,nested (thread 1),cpu,171.0200,171.2906,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,sweep plan,nested (thread 1),cpu,171.2923,171.2925,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,slot plan,nested (thread 3),cpu,163.8603,264.9646,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,plans (ahead),nested (thread 1),cpu,181.5075,264.9930,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,sweep plan,nested (thread 1),cpu,264.9938,264.9940,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,layer plan,nested (thread 1),cpu,265.0039,265.0110,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,slot plan,nested (thread 1),cpu,265.0112,265.0169,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,closure,main,cpu,160.7894,265.0780,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,free,main,cpu,265.0784,265.1543,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,5,316.4320,relabel columns,main,cpu,265.1545,269.7865,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,host matrix,main,cpu,0.2630,0.2632,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,symbolic,main,cpu,0.2653,114.2813,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,factor storage,main,cpu,114.2821,114.3144,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,top selection,main,cpu,114.3398,115.8788,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,bottom forest,main,cpu,115.8798,116.3187,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,worker stacks,main,cpu,116.3191,117.1916,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,device factor,main,cpu,117.2770,117.4695,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,structure,structure,cpu,114.3319,119.3951,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,upload factor,device entries,cpu,117.4878,121.9304,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,A's top entries and index arrays,device entries,pcie,117.4878,121.9304,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,maps alloc,nested (thread 1),cpu,124.2216,124.5009,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,maps alloc,nested (thread 2),cpu,124.9266,125.2600,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,maps,nested (thread 1),cpu,124.5652,127.9233,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,maps,nested (thread 2),cpu,125.6396,128.4808,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,amalgamation,nested (thread 1),cpu,117.4865,129.2483,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,top merge,nested (thread 1),cpu,117.4863,129.2485,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,merge maps,structure,cpu,119.3960,129.8975,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,positions,nested (thread 1),cpu,130.3347,130.6618,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,levels,structure,cpu,129.8979,130.7952,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,device buffers,nested (thread 1),cpu,130.6621,132.0047,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,merged plan,nested (thread 1),cpu,129.2488,132.0051,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,plan (top),main,cpu,117.4857,132.0055,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,top batch,main,cpu,132.0060,132.1183,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,copy entries,entries,cpu,117.2700,132.2225,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,structure upload,structure,cpu,130.8011,145.4891,,host trace thread 7
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,solve structure,structure,pcie,130.8011,145.4891,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,bottom (CPU),subtrees,cpu,132.2274,147.6214,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,upload bottom,main,cpu,147.6354,152.5959,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,subtrees' factors and updates,main,pcie,147.6354,152.5959,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,merge gather,nested (thread 1),cpu,152.6000,152.6369,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,fronts,nested (thread 1),cpu,152.6371,154.5206,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,merge scatter,nested (thread 1),cpu,154.5208,154.5391,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,top (GPU),main,cpu,152.5964,154.5396,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,factor upload,nested (thread 1),cpu,154.5607,154.5607,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,merged factor,nested (thread 1),cpu,154.5609,154.9419,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,upload structure,nested (thread 1),cpu,154.9422,154.9422,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,solve setup,main,cpu,154.5487,155.3669,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,kernels,nested (thread 1),cpu,155.7997,157.1809,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,columns,nested (thread 1),cpu,157.1841,157.6853,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,operators,main,cpu,155.5065,157.6889,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,memory check,main,cpu,157.6967,157.7309,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,allocate,main,cpu,157.7317,158.5567,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,sweep plan,nested (thread 1),cpu,158.9132,159.3583,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,sweep plan,nested (thread 1),cpu,159.3620,159.3621,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,top columns,nested (thread 1),cpu,159.4247,159.6033,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,layer plan,nested (thread 3),cpu,159.4275,161.8144,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,sweep plan,nested (thread 1),cpu,163.7222,163.7224,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,first descendants,nested (thread 1),cpu,169.0623,169.3775,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,sweep plan,nested (thread 1),cpu,169.3791,169.3794,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,slot plan,nested (thread 3),cpu,161.8154,262.8730,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,plans (ahead),nested (thread 1),cpu,179.6424,262.9022,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,sweep plan,nested (thread 1),cpu,262.9030,262.9032,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,layer plan,nested (thread 1),cpu,262.9137,262.9209,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,slot plan,nested (thread 1),cpu,262.9211,262.9271,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,closure,main,cpu,158.5899,262.9870,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,free,main,cpu,262.9918,263.0608,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,relabel columns,main,cpu,263.0611,267.7435,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,top,gpu,gpu,152.5964,158.0874,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,merged factor and operators,gpu,gpu,158.0874,158.7543,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,X <- U*,gpu,gpu,158.7568,190.3117,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,X <- XL*,gpu,gpu,190.3117,305.8956,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,relabel,gpu,gpu,305.8956,314.4719,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,start,event,event,0.0124,0.0124,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,top_done,event,event,154.5485,158.0874,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,merged_done,event,event,155.3744,158.2379,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,operators_done,event,event,157.6959,158.7543,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,closure_start,event,event,158.5896,158.7568,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,U_done,event,event,169.0448,190.3117,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,closure_done,event,event,262.9914,305.8956,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,5,315.6591,relabel_done,event,event,267.7496,314.4719,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,host matrix,main,cpu,0.2625,0.2627,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,symbolic,main,cpu,0.2702,115.6817,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,factor storage,main,cpu,115.6825,115.7207,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,top selection,main,cpu,115.7450,117.3168,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,bottom forest,main,cpu,117.3177,117.7538,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,worker stacks,main,cpu,117.7541,118.6255,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,device factor,main,cpu,118.7057,118.7391,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,structure,structure,cpu,115.7383,120.8248,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,upload factor,device entries,cpu,118.7467,122.8638,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,A's top entries and index arrays,device entries,pcie,118.7467,122.8638,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,maps alloc,nested (thread 1),cpu,124.5482,124.9073,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,maps alloc,nested (thread 2),cpu,126.4460,126.8133,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,maps,nested (thread 1),cpu,124.9820,128.7995,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,amalgamation,nested (thread 1),cpu,118.7419,130.2212,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,top merge,nested (thread 1),cpu,118.7418,130.2216,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,maps,nested (thread 2),cpu,127.2011,131.3399,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,positions,nested (thread 1),cpu,131.3204,131.7258,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,merge maps,structure,cpu,120.8257,132.7577,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,device buffers,nested (thread 1),cpu,131.7262,132.8474,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,merged plan,nested (thread 1),cpu,130.2219,132.8479,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,plan (top),main,cpu,118.7414,132.8484,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,top batch,main,cpu,132.8489,132.9582,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,levels,structure,cpu,132.7582,133.6618,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,copy entries,entries,cpu,118.7010,133.6680,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,bottom (CPU),subtrees,cpu,133.6723,149.1821,,host trace thread 6
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,upload bottom,main,cpu,149.1956,154.2178,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,subtrees' factors and updates,main,pcie,149.1956,154.2178,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,merge gather,nested (thread 1),cpu,154.2237,154.2619,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,fronts,nested (thread 1),cpu,154.2621,156.1760,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,merge scatter,nested (thread 1),cpu,156.1762,156.1950,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,top (GPU),main,cpu,154.2184,156.1953,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,factor upload,nested (thread 1),cpu,156.2096,156.2097,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,merged factor,nested (thread 1),cpu,156.2098,156.6445,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,upload structure,nested (thread 1),cpu,156.6449,156.6449,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,solve setup,main,cpu,156.1969,157.1726,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,kernels,nested (thread 1),cpu,157.6094,158.8844,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,columns,nested (thread 1),cpu,158.8847,159.1169,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,operators,main,cpu,157.3022,159.1224,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,memory check,main,cpu,159.1226,159.1717,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,allocate,main,cpu,159.1778,160.0873,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,sweep plan,nested (thread 1),cpu,160.6436,161.1123,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,sweep plan,nested (thread 1),cpu,161.1163,161.1165,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,top columns,nested (thread 1),cpu,161.1843,161.3688,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,sweep plan,nested (thread 1),cpu,163.8091,163.8093,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,layer plan,nested (thread 3),cpu,161.1856,163.8639,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,first descendants,nested (thread 1),cpu,169.1298,169.3098,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,sweep plan,nested (thread 1),cpu,169.3114,169.3117,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,slot plan,nested (thread 3),cpu,163.8651,263.0478,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,plans (ahead),nested (thread 1),cpu,179.4442,263.0765,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,sweep plan,nested (thread 1),cpu,263.0775,263.0778,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,layer plan,nested (thread 1),cpu,263.0878,263.0943,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,slot plan,nested (thread 1),cpu,263.0945,263.1006,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,closure,main,cpu,160.1209,263.1662,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,free,main,cpu,263.1668,263.2393,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,6,314.8928,relabel columns,main,cpu,263.2396,267.9505,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,host matrix,main,cpu,0.2615,0.2616,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,symbolic,main,cpu,0.2640,115.5998,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,factor storage,main,cpu,115.6006,115.6426,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,top selection,main,cpu,115.6720,117.0579,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,bottom forest,main,cpu,117.0588,117.5010,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,worker stacks,main,cpu,117.5015,118.3674,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,device factor,main,cpu,118.4477,118.6325,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,structure,structure,cpu,115.6633,120.7940,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,upload factor,device entries,cpu,118.6461,123.0878,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,A's top entries and index arrays,device entries,pcie,118.6461,123.0878,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,maps alloc,nested (thread 1),cpu,124.5778,124.8564,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,maps alloc,nested (thread 2),cpu,126.2555,126.5138,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,maps,nested (thread 1),cpu,124.9292,127.6387,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,amalgamation,nested (thread 1),cpu,118.6481,129.0529,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,top merge,nested (thread 1),cpu,118.6480,129.0532,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,positions,nested (thread 1),cpu,130.1668,130.9111,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,maps,nested (thread 2),cpu,126.8867,130.9440,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,device buffers,nested (thread 1),cpu,130.9116,132.0105,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,merged plan,nested (thread 1),cpu,129.0535,132.0109,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,plan (top),main,cpu,118.6476,132.0114,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,top batch,main,cpu,132.0119,132.1187,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,merge maps,structure,cpu,120.7950,132.3531,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,levels,structure,cpu,132.3535,133.2471,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,copy entries,entries,cpu,118.4454,133.5766,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,structure upload,structure,cpu,133.2528,146.5200,,host trace thread 5
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,solve structure,structure,pcie,133.2528,146.5200,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,bottom (CPU),subtrees,cpu,133.5805,148.1069,,host trace thread 7
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,upload bottom,main,cpu,148.1211,153.0782,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,subtrees' factors and updates,main,pcie,148.1211,153.0782,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,merge gather,nested (thread 1),cpu,153.0826,153.1196,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,fronts,nested (thread 1),cpu,153.1199,155.0055,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,merge scatter,nested (thread 1),cpu,155.0057,155.0232,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,top (GPU),main,cpu,153.0787,155.0235,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,factor upload,nested (thread 1),cpu,155.0432,155.0433,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,merged factor,nested (thread 1),cpu,155.0434,155.3853,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,upload structure,nested (thread 1),cpu,155.3858,155.3858,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,solve setup,main,cpu,155.0316,155.9686,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,kernels,nested (thread 1),cpu,156.4553,157.7425,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,columns,nested (thread 1),cpu,157.7457,158.2389,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,operators,main,cpu,156.1043,158.2427,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,memory check,main,cpu,158.2505,158.2847,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,allocate,main,cpu,158.2854,159.1826,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,sweep plan,nested (thread 1),cpu,159.5603,160.0097,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,sweep plan,nested (thread 1),cpu,160.0130,160.0131,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,top columns,nested (thread 1),cpu,160.0714,160.2527,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,layer plan,nested (thread 3),cpu,160.0710,162.4650,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,sweep plan,nested (thread 1),cpu,164.3433,164.3435,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,first descendants,nested (thread 1),cpu,169.6701,169.9792,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,sweep plan,nested (thread 1),cpu,169.9808,169.9811,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,slot plan,nested (thread 3),cpu,162.4660,263.5962,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,plans (ahead),nested (thread 1),cpu,180.3120,263.6254,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,sweep plan,nested (thread 1),cpu,263.6264,263.6266,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,layer plan,nested (thread 1),cpu,263.6366,263.6433,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,slot plan,nested (thread 1),cpu,263.6434,263.6491,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,closure,main,cpu,159.2170,263.7121,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,free,main,cpu,263.7172,263.7879,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,relabel columns,main,cpu,263.7881,268.3435,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,top,gpu,gpu,153.0787,158.5687,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,merged factor and operators,gpu,gpu,158.5687,159.2410,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,X <- U*,gpu,gpu,159.2437,190.8963,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,X <- XL*,gpu,gpu,190.8963,306.8584,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,relabel,gpu,gpu,306.8584,315.8203,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,start,event,event,0.0122,0.0122,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,top_done,event,event,155.0314,158.5687,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,merged_done,event,event,155.9758,158.7214,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,operators_done,event,event,158.2495,159.2410,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,closure_start,event,event,159.2169,159.2437,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,U_done,event,event,169.6497,190.8963,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,closure_done,event,event,263.7170,306.8584,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,6,315.8682,relabel_done,event,event,268.3500,315.8203,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,host matrix,main,cpu,0.2520,0.2521,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,symbolic,main,cpu,0.2584,116.4411,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,factor storage,main,cpu,116.4421,116.4733,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,top selection,main,cpu,116.4958,118.0654,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,bottom forest,main,cpu,118.0664,118.5040,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,worker stacks,main,cpu,118.5044,119.3892,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,device factor,main,cpu,119.4703,119.8347,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,structure,structure,cpu,116.4904,121.6944,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,upload factor,device entries,cpu,119.8486,124.2771,,host trace thread 5
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,A's top entries and index arrays,device entries,pcie,119.8486,124.2771,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,maps alloc,nested (thread 1),cpu,126.7322,126.9319,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,maps alloc,nested (thread 2),cpu,127.3608,127.7210,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,maps,nested (thread 1),cpu,127.0046,129.3816,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,maps,nested (thread 2),cpu,128.0918,130.4936,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,amalgamation,nested (thread 1),cpu,119.8525,130.7945,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,top merge,nested (thread 1),cpu,119.8523,130.7949,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,merge maps,structure,cpu,121.6955,131.9062,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,positions,nested (thread 1),cpu,131.7799,132.4018,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,levels,structure,cpu,131.9065,132.8110,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,device buffers,nested (thread 1),cpu,132.4022,133.8926,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,merged plan,nested (thread 1),cpu,130.7951,133.8930,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,plan (top),main,cpu,119.8518,133.8935,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,top batch,main,cpu,133.8939,134.0229,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,copy entries,entries,cpu,119.4655,134.8192,,host trace thread 6
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,bottom (CPU),subtrees,cpu,134.8241,149.3516,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,upload bottom,main,cpu,149.3656,154.4694,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,subtrees' factors and updates,main,pcie,149.3656,154.4694,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,merge gather,nested (thread 1),cpu,154.4772,154.5136,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,fronts,nested (thread 1),cpu,154.5139,156.4196,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,merge scatter,nested (thread 1),cpu,156.4197,156.4419,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,top (GPU),main,cpu,154.4709,156.4423,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,factor upload,nested (thread 1),cpu,156.4558,156.4559,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,merged factor,nested (thread 1),cpu,156.4561,156.7667,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,upload structure,nested (thread 1),cpu,156.7671,156.7671,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,solve setup,main,cpu,156.4442,157.2975,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,kernels,nested (thread 1),cpu,157.7388,159.3330,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,columns,nested (thread 1),cpu,159.3334,159.8380,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,operators,main,cpu,157.4337,159.8438,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,memory check,main,cpu,159.8440,159.8861,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,allocate,main,cpu,159.8918,160.8054,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,sweep plan,nested (thread 1),cpu,161.1757,161.6222,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,sweep plan,nested (thread 1),cpu,161.6259,161.6261,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,top columns,nested (thread 1),cpu,161.6881,161.8686,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,layer plan,nested (thread 3),cpu,161.6897,164.0965,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,sweep plan,nested (thread 1),cpu,166.0332,166.0335,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,first descendants,nested (thread 1),cpu,171.4701,171.7081,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,sweep plan,nested (thread 1),cpu,171.7096,171.7098,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,slot plan,nested (thread 3),cpu,164.0977,265.6150,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,plans (ahead),nested (thread 1),cpu,182.0508,265.6447,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,sweep plan,nested (thread 1),cpu,265.6457,265.6458,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,layer plan,nested (thread 1),cpu,265.6562,265.6633,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,slot plan,nested (thread 1),cpu,265.6634,265.6691,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,closure,main,cpu,160.8388,265.7307,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,free,main,cpu,265.7310,265.8040,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,7,317.2571,relabel columns,main,cpu,265.8042,270.5215,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,host matrix,main,cpu,0.2603,0.2605,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,symbolic,main,cpu,0.2627,114.4937,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,factor storage,main,cpu,114.4946,114.5223,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,top selection,main,cpu,114.5447,116.1116,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,bottom forest,main,cpu,116.1127,116.5632,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,worker stacks,main,cpu,116.5636,117.4135,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,device factor,main,cpu,117.5009,117.5307,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,structure,structure,cpu,114.5401,119.5769,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,upload factor,device entries,cpu,117.5378,121.6793,,host trace thread 6
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,A's top entries and index arrays,device entries,pcie,117.5378,121.6793,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,maps alloc,nested (thread 1),cpu,123.2563,123.4849,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,maps alloc,nested (thread 2),cpu,125.1397,125.5249,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,maps,nested (thread 1),cpu,123.5686,125.9958,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,amalgamation,nested (thread 1),cpu,117.5338,127.3799,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,top merge,nested (thread 1),cpu,117.5336,127.3802,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,maps,nested (thread 2),cpu,125.9005,129.9563,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,merge maps,structure,cpu,119.5780,131.3853,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,positions,nested (thread 1),cpu,127.8513,132.1169,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,levels,structure,cpu,131.3857,132.2845,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,copy entries,entries,cpu,117.4989,132.9704,,host trace thread 5
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,device buffers,nested (thread 1),cpu,132.1175,133.6365,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,merged plan,nested (thread 1),cpu,127.3805,133.6369,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,plan (top),main,cpu,117.5332,133.6373,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,top batch,main,cpu,133.6377,133.7493,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,structure upload,structure,cpu,132.2900,146.1781,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,solve structure,structure,pcie,132.2900,146.1781,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,bottom (CPU),subtrees,cpu,132.9745,148.2767,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,upload bottom,main,cpu,148.2842,153.4840,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,subtrees' factors and updates,main,pcie,148.2842,153.4840,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,merge gather,nested (thread 1),cpu,153.4916,153.5284,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,fronts,nested (thread 1),cpu,153.5286,155.4315,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,merge scatter,nested (thread 1),cpu,155.4317,155.4497,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,top (GPU),main,cpu,153.4846,155.4501,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,factor upload,nested (thread 1),cpu,155.4711,155.4711,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,merged factor,nested (thread 1),cpu,155.4714,155.9072,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,upload structure,nested (thread 1),cpu,155.9076,155.9077,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,solve setup,main,cpu,155.4584,156.4156,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,kernels,nested (thread 1),cpu,156.8413,158.4163,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,columns,nested (thread 1),cpu,158.4198,158.9036,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,operators,main,cpu,156.5473,158.9070,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,memory check,main,cpu,158.9147,158.9496,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,allocate,main,cpu,158.9503,159.8435,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,sweep plan,nested (thread 1),cpu,160.2107,160.6636,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,sweep plan,nested (thread 1),cpu,160.6670,160.6672,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,top columns,nested (thread 1),cpu,160.7276,160.9045,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,sweep plan,nested (thread 1),cpu,161.9648,161.9649,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,layer plan,nested (thread 4),cpu,160.7306,167.6065,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,first descendants,nested (thread 1),cpu,167.5495,167.8557,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,sweep plan,nested (thread 1),cpu,167.8572,167.8575,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,slot plan,nested (thread 4),cpu,167.6075,269.7698,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,plans (ahead),nested (thread 1),cpu,177.9224,269.7992,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,sweep plan,nested (thread 1),cpu,269.8001,269.8003,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,layer plan,nested (thread 1),cpu,269.8108,269.8179,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,slot plan,nested (thread 1),cpu,269.8180,269.8243,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,closure,main,cpu,159.8806,269.8852,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,free,main,cpu,269.8902,269.9598,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,relabel columns,main,cpu,269.9601,274.3492,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,top,gpu,gpu,153.4846,158.9764,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,merged factor and operators,gpu,gpu,158.9764,159.6488,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,X <- U*,gpu,gpu,159.8785,190.3199,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,X <- XL*,gpu,gpu,190.3199,309.7573,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,relabel,gpu,gpu,309.7573,318.3458,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,start,event,event,0.0129,0.0129,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,top_done,event,event,155.4582,158.9764,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,merged_done,event,event,156.4228,159.1280,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,operators_done,event,event,158.9139,159.6488,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,closure_start,event,event,159.8804,159.8785,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,U_done,event,event,167.5324,190.3199,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,closure_done,event,event,269.8899,309.7573,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,7,318.3921,relabel_done,event,event,274.3555,318.3458,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,host matrix,main,cpu,0.2511,0.2513,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,symbolic,main,cpu,0.2572,114.1100,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,factor storage,main,cpu,114.1107,114.1371,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,top selection,main,cpu,114.1608,115.5589,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,bottom forest,main,cpu,115.5598,116.0101,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,worker stacks,main,cpu,116.0104,116.8595,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,device factor,main,cpu,116.9477,117.2320,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,structure,structure,cpu,114.1532,119.2256,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,upload factor,device entries,cpu,117.2461,121.3867,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,A's top entries and index arrays,device entries,pcie,117.2461,121.3867,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,maps alloc,nested (thread 1),cpu,123.7757,124.1079,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,maps alloc,nested (thread 2),cpu,124.7210,125.0160,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,maps,nested (thread 1),cpu,124.1848,126.8159,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,amalgamation,nested (thread 1),cpu,117.2491,128.0305,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,top merge,nested (thread 1),cpu,117.2489,128.0309,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,maps,nested (thread 2),cpu,125.3901,129.3021,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,positions,nested (thread 1),cpu,128.8549,129.6126,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,device buffers,nested (thread 1),cpu,129.6129,130.6806,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,merged plan,nested (thread 1),cpu,128.0311,130.6810,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,plan (top),main,cpu,117.2485,130.6814,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,merge maps,structure,cpu,119.2266,130.7072,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,top batch,main,cpu,130.6818,130.8016,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,levels,structure,cpu,130.7077,131.6078,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,copy entries,entries,cpu,116.9460,132.5090,,host trace thread 7
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,bottom (CPU),subtrees,cpu,132.5138,146.8767,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,upload bottom,main,cpu,146.8829,151.9224,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,subtrees' factors and updates,main,pcie,146.8829,151.9224,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,merge gather,nested (thread 1),cpu,151.9285,151.9643,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,fronts,nested (thread 1),cpu,151.9645,153.9053,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,merge scatter,nested (thread 1),cpu,153.9054,153.9243,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,top (GPU),main,cpu,151.9240,153.9246,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,factor upload,nested (thread 1),cpu,153.9385,153.9385,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,merged factor,nested (thread 1),cpu,153.9387,154.2791,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,upload structure,nested (thread 1),cpu,154.2797,154.2797,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,solve setup,main,cpu,153.9265,154.4542,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,kernels,nested (thread 1),cpu,154.9446,156.2445,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,columns,nested (thread 1),cpu,156.2449,156.4631,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,operators,main,cpu,154.5810,156.4684,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,memory check,main,cpu,156.4686,156.5080,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,allocate,main,cpu,156.5136,157.4117,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,sweep plan,nested (thread 1),cpu,157.7839,158.2380,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,sweep plan,nested (thread 1),cpu,158.2415,158.2418,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,top columns,nested (thread 1),cpu,158.3017,158.4846,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,layer plan,nested (thread 3),cpu,158.3015,160.6717,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,sweep plan,nested (thread 1),cpu,162.4734,162.4737,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,first descendants,nested (thread 1),cpu,167.8689,168.1862,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,sweep plan,nested (thread 1),cpu,168.1877,168.1879,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,slot plan,nested (thread 3),cpu,160.6729,261.5339,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,plans (ahead),nested (thread 1),cpu,178.4985,261.5608,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,sweep plan,nested (thread 1),cpu,261.5622,261.5625,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,layer plan,nested (thread 1),cpu,261.5726,261.5803,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,slot plan,nested (thread 1),cpu,261.5805,261.5870,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,closure,main,cpu,157.4412,261.6498,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,free,main,cpu,261.6501,261.7252,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,8,313.3808,relabel columns,main,cpu,261.7254,266.9088,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,host matrix,main,cpu,0.2674,0.2674,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,symbolic,main,cpu,0.2698,116.1418,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,factor storage,main,cpu,116.1427,116.1736,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,top selection,main,cpu,116.1965,117.7504,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,bottom forest,main,cpu,117.7514,118.1995,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,worker stacks,main,cpu,118.1998,119.0646,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,device factor,main,cpu,119.1439,119.3324,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,structure,structure,cpu,116.1914,121.2357,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,upload factor,device entries,cpu,119.3467,123.7295,,host trace thread 6
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,A's top entries and index arrays,device entries,pcie,119.3467,123.7295,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,maps alloc,nested (thread 1),cpu,124.5651,124.8365,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,maps alloc,nested (thread 2),cpu,126.8090,127.1613,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,maps,nested (thread 1),cpu,124.9065,128.2683,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,amalgamation,nested (thread 1),cpu,119.3480,129.7212,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,top merge,nested (thread 1),cpu,119.3478,129.7215,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,positions,nested (thread 1),cpu,130.8204,131.5714,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,maps,nested (thread 2),cpu,127.5473,131.7407,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,device buffers,nested (thread 1),cpu,131.5718,132.6735,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,merged plan,nested (thread 1),cpu,129.7218,132.6739,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,plan (top),main,cpu,119.3471,132.6743,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,top batch,main,cpu,132.6748,132.7799,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,merge maps,structure,cpu,121.2366,133.1737,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,levels,structure,cpu,133.1743,134.0753,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,copy entries,entries,cpu,119.1406,134.3072,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,structure upload,structure,cpu,134.0808,148.1380,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,solve structure,structure,pcie,134.0808,148.1380,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,bottom (CPU),subtrees,cpu,134.3121,149.0668,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,upload bottom,main,cpu,149.0788,154.1425,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,subtrees' factors and updates,main,pcie,149.0788,154.1425,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,merge gather,nested (thread 1),cpu,154.1476,154.1846,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,fronts,nested (thread 1),cpu,154.1848,156.0642,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,merge scatter,nested (thread 1),cpu,156.0644,156.0819,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,top (GPU),main,cpu,154.1431,156.0825,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,factor upload,nested (thread 1),cpu,156.1025,156.1025,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,merged factor,nested (thread 1),cpu,156.1027,156.5469,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,upload structure,nested (thread 1),cpu,156.5474,156.5474,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,solve setup,main,cpu,156.0913,157.0603,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,kernels,nested (thread 1),cpu,157.5117,159.0908,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,columns,nested (thread 1),cpu,159.0940,159.5997,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,operators,main,cpu,157.1949,159.6032,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,memory check,main,cpu,159.6106,159.6507,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,allocate,main,cpu,159.6513,160.5232,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,sweep plan,nested (thread 1),cpu,160.9026,161.3394,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,sweep plan,nested (thread 1),cpu,161.3429,161.3431,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,top columns,nested (thread 1),cpu,161.4024,161.5784,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,layer plan,nested (thread 3),cpu,161.4021,163.8503,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,sweep plan,nested (thread 1),cpu,165.5936,165.5938,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,first descendants,nested (thread 1),cpu,170.9715,171.2871,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,sweep plan,nested (thread 1),cpu,171.2888,171.2890,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,slot plan,nested (thread 3),cpu,163.8512,264.9661,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,plans (ahead),nested (thread 1),cpu,181.7021,264.9917,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,sweep plan,nested (thread 1),cpu,264.9925,264.9927,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,layer plan,nested (thread 1),cpu,265.0026,265.0090,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,slot plan,nested (thread 1),cpu,265.0092,265.0149,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,closure,main,cpu,160.5581,265.0755,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,free,main,cpu,265.0809,265.1484,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,relabel columns,main,cpu,265.1486,269.7206,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,top,gpu,gpu,154.1431,159.6343,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,merged factor and operators,gpu,gpu,159.6343,160.3043,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,X <- U*,gpu,gpu,160.5547,192.1679,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,X <- XL*,gpu,gpu,192.1679,308.1174,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,relabel,gpu,gpu,308.1174,317.0606,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,start,event,event,0.0131,0.0131,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,top_done,event,event,156.0912,159.6343,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,merged_done,event,event,157.0684,159.7859,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,operators_done,event,event,159.6099,160.3043,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,closure_start,event,event,160.5580,160.5547,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,U_done,event,event,170.9548,192.1679,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,closure_done,event,event,265.0806,308.1174,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,8,317.1135,relabel_done,event,event,269.7272,317.0606,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,host matrix,main,cpu,0.2552,0.2554,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,symbolic,main,cpu,0.2626,114.9643,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,factor storage,main,cpu,114.9650,114.9947,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,top selection,main,cpu,115.0164,116.4722,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,bottom forest,main,cpu,116.4733,116.8097,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,worker stacks,main,cpu,116.8101,117.6709,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,device factor,main,cpu,117.7600,117.9649,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,structure,structure,cpu,115.0119,120.0520,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,upload factor,device entries,cpu,117.9829,121.9318,,host trace thread 6
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,A's top entries and index arrays,device entries,pcie,117.9829,121.9318,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,maps alloc,nested (thread 1),cpu,123.5031,123.5557,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,maps alloc,nested (thread 2),cpu,125.6450,125.9468,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,maps,nested (thread 1),cpu,123.6207,127.1298,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,amalgamation,nested (thread 1),cpu,117.9821,128.5087,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,top merge,nested (thread 1),cpu,117.9819,128.5090,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,maps,nested (thread 2),cpu,126.3061,129.8862,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,positions,nested (thread 1),cpu,129.6216,130.3853,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,merge maps,structure,cpu,120.0528,131.3251,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,device buffers,nested (thread 1),cpu,130.3858,131.5932,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,merged plan,nested (thread 1),cpu,128.5094,131.5936,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,plan (top),main,cpu,117.9814,131.5941,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,top batch,main,cpu,131.5946,131.6985,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,levels,structure,cpu,131.3257,132.2255,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,copy entries,entries,cpu,117.7528,132.8856,,host trace thread 5
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,bottom (CPU),subtrees,cpu,132.8903,147.5975,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,upload bottom,main,cpu,147.6018,152.7634,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,subtrees' factors and updates,main,pcie,147.6018,152.7634,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,merge gather,nested (thread 1),cpu,152.7701,152.8072,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,fronts,nested (thread 1),cpu,152.8074,154.7071,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,merge scatter,nested (thread 1),cpu,154.7074,154.7255,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,top (GPU),main,cpu,152.7655,154.7258,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,factor upload,nested (thread 1),cpu,154.7386,154.7387,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,merged factor,nested (thread 1),cpu,154.7389,155.0398,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,upload structure,nested (thread 1),cpu,155.0403,155.0403,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,solve setup,main,cpu,154.7276,155.5606,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,kernels,nested (thread 1),cpu,156.0016,157.4920,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,columns,nested (thread 1),cpu,157.4924,157.9945,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,operators,main,cpu,155.6915,158.0008,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,memory check,main,cpu,158.0011,158.0379,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,allocate,main,cpu,158.0438,158.9390,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,sweep plan,nested (thread 1),cpu,159.3138,159.7613,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,sweep plan,nested (thread 1),cpu,159.7645,159.7647,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,top columns,nested (thread 1),cpu,159.8222,160.0031,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,layer plan,nested (thread 3),cpu,159.8220,162.2105,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,sweep plan,nested (thread 1),cpu,164.0113,164.0115,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,first descendants,nested (thread 1),cpu,169.5360,169.7905,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,sweep plan,nested (thread 1),cpu,169.7920,169.7923,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,slot plan,nested (thread 3),cpu,162.2116,263.6689,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,plans (ahead),nested (thread 1),cpu,180.1758,263.6940,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,sweep plan,nested (thread 1),cpu,263.6954,263.6956,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,layer plan,nested (thread 1),cpu,263.7067,263.7139,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,slot plan,nested (thread 1),cpu,263.7141,263.7207,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,closure,main,cpu,158.9706,263.7856,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,free,main,cpu,263.7859,263.8613,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,9,315.3779,relabel columns,main,cpu,263.8615,268.5617,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,host matrix,main,cpu,0.2678,0.2680,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,symbolic,main,cpu,0.2702,116.3017,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,factor storage,main,cpu,116.3026,116.3280,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,top selection,main,cpu,116.3509,117.8918,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,bottom forest,main,cpu,117.8926,118.3336,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,worker stacks,main,cpu,118.3340,119.1832,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,device factor,main,cpu,119.2705,119.5293,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,structure,structure,cpu,116.3481,121.5242,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,upload factor,device entries,cpu,119.5430,124.4112,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,A's top entries and index arrays,device entries,pcie,119.5430,124.4112,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,maps alloc,nested (thread 1),cpu,126.4017,126.6656,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,maps alloc,nested (thread 2),cpu,127.1271,127.4685,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,maps,nested (thread 1),cpu,126.7351,128.7612,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,amalgamation,nested (thread 1),cpu,119.5461,129.8136,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,top merge,nested (thread 1),cpu,119.5460,129.8140,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,positions,nested (thread 1),cpu,130.2855,130.9669,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,maps,nested (thread 2),cpu,127.8473,132.3874,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,device buffers,nested (thread 1),cpu,130.9672,132.6976,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,merged plan,nested (thread 1),cpu,129.8142,132.6980,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,plan (top),main,cpu,119.5456,132.6984,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,top batch,main,cpu,132.6988,132.8087,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,merge maps,structure,cpu,121.5251,133.8992,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,copy entries,entries,cpu,119.2687,134.1824,,host trace thread 7
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,levels,structure,cpu,133.8996,134.7926,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,structure upload,structure,cpu,134.7980,146.9341,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,solve structure,structure,pcie,134.7980,146.9341,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,bottom (CPU),subtrees,cpu,134.1870,148.6258,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,upload bottom,main,cpu,148.6303,153.8888,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,subtrees' factors and updates,main,pcie,148.6303,153.8888,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,merge gather,nested (thread 1),cpu,153.8933,153.9302,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,fronts,nested (thread 1),cpu,153.9305,155.8250,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,merge scatter,nested (thread 1),cpu,155.8252,155.8426,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,top (GPU),main,cpu,153.8894,155.8429,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,factor upload,nested (thread 1),cpu,155.8625,155.8625,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,merged factor,nested (thread 1),cpu,155.8629,156.2418,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,upload structure,nested (thread 1),cpu,156.2422,156.2422,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,solve setup,main,cpu,155.8509,156.5117,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,kernels,nested (thread 1),cpu,156.9533,158.2964,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,columns,nested (thread 1),cpu,158.2999,158.5333,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,operators,main,cpu,156.6436,158.5372,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,memory check,main,cpu,158.5448,158.5791,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,allocate,main,cpu,158.5800,159.4793,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,sweep plan,nested (thread 1),cpu,159.8507,160.3092,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,sweep plan,nested (thread 1),cpu,160.3133,160.3134,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,top columns,nested (thread 1),cpu,160.3726,160.5456,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,layer plan,nested (thread 3),cpu,160.3792,162.7822,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,sweep plan,nested (thread 1),cpu,164.6264,164.6266,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,first descendants,nested (thread 1),cpu,170.0703,170.3907,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,sweep plan,nested (thread 1),cpu,170.3925,170.3928,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,slot plan,nested (thread 3),cpu,162.7833,263.8421,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,plans (ahead),nested (thread 1),cpu,180.6019,263.8768,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,sweep plan,nested (thread 1),cpu,263.8777,263.8780,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,layer plan,nested (thread 1),cpu,263.8883,263.8944,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,slot plan,nested (thread 1),cpu,263.8945,263.9002,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,closure,main,cpu,159.5156,263.9625,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,free,main,cpu,263.9677,264.0383,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,relabel columns,main,cpu,264.0385,268.7591,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,top,gpu,gpu,153.8894,159.3937,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,merged factor and operators,gpu,gpu,159.3937,160.0686,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,X <- U*,gpu,gpu,160.0710,191.1941,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,X <- XL*,gpu,gpu,191.1941,307.1744,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,relabel,gpu,gpu,307.1744,316.1500,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,start,event,event,0.0123,0.0123,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,top_done,event,event,155.8508,159.3937,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,merged_done,event,event,156.5185,159.5474,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,operators_done,event,event,158.5441,160.0686,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,closure_start,event,event,159.5153,160.0710,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,U_done,event,event,170.0536,191.1941,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,closure_done,event,event,263.9674,307.1744,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,9,316.2026,relabel_done,event,event,268.7654,316.1500,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,host matrix,main,cpu,0.2562,0.2564,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,symbolic,main,cpu,0.2638,116.1771,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,factor storage,main,cpu,116.1780,116.2023,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,top selection,main,cpu,116.2243,117.8174,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,bottom forest,main,cpu,117.8186,118.2709,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,worker stacks,main,cpu,118.2713,119.5951,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,device factor,main,cpu,119.6774,119.9614,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,structure,structure,cpu,116.2205,121.4020,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,upload factor,device entries,cpu,119.9758,123.9128,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,A's top entries and index arrays,device entries,pcie,119.9758,123.9128,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,maps alloc,nested (thread 1),cpu,126.6516,126.8471,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,maps alloc,nested (thread 2),cpu,126.9871,127.3406,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,maps,nested (thread 1),cpu,126.9086,130.6742,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,maps,nested (thread 2),cpu,127.7256,131.7785,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,amalgamation,nested (thread 1),cpu,119.9779,132.0782,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,top merge,nested (thread 1),cpu,119.9776,132.0785,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,merge maps,structure,cpu,121.4030,133.2168,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,positions,nested (thread 1),cpu,133.1888,133.6052,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,levels,structure,cpu,133.2172,134.1298,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,copy entries,entries,cpu,119.6767,134.8871,,host trace thread 5
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,device buffers,nested (thread 1),cpu,133.6057,135.1312,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,merged plan,nested (thread 1),cpu,132.0788,135.1315,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,plan (top),main,cpu,119.9772,135.1320,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,top batch,main,cpu,135.1325,135.2467,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,bottom (CPU),subtrees,cpu,134.8912,149.0540,,host trace thread 7
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,upload bottom,main,cpu,149.0644,154.0013,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,subtrees' factors and updates,main,pcie,149.0644,154.0013,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,merge gather,nested (thread 1),cpu,154.0058,154.0414,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,fronts,nested (thread 1),cpu,154.0417,155.9445,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,merge scatter,nested (thread 1),cpu,155.9447,155.9618,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,top (GPU),main,cpu,154.0019,155.9623,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,factor upload,nested (thread 1),cpu,155.9752,155.9752,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,merged factor,nested (thread 1),cpu,155.9755,156.4032,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,upload structure,nested (thread 1),cpu,156.4036,156.4036,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,solve setup,main,cpu,155.9638,157.0064,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,kernels,nested (thread 1),cpu,157.4586,158.9478,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,columns,nested (thread 1),cpu,158.9482,159.4412,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,operators,main,cpu,157.1371,159.4467,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,memory check,main,cpu,159.4469,159.4857,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,allocate,main,cpu,159.4913,160.3750,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,sweep plan,nested (thread 1),cpu,160.7400,161.1941,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,sweep plan,nested (thread 1),cpu,161.1977,161.1979,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,top columns,nested (thread 1),cpu,161.2571,161.4330,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,sweep plan,nested (thread 1),cpu,162.8539,162.8540,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,layer plan,nested (thread 3),cpu,161.2680,163.6599,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,first descendants,nested (thread 1),cpu,168.1363,168.3912,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,sweep plan,nested (thread 1),cpu,168.3928,168.3930,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,slot plan,nested (thread 3),cpu,163.6608,266.4803,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,plans (ahead),nested (thread 1),cpu,178.7940,266.5057,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,sweep plan,nested (thread 1),cpu,266.5067,266.5069,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,layer plan,nested (thread 1),cpu,266.5171,266.5232,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,slot plan,nested (thread 1),cpu,266.5235,266.5293,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,closure,main,cpu,160.4077,266.5974,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,free,main,cpu,266.5978,266.6708,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,10,315.4590,relabel columns,main,cpu,266.6711,271.3782,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,host matrix,main,cpu,0.2697,0.2698,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,symbolic,main,cpu,0.2728,116.2801,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,factor storage,main,cpu,116.2810,116.3093,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,top selection,main,cpu,116.3315,117.8795,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,bottom forest,main,cpu,117.8805,118.3254,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,worker stacks,main,cpu,118.3258,119.1958,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,device factor,main,cpu,119.2766,119.5682,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,structure,structure,cpu,116.3278,119.6663,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,upload factor,device entries,cpu,119.5831,123.6808,,host trace thread 7
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,A's top entries and index arrays,device entries,pcie,119.5831,123.6808,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,maps alloc,nested (thread 1),cpu,123.7991,123.8536,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,maps alloc,nested (thread 2),cpu,125.1685,125.4520,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,maps,nested (thread 1),cpu,123.9147,127.2775,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,amalgamation,nested (thread 1),cpu,119.5842,128.7159,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,top merge,nested (thread 1),cpu,119.5840,128.7162,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,maps,nested (thread 2),cpu,125.8448,129.9590,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,positions,nested (thread 1),cpu,129.8098,131.1152,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,merge maps,structure,cpu,119.6672,131.3846,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,device buffers,nested (thread 1),cpu,131.1157,132.1918,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,merged plan,nested (thread 1),cpu,128.7166,132.1923,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,plan (top),main,cpu,119.5835,132.1926,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,levels,structure,cpu,131.3850,132.2873,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,top batch,main,cpu,132.1930,132.2979,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,structure upload,structure,cpu,132.2931,133.3240,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,solve structure,structure,pcie,132.2931,133.3240,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,copy entries,entries,cpu,119.2781,134.7295,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,bottom (CPU),subtrees,cpu,134.7339,149.4274,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,upload bottom,main,cpu,149.4322,154.4664,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,subtrees' factors and updates,main,pcie,149.4322,154.4664,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,merge gather,nested (thread 1),cpu,154.4712,154.5145,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,fronts,nested (thread 1),cpu,154.5147,156.4105,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,merge scatter,nested (thread 1),cpu,156.4107,156.4292,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,top (GPU),main,cpu,154.4670,156.4295,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,factor upload,nested (thread 1),cpu,156.4505,156.4505,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,merged factor,nested (thread 1),cpu,156.4506,156.7455,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,upload structure,nested (thread 1),cpu,156.7459,156.7459,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,solve setup,main,cpu,156.4386,157.2694,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,kernels,nested (thread 1),cpu,157.7115,159.2949,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,columns,nested (thread 1),cpu,159.2983,159.8093,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,operators,main,cpu,157.4051,159.8128,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,memory check,main,cpu,159.8208,159.8560,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,allocate,main,cpu,159.8565,160.7562,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,sweep plan,nested (thread 1),cpu,161.1383,161.6010,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,sweep plan,nested (thread 1),cpu,161.6049,161.6051,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,top columns,nested (thread 1),cpu,161.6690,161.8476,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,layer plan,nested (thread 3),cpu,161.6717,164.0512,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,sweep plan,nested (thread 1),cpu,165.9705,165.9705,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,first descendants,nested (thread 1),cpu,171.4309,171.7450,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,sweep plan,nested (thread 1),cpu,171.7469,171.7472,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,slot plan,nested (thread 3),cpu,164.0525,264.9136,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,plans (ahead),nested (thread 1),cpu,182.0659,264.9425,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,sweep plan,nested (thread 1),cpu,264.9434,264.9436,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,layer plan,nested (thread 1),cpu,264.9543,264.9607,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,slot plan,nested (thread 1),cpu,264.9609,264.9676,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,closure,main,cpu,160.7949,265.0303,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,free,main,cpu,265.0359,265.1075,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,relabel columns,main,cpu,265.1077,269.8029,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,top,gpu,gpu,154.4670,159.9653,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,merged factor and operators,gpu,gpu,159.9653,160.6335,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,X <- U*,gpu,gpu,160.7934,192.5735,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,X <- XL*,gpu,gpu,192.5735,308.0532,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,relabel,gpu,gpu,308.0532,316.6541,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,start,event,event,0.0146,0.0146,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,top_done,event,event,156.4385,159.9653,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,merged_done,event,event,157.2780,160.1170,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,operators_done,event,event,159.8200,160.6335,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,closure_start,event,event,160.7947,160.7934,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,U_done,event,event,171.4140,192.5735,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,closure_done,event,event,265.0356,308.0532,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,10,316.7005,relabel_done,event,event,269.8094,316.6541,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,host matrix,main,cpu,0.2519,0.2521,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,symbolic,main,cpu,0.2591,115.5587,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,factor storage,main,cpu,115.5595,115.5912,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,top selection,main,cpu,115.6131,117.1635,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,bottom forest,main,cpu,117.1645,117.5960,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,structure,structure,cpu,115.6088,118.1967,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,worker stacks,main,cpu,117.5963,118.4572,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,device factor,main,cpu,118.5386,118.7544,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,upload factor,device entries,cpu,118.7678,122.6914,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,A's top entries and index arrays,device entries,pcie,118.7678,122.6914,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,maps alloc,nested (thread 2),cpu,123.5374,123.9671,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,maps alloc,nested (thread 1),cpu,124.3776,124.4325,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,maps,nested (thread 1),cpu,124.4950,128.3092,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,maps,nested (thread 2),cpu,124.3442,128.8487,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,amalgamation,nested (thread 1),cpu,118.7697,129.6485,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,top merge,nested (thread 1),cpu,118.7696,129.6488,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,merge maps,structure,cpu,118.1977,130.2519,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,levels,structure,cpu,130.2525,131.1448,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,positions,nested (thread 1),cpu,130.7279,131.4032,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,device buffers,nested (thread 1),cpu,131.4035,132.8235,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,merged plan,nested (thread 1),cpu,129.6491,132.8239,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,plan (top),main,cpu,118.7691,132.8243,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,top batch,main,cpu,132.8248,132.9426,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,copy entries,entries,cpu,118.5346,133.9266,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,bottom (CPU),subtrees,cpu,133.9307,148.7652,,host trace thread 7
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,upload bottom,main,cpu,148.7787,153.9000,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,subtrees' factors and updates,main,pcie,148.7787,153.9000,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,merge gather,nested (thread 1),cpu,153.9045,153.9465,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,fronts,nested (thread 1),cpu,153.9468,155.8377,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,merge scatter,nested (thread 1),cpu,155.8378,155.8562,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,top (GPU),main,cpu,153.9007,155.8565,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,factor upload,nested (thread 1),cpu,155.8696,155.8696,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,merged factor,nested (thread 1),cpu,155.8697,156.2507,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,upload structure,nested (thread 1),cpu,156.2511,156.2511,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,solve setup,main,cpu,155.8579,156.7739,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,kernels,nested (thread 1),cpu,157.2097,158.7627,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,columns,nested (thread 1),cpu,158.7630,159.2440,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,operators,main,cpu,156.9012,159.2495,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,memory check,main,cpu,159.2497,159.2864,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,allocate,main,cpu,159.2922,160.1922,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,sweep plan,nested (thread 1),cpu,160.5557,161.0107,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,sweep plan,nested (thread 1),cpu,161.0145,161.0147,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,top columns,nested (thread 1),cpu,161.0749,161.2521,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,sweep plan,nested (thread 1),cpu,163.5618,163.5619,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,layer plan,nested (thread 2),cpu,161.0729,163.6226,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,first descendants,nested (thread 1),cpu,168.8227,169.1484,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,sweep plan,nested (thread 1),cpu,169.1500,169.1503,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,slot plan,nested (thread 2),cpu,163.6240,263.8647,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,plans (ahead),nested (thread 1),cpu,179.2616,263.8894,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,sweep plan,nested (thread 1),cpu,263.8902,263.8905,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,layer plan,nested (thread 1),cpu,263.8995,263.9060,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,slot plan,nested (thread 1),cpu,263.9062,263.9119,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,closure,main,cpu,160.2219,263.9801,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,free,main,cpu,263.9804,264.0548,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,plain,11,315.1079,relabel columns,main,cpu,264.0550,268.7751,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,host matrix,main,cpu,0.2725,0.2725,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,symbolic,main,cpu,0.2748,114.7910,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,factor storage,main,cpu,114.7919,114.8149,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,top selection,main,cpu,114.8368,116.3862,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,bottom forest,main,cpu,116.3874,116.8369,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,structure,structure,cpu,114.8326,117.5373,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,worker stacks,main,cpu,116.8373,117.6907,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,device factor,main,cpu,117.7703,118.0562,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,maps alloc,nested (thread 1),cpu,121.9852,122.2819,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,maps alloc,nested (thread 2),cpu,121.7886,122.6968,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,upload factor,device entries,cpu,118.0698,122.7870,,host trace thread 8
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,A's top entries and index arrays,device entries,pcie,118.0698,122.7870,14971639,host step upload factor
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,maps,nested (thread 2),cpu,123.0817,125.3585,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,maps,nested (thread 1),cpu,122.3536,125.9919,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,merge maps,structure,cpu,117.5383,126.8120,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,amalgamation,nested (thread 1),cpu,118.0719,127.4027,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,top merge,nested (thread 1),cpu,118.0716,127.4029,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,levels,structure,cpu,126.8127,127.7214,,host trace thread 2
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,positions,nested (thread 1),cpu,128.4739,129.7510,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,structure upload,structure,cpu,127.7273,130.0242,,host trace thread 4
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,solve structure,structure,pcie,127.7273,130.0242,5954563,host step structure upload
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,device buffers,nested (thread 1),cpu,129.7516,130.8672,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,merged plan,nested (thread 1),cpu,127.4033,130.8676,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,plan (top),main,cpu,118.0710,130.8680,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,top batch,main,cpu,130.8685,130.9810,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,copy entries,entries,cpu,117.7682,132.8575,,host trace thread 6
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,bottom (CPU),subtrees,cpu,132.8626,147.7679,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,upload bottom,main,cpu,147.7728,152.9044,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,subtrees' factors and updates,main,pcie,147.7728,152.9044,44497992,host step upload bottom
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,merge gather,nested (thread 1),cpu,152.9092,152.9468,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,fronts,nested (thread 1),cpu,152.9470,154.8478,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,merge scatter,nested (thread 1),cpu,154.8480,154.8695,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,top (GPU),main,cpu,152.9050,154.8698,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,factor upload,nested (thread 1),cpu,154.8910,154.8911,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,merged factor,nested (thread 1),cpu,154.8912,155.3125,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,upload structure,nested (thread 1),cpu,155.3130,155.3130,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,solve setup,main,cpu,154.8794,155.8528,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,kernels,nested (thread 1),cpu,156.3019,157.7981,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,columns,nested (thread 1),cpu,157.8012,158.2930,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,operators,main,cpu,155.9873,158.2967,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,memory check,main,cpu,158.3037,158.3395,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,allocate,main,cpu,158.3402,159.2134,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,sweep plan,nested (thread 1),cpu,159.5785,160.0400,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,sweep plan,nested (thread 1),cpu,160.0438,160.0440,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,top columns,nested (thread 1),cpu,160.1057,160.2733,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,sweep plan,nested (thread 1),cpu,162.7024,162.7025,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,layer plan,nested (thread 3),cpu,160.1116,163.0819,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,first descendants,nested (thread 1),cpu,168.0209,168.3405,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,sweep plan,nested (thread 1),cpu,168.3421,168.3424,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,slot plan,nested (thread 3),cpu,163.0833,265.0006,,host trace thread 3
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,plans (ahead),nested (thread 1),cpu,178.4087,265.0311,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,sweep plan,nested (thread 1),cpu,265.0320,265.0323,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,layer plan,nested (thread 1),cpu,265.0437,265.0510,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,slot plan,nested (thread 1),cpu,265.0512,265.0577,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,closure,main,cpu,159.2501,265.1222,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,free,main,cpu,265.1275,265.1966,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,relabel columns,main,cpu,265.1970,269.9171,,host trace thread 1
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,top,gpu,gpu,152.9050,158.3957,,issued (host step top (GPU)) to event top_done
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,merged factor and operators,gpu,gpu,158.3957,159.0652,,events top_done to operators_done
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,X <- U*,gpu,gpu,159.2475,189.7302,,events closure_start to U_done
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,X <- XL*,gpu,gpu,189.7302,305.4411,,events U_done to closure_done
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,relabel,gpu,gpu,305.4411,314.0316,,events closure_done to relabel_done
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,start,event,event,0.0159,0.0159,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,top_done,event,event,154.8792,158.3957,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,merged_done,event,event,155.8603,158.5474,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,operators_done,event,event,158.3031,159.0652,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,closure_start,event,event,159.2499,159.2475,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,U_done,event,event,168.0031,189.7302,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,closure_done,event,event,265.1272,305.4411,,cuda event: recorded (host) and completed (gpu)
+fe_tooth,lib-g,NVIDIA B200,events,11,314.0721,relabel_done,event,event,269.9233,314.0316,,cuda event: recorded (host) and completed (gpu)

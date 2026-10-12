@@ -1,0 +1,207 @@
+diff -ruN orig/fap/fap.cpp patched/fap/fap.cpp
+--- orig/fap/fap.cpp	2026-10-03 19:29:38.655737196 -0400
++++ patched/fap/fap.cpp	2026-10-03 19:30:08.137327944 -0400
+@@ -21,6 +21,7 @@
+ #include "fap/fap.h"
+ #include "fap/utils.h"
+ #include "fap/kernel.h"
++#include "fap/fap_timers.h"  // [gpubase] timing only
+ 
+ namespace fap {
+ 
+@@ -30,6 +31,7 @@
+   int vertexs;
+   int edges;
+ 
++  double gb_t0 = fap_now();  // [gpubase]
+   readVerEdges(vertexs, edges, input_graph, directed, weighted);
+   this->num_vertexs = vertexs;
+   this->num_edges = edges;
+@@ -52,10 +54,12 @@
+   readMatFile(vertexs, edges,
+       adj_size.data(), row_offset.data(), col_val.data(), weight.data(),
+       input_graph, directed, weighted);
++  double gb_t1 = fap_now(); fap_timers().read += gb_t1 - gb_t0;  // [gpubase]
+   // get subgraph message from metis.
+   readIdFile_METIS(
+       graph_id.data(), BlockVer, K, directed, vertexs, edges,
+       adj_size.data(), row_offset.data(), col_val.data(), weight.data());
++  fap_timers().metis += fap_now() - gb_t1;  // [gpubase]
+ }
+ 
+ fapGraph::fapGraph(int32_t num_vertexs, int64_t num_edges,
+@@ -65,6 +69,7 @@
+ }
+ 
+ void fapGraph::preCondition() {
++  double gb_t0 = fap_now();  // [gpubase]
+   findBoundry(this->K, this->num_vertexs, this->graph_id.data(),
+             this->adj_size.data(), this->row_offset.data(),
+             this->col_val.data(), this->weight.data(),
+@@ -78,6 +83,11 @@
+                   this->st2ed.data(), this->ed2st.data());
+ 
+   this->is_split = (this->num_vertexs > this->max_vertexs_num_limit);
++  fap_timers().pre += fap_now() - gb_t0;  // [gpubase]
++  for (int i = 1; i <= K; i++) {  // [gpubase] stats only
++    fap_timers().bdy_total += C_BlockBdy_num[i];
++    if (C_BlockVer_num[i] > fap_timers().max_sub) fap_timers().max_sub = C_BlockVer_num[i];
++  }
+ }
+ 
+ bool fapGraph::isSplit() {
+@@ -103,11 +113,13 @@
+   vector<int> inner_to_inner_path(inner_to_inner_size, -1);
+ 
+   // stage 1. run sssp algorithm in boundry points.
++  double gb_t = fap_now(), gb_u;  // [gpubase]
+   fap::handle_boundry_path(
+             subgraph_dist, subgraph_path,
+             this->num_vertexs, this->num_edges, bdy_num,
+             adj_size.data(), row_offset.data(), col_val.data(), weight.data(),
+             st2ed.data(), C_BlockVer_offset[sub_garph_id]);
++  gb_u = fap_now(); fap_timers().sssp += gb_u - gb_t; gb_t = gb_u;  // [gpubase]
+ 
+   // stage 2. run floyd algorithm in all points of subgraph.
+   // 2.1 move data from subgraph matrix to floyd matrix.
+@@ -118,15 +130,18 @@
+       sub_vertexs, bdy_num,
+       this->num_vertexs, st2ed.data(), ed2st.data(),
+       adj_size.data(), row_offset.data(), col_val.data(), weight.data());
++  gb_u = fap_now(); fap_timers().build += gb_u - gb_t; gb_t = gb_u;  // [gpubase]
+ 
+   // 2.2 run floyd algorithm
+   fap::floyd_path(sub_vertexs,
+     inner_to_inner_dist.data(), inner_to_inner_path.data());
++  gb_u = fap_now(); fap_timers().floyd += gb_u - gb_t; gb_t = gb_u;  // [gpubase]
+ 
+   // stage 3. run min-plus algorithm in boundry points to all other points.
+   // 3.1 move data from subMat to a thin matrix.
+   fap::MyMat1Build(inner_to_bdy_dist.data(), inner_to_inner_dist.data(),
+             inner_num, bdy_num, sub_vertexs);
++  gb_u = fap_now(); fap_timers().mat1 += gb_u - gb_t; gb_t = gb_u;  // [gpubase]
+   int64_t offset = (int64_t)bdy_num * this->num_vertexs;
+ 
+   // 3.2 run min-plus
+@@ -172,16 +187,19 @@
+       }
+   }
+ 
++  gb_u = fap_now(); fap_timers().minplus += gb_u - gb_t; gb_t = gb_u;  // [gpubase]
+   // 3.3 move data from floyd matrix to subgraph matrix.
+   fap::MysubMatDecode_path(
+       inner_to_inner_dist.data(), inner_to_inner_path.data(),
+       subgraph_dist, subgraph_path,
+       C_BlockVer_offset[sub_garph_id], sub_vertexs,
+       sub_vertexs, this->num_vertexs, st2ed.data());
++  fap_timers().decode += fap_now() - gb_t;  // [gpubase]
+ }
+ 
+ // run fast APSP algorithm.
+ int32_t fapGraph::solve(bool is_path_needed) {
++  double gb_t0 = fap_now();  // [gpubase]
+   int64_t graph_size = (int64_t)num_vertexs * num_vertexs;
+   dist.resize(graph_size);
+   path.resize(graph_size);
+@@ -191,6 +209,8 @@
+     int64_t size = (int64_t)num_vertexs * C_BlockVer_num[i];
+     offset += size;
+   }
++  fap_timers().solve += fap_now() - gb_t0;  // [gpubase]
++  return 0;  // [gpubase] missing return (UB at -O2)
+ }
+ 
+ // run fast APSP algorithm in one subgraph.
+@@ -204,6 +224,7 @@
+   this->current_subgraph_id = sub_garph_id;
+ 
+   run(subgraph_dist.data(), subgraph_path.data(), sub_garph_id);
++  return 0;  // [gpubase] missing return (UB at -O2)
+ }
+ 
+ std::vector<int32_t> fapGraph::getMapping() {
+@@ -274,5 +295,6 @@
+                int *col_val, float *weight, int *graph_id) {
+   fap::check_ans(dist, path, source, source_num, vertexs,
+           adj_size, row_offset, col_val, weight, graph_id);
++  return true;  // [gpubase] missing return (UB at -O2); not called by the driver
+ }
+ }  // namespace fap
+diff -ruN orig/fap/fap.h patched/fap/fap.h
+--- orig/fap/fap.h	2026-10-03 19:29:38.655779456 -0400
++++ patched/fap/fap.h	2026-10-03 19:30:08.137426730 -0400
+@@ -98,6 +98,9 @@
+     std::vector<int32_t> getMapping();
+     // return dist.
+     std::vector<float> getAllDistance();
++    // [gpubase] zero-copy access to the full n x n distance matrix (checksum only)
++    const float *distData() const { return dist.data(); }
++    int64_t distSize() const { return (int64_t)dist.size(); }
+     // return path.
+     std::vector<int32_t> getAllPath();
+     // return current subgraph id.
+diff -ruN orig/fap/fap_timers.h patched/fap/fap_timers.h
+--- orig/fap/fap_timers.h	1969-12-31 19:00:00.000000000 -0500
++++ patched/fap/fap_timers.h	2026-10-03 19:29:43.982450716 -0400
+@@ -0,0 +1,14 @@
++// [gpubase instrumentation] wall-clock phase accumulators (timing only, no algorithmic change).
++#pragma once
++#include <chrono>
++namespace fap {
++struct FapTimers {
++  double read = 0, metis = 0, pre = 0, solve = 0;
++  double sssp = 0, build = 0, floyd = 0, mat1 = 0, minplus = 0, decode = 0;
++  long long bdy_total = 0, max_sub = 0;
++};
++inline FapTimers& fap_timers() { static FapTimers t; return t; }
++inline double fap_now() {
++  return std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();
++}
++}  // namespace fap
+diff -ruN orig/fap/kernel/cuda/batch_sssp.cu patched/fap/kernel/cuda/batch_sssp.cu
+--- orig/fap/kernel/cuda/batch_sssp.cu	2026-10-03 19:29:38.656006163 -0400
++++ patched/fap/kernel/cuda/batch_sssp.cu	2026-10-03 19:30:08.137493525 -0400
+@@ -234,15 +234,16 @@
+ 
+     float *d_res;
+ 
+-    checkCudaErrors(cudaMalloc((void **)&d_rowOffsetArc, vertexs * sizeof(int)));
++    // [gpubase] bug fix: the kernel reads d_rowOffsetArc[x + 1] for x = vertexs - 1, so n+1 offsets are needed
++    checkCudaErrors(cudaMalloc((void **)&d_rowOffsetArc, (vertexs + 1) * sizeof(int)));
+     checkCudaErrors(cudaMalloc((void **)&d_colValueArc, edges * sizeof(int)));
+     checkCudaErrors(cudaMalloc((void **)&d_weightArc, edges * sizeof(float)));
+     checkCudaErrors(cudaMalloc((void **)&d_weightRow, vertexs * sizeof(float)));
+     checkCudaErrors(cudaMalloc((void **)&d_weightRowTemp, vertexs * sizeof(float)));
+     checkCudaErrors(cudaMalloc((void **)&d_mask, vertexs * sizeof(bool)));
+-    checkCudaErrors(cudaMalloc((void **)&d_res, numFrom * vertexs * sizeof(float)));
++    checkCudaErrors(cudaMalloc((void **)&d_res, (size_t)numFrom * vertexs * sizeof(float)));  // [gpubase] int overflow fix
+ 
+-    checkCudaErrors(cudaMemcpy(d_rowOffsetArc, rowOffsetArc, vertexs * sizeof(int), cudaMemcpyHostToDevice));
++    checkCudaErrors(cudaMemcpy(d_rowOffsetArc, rowOffsetArc, (vertexs + 1) * sizeof(int), cudaMemcpyHostToDevice));  // [gpubase] n+1
+     checkCudaErrors(cudaMemcpy(d_colValueArc, colValueArc, edges * sizeof(int), cudaMemcpyHostToDevice));
+     checkCudaErrors(cudaMemcpy(d_weightArc, weightArc, edges * sizeof(float), cudaMemcpyHostToDevice));
+ 
+@@ -252,11 +253,11 @@
+     for (int k = 0; k < numFrom; k++)
+     {
+         isEmpty = false;
+-        initKernel<<<dim3(numberOfBlock, 1), dim3(blockDim, 1)>>>(d_res + k * vertexs, MAX_VALUE, d_weightRowTemp, MAX_VALUE, d_mask, fromNode[k], vertexs);
++        initKernel<<<dim3(numberOfBlock, 1), dim3(blockDim, 1)>>>(d_res + (size_t)k * vertexs, MAX_VALUE, d_weightRowTemp, MAX_VALUE, d_mask, fromNode[k], vertexs);
+         while (!isEmpty)
+         {
+-            dijkstraKernel1<<<dim3(numberOfBlock, 1), dim3(blockDim, 1)>>>(d_rowOffsetArc, d_colValueArc, d_weightArc, d_res + k * vertexs, d_weightRowTemp, d_mask, vertexs);
+-            dijkstraKernel2<<<dim3(numberOfBlock, 1), dim3(blockDim, 1)>>>(d_res + k * vertexs, d_weightRowTemp, d_mask, vertexs);
++            dijkstraKernel1<<<dim3(numberOfBlock, 1), dim3(blockDim, 1)>>>(d_rowOffsetArc, d_colValueArc, d_weightArc, d_res + (size_t)k * vertexs, d_weightRowTemp, d_mask, vertexs);
++            dijkstraKernel2<<<dim3(numberOfBlock, 1), dim3(blockDim, 1)>>>(d_res + (size_t)k * vertexs, d_weightRowTemp, d_mask, vertexs);
+             checkCudaErrors(cudaMemcpy(mask, d_mask, vertexs * sizeof(bool), cudaMemcpyDeviceToHost));
+             isEmpty = true;
+             for (int i = 0; i < vertexs; i++)
+@@ -268,7 +269,7 @@
+             }
+         }
+     }
+-    checkCudaErrors(cudaMemcpy(shortLenTable, d_res, numFrom * vertexs * sizeof(float), cudaMemcpyDeviceToHost));
++    checkCudaErrors(cudaMemcpy(shortLenTable, d_res, (size_t)numFrom * vertexs * sizeof(float), cudaMemcpyDeviceToHost));  // [gpubase] int overflow fix
+ 
+     checkCudaErrors(cudaFree(d_rowOffsetArc));
+     checkCudaErrors(cudaFree(d_colValueArc));

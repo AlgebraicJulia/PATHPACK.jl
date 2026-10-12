@@ -1,0 +1,476 @@
+diff --git a/include/Common/Instr.hpp b/include/Common/Instr.hpp
+new file mode 100644
+index 0000000..b8c02ed
+--- /dev/null
++++ b/include/Common/Instr.hpp
+@@ -0,0 +1,6 @@
++// [artifact instrumentation] host timers + counters for ROME phases (no kernel changes)
++#pragma once
++#include <time.h>
++inline double instr_now() { timespec t; clock_gettime(CLOCK_MONOTONIC, &t); return t.tv_sec + t.tv_nsec * 1e-9; }
++struct InstrETree { double t_scotch = 0, t_permcsr = 0, t_tree = 0; };
++extern InstrETree g_instr_etree;
+diff --git a/src/APSP/rome.cu b/src/APSP/rome.cu
+index 0200bff..f997376 100644
+--- a/src/APSP/rome.cu
++++ b/src/APSP/rome.cu
+@@ -22,6 +22,23 @@
+ #include <vector>
+ #include <cmath>
+ #include <cstdlib>
++// [artifact instrumentation] host timers, per-level counters, NVTX ranges. Kernels and launch logic unchanged.
++#include "Common/Instr.hpp"
++#include <nvtx3/nvToolsExt.h>
++#include <vector>
++#include <cstdlib>
++struct OpsCnt { unsigned long long batch_ops = 0, batch_tiles = 0, batch_cap = 0, large_ops = 0, large_launches = 0, large_tiles = 0, large_cap = 0; };
++static OpsCnt* g_ops = nullptr;     // phase-2 / phase-3 GEMMs
++static OpsCnt* g_ops_cf = nullptr;  // ancestor x ancestor (conflict) GEMMs
++struct LevelRec {
++    long depth = 0, nsuper = 0, nsmall = 0, nlarge = 0, maxdiag = 0, sumdiag = 0, maxkb = 0;
++    unsigned long long ops_diag_small = 0, ops_diag_large = 0, meta_bytes = 0;
++    OpsCnt p2, p3, cf;
++    long index1 = 0, index2 = 0, index3 = 0, cf_raw = 0, cf_merged = 0, cf_buckets = 0, cf_atomic = 0;
++    double t_begin = 0, t_p1 = 0, t_p2 = 0, t_p3 = 0, t_cf = 0, t_end = 0;
++};
++static char g_nvtx_buf[96];
++static inline void nvtx_push2(const char* tag, long d) { snprintf(g_nvtx_buf, sizeof g_nvtx_buf, "L%ld %s", d, tag); nvtxRangePushA(g_nvtx_buf); }
+ 
+ //#define PRINT_SHAPE 
+ 
+@@ -72,8 +89,12 @@ namespace{
+ 
+         const int num_I_tiles = (M + TILE_SIZE_I - 1) / TILE_SIZE_I;
+         const int num_J_tiles = (N + TILE_SIZE_J - 1) / TILE_SIZE_J;
++        const unsigned long long K_ = toK - fromK;
+ 
+         if (BATCH_TILE_ENGINE == false || num_I_tiles * num_J_tiles >=  128 * 8) {
++            if (g_ops) { g_ops->large_ops += (unsigned long long)M * N * K_; g_ops->large_launches++;
++                         g_ops->large_tiles += (unsigned long long)num_I_tiles * num_J_tiles;
++                         g_ops->large_cap += (unsigned long long)num_I_tiles * num_J_tiles * TILE_SIZE_I * TILE_SIZE_J * K_; }
+ 
+             // printf("Large GEMM: %ld x %ld, %d x %d tiles\n", M, N, num_I_tiles, num_J_tiles);
+             dim3 gridDim(num_J_tiles, num_I_tiles, 1); 
+@@ -81,6 +102,9 @@ namespace{
+             SemiRingGEMM_TiledShared_for_whole<<<gridDim, (TILE_SIZE_I/REG_TILE_I) * (TILE_SIZE_J/REG_TILE_J), 0, large_kernel_stream>>>(distance, size, large_GEMM_metadata);
+             return;
+         }
++        if (g_ops) { unsigned long long nt = (M <= TILE_SIZE_I && N <= TILE_SIZE_J) ? 1ULL : (unsigned long long)num_I_tiles * num_J_tiles;
++                     g_ops->batch_ops += (unsigned long long)M * N * K_; g_ops->batch_tiles += nt;
++                     g_ops->batch_cap += nt * TILE_SIZE_I * TILE_SIZE_J * K_; }
+         
+         // If matrix is too small, don't tile
+         if (M <= TILE_SIZE_I &&  N <= TILE_SIZE_J) {
+@@ -126,7 +150,11 @@ namespace{
+         const int num_I_tiles = (M + TILE_SIZE_I - 1) / TILE_SIZE_I;
+         const int num_J_tiles = (N + TILE_SIZE_J - 1) / TILE_SIZE_J;
+ 
++        const unsigned long long K_ = toK - fromK;
+         if (BATCH_TILE_ENGINE == false ||is_large_root && num_I_tiles * num_J_tiles >=  64) {
++            if (g_ops_cf) { g_ops_cf->large_ops += (unsigned long long)M * N * K_; g_ops_cf->large_launches++;
++                            g_ops_cf->large_tiles += (unsigned long long)num_I_tiles * num_J_tiles;
++                            g_ops_cf->large_cap += (unsigned long long)num_I_tiles * num_J_tiles * TILE_SIZE_I * TILE_SIZE_J * K_; }
+             // printf("Large GEMM: %ld x %ld, %d x %d tiles\n", M, N, num_I_tiles, num_J_tiles);
+             dim3 gridDim(num_J_tiles, num_I_tiles, 1); 
+             blockGEMM_metadata large_GEMM_metadata(fromI, toI, fromJ, toJ, fromK, toK);
+@@ -135,6 +163,10 @@ namespace{
+             SemiRingGEMM_TiledShared_for_whole_conflict<<<gridDim, (TILE_SIZE_I/REG_TILE_I) * (TILE_SIZE_J/REG_TILE_J), 0, large_kernel_stream>>>(distance, size, large_GEMM_metadata);
+             return;
+         }
++        if (g_ops_cf) { const long sI = (M + SMALL_TILE_SIZE_I - 1) / SMALL_TILE_SIZE_I, sJ = (N + SMALL_TILE_SIZE_J - 1) / SMALL_TILE_SIZE_J;
++                        unsigned long long nt = (M <= SMALL_TILE_SIZE_I && N <= SMALL_TILE_SIZE_J) ? 1ULL : (unsigned long long)sI * sJ;
++                        g_ops_cf->batch_ops += (unsigned long long)M * N * K_; g_ops_cf->batch_tiles += nt;
++                        g_ops_cf->batch_cap += nt * SMALL_TILE_SIZE_I * SMALL_TILE_SIZE_J * K_; }
+         
+         // If matrix is too small, don't tile
+         if (M <= SMALL_TILE_SIZE_I &&  N <= SMALL_TILE_SIZE_J) {
+@@ -176,7 +208,9 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+     
+     dataSize_t size = input_graph.Size();
+     printf("Input graph size: %ld\n", size);
++    nvtxRangePushA("tree build");
+     ETreeScotch eTree(input_graph, 0, 64, 100);
++    const double t_etree_done = instr_now();
+ 
+ 
+     // for(dataSize_t i = 0; i < size * size; ++i){
+@@ -262,12 +296,31 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+ 
+     dataSize_t root_size = supernodes[0].to - supernodes[0].from;
+     bool is_large_root = root_size > 384;
++    const double t_ancdesc = instr_now() - t_etree_done;
++    // [artifact] optional tree dump: index from to parent depth nchildren ndesc_vertices nanc_vertices
++    if (const char* tp = std::getenv("ROME_TREE_DUMP")) {
++        FILE* tf = std::fopen(tp, "w");
++        for (dataSize_t d = 0; d + 1 < (dataSize_t)depthIndex.size(); ++d)
++            for (dataSize_t i = depthIndex[d]; i < depthIndex[d + 1]; ++i) {
++                long nd = 0, na = 0;
++                for (auto x : descendants[i]) nd += supernodes[x].to - supernodes[x].from;
++                for (auto x : ancestors[i]) na += supernodes[x].to - supernodes[x].from;
++                std::fprintf(tf, "%ld %ld %ld %ld %ld %zu %ld %ld\n", (long)i, (long)supernodes[i].from, (long)supernodes[i].to,
++                             (long)supernodes[i].parent, (long)d, supernodes[i].children.size(), nd, na);
++            }
++        std::fclose(tf);
++    }
++    nvtxRangePop();
+ 
+     clock_gettime(CLOCK_MONOTONIC, &global_finish);
+     // Calculate elapsed time (seconds)
+     elapsed = (global_finish.tv_sec - global_start.tv_sec) + 
+               (global_finish.tv_nsec - global_start.tv_nsec) / 1e9;
+     printf("Time elapsed of tree build: %.6f seconds\n", elapsed);
++    printf("[INSTR] tree: scotch_nd %.6f permute_csr %.6f etree %.6f anc_desc_lists %.6f (s); supernodes %ld depth %zu root %ld\n",
++           g_instr_etree.t_scotch, g_instr_etree.t_permcsr, g_instr_etree.t_tree, t_ancdesc, (long)numSupernodes, depthIndex.size() - 1, (long)root_size);
++    nvtxRangePushA("alloc_init");
++    double ta0 = instr_now(), ta1 = 0, ta2 = 0, ta3 = 0, ta4 = 0;
+ 
+     clock_gettime(CLOCK_MONOTONIC, &global_start);
+ 
+@@ -282,6 +335,7 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+ 
+     CHK_CUDA_ERR(cudaMallocPitch(&d_permDistance, &pitch, size * sizeof(weight_t), size));
+     printf("Allocated GPU memory for permDistance with pitch: %zu bytes\n", pitch);
++    ta1 = instr_now();
+     //CHK_CUDA_ERR(cudaMalloc((void**)&d_permDistance, size * size * sizeof(weight_t)));
+     CHK_CUDA_ERR(cudaMalloc((void**)&d_rowPtrPerm, (size + 1) * sizeof(dataSize_t)));
+     CHK_CUDA_ERR(cudaMalloc((void**)&d_colIdxPerm, numEdges * sizeof(dataSize_t)));
+@@ -295,6 +349,7 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+     CHK_CUDA_ERR(cudaMemcpy(d_valuePerm, valuePerm, numEdges * sizeof(weight_t), cudaMemcpyHostToDevice));
+ 
+     dataSize_t pitch_width = pitch / sizeof(weight_t);
++    ta2 = instr_now();
+ 
+     dataSize_t total_elements = size * pitch_width;
+     int blockSize = 1024;
+@@ -308,6 +363,8 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+     CHK_CUDA_ERR(cudaFree(d_rowPtrPerm));
+     CHK_CUDA_ERR(cudaFree(d_colIdxPerm));
+     CHK_CUDA_ERR(cudaFree(d_valuePerm));
++    CHK_CUDA_ERR(cudaDeviceSynchronize());   // [artifact] cudaFree above already synchronizes; explicit for clarity
++    ta3 = instr_now();
+ 
+     dataSize_t maxDepth = depthIndex.size() - 2;
+ 
+@@ -321,6 +378,8 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+         }
+     }
+ 
++    std::vector<LevelRec> levels;
++    levels.reserve(maxDepth + 1);
+     cudaStream_t normal_stream = nullptr, conflict_stream = nullptr, blockFW_stream = nullptr, large_stream = nullptr, large_conflict_stream = nullptr;
+ #ifndef NO_ASYNC
+     CHK_CUDA_ERR(cudaStreamCreate(&normal_stream));
+@@ -359,15 +418,24 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+     // const int hash_range = num_sm * HASH_RANGE_TIMES;
+ 
+     dataSize_t conflict_factor = is_large_root ? 0 : 3;
++    // [artifact instrumentation] ROME_CONFLICT_MULT=k (default 1 = as shipped) scales the conflict-metadata buffers below;
++    // the capacity is checked per level before the buffers are written (as shipped, an overflow writes past the
++    // pinned buffer and then fails in cudaMemcpyAsync with "invalid argument").
++    const long long g_cf_mult = std::getenv("ROME_CONFLICT_MULT") ? std::atoll(std::getenv("ROME_CONFLICT_MULT")) : 1;
++    const unsigned long long g_cf_cap = (unsigned long long)g_cf_mult * (unsigned long long)(2 << (maxDepth + conflict_factor)) * (root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1);
++    printf("[INSTR] conflict buffer capacity: %llu entries (mult %lld, maxDepth %ld, conflict_factor %ld, root %ld)\n", g_cf_cap, g_cf_mult, (long)maxDepth, (long)conflict_factor, (long)root_size);
+     conflictGEMM_offset * h_conflict_offset;
+     conflictGEMM_offset * d_conflict_offset;
+-    CHK_CUDA_ERR(cudaMallocHost((void**)&h_conflict_offset, (2 << (maxDepth + conflict_factor)) * (root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1) * sizeof(conflictGEMM_offset)));
+-    CHK_CUDA_ERR(cudaMalloc((void**)&d_conflict_offset,  (2 << (maxDepth + conflict_factor)) *(root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1) * sizeof(conflictGEMM_offset)));
++    const unsigned long long conflict_entries = (unsigned long long)(2 << (maxDepth + conflict_factor)) * (root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1);
++    printf("[INSTR] conflict buffers: %llu entries -> offsets %.3f GB + flattened %.3f GB, pinned host and device each\n", conflict_entries,
++           conflict_entries * sizeof(conflictGEMM_offset) / 1e9, conflict_entries * sizeof(blockGEMM_metadata) / 1e9);
++    CHK_CUDA_ERR(cudaMallocHost((void**)&h_conflict_offset, g_cf_mult * (2 << (maxDepth + conflict_factor)) * (root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1) * sizeof(conflictGEMM_offset)));
++    CHK_CUDA_ERR(cudaMalloc((void**)&d_conflict_offset,  g_cf_mult * (2 << (maxDepth + conflict_factor)) *(root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1) * sizeof(conflictGEMM_offset)));
+ 
+     blockGEMM_metadata * h_flattened, * d_flattened;
+ 
+-    CHK_CUDA_ERR(cudaMallocHost((void**)&h_flattened,  (2 << (maxDepth + conflict_factor)) *(root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1) * sizeof(blockGEMM_metadata)));
+-    CHK_CUDA_ERR(cudaMalloc((void**)&d_flattened,  (2 << (maxDepth + conflict_factor)) *(root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1) * sizeof(blockGEMM_metadata)));
++    CHK_CUDA_ERR(cudaMallocHost((void**)&h_flattened,  g_cf_mult * (2 << (maxDepth + conflict_factor)) *(root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1) * sizeof(blockGEMM_metadata)));
++    CHK_CUDA_ERR(cudaMalloc((void**)&d_flattened,  g_cf_mult * (2 << (maxDepth + conflict_factor)) *(root_size / SMALL_TILE_SIZE_I + 1) * (root_size / SMALL_TILE_SIZE_J + 1) * sizeof(blockGEMM_metadata)));
+ 
+ #ifndef NO_ASYNC
+     cudaEvent_t normal_stream_phase1_done;
+@@ -387,6 +455,10 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+ 
+     // calculateOccupancy(SemiRingGEMM_TiledShared, 256);
+ 
++    ta4 = instr_now();
++    nvtxRangePop();
++    printf("[INSTR] alloc_init: mallocPitch(n^2) %.6f csr_alloc_h2d %.6f init_kernels+sync %.6f meta_buffers_alloc %.6f (s); pitch_bytes %zu\n",
++           ta1 - ta0, ta2 - ta1, ta3 - ta2, ta4 - ta3, pitch);
+     clock_gettime(CLOCK_MONOTONIC, &global_finish);
+     printf("Time elapsed for GPU memory allocation and initialization: %.6f seconds\n", 
+            (global_finish.tv_sec - global_start.tv_sec) + 
+@@ -396,17 +468,26 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+ 
+     // GPU computation
+     clock_gettime(CLOCK_MONOTONIC, &global_start);
++    nvtxRangePushA("computing");
++    const double t_comp0 = instr_now();
+ 
+     for(dataSize_t depth = maxDepth; depth >= 0; --depth){
+         // Diagonal Update
+         
+         CHK_CUDA_ERR(cudaDeviceSynchronize());
++        levels.emplace_back();
++        LevelRec& R = levels.back();
++        R.depth = depth; R.t_begin = instr_now(); R.nsuper = depthIndex[depth + 1] - depthIndex[depth];
++        nvtx_push2("P1 diag", depth);
+ 
+ 
+         dataSize_t index1 = 0;
+         dataSize_t large_index = 0;
+         for(dataSize_t i = depthIndex[depth]; i < depthIndex[depth + 1]; ++i){
+             // UpdateBlock(d_permDistance, size, i, i, i, supernodes, stream[i], 0);
++            {   const long sz = supernodes[i].to - supernodes[i].from; R.sumdiag += sz; if (sz > R.maxdiag) R.maxdiag = sz;
++                if (sz > 64) { R.nlarge++; R.ops_diag_large += (unsigned long long)sz * sz * sz; long kb = (sz + 63) / 64; if (kb > R.maxkb) R.maxkb = kb; }
++                else { R.nsmall++; R.ops_diag_small += (unsigned long long)sz * sz * sz; } }
+             if (supernodes[i].to - supernodes[i].from > 64) {
+                 large_supernodes_from[large_index] = supernodes[i].from;
+                 large_supernodes_to[large_index] = supernodes[i].to;
+@@ -430,6 +511,11 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+ #endif
+         // Launch the kernel for diagonal update
+         SemiRingGEMM_Simple_KOuter<<<index1, 1024, 0, normal_stream>>>(d_permDistance, pitch_width, d_meta_phase1);
++        R.index1 = index1; R.meta_bytes += index1 * sizeof(blockGEMM_metadata) + 2 * large_index * sizeof(dataSize_t);
++        nvtxRangePop();
++        R.t_p1 = instr_now();
++        nvtx_push2("P2 panel", depth);
++        g_ops = &R.p2;
+ 
+ #ifndef NO_ASYNC
+         cudaEventRecord(blockFW_stream_done, blockFW_stream);
+@@ -505,6 +591,12 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+ 
+ 
+         SemiRingGEMM_TiledShared<<<index2, (TILE_SIZE_I/REG_TILE_I) * (TILE_SIZE_J/REG_TILE_J), 0, normal_stream>>>(d_permDistance, pitch_width, d_meta_phase2);
++        R.index2 = index2; R.meta_bytes += index2 * sizeof(blockGEMM_metadata);
++        g_ops = nullptr;
++        nvtxRangePop();
++        R.t_p2 = instr_now();
++        nvtx_push2("P3 outer", depth);
++        g_ops = &R.p3; g_ops_cf = &R.cf;
+         
+         #ifndef NO_ASYNC
+         CHK_CUDA_ERR(cudaEventRecord(normal_stream_phase2_done, normal_stream));
+@@ -640,6 +732,12 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+         }
+ 
+ 
++        R.index3 = index3; R.meta_bytes += index3 * sizeof(blockGEMM_metadata);
++        g_ops = nullptr; g_ops_cf = nullptr;
++        nvtxRangePop();
++        R.t_p3 = instr_now();
++        nvtx_push2("P4 conflict", depth);
++        R.cf_raw = conflictGEMM_metadata.size();
+         std::sort(conflictGEMM_metadata.begin(), conflictGEMM_metadata.end());
+ 
+         // Merge fromK[n+1] == toK[n] with the same fromI, toI, fromJ, toJ
+@@ -662,6 +760,11 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+             }
+         }
+ 
++        if ((unsigned long long)merged_metadata.size() + 1 > g_cf_cap) {
++            printf("[INSTR] CONFLICT BUFFER OVERFLOW at depth %ld: %zu merged conflict GEMMs (from %zu raw) need %zu entries > capacity %llu; as shipped ROME would write past the pinned buffer (aborting)\n",
++                   (long)depth, merged_metadata.size(), conflictGEMM_metadata.size(), merged_metadata.size() + 1, g_cf_cap);
++            std::exit(3);
++        }
+         // Flatten the merged metadata
+         dataSize_t flattend_offset_index = 1;
+         h_conflict_offset[0].offset = 0;
+@@ -715,7 +818,9 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+ 
+         // printf("Depth %ld, flattend size: %ld, offset size: %d\n", depth, flattend_size, flattend_offset_index);
+ 
++        R.cf_merged = flattend_size;
+         if (flattend_size == 0) {
++            nvtxRangePop(); R.t_cf = R.t_end = instr_now();
+             continue; // No conflict, skip the conflict stream
+         }
+ 
+@@ -735,12 +840,20 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+ 
+         // SemiRingGEMM_1DShared_conflict<<<flattend_offset_index - 1, 1024, 0, conflict_stream>>>(d_permDistance, size, d_flattened, d_conflict_offset);
+         SemiRingGEMM_TiledSharedSmall_conflict<<<flattend_offset_index - 1, (SMALL_TILE_SIZE_I/SMALL_REG_TILE_I) * (SMALL_TILE_SIZE_J/SMALL_REG_TILE_J), 0, conflict_stream>>>(d_permDistance, pitch_width, d_flattened, d_conflict_offset);
++        R.cf_buckets = flattend_offset_index - 1;
++        for (dataSize_t b = 0; b + 1 < flattend_offset_index; ++b) R.cf_atomic += h_conflict_offset[b].need_atomic ? 1 : 0;
++        R.meta_bytes += flattend_size * sizeof(blockGEMM_metadata) + flattend_offset_index * sizeof(conflictGEMM_offset);
++        nvtxRangePop();
++        R.t_cf = R.t_end = instr_now();
+         
+ 
+     }
+ 
+ 
++    const double t_lastlaunch = instr_now();
+     CHK_CUDA_ERR(cudaDeviceSynchronize());
++    const double t_comp1 = instr_now();
++    nvtxRangePop();
+     
+ 
+     clock_gettime(CLOCK_MONOTONIC, &global_finish);
+@@ -748,6 +861,31 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+     auto comp_elapsed = (global_finish.tv_sec - global_start.tv_sec) + 
+               (global_finish.tv_nsec - global_start.tv_nsec) / 1e9;
+     printf("Time elapsed of computing: %.6f seconds\n", comp_elapsed);
++    {   // [artifact] per-level report. host_* = host time spent building metadata + launching in that phase;
++        // wall = from this level's start (after the level-entry cudaDeviceSynchronize) to the next level's start.
++        double hsum = 0, wsum = 0; unsigned long long mb = 0;
++        printf("[LVLHDR] depth nsuper nsmall nlarge maxdiag sumdiag maxkb ops_diag_small ops_diag_large "
++               "p2_batch_ops p2_batch_tiles p2_batch_cap p2_large_ops p2_large_launches p2_large_cap "
++               "p3_batch_ops p3_batch_tiles p3_batch_cap p3_large_ops p3_large_launches p3_large_cap "
++               "cf_batch_ops cf_batch_tiles cf_batch_cap cf_large_ops cf_large_launches cf_large_cap "
++               "index1 index2 index3 cf_raw cf_merged cf_buckets cf_atomic meta_bytes host_p1 host_p2 host_p3 host_cf host_total wall\n");
++        for (size_t l = 0; l < levels.size(); ++l) {
++            const LevelRec& R = levels[l];
++            const double tnext = (l + 1 < levels.size()) ? levels[l + 1].t_begin : t_comp1;
++            const double h1 = R.t_p1 - R.t_begin, h2 = R.t_p2 - R.t_p1, h3 = R.t_p3 - R.t_p2, h4 = R.t_cf - R.t_p3;
++            hsum += h1 + h2 + h3 + h4; wsum += tnext - R.t_begin; mb += R.meta_bytes;
++            printf("[LVL] %ld %ld %ld %ld %ld %ld %ld %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu "
++                   "%ld %ld %ld %ld %ld %ld %ld %llu %.6e %.6e %.6e %.6e %.6e %.6e\n",
++                   R.depth, R.nsuper, R.nsmall, R.nlarge, R.maxdiag, R.sumdiag, R.maxkb, R.ops_diag_small, R.ops_diag_large,
++                   R.p2.batch_ops, R.p2.batch_tiles, R.p2.batch_cap, R.p2.large_ops, R.p2.large_launches, R.p2.large_cap,
++                   R.p3.batch_ops, R.p3.batch_tiles, R.p3.batch_cap, R.p3.large_ops, R.p3.large_launches, R.p3.large_cap,
++                   R.cf.batch_ops, R.cf.batch_tiles, R.cf.batch_cap, R.cf.large_ops, R.cf.large_launches, R.cf.large_cap,
++                   R.index1, R.index2, R.index3, R.cf_raw, R.cf_merged, R.cf_buckets, R.cf_atomic, R.meta_bytes,
++                   h1, h2, h3, h4, h1 + h2 + h3 + h4, tnext - R.t_begin);
++        }
++        printf("[INSTR] computing: levels %zu host_metadata+launch %.6f (s) final_sync_wait %.6f level_wall_sum %.6f meta_h2d_bytes %llu window %.6f\n",
++               levels.size(), hsum, t_comp1 - t_lastlaunch, wsum, mb, t_comp1 - t_comp0);
++    }
+     // CHK_CUDA_ERR(cudaGetLastError());
+ 
+ 
+@@ -771,6 +909,7 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+ 
+     
+     // Copy back to host
++    nvtxRangePushA("D2H");
+     CHK_CUDA_ERR(cudaMemcpy2D(
+         permDistance,          // Target host memory pointer (assumed contiguous)
+         size * sizeof(weight_t), // Target stride
+@@ -780,12 +919,32 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+         size,    // Copy height
+         cudaMemcpyDeviceToHost
+     ));
++    nvtxRangePop();
+ 
+     clock_gettime(CLOCK_MONOTONIC, &global_finish);
+     // Calculate elapsed time (seconds)
+     elapsed = (global_finish.tv_sec - global_start.tv_sec) + 
+               (global_finish.tv_nsec - global_start.tv_nsec) / 1e9;
+     printf("Time elapsed of data transfer to host: %.6f seconds\n", elapsed);
++    printf("[INSTR] d2h: %.6f s, %.2f GB/s (n^2*4 = %.3f GB)\n", elapsed, size * size * 4.0 / elapsed / 1e9, size * size * 4.0 / 1e9);
++    // [artifact] ROME_DUMP_ROWS_PERM=<file>: first ROME_DUMP_NROWS (default 3) rows in the ORIGINAL labeling, read from the
++    // permuted host buffer through iperm (works with ROME_LOWMEM=1). Outside all timers except E2E (a few ms).
++    if (const char* dp = std::getenv("ROME_DUMP_ROWS_PERM")) {
++        const dataSize_t* ip = eTree.IPerm();
++        int nrows = std::getenv("ROME_DUMP_NROWS") ? std::atoi(std::getenv("ROME_DUMP_NROWS")) : 3;
++        FILE* f = std::fopen(dp, "w");
++        for (int r = 0; r < nrows && r < size; ++r) {
++            const weight_t* row = permDistance + ip[r] * size;
++            for (dataSize_t c = 0; c < size; ++c) {
++                weight_t v = row[ip[c]];
++                if (v == kWeightInf) std::fprintf(f, c ? " Inf" : "Inf");
++                else std::fprintf(f, c ? " %.0f" : "%.0f", (double)v);
++            }
++            std::fprintf(f, "\n");
++        }
++        std::fclose(f);
++        printf("[artifact] Dumped %d rows (original labeling, from permuted buffer) to %s\n", nrows, dp);
++    }
+ 
+     // [artifact] ROME_ROWHASH=<file>: verification only, run after every ROME timer (tree build, alloc/init,
+     // computing, D2H). Per-row position-sensitive hash of the WHOLE result in the ORIGINAL labels (1-based i, j),
+@@ -823,6 +982,7 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+         printf("[artifact] rowhash: n %ld fullhash %016llx checksum_sum %llu unreachable %llu threads %d time %.6f s (after all timers) file %s\n",
+                (long)size, full, S, U, nt, (th1.tv_sec - th0.tv_sec) + (th1.tv_nsec - th0.tv_nsec) / 1e9, hf ? hp : "(open failed)");
+     }
++    const double tu0 = instr_now();
+ 
+ 
+     // Prepare vertification
+@@ -835,6 +995,7 @@ void APSP(const CSRGraph& input_graph, weight_t* distance, weight_t* permDistanc
+         }
+     }
+     
++    if (distance != nullptr) printf("[INSTR] unpermute (host, 1 thread): %.6f s\n", instr_now() - tu0);
+     cudaDeviceProp deviceProp;
+     cudaGetDeviceProperties(&deviceProp, 0);
+     auto SM_num = deviceProp.multiProcessorCount;
+diff --git a/src/App/APSP.cu b/src/App/APSP.cu
+index 30f1c82..005d13e 100644
+--- a/src/App/APSP.cu
++++ b/src/App/APSP.cu
+@@ -27,10 +27,17 @@ int main(int argc, char* argv[]){
+     // [artifact] in-process end-to-end timer: mtx read + CSR + pinned host alloc + APSP()
+     struct timespec e2e_start, e2e_finish;
+     clock_gettime(CLOCK_MONOTONIC, &e2e_start);
++    // [artifact instrumentation] split the driver part of E2E: CUDA context, mtx read, CSR, pinned host alloc
++    auto now_ = [](){ timespec t; clock_gettime(CLOCK_MONOTONIC, &t); return t.tv_sec + t.tv_nsec * 1e-9; };
++    double td0 = now_();
++    cudaFree(0);                      // context creation (stock: triggered by the first cudaMallocHost below)
++    double td1 = now_();
+ 
+     Graph g = MtxReader::Instance().Read(argv[1]);
++    double td2 = now_();
+ 
+     CSRGraph csr = Converter::Instance().ToCSR(g);
++    double td3 = now_();
+     weight_t* buffer = nullptr;
+     weight_t* result = nullptr;
+     // [artifact] ROME_LOWMEM=1: allocate only the permuted-distance host buffer (no un-permuted result
+@@ -42,6 +49,9 @@ int main(int argc, char* argv[]){
+     if (!lowmem)
+     DebugAssert(__FILE__, __LINE__, "cudaMallocHost(result) failed",
+                 cudaMallocHost((void**)&result, csr.Size() * csr.Size() * sizeof(weight_t)) == cudaSuccess);
++    {   double td4 = now_();
++        printf("[INSTR] driver: cuda_context %.6f mtx_read %.6f to_csr %.6f pinned_host_alloc %.6f (s) n %ld nnz %ld\n",
++               td1 - td0, td2 - td1, td3 - td2, td4 - td3, (long)csr.Size(), (long)csr.NEdge()); }
+     #else
+     result = new weight_t[csr.Size() * csr.Size()];
+     buffer = new weight_t[csr.Size() * csr.Size()];
+diff --git a/src/ETree/ETreeOptimized.cpp b/src/ETree/ETreeOptimized.cpp
+index cb999fb..10bfcfb 100644
+--- a/src/ETree/ETreeOptimized.cpp
++++ b/src/ETree/ETreeOptimized.cpp
+@@ -12,6 +12,8 @@
+ #include <ctime>
+ #include <cstdlib>
+ #include <vector>
++#include "Common/Instr.hpp"
++InstrETree g_instr_etree;
+ 
+ //#define DEBUG
+ 
+@@ -52,6 +54,7 @@ ETreeScotch::ETreeScotch(const CSRGraph& input_graph, dataSize_t clearAreaThresh
+ 
+     // int resultND = METIS_NodeND(&size,rowPtr,colIdx,NULL,options,perm,iperm);
+ 
++    double _t0 = instr_now();
+     SCOTCH_Graph        grafdat;                    /* Scotch graph object to interface with libScotch    */
+     SCOTCH_Ordering     ordedat;                    /* Scotch ordering object to interface with libScotch */
+     SCOTCH_Strat        stradat;
+@@ -79,6 +82,7 @@ ETreeScotch::ETreeScotch(const CSRGraph& input_graph, dataSize_t clearAreaThresh
+     SCOTCH_graphExit (&grafdat);
+     DebugAssert(__FILE__, __LINE__, "Scotch nested dissection failed", scotch_status == 0);
+     printf("Scotch nested dissection success\n");
++    double _t1 = instr_now(); g_instr_etree.t_scotch = _t1 - _t0;
+     // printf("Scotch block number: %ld\n", block_num);
+ 
+     #ifdef DEBUG
+@@ -120,6 +124,7 @@ ETreeScotch::ETreeScotch(const CSRGraph& input_graph, dataSize_t clearAreaThresh
+         }
+     }
+     permGraph = new CSRGraph(size, rowPtrPerm, colIdxPerm, valuePerm);
++    double _t2 = instr_now(); g_instr_etree.t_permcsr = _t2 - _t1;
+ 
+ 
+     std::vector<std::vector<dataSize_t>> des_block_list_scotch;
+@@ -174,6 +179,7 @@ ETreeScotch::ETreeScotch(const CSRGraph& input_graph, dataSize_t clearAreaThresh
+ 
+ 
+     printf("Depth:%ld\n", depth);
++    g_instr_etree.t_tree = instr_now() - _t2;
+ 
+     delete[] rangtab;
+     delete[] treetab;

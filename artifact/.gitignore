@@ -1,0 +1,9 @@
+work/
+raw/
+results/
+build/
+hpc/config.local.sh
+bench/Manifest.toml.bak
+!bench/Manifest.toml
+!bench/gpu/Manifest.toml
+!bench/gpu/tests.Manifest.toml
