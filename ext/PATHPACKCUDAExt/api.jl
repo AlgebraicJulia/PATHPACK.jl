@@ -527,7 +527,7 @@ end
 
 #
 # A host matrix for the result, on transparent huge pages where the OS offers them (Linux with THP in
-# madvise mode, as on HiPerGator): the copy from the GPU first-touches every page of a fresh matrix,
+# madvise mode, as on our test machines): the copy from the GPU first-touches every page of a fresh matrix,
 # and 2 MB pages fault 512× less often than 4 KB ones (an n × n Float32 result of n = 27000 took 0.6 s
 # in page faults; 0.22 s on huge pages). A matrix reused across calls (apsp_gpu!) has no faults at all.
 #
@@ -754,7 +754,7 @@ end
 #
 # Host memory outside Julia's heap (Libc.malloc), for the host copy of the factor in a one-shot call:
 # the factor lives through the call, so on the heap the collections the call triggers promoted it,
-# and a full collection of the session's heap (~65 ms on HPG) was later needed to reclaim it. Off the
+# and a full collection of the session's heap (~65 ms on our test machines) was later needed to reclaim it. Off the
 # heap the collector neither counts nor scans it; with_host_buffers frees it when the call returns
 # (nothing reads the host factor after factorize!: the solve uses the device copy).
 #
@@ -768,7 +768,7 @@ end
 #
 # A pinned host arena for those buffers: uploads from pinned memory run at the bus rate (pageable
 # copies are staged by the driver), and memory reused across calls has no page faults to take. Pinning
-# is slow (~3 GB/s on the HPG hosts), so the arena is made once, grown only when a call needed more (the
+# is slow (~3 GB/s on the B200 hosts we used), so the arena is made once, grown only when a call needed more (the
 # next call then fits), and kept. One call at a time holds it; a call that finds it busy, or too small,
 # uses malloc'd memory as before.
 #
@@ -848,7 +848,7 @@ end
 #
 # Fresh malloc'd memory faults on first touch, a 4 KB page at a time (copyto!(F, A) fills the factor
 # arrays: on a cold call much of its time is page faults). Where the OS offers transparent huge pages
-# in madvise mode (HiPerGator), ask for 2 MB pages for the aligned interior of a large block, as
+# in madvise mode (our test machines), ask for 2 MB pages for the aligned interior of a large block, as
 # host_matrix does: 512× fewer faults. A hint; the contents are the same.
 #
 const HOST_HUGEPAGES = Ref(true)

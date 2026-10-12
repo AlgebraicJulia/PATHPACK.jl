@@ -559,8 +559,8 @@ function siszero(s::AbstractSemiring, trans::Val, C::AbstractVector{T}, jstrt::I
 end
 
 #
-# FVector{T}(undef, n), on transparent huge pages where the OS offers them in madvise mode (Linux, e.g.
-# HiPerGator): for the large work arrays of the symbolic phase, which are fresh memory on every call
+# FVector{T}(undef, n), on transparent huge pages where the OS offers them in madvise mode (Linux, e.g. many
+# clusters): for the large work arrays of the symbolic phase, which are fresh memory on every call
 # (the allocator maps arrays this large anew each time), so every 4 KB page of them faults when first
 # written; 2 MB pages fault 512× less often (a 256 MB array written by one thread: 80 ms in 4 KB faults,
 # 37 ms on huge pages, on a B200 node's host). A hint: the contents are the same.

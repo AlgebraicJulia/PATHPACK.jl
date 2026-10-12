@@ -1,5 +1,5 @@
 name = "PATHPACK"
-uuid = "d9e183ce-d61f-4afe-9dc2-c05bd96bb422"
+uuid = "1b389887-3ae0-48ab-8b08-e5a3e3f9bdde"
 license = "MIT"
 authors = ["AlgebraicJulia Developer <email@algebraicjulia.org>"]
 version = "0.0.1"

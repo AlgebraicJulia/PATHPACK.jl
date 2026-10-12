@@ -1,5 +1,5 @@
 #
-# Fill-reducing orderings for the all-pairs closure (from CliqueTrees' itay/gpu branch, src/fast_orderings.jl
+# Fill-reducing orderings for the all-pairs closure (from a development branch of CliqueTrees, src/fast_orderings.jl
 # and Semiring's parallel_symbolic.jl: amf32), on the released CliqueTrees: CliqueTrees.permutation is
 # extended for these algorithms, and the AMF they run is CliqueTrees' own (AMFLib).
 #
