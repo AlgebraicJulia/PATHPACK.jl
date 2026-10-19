@@ -12,7 +12,9 @@ end
 
 if gpu_present()
     project = @__DIR__
-    julia = Base.julia_cmd()
+    # Pkg.test narrows JULIA_LOAD_PATH to the test sandbox; the GPU tests run in their own environment, so
+    # give their processes the default load path back (otherwise not even Pkg is found).
+    julia = addenv(Base.julia_cmd(), "JULIA_LOAD_PATH" => "@:@stdlib")
     run(`$julia --project=$project --startup-file=no -e 'using Pkg; Pkg.instantiate()'`)
     p = run(ignorestatus(`$julia --project=$project --startup-file=no $(joinpath(project, "runtests.jl")) $(get(ENV, "PATHPACK_TEST_GPU_SUITE", "quick"))`))
 
