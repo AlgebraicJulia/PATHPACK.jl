@@ -46,4 +46,6 @@ include("dense_slu.jl")
 include("bellman.jl")
 include("dijkstra.jl")
 
+include("precompile.jl")
+
 end
