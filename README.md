@@ -1,5 +1,8 @@
 <h1 align="center">
-    PATHPACK.jl
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="docs/src/assets/logo-dark.svg">
+        <img src="docs/src/assets/logo.svg" alt="PATHPACK.jl" width="320">
+    </picture>
     <p align="center">
         <a href="https://algebraicjulia.github.io/PATHPACK.jl/dev">
             <img src="https://img.shields.io/badge/docs-dev-blue.svg" alt="documentation (development)">
