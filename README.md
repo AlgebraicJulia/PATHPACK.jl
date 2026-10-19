@@ -4,15 +4,9 @@
         <img src="docs/src/assets/logo.svg" alt="PATHPACK.jl" width="320">
     </picture>
     <p align="center">
-        <a href="https://algebraicjulia.github.io/PATHPACK.jl/dev">
-            <img src="https://img.shields.io/badge/docs-dev-blue.svg" alt="documentation (development)">
-        </a>
-        <a href="https://github.com/AlgebraicJulia/PATHPACK.jl/actions/workflows/julia_ci.yml">
-            <img src="https://github.com/AlgebraicJulia/PATHPACK.jl/actions/workflows/julia_ci.yml/badge.svg" alt="build status">
-        </a>
-        <a href="https://github.com/JuliaTesting/Aqua.jl">
-            <img src="https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg" alt="Aqua">
-        </a>
+        <a href="https://algebraicjulia.github.io/PATHPACK.jl/dev"><img src="https://img.shields.io/badge/docs-dev-blue.svg" alt="documentation (development)"></a>
+        <a href="https://github.com/AlgebraicJulia/PATHPACK.jl/actions/workflows/julia_ci.yml"><img src="https://github.com/AlgebraicJulia/PATHPACK.jl/actions/workflows/julia_ci.yml/badge.svg" alt="build status"></a>
+        <a href="https://github.com/JuliaTesting/Aqua.jl"><img src="https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg" alt="Aqua"></a>
     </p>
 </h1>
 
