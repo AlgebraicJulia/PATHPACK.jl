@@ -6,6 +6,11 @@
 # - addition is intersection
 # - multiplication is union
 #
+"""
+    AndOr()
+
+The Boolean lattice `(2ⁿ, ∩, ∪)` on sets of bits stored in integers: the dual of [`OrAnd`](@ref).
+"""
 struct AndOr <: AbstractSemiring end
 
 # The dual Boolean lattice
@@ -16,6 +21,13 @@ struct AndOr <: AbstractSemiring end
 # - addition is union
 # - multiplication is intersection
 #
+"""
+    OrAnd()
+
+The Boolean lattice `(2ⁿ, ∪, ∩)` on sets of bits stored in integers. With labels as weights,
+`mstar(OrAnd(), A)[i, j]` is the set of labels that some path carries from `i` to `j`; with one bit, it is
+reachability. Use an integer type such as `Int32`.
+"""
 const OrAnd = DualQuantale{AndOr}
 
 function sid(::AndOr, a, ::Val{:C})

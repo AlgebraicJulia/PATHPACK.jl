@@ -4,6 +4,7 @@
 # single-source and single-target queries from one factorization.
 
 using PATHPACK, SparseArrays, LinearAlgebra
+Base.include(@__MODULE__, joinpath(pkgdir(PATHPACK), "docs", "literate", "_figs.jl"))  #hide
 using PATHPACK.CPU: MinPlus, MaxMin, mstar, mlu
 
 # The entry `A[i, j]` is the weight of the arc `i → j`.
@@ -20,6 +21,12 @@ D = mstar(MinPlus(), A)
 # In the max-min semiring the same call gives the capacity of the widest path between every pair of vertices.
 
 W = mstar(MaxMin(), A)
+
+#-
+
+figure(panel("mstar(MinPlus(), A)", matrixfig(D; val = Figs.unit(D)); sub = "shortest distance"),  #hide
+    panel("mstar(MaxMin(), A)", matrixfig(W; val = 1 .- Figs.unit(W)); sub = "widest capacity");  #hide
+    caption = "Row i, column j: from vertex i to vertex j. Inf: no path; in max-min the diagonal is the semiring's one, Inf.")  #hide
 
 # ## Queries
 #

@@ -6,6 +6,12 @@
 # - addition is minimization
 # - multiplication is addition (+∞ + -∞ = +∞)
 #
+"""
+    MinPlus()
+
+The tropical semiring `([-∞, ∞], min, +)`. With it, `mstar(MinPlus(), A)[i, j]` is the length of a shortest path
+from `i` to `j`; `Inf` means that `j` cannot be reached from `i`. Weights may be negative if no cycle is.
+"""
 struct MinPlus <: AbstractSemiring end
 
 # The dual tropical semiring
@@ -16,6 +22,12 @@ struct MinPlus <: AbstractSemiring end
 # - addition is maximization
 # - multiplication is addition (+∞ + -∞ = -∞)
 #
+"""
+    MaxPlus()
+
+The semiring `([-∞, ∞], max, +)`. With it, `mstar(MaxPlus(), A)[i, j]` is the length of a longest path from `i` to
+`j`: on graphs without positive cycles, for example the critical paths of a schedule.
+"""
 const MaxPlus = DualQuantale{MinPlus}
 
 # The Viterbi semiring
@@ -26,6 +38,12 @@ const MaxPlus = DualQuantale{MinPlus}
 # - addition is minization
 # - multiplication is as usual (+∞ × 0 = +∞)
 #
+"""
+    MinProd()
+
+The semiring `([0, ∞], min, ×)`. With it, `mstar(MinProd(), A)[i, j]` is the smallest product of arc weights along
+a path from `i` to `j`.
+"""
 struct MinProd <: AbstractSemiring end
 
 # The max-times semiring
@@ -36,6 +54,12 @@ struct MinProd <: AbstractSemiring end
 # - addition is maximization
 # - multiplication is as usual (+∞ × 0 = 0)
 #
+"""
+    MaxProd()
+
+The Viterbi semiring `([0, ∞], max, ×)`. With probabilities in `[0, 1]` as weights, `mstar(MaxProd(), A)[i, j]` is
+the probability of the most reliable path from `i` to `j`.
+"""
 const MaxProd = DualQuantale{MinProd}
 
 const TropicalSemiring = Union{MinPlus, MaxPlus, MinProd, MaxProd}

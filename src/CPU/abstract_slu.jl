@@ -27,6 +27,20 @@ end
 
 # ===== mlu =====
 
+"""
+    mlu(s::AbstractSemiring, A; alg = AMF(), nt = Threads.nthreads())
+
+Factorize the star of the matrix `A` over the semiring `s`, `A* = U* L*`, for queries. A sparse `A` is ordered to
+reduce fill (`alg`: any elimination algorithm of CliqueTrees.jl, or a permutation) and factorized with the
+multifrontal method; a dense `A` is factorized directly. Then `lmul!(F, B)` gives `A* B` (columns of the star),
+`rmul!(B, F)` gives `B A*` (rows), and `Matrix(F)` the whole star. `nt` is the number of threads.
+
+```julia
+F = mlu(MinPlus(), A)
+B = fill(Inf, 1, size(A, 1)); B[1] = 0.0
+rmul!(B, F)    # the distances from vertex 1
+```
+"""
 function mlu(s::AbstractSemiring, A::SparseMatrixCSC; alg::PermutationOrAlgorithm = DEFAULT_ELIMINATION_ALGORITHM, nt::Integer = nthreads())
     F = ChordalSLU(s, A; alg)
     copyto!(F, A)
@@ -50,6 +64,20 @@ end
 #
 #   A*
 #
+"""
+    mstar(s::AbstractSemiring, A; alg = AMF(), nt = Threads.nthreads())
+
+Compute the star `A* = I ⊕ A ⊕ A² ⊕ ⋯` of the matrix `A` over the semiring `s`, as a dense matrix. `A[i, j]` is the
+weight of the arc `i → j`; `A*[i, j]` is the ⊕-sum over all paths from `i` to `j` of the ⊗-products of their arcs'
+weights. With [`MinPlus`](@ref) that is the shortest-path distance between every pair of vertices.
+
+```julia
+D = mstar(MinPlus(), A)    # shortest paths
+W = mstar(MaxMin(), A)     # widest paths
+```
+
+The result has `n²` entries; to compute only some rows or columns, factorize with [`mlu`](@ref).
+"""
 function mstar(s::AbstractSemiring, A::AbstractMatrix; nt::Integer = nthreads())
     return Matrix(mlu(s, A; nt); nt)
 end
@@ -65,6 +93,12 @@ end
 #
 #   A*
 #
+"""
+    pstar(s::AbstractSemiring, A::SparseMatrixCSC; alg, nt)
+
+The partial star of a sparse matrix: the entries of `A*` on the sparsity pattern of the factors, as a sparse matrix in
+the original vertex order.
+"""
 function pstar(s::AbstractSemiring, A::SparseMatrixCSC; alg::PermutationOrAlgorithm = DEFAULT_ELIMINATION_ALGORITHM, nt::Integer = nthreads())
     F = mlu(s, A; alg, nt); sgetrp!(F; nt)
     L = sparse(F.L); tril!(L, -1)

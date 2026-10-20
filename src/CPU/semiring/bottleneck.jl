@@ -6,6 +6,12 @@
 # - addition is minimization
 # - multiplication is maximization
 #
+"""
+    MinMax()
+
+The bottleneck semiring `([-∞, ∞], min, max)`. With it, `mstar(MinMax(), A)[i, j]` is the smallest possible
+largest arc weight on a path from `i` to `j`: the mildest worst step.
+"""
 const MinMax = Lattice{MinPlus}
 
 # The dual bottleneck lattice
@@ -16,6 +22,12 @@ const MinMax = Lattice{MinPlus}
 # - addition is maximization
 # - multiplication is minimization
 #
+"""
+    MaxMin()
+
+The widest-path semiring `([-∞, ∞], max, min)`. With capacities as weights, `mstar(MaxMin(), A)[i, j]` is the
+largest capacity of a single path from `i` to `j`.
+"""
 const MaxMin = DualQuantale{MinMax}
 
 @inline function sprod(s::Union{MinMax, MaxMin}, a, b, ::Val{:C}, ::Val{:N})

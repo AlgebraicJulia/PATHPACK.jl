@@ -1,2 +1,6 @@
 build/
+node_modules/
 src/generated/
+package-lock.json
+src/public/explore/
+src/public/notebooks/

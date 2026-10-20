@@ -6,6 +6,13 @@
 # - addition is as usual
 # - multiplication is as usual
 #
+"""
+    PlusProd()
+
+The semiring of nonnegative real numbers `([0, ∞], +, ×)`. With it, `mstar(PlusProd(), B)` is the sum over all
+walks, `(I - B)⁻¹`, for a nonnegative `B` whose spectral radius is below 1: diffusion, personalized PageRank, walk
+counts. Negative entries are outside this semiring.
+"""
 struct PlusProd <: AbstractSemiring end
 
 function slte(::PlusProd, a, b)

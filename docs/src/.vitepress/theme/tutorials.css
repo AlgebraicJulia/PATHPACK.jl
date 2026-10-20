@@ -1,0 +1,65 @@
+/* ---- tutorial and benchmark pages ---- */
+
+/* a clip beside its key numbers */
+.pp-t-hero { display: grid; grid-template-columns: minmax(0, 11fr) minmax(0, 9fr); gap: 20px; align-items: stretch; margin: 24px 0 10px; }
+.pp-t-wide { border-radius: 14px; border: 1px solid var(--pp-line); overflow: hidden; background: var(--vp-c-bg); aspect-ratio: 4 / 3; max-width: 720px; margin: 24px auto 0; }
+.pp-t-clip { position: relative; border-radius: 14px; border: 1px solid var(--pp-line); overflow: hidden; background: var(--vp-c-bg); aspect-ratio: 4 / 3; align-self: center; }
+.pp-t-facts { display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+.pp-t-fact { background: var(--pp-card); border: 1px solid var(--pp-line); border-radius: 12px; padding: 14px 18px; }
+.pp-t-fact b { display: block; font-family: var(--pp-display); font-weight: 800; font-size: 2em; line-height: 1.1; letter-spacing: -0.02em; color: var(--pp-blue); font-variant-numeric: tabular-nums; }
+.pp-t-fact span { display: block; margin-top: 4px; color: var(--pp-muted); font-size: 0.9em; line-height: 1.45; }
+@media (max-width: 760px) {
+  .pp-t-hero { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* numbers line up in the measured tables */
+.vp-doc table td, .vp-doc table th { font-variant-numeric: tabular-nums; }
+
+/* the benchmark chart inside a documentation page */
+.pp-t-bench { margin: 20px 0 28px; }
+.pp-t-bench .pp-bench-group h4 { margin-top: 0; line-height: 1.4; }
+.pp-t-bench .pp-credit { margin-top: 0; }
+@media (max-width: 960px) {
+  .pp-t-bench .pp-bench-row { grid-template-columns: 130px minmax(0, 1fr) 150px; font-size: 13px; }
+}
+
+/* keep numbers and units on one line */
+.vp-doc table td:not(:first-child), .vp-doc table th:not(:first-child) { white-space: nowrap; }
+
+/* three key numbers in a row */
+.pp-t-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 22px 0; }
+.pp-t-stats .pp-stat { padding: 14px 16px; }
+.pp-t-stats .pp-stat b { font-family: var(--pp-display); font-weight: 800; font-size: 1.9em; letter-spacing: -0.02em; }
+.pp-t-stats .pp-stat span { font-size: 0.88em; }
+@media (max-width: 760px) { .pp-t-stats { grid-template-columns: minmax(0, 1fr); } }
+
+/* the notebook download line at the top of a tutorial */
+.pp-t-nb { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 4px 0 18px; font-size: 0.9em; color: var(--pp-muted); }
+.pp-t-nb a.pp-t-nb-btn { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--pp-line); background: var(--pp-card); color: var(--pp-ink); font-weight: 600; text-decoration: none; transition: border-color .2s; }
+.pp-t-nb a.pp-t-nb-btn:hover { border-color: var(--pp-blue); }
+.pp-t-nb a.pp-t-nb-btn svg { width: 15px; height: 15px; }
+
+/* tutorial figures (docs/literate/_figs.jl): inline SVG whose colors are classes along the distance ramp */
+.pp-fig { margin: 22px 0 26px; padding: 16px 18px 14px; border: 1px solid var(--pp-line); border-radius: 14px; background: var(--pp-card); }
+.pp-fig-row { display: grid; grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr)); gap: 18px; align-items: end; }
+.pp-fig-panel { min-width: 0; }
+.pp-fig-panel svg { display: block; width: 100%; height: auto; overflow: visible; }
+.pp-fig-title { font-size: 13px; color: var(--pp-muted); margin: 0 0 8px; }
+.pp-fig-title b { font-family: var(--pp-display); font-weight: 800; font-size: 14px; color: var(--vp-c-text-1); margin-right: 4px; }
+.pp-fig figcaption { font-size: 13.5px; line-height: 1.5; color: var(--pp-muted); margin-top: 12px; }
+.pp-fig-legend { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--pp-muted); margin-top: 12px; font-variant-numeric: tabular-nums; }
+.pp-fig-legend i { display: block; width: 180px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #2f4fc0, #4565cf, #5b6bd0, #7961c0, #9458b3, #ae4b77, #c83e3b, #d96c38, #e8a33d); }
+.dark .pp-fig-legend i { background: linear-gradient(90deg, #6088ff, #807af8, #9770f3, #bd62c3, #e05598, #ec616e, #f76e46, #fb9b4f, #ffcc60); }
+.pp-fig-legend em { font-style: normal; margin-left: 6px; }
+.pp-fig text { font-family: var(--vp-font-family-base); }
+.pp-fig .pp-fig-ix { font-size: 11px; fill: var(--pp-muted); font-family: var(--vp-font-family-mono); }
+.pp-fig .pp-fig-num { font-size: 13px; font-weight: 700; fill: #fff; font-family: var(--vp-font-family-mono); }
+.pp-fig .pp-fig-num2 { font-size: 12px; fill: var(--vp-c-text-2); font-family: var(--vp-font-family-mono); }
+.pp-fig .pp-fig-lab { font-size: 12.5px; fill: var(--vp-c-text-1); }
+.pp-fig .kg { color: #c6ccd8 } .dark .pp-fig .kg { color: #464e66 }
+.pp-fig .kl { color: #b8bfcc } .dark .pp-fig .kl { color: #3a4258 }
+.pp-fig .ka { color: var(--pp-red) } .pp-fig .ki { color: var(--vp-c-text-1) }
+.pp-fig .k0 { color: #2f4fc0 } .pp-fig .k1 { color: #3757c6 } .pp-fig .k2 { color: #3d5dc9 } .pp-fig .k3 { color: #4262cd } .pp-fig .k4 { color: #4666d0 } .pp-fig .k5 { color: #4a6ad3 } .pp-fig .k6 { color: #4e6ed5 } .pp-fig .k7 { color: #556dd3 } .pp-fig .k8 { color: #5d6acf } .pp-fig .k9 { color: #6568cb } .pp-fig .k10 { color: #6d65c7 } .pp-fig .k11 { color: #7463c3 } .pp-fig .k12 { color: #7c60bf } .pp-fig .k13 { color: #835ebb } .pp-fig .k14 { color: #8a5cb8 } .pp-fig .k15 { color: #905ab4 } .pp-fig .k16 { color: #9757ad } .pp-fig .k17 { color: #9e539c } .pp-fig .k18 { color: #a5508c } .pp-fig .k19 { color: #ac4c7c } .pp-fig .k20 { color: #b2496d } .pp-fig .k21 { color: #b9455d } .pp-fig .k22 { color: #c0424e } .pp-fig .k23 { color: #c63f3f } .pp-fig .k24 { color: #cc3f33 } .pp-fig .k25 { color: #d04e35 } .pp-fig .k26 { color: #d45c36 } .pp-fig .k27 { color: #d86b38 } .pp-fig .k28 { color: #dc7939 } .pp-fig .k29 { color: #e0873a } .pp-fig .k30 { color: #e4953c } .pp-fig .k31 { color: #e8a33d }
+.dark .pp-fig .k0 { color: #6088ff } .dark .pp-fig .k1 { color: #6c83fd } .dark .pp-fig .k2 { color: #747ffb } .dark .pp-fig .k3 { color: #7b7cfa } .dark .pp-fig .k4 { color: #8179f8 } .dark .pp-fig .k5 { color: #8777f7 } .dark .pp-fig .k6 { color: #8d74f6 } .dark .pp-fig .k7 { color: #9372f5 } .dark .pp-fig .k8 { color: #9a6fef } .dark .pp-fig .k9 { color: #a46be3 } .dark .pp-fig .k10 { color: #ae67d7 } .dark .pp-fig .k11 { color: #b764cb } .dark .pp-fig .k12 { color: #c160bf } .dark .pp-fig .k13 { color: #ca5db4 } .dark .pp-fig .k14 { color: #d359a8 } .dark .pp-fig .k15 { color: #dc569d } .dark .pp-fig .k16 { color: #e35593 } .dark .pp-fig .k17 { color: #e65987 } .dark .pp-fig .k18 { color: #e95c7d } .dark .pp-fig .k19 { color: #eb6072 } .dark .pp-fig .k20 { color: #ee6367 } .dark .pp-fig .k21 { color: #f1675d } .dark .pp-fig .k22 { color: #f36a52 } .dark .pp-fig .k23 { color: #f66d48 } .dark .pp-fig .k24 { color: #f87341 } .dark .pp-fig .k25 { color: #f98046 } .dark .pp-fig .k26 { color: #fa8d4a } .dark .pp-fig .k27 { color: #fb9a4f } .dark .pp-fig .k28 { color: #fca653 } .dark .pp-fig .k29 { color: #fdb357 } .dark .pp-fig .k30 { color: #fec05c } .dark .pp-fig .k31 { color: #ffcc60 }
+@media (max-width: 760px) { .pp-fig-row { grid-template-columns: minmax(0, 1fr); } .pp-fig { padding: 12px; } }
+.pp-fig-row[style="--cols:1"] { max-width: 560px; margin: 0 auto; }

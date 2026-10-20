@@ -1,0 +1,16 @@
+{
+  "name": "PATHPACK.jl",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/julialang/devcontainer-features/julia:1": { "channel": "release" }
+  },
+  "postCreateCommand": "julia --project=docs -e 'using Pkg; Pkg.develop(path=\".\"); Pkg.instantiate(); using PATHPACK'",
+  "customizations": {
+    "vscode": {
+      "extensions": ["julialang.language-julia"],
+      "settings": { "julia.environmentPath": "docs" }
+    },
+    "codespaces": { "openFiles": ["docs/literate/road_networks.jl"] }
+  },
+  "hostRequirements": { "cpus": 2, "memory": "4gb" }
+}

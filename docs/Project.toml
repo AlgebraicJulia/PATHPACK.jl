@@ -1,6 +1,8 @@
 [deps]
-PATHPACK = "d9e183ce-d61f-4afe-9dc2-c05bd96bb422"
+CliqueTrees = "60701a23-6482-424a-84db-faee86b9b1f8"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
+DocumenterVitepress = "4710194d-e776-4893-9690-8d956a29c365"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
+PATHPACK = "d9e183ce-d61f-4afe-9dc2-c05bd96bb422"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
