@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// The home page's opening: the [PATH PACK]* logo as a street network of 35,466 points. A distance wave spreads from
+// The home page's opening: the [PATH PACK]* logo as a street network of 35,483 points. A distance wave spreads from
 // the asterisk; a click anywhere starts a new one from that point (one Dijkstra in the browser). The strokes are
 // cheap to travel along, so the wave races through each letter and crawls between them.
 import { onMounted, onBeforeUnmount, ref } from 'vue'
@@ -104,9 +104,9 @@ onBeforeUnmount(() => stop())
         <canvas ref="canvas" class="pp-hero-canvas" aria-label="The PATHPACK logo as a network; click to send a distance wave"></canvas>
       </div>
       <figcaption>
-        The logo is a graph: 35,466 points. <strong>Click anywhere</strong> to send a distance wave from there:
+        The logo is a graph: 35,483 points. <strong>Click anywhere</strong> to send a distance wave from there:
         one Dijkstra in your browser<span v-if="ms">, {{ ms }} ms</span>. PATHPACK.jl computes all 1.26 billion
-        pairs in 46 ms on one NVIDIA B200.
+        pairs in 44 ms on one NVIDIA B200.
       </figcaption>
     </figure>
   </section>
