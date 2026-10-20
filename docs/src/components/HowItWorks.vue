@@ -18,6 +18,9 @@ const stats = ref<Record<Key, { fill: number; work: number; height: number }>>({
 const q = ref<QueryInfo>({ up: 0, touchU: 0, touchL: 0 })
 interface TNode { id: number; x: number; y: number; r: number; sep: boolean; size: number; first: number; px: number; py: number; depth: number }
 const tree = ref<{ nodes: TNode[]; h: number; split: number }>({ nodes: [], h: 120, split: 0 })
+// separators get a tone by their level: the top one darkest red (--pp-sep0), each level below lighter
+const sepLevels = ref<number[]>([])
+const sepRank = (depth: number) => Math.min(3, Math.max(0, sepLevels.value.indexOf(depth)))
 let md: Model | null = null
 let scene: ReturnType<typeof import('./hiw/scene').createScene> | null = null
 
@@ -76,7 +79,7 @@ const matRead = computed(() => {
   }
   return `A[${i}, ${j}] = ∞: no street from ${i} to ${j}.`
 })
-const graphHead = computed(() => ['144 corners, 232 streets', 'separators in red', 'with fill', 'colored by worker', 'distance from the source'][ui.step])
+const graphHead = computed(() => ['144 corners, 232 streets', 'separators in red, darker at the top', 'with fill', 'colored by worker', 'distance from the source'][ui.step])
 const matHead = computed(() => ['A, input order', 'A, nested-dissection order', `L + U, ${ORDERS.find(o => o.key === ui.ord)!.label.toLowerCase()}`, 'A*, one row per corner', 'L + U, and one row of A*'][ui.step])
 
 // ---- stepping ----
@@ -155,6 +158,7 @@ onMounted(async () => {
     for (const k of x.kids) visit(k, x)
   }
   visit(md.nd.root, null)
+  sepLevels.value = [...new Set(nodes.filter(t => t.sep).map(t => t.depth))].sort((a, b) => a - b)
   tree.value = { nodes, h: top + maxDepth * gap + 16, split: top + 1.5 * gap }
   ready.value = true
   await nextTick()
@@ -207,7 +211,8 @@ onBeforeUnmount(() => stop())
           <h3>Reorder: nested dissection</h3>
           <p>First, renumber the corners so that the factors stay sparse. Nested dissection, one such order, cuts the
             graph in two with a small separator (red), numbers both halves first and the separator last, then cuts each
-            half the same way.</p>
+            half the same way. Each level of cuts has its own shade: the first separator is the darkest red, the
+            separators of its two halves a lighter one, and so on down the tree.</p>
           <p>The matrix is the same, its rows and columns permuted. No street joins two halves, so the blocks between them
             are empty, and they stay empty when the matrix is factorized.</p>
         </template>
@@ -292,7 +297,8 @@ onBeforeUnmount(() => stop())
             <line v-for="x in tree.nodes.filter(t => !Number.isNaN(t.px))" :key="'e' + x.id" :x1="x.px" :y1="x.py" :x2="x.x" :y2="x.y"
               :class="{ hot: upNodes.has(x.id) }" />
           </g>
-          <g v-for="x in tree.nodes" :key="x.id" :class="['pp-hiw-node', x.sep ? 'sep' : 'part', { hot: upNodes.has(x.id) }]">
+          <g v-for="x in tree.nodes" :key="x.id" :class="['pp-hiw-node', x.sep ? 'sep' : 'part', { hot: upNodes.has(x.id) }]"
+            :style="x.sep ? { '--sep': `var(--pp-sep${sepRank(x.depth)})` } : undefined">
             <title>{{ x.sep ? 'separator' : 'part' }}: {{ x.size }} corner{{ x.size === 1 ? '' : 's' }}</title>
             <circle :cx="x.x" :cy="x.y" :r="x.r" class="ring" />
             <circle :cx="x.x" :cy="x.y" :r="x.r * Math.sqrt(nodeDone(x))" class="fill" />

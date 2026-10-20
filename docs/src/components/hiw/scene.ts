@@ -32,12 +32,16 @@ export function createScene(gc: HTMLCanvasElement, mc: HTMLCanvasElement, md: Mo
     const v = (name: string, fb: RGB) => hex(cs.getPropertyValue(name), fb)
     C = { blue: v('--pp-blue', [47, 84, 200]), red: v('--pp-red', [217, 69, 43]), ink: v('--pp-ink', [26, 31, 46]),
       muted: v('--pp-muted', [93, 101, 120]), line: v('--pp-line', [226, 230, 240]), bg: v('--pp-hiw-bg', [255, 255, 255]),
-      w1: v('--pp-hiw-w1', [47, 84, 200]), w2: v('--pp-hiw-w2', [217, 69, 43]), w3: v('--pp-hiw-w3', [19, 145, 127]), w4: v('--pp-hiw-w4', [201, 138, 16]) }
+      w1: v('--pp-hiw-w1', [47, 84, 200]), w2: v('--pp-hiw-w2', [217, 69, 43]), w3: v('--pp-hiw-w3', [19, 145, 127]), w4: v('--pp-hiw-w4', [201, 138, 16]),
+      s0: v('--pp-sep0', [163, 34, 26]), s1: v('--pp-sep1', [207, 59, 36]), s2: v('--pp-sep2', [232, 103, 74]), s3: v('--pp-sep3', [242, 154, 124]) }
   }
   const rgba = (c: RGB, a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`
   const mix = (a: RGB, b: RGB, t: number): RGB => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]
   const rampC = (d: number): RGB => { const i = Math.max(0, Math.min(255, Math.round((d / dmax) * 255))) * 4; return [R[i], R[i + 1], R[i + 2]] }
   const workerC = (w: number): RGB => [C.w1, C.w2, C.w3, C.w4][w]
+  // a separator's tone by its level in the dissection (the top separator darkest)
+  const sepDepths = [...new Set(nd.nodes.filter(x => x.sep).map(x => x.depth))].sort((a, b) => a - b)
+  const sepC = (depth: number): RGB => [C.s0, C.s1, C.s2, C.s3][Math.min(3, Math.max(0, sepDepths.indexOf(depth)))]
   readColors()
 
   // ---- sizes ----
@@ -149,7 +153,7 @@ export function createScene(gc: HTMLCanvasElement, mc: HTMLCanvasElement, md: Mo
         for (const x of nd.nodes) {
           if (!x.sep) continue
           const a = shownAt(x.depth); if (a <= 0) continue
-          const S = new Set(x.verts); c.strokeStyle = rgba(C.red, 0.28 * a); c.beginPath()
+          const S = new Set(x.verts); c.strokeStyle = rgba(sepC(x.depth), 0.36 * a); c.beginPath()
           for (const v of x.verts) for (const w of g.nbr[v]) if (v < w && S.has(w)) line(c, X(v, L), Y(v, L), X(w, L), Y(w, L))
           c.stroke()
         }
@@ -161,7 +165,7 @@ export function createScene(gc: HTMLCanvasElement, mc: HTMLCanvasElement, md: Mo
       if (step === 1) for (const x of nd.nodes) {
         if (!x.sep) continue
         const a = shownAt(x.depth); if (a <= 0) continue
-        c.fillStyle = rgba(mix(C.blue, C.red, a), 1); c.beginPath(); for (const v of x.verts) dot(c, X(v, L), Y(v, L), rr * (1 + 0.35 * a)); c.fill()
+        c.fillStyle = rgba(mix(C.blue, sepC(x.depth), a), 1); c.beginPath(); for (const v of x.verts) dot(c, X(v, L), Y(v, L), rr * (1 + 0.35 * a)); c.fill()
       }
       hoverMarks(L, g.nbr.map(a => a))
     } else if (step === 2) {
@@ -293,9 +297,10 @@ export function createScene(gc: HTMLCanvasElement, mc: HTMLCanvasElement, md: Mo
       for (const x of nd.nodes) {
         if (!x.sep) { c.strokeStyle = rgba(C.blue, 0.5 * alpha); c.strokeRect(ox + x.first * cs, oy + x.first * cs, x.size * cs, x.size * cs); continue }
         const a = lo(x), b = x.first + x.size
-        c.fillStyle = rgba(C.red, 0.06 * alpha)
+        const sc = sepC(x.depth)
+        c.fillStyle = rgba(sc, 0.08 * alpha)
         c.fillRect(ox + a * cs, oy + x.first * cs, (b - a) * cs, x.size * cs); c.fillRect(ox + x.first * cs, oy + a * cs, x.size * cs, (x.first - a) * cs)
-        c.strokeStyle = rgba(C.red, 0.55 * alpha); c.strokeRect(ox + x.first * cs, oy + x.first * cs, x.size * cs, x.size * cs)
+        c.strokeStyle = rgba(sc, 0.7 * alpha); c.strokeRect(ox + x.first * cs, oy + x.first * cs, x.size * cs, x.size * cs)
         c.strokeStyle = rgba(C.muted, 0.35 * alpha); c.strokeRect(ox + a * cs, oy + a * cs, (b - a) * cs, (b - a) * cs)
       }
     }
