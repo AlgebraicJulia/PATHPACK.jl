@@ -270,28 +270,61 @@ atomic_kind(::CPU.DualQuantale{CPU.MinPlus}, ::Val{:N}, ::Type{<:Union{Float32, 
 atomic_kind(::CPU.DualQuantale{CPU.MinMax}, ::Val{:N}, ::Type{<:Union{Float32, Float64, Int32, Int64}}) = Val(:max)   # MaxMin
 atomic_kind(::CPU.PlusProd, ::Val{:N}, ::Type{<:Union{Float32, Float64}}) = Val(:add)
 
-@inline atomic_ptr(::Type{U}, C, i, j) where {U} = reinterpret(Core.LLVMPtr{U, CUDA.AS.Global}, pointer(C, i + (j - 1) * size(C, 1)))
+# The atomics are written in PTX, relaxed: the partial results they merge are read only by later kernels, so they
+# need no ordering. (CUDA.jl's atomic_min! and friends ask LLVM for acquire-release ordering; LLVM's NVPTX backend
+# up to Julia 1.12's ignored it and emitted relaxed atomics, but the newer one CUDA.jl 6.4 ships honours it, which
+# turns every split-K update into an ordered atom instead of a fire-and-forget reduction.)
+@inline atomic_addr(C, i, j) = reinterpret(UInt64, pointer(C, i + (j - 1) * size(C, 1)))
+
+for (T, ty, c) in ((Int32, "s32", "r"), (UInt32, "u32", "r"), (Int64, "s64", "l"), (UInt64, "u64", "l"))
+    L = T === Int32 || T === UInt32 ? "i32" : "i64"
+    for op in (:min, :max)
+        f = Symbol(:red_, op, :!)
+        @eval @inline $f(p::UInt64, v::$T) = Base.llvmcall(($"""
+            define void @entry(i64 %p, $L %v) #0 {
+                call void asm sideeffect "red.relaxed.gpu.global.$op.$ty [\$0], \$1;", "l,$c,~{memory}"(i64 %p, $L %v)
+                ret void
+            }
+            attributes #0 = { alwaysinline }""", "entry"), Cvoid, Tuple{UInt64, $T}, p, v)
+    end
+end
+for (T, ty, L, c) in ((Float32, "f32", "float", "f"), (Float64, "f64", "double", "d"))
+    @eval @inline red_add!(p::UInt64, v::$T) = Base.llvmcall(($"""
+        define void @entry(i64 %p, $L %v) #0 {
+            call void asm sideeffect "red.relaxed.gpu.global.add.$ty [\$0], \$1;", "l,$c,~{memory}"(i64 %p, $L %v)
+            ret void
+        }
+        attributes #0 = { alwaysinline }""", "entry"), Cvoid, Tuple{UInt64, $T}, p, v)
+end
+for (T, ty, L, c) in ((UInt32, "b32", "i32", "r"), (UInt64, "b64", "i64", "l"))
+    @eval @inline cas_relaxed!(p::UInt64, cmp::$T, new::$T) = Base.llvmcall(($"""
+        define $L @entry(i64 %p, $L %cmp, $L %new) #0 {
+            %r = call $L asm sideeffect "atom.relaxed.gpu.global.cas.$ty \$0, [\$1], \$2, \$3;", "=$c,l,$c,$c,~{memory}"(i64 %p, $L %cmp, $L %new)
+            ret $L %r
+        }
+        attributes #0 = { alwaysinline }""", "entry"), $T, Tuple{UInt64, $T, $T}, p, cmp, new)
+end
 
 @inline function atomic_splus!(::Val{:add}, s, trans, C::CuDeviceMatrix{T}, i, j, m::T) where {T}
-    CUDA.atomic_add!(atomic_ptr(T, C, i, j), m)
+    red_add!(atomic_addr(C, i, j), m)
     return
 end
 
 # integers: native min / max. IEEE floats: their order is the signed-integer order of the bits for
 # x ≥ 0 and the reversed unsigned order for x < 0, so min is a signed min when m ≥ 0 and an unsigned
 # max when m < 0 (and the converse for max). Exact; a NaN m is dropped, as by minnum / maxnum.
-for (K, op, rop) in ((:min, :atomic_min!, :atomic_max!), (:max, :atomic_max!, :atomic_min!))
+for (K, op, rop) in ((:min, :red_min!, :red_max!), (:max, :red_max!, :red_min!))
     @eval @inline function atomic_splus!(::Val{$(QuoteNode(K))}, s, trans, C::CuDeviceMatrix{T}, i, j, m::T) where {T}
         if T <: Integer
-            CUDA.$op(atomic_ptr(T, C, i, j), m)
+            $op(atomic_addr(C, i, j), m)
         elseif !isnan(m)
             S = sizeof(T) == 4 ? Int32 : Int64
             U = sizeof(T) == 4 ? UInt32 : UInt64
 
             if signbit(m)
-                CUDA.$rop(atomic_ptr(U, C, i, j), reinterpret(U, m))
+                $rop(atomic_addr(C, i, j), reinterpret(U, m))
             else
-                CUDA.$op(atomic_ptr(S, C, i, j), reinterpret(S, m))
+                $op(atomic_addr(C, i, j), reinterpret(S, m))
             end
         end
 
@@ -301,7 +334,7 @@ end
 
 @inline function atomic_splus!(::Val{:cas}, s::AbstractSemiring, trans::Val, C::CuDeviceMatrix{T}, i, j, m::T) where {T}
     U = sizeof(T) == 4 ? UInt32 : UInt64
-    ptr = reinterpret(Core.LLVMPtr{U, CUDA.AS.Global}, pointer(C, i + (j - 1) * size(C, 1)))
+    p = atomic_addr(C, i, j)
     old = @inbounds C[i, j]
 
     while true
@@ -311,7 +344,7 @@ end
             return
         end
 
-        prev = CUDA.atomic_cas!(ptr, reinterpret(U, old), reinterpret(U, new))
+        prev = cas_relaxed!(p, reinterpret(U, old), reinterpret(U, new))
 
         if prev == reinterpret(U, old)
             return
