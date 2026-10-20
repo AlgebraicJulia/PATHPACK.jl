@@ -43,7 +43,8 @@ export default defineConfig({
     ['script', {src: `${baseTemp.base}siteinfo.js`}],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap' }],
+    // the fonts load without blocking the first paint: text shows in the fallback font and swaps when they arrive
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap', media: 'print', onload: "this.media='all'" }],
     // REPLACE_ME_DOCUMENTER_VITEPRESS_NOINDEX
     // the card a shared link shows (LinkedIn, Slack, X, iMessage); the image needs an absolute URL
     ['meta', { property: 'og:type', content: 'website' }],
