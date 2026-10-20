@@ -23,7 +23,7 @@ and [One Graph, Many Questions](generated/semirings.md).
 | [Longest Paths and Schedules](generated/critical_paths.md) | Earliest start times and the critical path of a project | `MaxPlus` |
 | [Most Reliable Routes](generated/reliability.md) | The route most likely to work when links fail | `MaxProd` |
 | [Bandwidth and Widest Paths](generated/widest_paths.md) | The largest capacity between every pair of nodes | `MaxMin`, `MinMax` |
-| [Reachability and Labels](generated/reachability.md) | Which nodes can be reached, and with which permissions | `OrAnd` |
+| [Access Audits](generated/access_audits.md) | Who can read which files on a Linux file system, by any route, and the leak a bind mount opens | `OrAnd` |
 
 ## Applications
 

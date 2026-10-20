@@ -78,7 +78,7 @@ makedocs(
       "Longest Paths and Schedules" => "generated/critical_paths.md",
       "Most Reliable Routes" => "generated/reliability.md",
       "Bandwidth and Widest Paths" => "generated/widest_paths.md",
-      "Reachability and Labels" => "generated/reachability.md",
+      "Access Audits" => "generated/access_audits.md",
       "Factorize Once, Query Many Times" => "generated/queries.md",
     ],
     "Applications" => Any[

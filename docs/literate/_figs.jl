@@ -4,7 +4,7 @@
 # of the code a reader runs.
 module Figs
 
-export Fig, figure, panel, network, gridmap, matrixfig, gantt, bars, scatter, legend
+export Fig, figure, panel, network, gridmap, matrixfig, gantt, bars, scatter, legend, checkgrid
 
 struct Fig
     html::String
@@ -171,6 +171,28 @@ function bars(labels, vals; fmt = num, hi = falses(length(vals)), w = 560, row =
         print(body, """<text class="pp-fig-lab" x="$(lab - 10)" y="$(y + row / 2 + 4)" text-anchor="end">$(esc(l))</text>""")
         print(body, """<rect class="$c" x="$lab" y="$(y + 4)" width="$(r1(max(2, v * k)))" height="$(row - 8)" rx="5" fill="currentColor"/>""")
         print(body, """<text class="pp-fig-num2" x="$(r1(lab + max(2, v * k) + 8))" y="$(y + row / 2 + 4)">$(esc(fmt(v)))</text>""")
+    end
+    return String(take!(body)), w, h
+end
+
+"""
+A yes/no grid with row and column labels: `M[i, j]` true is a filled cell, in the accent color where `hi[i, j]`.
+"""
+function checkgrid(rows, cols, M; hi = falses(size(M)), cell = 34)
+    lab = min(320, 12 + 7.0 * maximum(length, string.(rows))); top = 30
+    w = lab + length(cols) * cell + 4; h = top + length(rows) * cell + 4
+    body = IOBuffer()
+    for (j, c) in enumerate(cols)
+        print(body, """<text class="pp-fig-lab" x="$(r1(lab + (j - 0.5) * cell))" y="20" text-anchor="middle">$(esc(c))</text>""")
+    end
+    for (i, r) in enumerate(rows)
+        y = top + (i - 1) * cell
+        print(body, """<text class="pp-fig-lab" x="$(lab - 10)" y="$(r1(y + cell / 2 + 4))" text-anchor="end">$(esc(r))</text>""")
+        for j in eachindex(cols)
+            x = lab + (j - 1) * cell
+            c = M[i, j] ? (hi[i, j] ? "ka" : "k6") : "kg"
+            print(body, """<rect class="$c" x="$(r1(x + 3))" y="$(r1(y + 3))" width="$(cell - 6)" height="$(cell - 6)" rx="6" fill="currentColor" opacity="$(M[i, j] ? 0.95 : 0.35)"/>""")
+        end
     end
     return String(take!(body)), w, h
 end
