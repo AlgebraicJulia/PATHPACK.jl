@@ -4,7 +4,7 @@
 # of the code a reader runs.
 module Figs
 
-export Fig, figure, panel, network, gridmap, matrixfig, gantt, bars, scatter, legend, checkgrid
+export Fig, figure, panel, network, gridmap, matrixfig, gantt, bars, scatter, legend, checkgrid, filetree
 
 struct Fig
     html::String
@@ -193,6 +193,42 @@ function checkgrid(rows, cols, M; hi = falses(size(M)), cell = 34)
             c = M[i, j] ? (hi[i, j] ? "ka" : "k6") : "kg"
             print(body, """<rect class="$c" x="$(r1(x + 3))" y="$(r1(y + 3))" width="$(cell - 6)" height="$(cell - 6)" rx="6" fill="currentColor" opacity="$(M[i, j] ? 0.95 : 0.35)"/>""")
         end
+    end
+    return String(take!(body)), w, h
+end
+
+"""
+A directory tree, as `tree` draws it, with a label per entry (for example the mode and owner, as `ls -l` shows them).
+`entries` are (path, label) pairs in any order; `dirs` the paths that are directories; `links` arrows from one path to
+another (a mount point to the directory mounted there), drawn dashed in the accent color with their `linklabel`;
+`hi` the paths drawn in the accent color.
+"""
+function filetree(entries, dirs; links = Pair{String, String}[], hi = String[], linklabel = "", row = 23)
+    parts(p) = p == "/" ? String[] : String.(split(p[2:end], '/'))
+    E = sort(collect(entries); by = e -> parts(e[1]))                     # depth first, siblings in name order
+    k = Dict(e[1] => i for (i, e) in enumerate(E))
+    depth(p) = length(parts(p)); ind = 18; namex(p) = 10 + depth(p) * ind
+    namew = maximum(namex(p) + 7.4 * (length(p == "/" ? "/" : basename(p)) + 1) for (p, _) in E)
+    labx = namew + 26; labw = 7.2 * maximum(length(l) for (_, l) in E)
+    arcx = labx + labw + 30; w = arcx + 40; h = length(E) * row + 8
+    y(p) = 4 + (k[p] - 0.5) * row
+    body = IOBuffer()
+    for (p, _) in E                                                       # the tree's lines, from each parent
+        p == "/" && continue
+        q = dirname(p); x = namex(q) + 5
+        print(body, """<path class="kl" d="M$(r1(x)) $(r1(y(q) + 7))V$(r1(y(p)))H$(r1(namex(p) - 4))" stroke="currentColor" stroke-width="1.2" fill="none"/>""")
+    end
+    for (p, lab) in E
+        name = p == "/" ? "/" : basename(p) * (p in dirs ? "/" : "")
+        c = p in hi ? "ka" : "ki"
+        print(body, """<text class="pp-fig-tree $c" x="$(r1(namex(p)))" y="$(r1(y(p) + 4))" fill="currentColor" font-weight="$(p in dirs ? 700 : 400)">$(esc(name))</text>""")
+        print(body, """<text class="pp-fig-mono" x="$(r1(labx))" y="$(r1(y(p) + 4))">$(esc(lab))</text>""")
+    end
+    for (a, b) in links                                                   # dashed arrows on the right
+        ya, yb = y(a), y(b); x0 = labx + labw + 8
+        print(body, """<path class="ka" d="M$(r1(x0)) $(r1(ya))C$(r1(arcx + 26)) $(r1(ya)) $(r1(arcx + 26)) $(r1(yb)) $(r1(x0 + 6)) $(r1(yb))" stroke="currentColor" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>""")
+        print(body, """<path class="ka" d="M$(r1(x0 + 6)) $(r1(yb))l7 -4.5v9z" fill="currentColor"/>""")
+        isempty(linklabel) || print(body, """<text class="pp-fig-ix ka" x="$(r1(arcx + 30))" y="$(r1((ya + yb) / 2))" fill="currentColor" transform="rotate(90 $(r1(arcx + 30)) $(r1((ya + yb) / 2)))" text-anchor="middle">$(esc(linklabel))</text>""")
     end
     return String(take!(body)), w, h
 end

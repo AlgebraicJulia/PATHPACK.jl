@@ -74,3 +74,6 @@
 .pp-road figcaption span { font-family: var(--pp-display); font-size: 20px; font-weight: 800; color: var(--pp-blue); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .pp-road figcaption p { margin: 4px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--pp-muted); }
 @media (max-width: 640px) { .pp-roads { grid-template-columns: minmax(0, 1fr); } }
+
+.pp-fig .pp-fig-tree { font-size: 13px; font-family: var(--vp-font-family-mono); }
+.pp-fig .pp-fig-mono { font-size: 12px; fill: var(--pp-muted); font-family: var(--vp-font-family-mono); }

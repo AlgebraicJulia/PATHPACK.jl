@@ -67,6 +67,14 @@ fs = [
 
 mounts = ["/srv/shared/datasets" => "/home/alice/datasets"]
 
+#-
+
+modestr(m, d) = (d ? "d" : "-") * join(((m >> s) & 4 != 0 ? "r" : "-") * ((m >> s) & 2 != 0 ? "w" : "-") * ((m >> s) & 1 != 0 ? "x" : "-") for s in (6, 3, 0))  #hide
+isdirpath = Set(dirname(e[1]) for e in fs if e[1] != "/")  #hide
+tree_entries = vcat([(e[1], modestr(e[4], e[1] in isdirpath) * "  " * e[2] * ":" * e[3]) for e in fs], [(m, "bind mount") for (m, _) in mounts])  #hide
+figure(panel("the file system", filetree(tree_entries, union(isdirpath, first.(mounts)); links = mounts, hi = ["/home/alice/datasets/patients.csv", "/srv/shared/datasets"], linklabel = "bind mount")),  #hide
+    caption = "Modes and owners as ls -l shows them. The dashed arrow is the bind mount: /srv/shared/datasets is a second name for /home/alice/datasets, reached through the lab's folder instead of Alice's home.")  #hide
+
 # Each directory and file is a vertex, and each name in a directory is an arc from the directory to it. The arc's
 # label is the set of users allowed to look the name up: those with execute permission on the directory. Whether a
 # user has a permission depends on which class they fall in, owner, group or other, exactly as the kernel decides.
