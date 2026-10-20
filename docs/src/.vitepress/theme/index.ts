@@ -60,11 +60,6 @@ export const Theme: ThemeConfig = {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'nav-bar-content-after': () => [
-        h(NolebaseEnhancedReadabilitiesMenu), // Enhanced Readabilities menu
-      ],
-      // A enhanced readabilities menu for narrower screens (usually smaller than iPad Mini)
-      'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
       // Sidebar drawer toggle button (to the left of search bar)
       'nav-bar-content-before': () => h(SidebarDrawerToggle),
     })

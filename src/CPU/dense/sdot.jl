@@ -130,6 +130,13 @@ end
 
 # ===== sdot =====
 
+"""
+    sdot(s::AbstractSemiring, tA, tB, x, y)
+
+The semiring dot product `⊕ᵢ x[i] ⊗ y[i]`, vectorized for machine number types.
+"""
+function sdot end
+
 function sdot(s::AbstractSemiring, tA::Val, tB::Val, x::AbstractVector{T}, y::AbstractVector{T}) where {T <: BScalarTypes}
     @assert length(x) == length(y)
 

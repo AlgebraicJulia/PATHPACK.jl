@@ -12,6 +12,14 @@ end
 
 # ===== sger! =====
 
+"""
+    sger!(s::AbstractSemiring, tA, tB, side, x, y, M; nt = Threads.nthreads())
+
+The rank-one update `M[r, c] = (x[r] ⊗ y[c]) ⊕ M[r, c]` (`side = Val(:R)`) or `(y[c] ⊗ x[r]) ⊕ M[r, c]`
+(`side = Val(:L)`), on `nt` threads; returns `M`.
+"""
+function sger! end
+
 function sger!(s::AbstractSemiring, tA::Val, tB::Val, side::Val, x::AbstractVector{T}, y::AbstractVector, M::AbstractMatrix{T}; nt::Integer = nthreads()) where {T}
     nr = length(x)
     nc = length(y)

@@ -62,6 +62,11 @@ the probability of the most reliable path from `i` to `j`.
 """
 const MaxProd = DualQuantale{MinProd}
 
+"""
+    TropicalSemiring
+
+The union of `MinPlus`, `MaxPlus`, `MinProd` and `MaxProd`.
+"""
 const TropicalSemiring = Union{MinPlus, MaxPlus, MinProd, MaxProd}
 
 function sid(s::MinPlus, a, ::Val{:C})

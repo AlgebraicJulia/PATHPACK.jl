@@ -59,7 +59,8 @@ onMounted(async () => {
   const lut = gl.createTexture()!
   let theme = ''
   const setLut = (t: 'light' | 'dark') => { gl.bindTexture(gl.TEXTURE_2D, lut); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 256, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, ramp(t)); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE) }
-  let yaw = 0.6, pitch = 0.1, vmax = 1, t0 = performance.now(), drag = false, moved = 0, last = performance.now(), raf = 0, alive = true
+  let yaw = 0.6, pitch = 0.1, vmax = 1, t0 = performance.now(), drag = false, moved = 0, last = performance.now(), raf = 0, alive = true, visible = true
+  const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting }); io.observe(cv)   // no drawing off screen
   const rot = () => { const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch)
     return new Float32Array([cy, sy * sp, -sy * cp, 0, cp, sp, sy, -cy * sp, cy * cp]) }   // column-major: yaw about y, then pitch about x
   const source = (s: number) => {
@@ -71,6 +72,7 @@ onMounted(async () => {
   const scale = (w: number, h: number) => { const s = 0.92; return w > h ? [s * h / w, s] : [s, s * w / h] }
   const frame = (now: number) => {
     if (!alive) return
+    if (!visible) { last = now; raf = requestAnimationFrame(frame); return }
     const dark = isDark(), th = dark ? 'dark' : 'light'; if (th !== theme) { setLut(th); theme = th }
     if (!drag) yaw += (now - last) * 0.00012; last = now
     const [w, h] = fit(), [sx, sy] = scale(w, h), p = Math.min(1, (now - t0) / 1600), reach = (1 - Math.pow(1 - p, 3)) * vmax * 1.001
@@ -105,7 +107,7 @@ onMounted(async () => {
   // start from the tip of an ear: the highest vertex
   let top = 0; for (let i = 1; i < n; i++) if (P[3 * i + 1] > P[3 * top + 1]) top = i
   source(top); ready.value = true; raf = requestAnimationFrame(frame)
-  stop = () => { alive = false; cancelAnimationFrame(raf) }
+  stop = () => { alive = false; cancelAnimationFrame(raf); io.disconnect() }
 })
 onBeforeUnmount(() => stop())
 </script>

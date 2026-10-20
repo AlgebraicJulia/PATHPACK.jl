@@ -79,10 +79,10 @@ aside: false
 D = <span class="f">mstar</span>(<span class="s">MinPlus</span>(), A)    <span class="c"># shortest paths between all pairs</span>
 W = <span class="f">mstar</span>(<span class="s">MaxMin</span>(), A)     <span class="c"># widest paths, same call</span></code></pre>
 <div class="pp-features">
-  <div class="pp-feature"><h4>Any semiring</h4><p>Shortest, widest, bottleneck, most reliable, reachability, sums over all walks: one solver.</p></div>
-  <div class="pp-feature"><h4>Multithreaded CPUs</h4><p>One sparse factorization, then independent rows: every core busy, no write conflicts.</p></div>
-  <div class="pp-feature"><h4>One GPU or many</h4><p>The CPU factorizes the small parts, the GPU the large ones; the rows split over every GPU you have.</p></div>
-  <div class="pp-feature"><h4>Queries, fast</h4><p>Factorize once, then answer single-source and single-target queries with two triangular solves.</p></div>
+  <div class="pp-feature"><h3>Any semiring</h3><p>Shortest, widest, bottleneck, most reliable, reachability, sums over all walks: one solver.</p></div>
+  <div class="pp-feature"><h3>Multithreaded CPUs</h3><p>One sparse factorization, then independent rows: every core busy, no write conflicts.</p></div>
+  <div class="pp-feature"><h3>One GPU or many</h3><p>The CPU factorizes the small parts, the GPU the large ones; the rows split over every GPU you have.</p></div>
+  <div class="pp-feature"><h3>Queries, fast</h3><p>Factorize once, then answer single-source and single-target queries with two triangular solves.</p></div>
 </div>
 <div class="pp-hero-actions" style="margin-top: 34px">
   <a class="pp-btn pp-btn-brand" href="./generated/road_networks">Road networks tutorial</a>

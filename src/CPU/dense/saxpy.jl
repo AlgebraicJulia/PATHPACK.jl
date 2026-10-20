@@ -84,6 +84,13 @@ end
 
 # ===== saxpy! =====
 
+"""
+    saxpy!(s::AbstractSemiring, tA, tB, side, a, x, y)
+
+Overwrite `y` with `(a ⊗ x) ⊕ y` elementwise (`side = Val(:L)`) or `(x ⊗ a) ⊕ y` (`side = Val(:R)`), and return it.
+"""
+function saxpy! end
+
 function saxpy!(s::AbstractSemiring, tA::Val, tB::Val, side::Val, a, x::AbstractVector{T}, y::AbstractVector{T}) where {T <: BScalarTypes}
     @assert length(x) == length(y)
 

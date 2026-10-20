@@ -2,6 +2,12 @@ const X86 = Sys.ARCH === :x86_64 || Sys.ARCH === :i686
 
 # ===== quantales =====
 
+"""
+    DualQuantale{S}()
+
+`S` with its order reversed: `⊕` becomes the opposite operation of `S`'s order (`max` for `min`), and `⊗` stays.
+`MaxPlus` is `DualQuantale{MinPlus}` and `MaxProd` is `DualQuantale{MinProd}`.
+"""
 struct DualQuantale{S <: AbstractSemiring} <: AbstractSemiring
     s::S
 end
@@ -10,6 +16,12 @@ function DualQuantale{S}() where {S <: AbstractSemiring}
     return DualQuantale{S}(S())
 end
 
+"""
+    NegativeQuantale{S}()
+
+`S` restricted to the elements below its one in its order, such as `[0, ∞]` in `([-∞, ∞], min, +)`. The Lawvere
+quantales [`MinPlusLaw`](@ref), [`MaxPlusLaw`](@ref), [`MinProdLaw`](@ref) and [`MaxProdLaw`](@ref) are these.
+"""
 struct NegativeQuantale{S <: AbstractSemiring} <: AbstractSemiring
     s::S
 end
@@ -18,6 +30,12 @@ function NegativeQuantale{S}() where {S <: AbstractSemiring}
     return NegativeQuantale{S}(S())
 end
 
+"""
+    Lattice{S}()
+
+The lattice of `S`'s order: `⊕` is `S`'s `⊕` and `⊗` is the opposite operation. `MinMax` is `Lattice{MinPlus}`,
+`([-∞, ∞], min, max)`.
+"""
 struct Lattice{S <: AbstractSemiring} <: AbstractSemiring
     s::S
 end
@@ -25,6 +43,53 @@ end
 function Lattice{S}() where {S <: AbstractSemiring}
     return Lattice{S}(S())
 end
+
+# ===== the scalar interface =====
+#
+# `op`, `tA` and `tB` are `Val(:N)` for the semiring itself; the other flags (`Val(:T)`, `Val(:R)`, `Val(:C)`) are
+# variants the factorization kernels use.
+
+"""
+    szero(s::AbstractSemiring, T, op = Val(:N))
+
+The zero of `s` as a value of type `T`: the identity of `⊕` and the weight of "no path" (`Inf` for `MinPlus`).
+"""
+function szero end
+
+"""
+    sone(s::AbstractSemiring, T, op = Val(:N))
+
+The one of `s` as a value of type `T`: the identity of `⊗` and the weight of the empty path (`0` for `MinPlus`).
+"""
+function sone end
+
+"""
+    splus(s::AbstractSemiring, a, b, op = Val(:N))
+
+`a ⊕ b`: the better of two paths (`min(a, b)` for `MinPlus`).
+"""
+function splus end
+
+"""
+    sprod(s::AbstractSemiring, a, b, tA = Val(:N), tB = Val(:N))
+
+`a ⊗ b`: two paths one after the other (`a + b` for `MinPlus`).
+"""
+function sprod end
+
+"""
+    smuladd(s::AbstractSemiring, a, b, c, tA = Val(:N), tB = Val(:N))
+
+`(a ⊗ b) ⊕ c`, the update at the heart of the factorization.
+"""
+function smuladd end
+
+"""
+    sstar(s::AbstractSemiring, a)
+
+The star `a* = 1 ⊕ a ⊕ a² ⊕ ⋯` of one element: for `MinPlus`, `0` if `a ≥ 0` and `-Inf` for a negative cycle.
+"""
+function sstar end
 
 # ===== vmin / vmax =====
 
@@ -81,6 +146,20 @@ end
 end
 
 # ===== slte / sgte =====
+
+"""
+    slte(s::AbstractSemiring, a, b)
+
+Whether `a ≤ b` in the natural order of `s`, the order in which `a ⊕ b = b`. For `MinPlus` that is `a >= b`.
+"""
+function slte end
+
+"""
+    sgte(s::AbstractSemiring, a, b)
+
+Whether `a ≥ b` in the natural order of `s`: `slte(s, b, a)`.
+"""
+function sgte end
 
 function slte(d::DualQuantale, a, b)
     return sgte(d.s, a, b)

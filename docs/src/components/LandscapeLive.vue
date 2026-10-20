@@ -92,10 +92,10 @@ onBeforeUnmount(() => stop())
 <template>
   <div class="pp-demo">
     <div class="pp-demo-bar">
-      <div class="pp-seg" role="tablist">
-        <button :class="{ on: mode === 'cost' }" @click="setMode('cost')"><code>MinPlus</code> cheapest route</button>
-        <button :class="{ on: mode === 'barrier' }" @click="setMode('barrier')"><code>MinMax</code> worst barrier</button>
-        <button :class="{ on: mode === 'walk' }" @click="setMode('walk')"><code>PlusProd</code> wandering animal</button>
+      <div class="pp-seg" role="group" aria-label="The question">
+        <button type="button" :class="{ on: mode === 'cost' }" :aria-pressed="mode === 'cost'" @click="setMode('cost')"><code>MinPlus</code> cheapest route</button>
+        <button type="button" :class="{ on: mode === 'barrier' }" :aria-pressed="mode === 'barrier'" @click="setMode('barrier')"><code>MinMax</code> worst barrier</button>
+        <button type="button" :class="{ on: mode === 'walk' }" :aria-pressed="mode === 'walk'" @click="setMode('walk')"><code>PlusProd</code> wandering animal</button>
       </div>
     </div>
     <div class="pp-land">

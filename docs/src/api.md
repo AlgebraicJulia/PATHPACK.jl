@@ -42,6 +42,40 @@ PATHPACK.CPU.OrAnd
 PATHPACK.CPU.AndOr
 ```
 
+## Semiring Algebra
+
+The scalar layer under the solver, for defining a semiring of your own or calling the kernels directly. A semiring is
+a subtype of `AbstractSemiring`; the solver reaches it only through these functions.
+
+```@docs
+PATHPACK.CPU.AbstractSemiring
+PATHPACK.CPU.szero
+PATHPACK.CPU.sone
+PATHPACK.CPU.splus
+PATHPACK.CPU.sprod
+PATHPACK.CPU.smuladd
+PATHPACK.CPU.sstar
+PATHPACK.CPU.slte
+PATHPACK.CPU.sgte
+PATHPACK.CPU.sdot
+PATHPACK.CPU.saxpy!
+PATHPACK.CPU.sger!
+```
+
+Semirings built from others, and families:
+
+```@docs
+PATHPACK.CPU.DualQuantale
+PATHPACK.CPU.NegativeQuantale
+PATHPACK.CPU.Lattice
+PATHPACK.CPU.MinPlusLaw
+PATHPACK.CPU.MaxPlusLaw
+PATHPACK.CPU.MinProdLaw
+PATHPACK.CPU.MaxProdLaw
+PATHPACK.CPU.LawvereQuantale
+PATHPACK.CPU.TropicalSemiring
+```
+
 ## GPUs
 
 ```@docs

@@ -57,10 +57,13 @@ makedocs(
     repo = "https://github.com/AlgebraicJulia/PATHPACK.jl",
     devbranch = "main",
     devurl = "dev",
+    # there is no tagged release yet, so dev is the only version: let search engines index it (turn this back on, the
+    # default, once there is a stable version, so that only stable is indexed)
+    noindex_non_stable = false,
     description = "All-pairs shortest paths, widest paths, reachability and more, on CPUs and NVIDIA GPUs",
   ),
   doctest = false,
-  checkdocs = :none,
+  checkdocs = :exports,
   pages = Any[
     "Home" => "index.md",
     "Guide" => Any[
@@ -90,6 +93,7 @@ makedocs(
     ],
     "Reference" => Any[
       "Library Reference" => "api.md",
+      "Release Notes" => "changelog.md",
     ],
   ],
 )

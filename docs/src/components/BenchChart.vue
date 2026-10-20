@@ -25,10 +25,10 @@ onBeforeUnmount(() => io?.disconnect())
 <template>
   <div class="pp-bench" ref="root">
     <div class="pp-bench-head">
-      <div class="pp-seg"><button :class="{ on: log }" @click="log = true">log scale</button><button :class="{ on: !log }" @click="log = false">linear</button></div>
+      <div class="pp-seg" role="group" aria-label="Scale"><button type="button" :class="{ on: log }" :aria-pressed="log" @click="log = true">log scale</button><button type="button" :class="{ on: !log }" :aria-pressed="!log" @click="log = false">linear</button></div>
     </div>
     <div v-for="G in GROUPS" :key="G.title" class="pp-bench-group">
-      <h4>{{ G.title }} <span>{{ G.where }}</span></h4>
+      <h3>{{ G.title }} <span>{{ G.where }}</span></h3>
       <div v-for="([who, s], i) in G.rows" :key="who" class="pp-bench-row" :class="{ us: i === 0 }">
         <span class="pp-bench-who">{{ who }}</span>
         <span class="pp-bench-track"><span class="pp-bench-bar" :style="{ width: (shown ? 100 * frac(s as number, Math.max(...G.rows.map(r => r[1] as number))) : 0) + '%' }"></span></span>

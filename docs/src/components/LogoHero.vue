@@ -20,24 +20,32 @@ onMounted(async () => {
   const [{ loadBin, bit }, { csr, dijkstra, nearest }, { FieldGL }, { isDark }] = await Promise.all([
     import('./lib/bin'), import('./lib/graph'), import('./lib/fieldgl'), import('./lib/palette')])
   const { meta, a } = await loadBin(withBase('/data/logo.bin.gz'))
+  const yieldNow = () => new Promise((r) => setTimeout(r))   // split the setup into short tasks, so the page stays responsive
   const n = meta.n, m = meta.m, xy = new Float32Array(2 * n), E = new Uint32Array(2 * m), inside = new Uint8Array(m), W = new Float32Array(m)
   for (let i = 0; i < 2 * n; i++) xy[i] = meta.lo[i & 1] + a.q[i] / meta.scale
   for (let k = 0, u = 0; k < m; k++) {   // edges: steps of the first vertex, jumps to the second
     u += a.first[k]; const v = u + a.jump[k]; E[2 * k] = u; E[2 * k + 1] = v; inside[k] = bit(a.inbits, k)
     W[k] = Math.hypot(xy[2 * u] - xy[2 * v], xy[2 * u + 1] - xy[2 * v + 1]) * (inside[k] ? meta.inner_weight : 1)
   }
+  await yieldNow()
   const g = csr(n, E.filter((_, k) => k % 2 === 0), E.filter((_, k) => k % 2 === 1), W)
+  await yieldNow()
   // segments: the joining roads first (thin, faint), then the strokes
   const order: number[] = []; for (let k = 0; k < m; k++) if (!inside[k]) order.push(k); const nout = order.length
   for (let k = 0; k < m; k++) if (inside[k]) order.push(k)
   const seg = new Float32Array(4 * m), wid = new Float32Array(m)
   order.forEach((k, i) => { const u = E[2 * k], v = E[2 * k + 1]; seg.set([xy[2 * u], xy[2 * u + 1], xy[2 * v], xy[2 * v + 1]], 4 * i); wid[i] = inside[k] ? 1.25 : 0.9 })
+  await yieldNow()
+  if (!canvas.value) return
   const fg = new FieldGL(canvas.value!); fg.pad = 0.02
   fg.setGeometry(seg, wid, [{ start: 0, count: nout, width: 0.9, alpha: 0.42 }, { start: nout, count: m - nout, width: 1.25, alpha: 1 }])
   const near = nearest(xy), vals = new Float64Array(2 * m)
   const onLetter = new Uint8Array(n); for (let k = 0; k < m; k++) if (inside[k]) { onLetter[E[2 * k]] = 1; onLetter[E[2 * k + 1]] = 1 }
   const letters: number[] = []; onLetter.forEach((f, i) => { if (f) letters.push(i) })
-  let d = new Float64Array(n), vmax = 1, t0 = 0, last = 0, raf = 0, alive = true, auto = 0
+  let d = new Float64Array(n), vmax = 1, t0 = 0, last = 0, raf = 0, alive = true, auto = 0, dirty = true, visible = true
+  fg.onresize = () => { dirty = true }
+  // draw only while a wave moves (or the size or theme changed), and nothing while the logo is off screen
+  const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) dirty = true }); io.observe(canvas.value!)
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
   const wave = (s: number) => {
     const t = performance.now(); dijkstra(g, [s], 'sum', d); ms.value = (performance.now() - t).toFixed(1)
@@ -47,10 +55,12 @@ onMounted(async () => {
   }
   const frame = (now: number) => {
     if (!alive) return
-    const dark = isDark(); if ((fg.theme === 'dark') !== dark) fg.setTheme(dark ? 'dark' : 'light')
+    if (!visible) { raf = requestAnimationFrame(frame); return }
+    const dark = isDark(); if ((fg.theme === 'dark') !== dark) { fg.setTheme(dark ? 'dark' : 'light'); dirty = true }
     const p = Math.min(1, (now - t0) / (reduce ? 1 : 1700)), e = 1 - Math.pow(1 - p, 3)
-    fg.draw({ reach: e * vmax * 1.02, vmax, front: p < 1 ? vmax * 0.07 : 0, glow: dark ? 0.5 : 0.35,
+    if (p < 1 || dirty) fg.draw({ reach: e * vmax * 1.02, vmax, front: p < 1 ? vmax * 0.07 : 0, glow: dark ? 0.5 : 0.35,
       base: dark ? [0.9, 0.92, 0.96, 0.13] : [0.1, 0.12, 0.18, 0.1] })
+    dirty = false
     // a new wave from a random point of a letter every few seconds, until the visitor clicks
     if (!reduce && auto >= 0 && now - last > 5200) wave(letters[Math.floor(Math.random() * letters.length)])
     raf = requestAnimationFrame(frame)
@@ -61,7 +71,7 @@ onMounted(async () => {
   }
   canvas.value!.addEventListener('click', onClick)
   wave(meta.src); raf = requestAnimationFrame(frame); ready.value = true
-  stop = () => { alive = false; cancelAnimationFrame(raf); canvas.value?.removeEventListener('click', onClick); fg.destroy() }
+  stop = () => { alive = false; cancelAnimationFrame(raf); io.disconnect(); canvas.value?.removeEventListener('click', onClick); fg.destroy() }
 })
 onBeforeUnmount(() => stop())
 </script>

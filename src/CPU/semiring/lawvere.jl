@@ -6,6 +6,11 @@
 # - addition is minimization
 # - multiplication is addition
 #
+"""
+    MinPlusLaw()
+
+The Lawvere quantale `([0, ∞], min, +)`: `MinPlus` on non-negative weights.
+"""
 const MinPlusLaw = NegativeQuantale{MinPlus}
 
 # The dual Lawvere quantale
@@ -16,6 +21,11 @@ const MinPlusLaw = NegativeQuantale{MinPlus}
 # - addition is maximization
 # - multiplication is addition
 #
+"""
+    MaxPlusLaw()
+
+The dual Lawvere quantale `([-∞, 0], max, +)`: `MaxPlus` on non-positive weights.
+"""
 const MaxPlusLaw = NegativeQuantale{MaxPlus}
 
 # The multiplicative Lawvere quantale
@@ -26,6 +36,11 @@ const MaxPlusLaw = NegativeQuantale{MaxPlus}
 # - addition is minimization
 # - multiplication is as usual
 #
+"""
+    MinProdLaw()
+
+The multiplicative Lawvere quantale `([1, ∞], min, ×)`: `MinProd` on weights of at least 1.
+"""
 const MinProdLaw = NegativeQuantale{MinProd}
 
 # The dual multiplicative Lawvere quantale
@@ -36,8 +51,18 @@ const MinProdLaw = NegativeQuantale{MinProd}
 # - addition is maximization
 # - multiplication is as usual
 #
+"""
+    MaxProdLaw()
+
+The dual multiplicative Lawvere quantale `([0, 1], max, ×)`: `MaxProd` on probabilities.
+"""
 const MaxProdLaw = NegativeQuantale{MaxProd}
 
+"""
+    LawvereQuantale
+
+The union of [`MinPlusLaw`](@ref), [`MaxPlusLaw`](@ref), [`MinProdLaw`](@ref) and [`MaxProdLaw`](@ref).
+"""
 const LawvereQuantale = Union{MinPlusLaw, MaxPlusLaw, MinProdLaw, MaxProdLaw}
 
 function sprod(n::Union{MinPlusLaw, MaxPlusLaw}, a, b, ::Val{:N}, ::Val{:N})

@@ -105,9 +105,9 @@ onBeforeUnmount(() => stop())
 <template>
   <div class="pp-demo">
     <div class="pp-demo-bar">
-      <div class="pp-seg" role="tablist">
-        <button :class="{ on: mode === 'live' }" @click="setMode('live')">From your cursor</button>
-        <button :class="{ on: mode === 'all' }" @click="setMode('all')">Every street at once</button>
+      <div class="pp-seg" role="group" aria-label="What to show">
+        <button type="button" :class="{ on: mode === 'live' }" :aria-pressed="mode === 'live'" @click="setMode('live')">From your cursor</button>
+        <button type="button" :class="{ on: mode === 'all' }" :aria-pressed="mode === 'all'" @click="setMode('all')">Every street at once</button>
       </div>
       <span class="pp-demo-stat" v-if="mode === 'live'">one Dijkstra in your browser: <b>{{ ms }} ms</b></span>
       <span class="pp-demo-stat" v-else>closeness: each junction's mean distance to all 11,840</span>

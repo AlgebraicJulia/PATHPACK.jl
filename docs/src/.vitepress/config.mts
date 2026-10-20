@@ -45,7 +45,27 @@ export default defineConfig({
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap' }],
     // REPLACE_ME_DOCUMENTER_VITEPRESS_NOINDEX
+    // the card a shared link shows (LinkedIn, Slack, X, iMessage); the image needs an absolute URL
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:site_name', content: 'PATHPACK.jl' }],
+    ['meta', { property: 'og:image', content: 'https://algebraicjulia.github.io/PATHPACK.jl/dev/og.jpg' }],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { property: 'og:image:alt', content: 'The PATHPACK.jl logo drawn as a graph, colored by distance: Every path, between every pair.' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:image', content: 'https://algebraicjulia.github.io/PATHPACK.jl/dev/og.jpg' }],
   ],
+  // each page's own title and description on its card
+  transformHead({ pageData, siteData }) {
+    const title = pageData.title && pageData.title !== siteData.title ? `${pageData.title} | ${siteData.title}` : `${siteData.title}: every path, between every pair`
+    const description = pageData.frontmatter?.description || pageData.description || siteData.description
+    return [
+      ['meta', { property: 'og:title', content: title }],
+      ['meta', { property: 'og:description', content: description }],
+      ['meta', { name: 'twitter:title', content: title }],
+      ['meta', { name: 'twitter:description', content: description }],
+    ]
+  },
   
   markdown: {
     component: { inlineTags: ['CitationPreview'] },

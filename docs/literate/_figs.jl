@@ -163,7 +163,7 @@ end
 
 """Horizontal bars, labelled, with their values printed by `fmt`; `hi` marks bars drawn in the accent color."""
 function bars(labels, vals; fmt = num, hi = falses(length(vals)), w = 560, row = 30, val = nothing)
-    lab = 150; top = maximum(vals); k = (w - lab - 80) / top; h = length(vals) * row + 6
+    lab = min(250, 8 + 6.6 * maximum(length, string.(labels))); top = maximum(vals); k = (w - lab - 80) / top; h = length(vals) * row + 6
     body = IOBuffer()
     for (r, (l, v)) in enumerate(zip(labels, vals))
         y = 3 + (r - 1) * row

@@ -63,3 +63,14 @@
 .dark .pp-fig .k0 { color: #6088ff } .dark .pp-fig .k1 { color: #6c83fd } .dark .pp-fig .k2 { color: #747ffb } .dark .pp-fig .k3 { color: #7b7cfa } .dark .pp-fig .k4 { color: #8179f8 } .dark .pp-fig .k5 { color: #8777f7 } .dark .pp-fig .k6 { color: #8d74f6 } .dark .pp-fig .k7 { color: #9372f5 } .dark .pp-fig .k8 { color: #9a6fef } .dark .pp-fig .k9 { color: #a46be3 } .dark .pp-fig .k10 { color: #ae67d7 } .dark .pp-fig .k11 { color: #b764cb } .dark .pp-fig .k12 { color: #c160bf } .dark .pp-fig .k13 { color: #ca5db4 } .dark .pp-fig .k14 { color: #d359a8 } .dark .pp-fig .k15 { color: #dc569d } .dark .pp-fig .k16 { color: #e35593 } .dark .pp-fig .k17 { color: #e65987 } .dark .pp-fig .k18 { color: #e95c7d } .dark .pp-fig .k19 { color: #eb6072 } .dark .pp-fig .k20 { color: #ee6367 } .dark .pp-fig .k21 { color: #f1675d } .dark .pp-fig .k22 { color: #f36a52 } .dark .pp-fig .k23 { color: #f66d48 } .dark .pp-fig .k24 { color: #f87341 } .dark .pp-fig .k25 { color: #f98046 } .dark .pp-fig .k26 { color: #fa8d4a } .dark .pp-fig .k27 { color: #fb9a4f } .dark .pp-fig .k28 { color: #fca653 } .dark .pp-fig .k29 { color: #fdb357 } .dark .pp-fig .k30 { color: #fec05c } .dark .pp-fig .k31 { color: #ffcc60 }
 @media (max-width: 760px) { .pp-fig-row { grid-template-columns: minmax(0, 1fr); } .pp-fig { padding: 12px; } }
 .pp-fig-row[style="--cols:1"] { max-width: 560px; margin: 0 auto; }
+
+/* the gallery of real road networks (Road Networks tutorial) */
+.pp-roads { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0 24px; }
+.pp-road { margin: 0; border: 1px solid var(--pp-line); border-radius: 14px; overflow: hidden; background: var(--pp-card); }
+.pp-road-pic { aspect-ratio: 4 / 3; background: var(--vp-c-bg); border-bottom: 1px solid var(--pp-line); }
+.pp-road figcaption { padding: 10px 14px 12px; }
+.pp-road figcaption div { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.pp-road figcaption b { font-family: var(--pp-display); font-size: 15.5px; font-weight: 700; color: var(--vp-c-text-1); }
+.pp-road figcaption span { font-family: var(--pp-display); font-size: 20px; font-weight: 800; color: var(--pp-blue); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pp-road figcaption p { margin: 4px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--pp-muted); }
+@media (max-width: 640px) { .pp-roads { grid-template-columns: minmax(0, 1fr); } }

@@ -83,12 +83,28 @@ vec(B) == D[id(1, 1), :]
 # D = apsp_gpu(A; devices = collect(CUDA.devices()))       # its rows split over every GPU in the machine
 # ```
 #
-# Measured on NVIDIA B200 GPUs, every pair of intersections:
-#
+# Measured on NVIDIA B200 GPUs, every pair of intersections. Each map is colored by the road distance from one city, a
+# single row of the answer.
+
+#md # ```@raw html
+#md # <div class="pp-roads">
+#md # <figure class="pp-road"><div class="pp-road-pic"><AppVisual name="road_usa" ring label="United States, major roads, colored by road distance from Chicago" /></div><figcaption><div><b>United States, major roads</b><span>0.14 s</span></div><p>126,146 intersections, 15.9 billion distances, on one GPU. Colored by road distance from Chicago.</p></figcaption></figure>
+#md # <figure class="pp-road"><div class="pp-road-pic"><AppVisual name="france" ring label="France, colored by road distance from Paris" /></div><figcaption><div><b>France</b><span>0.34 s</span></div><p>297,144 intersections, 88.3 billion distances, on 8 GPUs. Colored by road distance from Paris.</p></figcaption></figure>
+#md # <figure class="pp-road"><div class="pp-road-pic"><AppVisual name="road_brazil" ring label="Brazil, colored by road distance from São Paulo" /></div><figcaption><div><b>Brazil</b><span>0.39 s</span></div><p>323,474 intersections, 104.6 billion distances, on 8 GPUs. Colored by road distance from São Paulo.</p></figcaption></figure>
+#md # <figure class="pp-road"><div class="pp-road-pic"><AppVisual name="road_japan" ring label="Japan, colored by road distance from Tokyo" /></div><figcaption><div><b>Japan</b><span>0.46 s</span></div><p>353,713 intersections, 125.1 billion distances, on 8 GPUs. Colored by road distance from Tokyo.</p></figcaption></figure>
+#md # <figure class="pp-road"><div class="pp-road-pic"><AppVisual name="road_ny" ring label="New York City, colored by road distance from Midtown Manhattan" /></div><figcaption><div><b>New York City</b><span>0.30 s</span></div><p>264,346 intersections, 69.9 billion distances, on 2 GPUs. Colored by road distance from Midtown Manhattan.</p></figcaption></figure>
+#md # <figure class="pp-road"><div class="pp-road-pic"><AppVisual name="road_bay" ring label="San Francisco Bay Area, colored by road distance from San Francisco" /></div><figcaption><div><b>San Francisco Bay Area</b><span>0.29 s</span></div><p>321,270 intersections, 103.2 billion distances, on 5 GPUs. Colored by road distance from San Francisco.</p></figcaption></figure>
+#md # <figure class="pp-road"><div class="pp-road-pic"><AppVisual name="road_col" ring label="Colorado, colored by road distance from Denver" /></div><figcaption><div><b>Colorado</b><span>0.39 s</span></div><p>435,666 intersections, 189.8 billion distances, on 8 GPUs. Colored by road distance from Denver.</p></figcaption></figure>
+#md # </div>
+#md # ```
+
 # | Network | Intersections | Distances | Time |
-# |---|---|---|---|
+# |---|---:|---:|---:|
+# | Luxembourg | 114,599 | 13.1 billion | 0.09 s on one GPU |
 # | United States, major roads | 126,146 | 15.9 billion | 0.14 s on one GPU |
+# | New York City | 264,346 | 69.9 billion | 0.30 s on 2 GPUs |
 # | France | 297,144 | 88.3 billion | 0.34 s on 8 GPUs |
+# | San Francisco Bay Area | 321,270 | 103.2 billion | 0.29 s on 5 GPUs |
 # | Brazil | 323,474 | 104.6 billion | 0.39 s on 8 GPUs |
 # | Japan | 353,713 | 125.1 billion | 0.46 s on 8 GPUs |
 # | Colorado | 435,666 | 189.8 billion | 0.39 s on 8 GPUs |

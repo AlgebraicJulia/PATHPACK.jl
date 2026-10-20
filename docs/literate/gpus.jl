@@ -87,6 +87,16 @@ blocks = apsp_gpu(A; devices = gpus)                # one block per GPU
 # `D_g[t, j]` is the distance from `sources_g[t]` to `j`. The work is balanced between the GPUs: over our multi-GPU
 # runs, the slowest GPU took 2.2% longer than the mean in the median case, and 13.3% longer at most.
 
+#md # Every pair of intersections of eight road networks, measured on NVIDIA B200s with the GPU counts shown:
+#md #
+#md # ```@example gpufig
+#md # using PATHPACK  #hide
+#md # Base.include(@__MODULE__, joinpath(pkgdir(PATHPACK), "docs", "literate", "_figs.jl"))  #hide
+#md # nets = ["Luxembourg (13.1), 1 GPU", "United States (15.9), 1 GPU", "New York City (69.9), 2 GPUs", "France (88.3), 8 GPUs", "Bay Area (103.2), 5 GPUs", "Brazil (104.6), 8 GPUs", "Japan (125.1), 8 GPUs", "Colorado (189.8), 8 GPUs"]  #hide
+#md # secs = [0.093, 0.139, 0.298, 0.343, 0.293, 0.392, 0.464, 0.389]  #hide
+#md # figure(panel("seconds for every pair", bars(nets, secs; fmt = x -> string(x, " s"), w = 640); sub = "billions of distances in brackets"), caption = "Networks too large for one GPU's memory split their rows over several GPUs.")  #hide
+#md # ```
+
 # ## New Weights, Same Graph
 #
 # Many applications solve one graph again and again with different weights: travel times at different hours,

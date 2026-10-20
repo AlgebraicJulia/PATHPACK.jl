@@ -24,6 +24,13 @@ export AndOr, OrAnd
 export splus, sprod, sstar, szero, sone, smuladd, sdot, saxpy!, sger!
 export slte, sgte, TropicalSemiring
 
+"""
+    AbstractSemiring
+
+The supertype of the semirings that `mstar`, `mlu` and `pstar` take. The solver reaches a semiring only through the
+scalar functions [`szero`](@ref), [`sone`](@ref), [`splus`](@ref), [`sprod`](@ref), [`smuladd`](@ref),
+[`sstar`](@ref) and [`slte`](@ref); the definitions in `src/CPU/semiring/` show what a semiring provides.
+"""
 abstract type AbstractSemiring end
 
 const N_OR_R = Union{Val{:N}, Val{:R}}
