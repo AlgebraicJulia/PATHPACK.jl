@@ -220,3 +220,4 @@ html:not(.dark) .pp-dark { display: none !important; }
 @media (max-width: 860px) { .pp-mesh { grid-template-columns: minmax(0, 1fr); } }
 
 .dark .pp-install-prompt { color: #5fc452; }
+.pp-readability { display: flex; align-items: center; }

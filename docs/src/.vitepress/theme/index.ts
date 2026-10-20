@@ -22,6 +22,7 @@ import BenchChart from '@/BenchChart.vue'
 import HowItWorks from '@/HowItWorks.vue'
 import CodeExplorer from '@/CodeExplorer.vue'
 import MeshPaint from '@/MeshPaint.vue'
+import ReadabilityMenu from '@/ReadabilityMenu.vue'
 import AppVisual from '@/AppVisual.vue'
 import SwissUnroll from '@/SwissUnroll.vue'
 // __DV_PLUGIN_COMPONENT_IMPORTS__
@@ -60,6 +61,10 @@ export const Theme: ThemeConfig = {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
+      // the Enhanced Readability menu: page width and spotlight (with an accessible name, ReadabilityMenu.vue)
+      'nav-bar-content-after': () => [h(ReadabilityMenu)],
+      // the same menu for narrower screens
+      'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
       // Sidebar drawer toggle button (to the left of search bar)
       'nav-bar-content-before': () => h(SidebarDrawerToggle),
     })
