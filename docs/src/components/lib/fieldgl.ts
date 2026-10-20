@@ -32,9 +32,12 @@ export class FieldGL {
   bufGeo: WebGLBuffer; bufVal: WebGLBuffer; bufIdx: WebGLBuffer; lut: WebGLTexture
   box = [0, 0, 1, 1]; pad = 0.03; ro: ResizeObserver; theme: 'light' | 'dark' = 'light'
   onresize: () => void = () => {}
+  software = false   // rendered on the CPU (no GPU): animate as little as possible
   constructor(public canvas: HTMLCanvasElement) {
     const gl = canvas.getContext('webgl', { antialias: true, premultipliedAlpha: false, alpha: true })!
     this.gl = gl
+    const info = gl.getExtension('WEBGL_debug_renderer_info')
+    this.software = /swiftshader|llvmpipe|softpipe|software|basic render/i.test(info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '')
     const sh = (t: number, s: string) => { const o = gl.createShader(t)!; gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o) || 'shader'); return o }
     const p = gl.createProgram()!; gl.attachShader(p, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(p)
     this.prog = p; this.bufGeo = gl.createBuffer()!; this.bufVal = gl.createBuffer()!; this.bufIdx = gl.createBuffer()!

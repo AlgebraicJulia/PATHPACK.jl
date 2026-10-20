@@ -46,7 +46,8 @@ onMounted(async () => {
   fg.onresize = () => { dirty = true }
   // draw only while a wave moves (or the size or theme changed), and nothing while the logo is off screen
   const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) dirty = true }); io.observe(canvas.value!)
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+  // no animation for reduced motion, or without a GPU, where every frame would block the page
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || fg.software
   const wave = (s: number) => {
     const t = performance.now(); dijkstra(g, [s], 'sum', d); ms.value = (performance.now() - t).toFixed(1)
     vmax = 0; for (let i = 0; i < n; i++) if (d[i] < Infinity && d[i] > vmax) vmax = d[i]
