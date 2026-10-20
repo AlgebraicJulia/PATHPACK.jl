@@ -1,12 +1,14 @@
 <script setup lang="ts">
-// Paris's streets (OpenStreetMap, 11,840 junctions). "From your cursor": one Dijkstra in the browser per mouse move,
-// every street colored by its walking distance from the junction under the cursor. "Every street at once": each
-// street's closeness (mean distance to all other junctions), from PATHPACK.jl's all 140 million distances.
+// Paris's streets (OpenStreetMap, 11,840 junctions). "From your cursor": per mouse move, the browser queries PATHPACK.jl's
+// factorization of the street graph (docs/site_factors.jl, lib/pathpack.ts) for one row of the distance matrix, and
+// every street is colored by its walking distance from the junction under the cursor (one Dijkstra in the browser if
+// the factorization cannot be loaded). "Every street at once": each street's closeness (mean distance to all other
+// junctions), from PATHPACK.jl's all 140 million distances.
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { withBase } from 'vitepress'
 
 const canvas = ref<HTMLCanvasElement>(), wrap = ref<HTMLDivElement>()
-const mode = ref<'live' | 'all'>('live'), ms = ref(''), street = ref(''), km = ref(''), pinned = ref(false)
+const mode = ref<'live' | 'all'>('live'), ms = ref(''), pp = ref(true), street = ref(''), km = ref(''), pinned = ref(false)
 const tip = ref({ x: 0, y: 0, show: false }), dot = ref({ x: 0, y: 0, show: false })
 let api: { setMode: (m: 'live' | 'all') => void } | null = null
 let stop = () => {}
@@ -14,9 +16,11 @@ function setMode(m: 'live' | 'all') { mode.value = m; api?.setMode(m) }
 
 onMounted(async () => {
   await (await import('./lib/bin')).nearView(canvas.value!)
-  const [{ loadBin }, { csr, dijkstra, nearest }, { FieldGL }, { isDark }] = await Promise.all([
-    import('./lib/bin'), import('./lib/graph'), import('./lib/fieldgl'), import('./lib/palette')])
-  const { meta, a } = await loadBin(withBase('/data/paris.bin.gz'))
+  const [{ loadBin }, { csr, dijkstra, nearest }, { FieldGL }, { isDark }, { fromBin, distancesFrom }] = await Promise.all([
+    import('./lib/bin'), import('./lib/graph'), import('./lib/fieldgl'), import('./lib/palette'), import('./lib/pathpack')])
+  // the streets, and PATHPACK.jl's factorization of their graph (null if it cannot be loaded: then Dijkstra)
+  const [{ meta, a }, lu] = await Promise.all([loadBin(withBase('/data/paris.bin.gz')),
+    loadBin(withBase('/data/paris-lu.bin.gz')).then(fromBin).catch(() => null)])
   const n = meta.n, m = meta.m, ei = a.ei, ej = a.ej, off = a.off as Uint32Array
   const dq = (q: number, c: number) => meta.lo[c] + q / meta.scale
   const xy = new Float32Array(2 * n); for (let i = 0; i < 2 * n; i++) xy[i] = dq(a.xy[i], i & 1)
@@ -68,7 +72,7 @@ onMounted(async () => {
   }
   const name = (v: number) => meta.names[a.name[v]] || 'a street'
   const run = (v: number) => {
-    src = v; const t = performance.now(); dijkstra(g, [v], 'sum', d); ms.value = (performance.now() - t).toFixed(1)
+    src = v; const t = performance.now(); if (lu) distancesFrom(lu, v, d); else dijkstra(g, [v], 'sum', d); ms.value = (performance.now() - t).toFixed(1)
     street.value = name(v); const [cx, cy] = fg.toCss(xy[2 * v], xy[2 * v + 1]); dot.value = { x: cx, y: cy, show: mode.value === 'live' }
     fill()
   }
@@ -96,6 +100,7 @@ onMounted(async () => {
   const onClick = (ev: PointerEvent) => { if (mode.value !== 'live') return; pinned.value = !pinned.value; if (!pinned.value) onMove(ev) }
   const el = canvas.value!
   el.addEventListener('pointermove', onMove); el.addEventListener('pointerleave', onLeave); el.addEventListener('click', onClick as any)
+  pp.value = !!lu
   run(src); t0 = performance.now(); raf = requestAnimationFrame(frame)
   stop = () => { alive = false; cancelAnimationFrame(raf); el.removeEventListener('pointermove', onMove); el.removeEventListener('pointerleave', onLeave); fg.destroy() }
 })
@@ -109,7 +114,8 @@ onBeforeUnmount(() => stop())
         <button type="button" :class="{ on: mode === 'live' }" :aria-pressed="mode === 'live'" @click="setMode('live')">From your cursor</button>
         <button type="button" :class="{ on: mode === 'all' }" :aria-pressed="mode === 'all'" @click="setMode('all')">Every street at once</button>
       </div>
-      <span class="pp-demo-stat" v-if="mode === 'live'">one Dijkstra in your browser: <b>{{ ms }} ms</b></span>
+      <span class="pp-demo-stat" v-if="mode === 'live' && pp">PATHPACK.jl's factorization, queried in your browser: <b>{{ ms }} ms</b></span>
+      <span class="pp-demo-stat" v-else-if="mode === 'live'">one Dijkstra in your browser: <b>{{ ms }} ms</b></span>
       <span class="pp-demo-stat" v-else>closeness: each junction's mean distance to all 11,840</span>
     </div>
     <div class="pp-demo-stage" ref="wrap">
@@ -124,7 +130,8 @@ onBeforeUnmount(() => stop())
     </div>
     <p class="pp-demo-note">
       Move over the map{{ mode === 'live' ? '; click to pin the source' : '' }}. Your browser computes one row of the
-      distance matrix per move. PATHPACK.jl computes every row, all 140 million distances, in 0.28 s on 16 CPU cores:
+      distance matrix per move<template v-if="pp">, with PATHPACK.jl's triangular solves on its factorization of the
+      street graph, made once ahead of time</template>. PATHPACK.jl computes every row, all 140 million distances, in 0.28 s on 16 CPU cores:
       <b>70×</b> faster than igraph and <b>3.4×</b> faster than graph-tool on the same cores.
       <span class="pp-credit">Streets © OpenStreetMap contributors.</span>
     </p>

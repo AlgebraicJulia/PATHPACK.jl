@@ -1,11 +1,12 @@
 <script setup lang="ts">
-// Paint distances on a surface: the Stanford bunny (8,171 vertices) as a shaded WebGL mesh. Click a point: one Dijkstra
-// along the mesh edges, in the browser, gives the distance from it to every vertex; the color and the moving contour
-// bands follow it. Drag to turn.
+// Paint distances on a surface: the Stanford bunny (8,146 vertices) as a shaded WebGL mesh. Click a point: the browser
+// queries PATHPACK.jl's factorization of the mesh's edge graph (docs/site_factors.jl, lib/pathpack.ts) for the distance
+// from it to every vertex along the mesh edges (one Dijkstra if the factorization cannot be loaded); the color and the
+// moving contour bands follow it. Drag to turn.
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { withBase } from 'vitepress'
 
-const canvas = ref<HTMLCanvasElement>(), ms = ref(''), ready = ref(false), failed = ref(false)
+const canvas = ref<HTMLCanvasElement>(), ms = ref(''), how = ref('PATHPACK.jl\'s factorization of the mesh\'s 8,146-vertex graph, queried in your browser'), ready = ref(false), failed = ref(false)
 let stop = () => {}
 
 const VS = `
@@ -30,9 +31,11 @@ void main() {
 }`
 
 onMounted(async () => {
-  const [{ loadBin, nearView }, { csr, dijkstra }, { ramp, isDark }] = await Promise.all([import('./lib/bin'), import('./lib/graph'), import('./lib/palette')])
+  const [{ loadBin, nearView }, { csr, dijkstra }, { ramp, isDark }, { fromBin, distancesFrom }] = await Promise.all([import('./lib/bin'), import('./lib/graph'), import('./lib/palette'), import('./lib/pathpack')])
   await nearView(canvas.value!)
-  const { meta, a } = await loadBin(withBase('/data/bunny.bin.gz'))
+  // the mesh, and PATHPACK.jl's factorization of its edge graph (null if it cannot be loaded: then Dijkstra)
+  const [{ meta, a }, lu] = await Promise.all([loadBin(withBase('/data/bunny.bin.gz')),
+    loadBin(withBase('/data/bunny-lu.bin.gz')).then(fromBin).catch(() => null)])
   const n = meta.n, nf = meta.f, tri = a.tri as Uint16Array
   const P = new Float32Array(3 * n); for (let i = 0; i < 3 * n; i++) P[i] = meta.lo[i % 3] + a.pos[i] / meta.scale
   // smooth normals, and the edges of the mesh as a graph weighted by length
@@ -64,7 +67,7 @@ onMounted(async () => {
   const rot = () => { const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch)
     return new Float32Array([cy, sy * sp, -sy * cp, 0, cp, sp, sy, -cy * sp, cy * cp]) }   // column-major: yaw about y, then pitch about x
   const source = (s: number) => {
-    const t = performance.now(); dijkstra(g, [s], 'sum', d); ms.value = (performance.now() - t).toFixed(1)
+    const t = performance.now(); if (lu) distancesFrom(lu, s, d); else dijkstra(g, [s], 'sum', d); ms.value = (performance.now() - t).toFixed(1)
     vmax = 0; for (let i = 0; i < n; i++) { D[i] = d[i]; if (d[i] < Infinity && d[i] > vmax) vmax = d[i] }
     gl.bindBuffer(gl.ARRAY_BUFFER, bD); gl.bufferSubData(gl.ARRAY_BUFFER, 0, D); t0 = performance.now()
   }
@@ -106,6 +109,7 @@ onMounted(async () => {
   cv.addEventListener('pointerup', (e) => { drag = false; if (moved < 4) { const r = cv.getBoundingClientRect(), s = pick(e.clientX - r.left, e.clientY - r.top); if (s >= 0) source(s) } })
   // start from the tip of an ear: the highest vertex
   let top = 0; for (let i = 1; i < n; i++) if (P[3 * i + 1] > P[3 * top + 1]) top = i
+  if (!lu) how.value = 'Your browser runs one Dijkstra over the mesh\'s 8,146 vertices'
   source(top); ready.value = true; raf = requestAnimationFrame(frame)
   stop = () => { alive = false; cancelAnimationFrame(raf); io.disconnect() }
 })
@@ -122,7 +126,7 @@ onBeforeUnmount(() => stop())
       <p class="pp-code">mstar(<span>MinPlus</span>(), surface)</p>
       <h3>Click the bunny.</h3>
       <p>Distance along the surface from where you click to every other point, with moving contours. Drag to turn it.
-        Your browser runs one Dijkstra over the mesh's 8,171 vertices: <b>{{ ms || '…' }} ms</b>.</p>
+        {{ how }}: <b>{{ ms || '…' }} ms</b>.</p>
       <p class="pp-big"><b>55.6 ms</b><span>for every pair of the full 34,834-vertex scan on one NVIDIA B200, 2× faster than ROME and 31× faster than cuGraph</span></p>
       <p class="pp-credit">Stanford Bunny, Stanford 3D Scanning Repository. Distances along mesh edges, which run about 7% longer than exact surface distances.</p>
     </div>
